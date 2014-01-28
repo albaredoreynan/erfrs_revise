@@ -15,10 +15,20 @@
 
   table{
     width: 100%;  
-    th{ background: $light-blue; }
+    thead th{ background: $light-blue; }
   }
 }
 
-.spip-search, .sp-search{
+.spip-search, .sp-search, .sp-show{
   @extend .spip
+}
+
+.sp-show{
+  padding-right: 80px;
+  border: none;
+
+  input, select, textarea{
+    width: 100%;  
+  }
+
 }
