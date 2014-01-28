@@ -5,7 +5,7 @@
   '  > Sub Project 999999
 br
 .tip
-  = image_tag('tip')
+  = image_tag('tip.png')
   ' TIP: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ornare aliquet. Nulla dapibus fringilla pretium. In urna mi, rutrum vitae tincidunt sed, faucibus ut sapien. Nunc eget dictum nisi. Vestibulum lacinia rutrum mattis. Praesent imperdiet iaculis augue, ac vulputate mauris volutpat eget.
 
 br
@@ -13,6 +13,10 @@ br
   ' Sub-Project ID
   ' &nbsp;&nbsp;
   ' 999999
+
+  p
+    = label_tag :status
+    = select_tag :status
 
 = render 'general_information'
 = render 'financial_information'
