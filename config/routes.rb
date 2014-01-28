@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   get '/dashboard' => 'static_pages#dashboard'
 
   resources :subproject_implementation_plans
+  resources :subprojects
 end
