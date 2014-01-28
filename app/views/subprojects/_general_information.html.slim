@@ -1,36 +1,63 @@
-h4 General Information
-form
-  p
-    = label_tag :title
-    = text_field_tag :title
-  p
-    = label_tag :region
-    = select_tag :region
-  p
-    = label_tag :province
-    = select_tag :province
-  p
-    = label_tag :municipality
-    = select_tag :municipality
-  p
-    = label_tag :barangay
-    = select_tag :barangay
-  p
-    = label_tag :category
-    = select_tag :category
-  p
-    = label_tag :physical_target, 'Physical Target'
-    = select_tag :physical_target
-  p
-    = label_tag :cost_parameter, 'Cost Parameter'
-    = select_tag :cost_parameter
-  p
-    = label_tag :mode_of_implementation, 'Mode of Implementation'
-    = select_tag :mode_of_implementation
-  p
-    = label_tag :description
-    = text_area_tag :description
-  p
-    = label_tag :fund_source
-    strong Name of Development Financial Institution
+.row.sp-show
+  h4 General Information
+  hr
+  form.form-horizontal
+    .col-md-2
+      = label_tag :title
+    .col-md-10
+      = text_field_tag :title
 
+    .col-md-12 style="margin-top: 10px;"
+      .row
+        .col-md-6
+          .form-group
+            .col-md-4
+              = label_tag :region
+            .col-md-8
+              = select_tag :region
+          .form-group
+            .col-md-4
+              = label_tag :province
+            .col-md-8
+              = text_field_tag :province
+          .form-group
+            .col-md-4
+              = label_tag :municipality
+            .col-md-8
+              = text_field_tag :municipality
+          .form-group
+            .col-md-4
+              = label_tag :barangay
+            .col-md-8
+              = text_field_tag :barangay
+
+        .col-md-6
+          .form-group
+            .col-md-5
+              = label_tag :category
+            .col-md-7
+              = select_tag :category
+          .form-group
+            .col-md-5
+              = label_tag :physical_target, 'Physical Target'
+            .col-md-7
+              = select_tag :physical_target
+          .form-group
+            .col-md-5
+              = label_tag :cost_parameter, 'Cost Parameter'
+            .col-md-7
+              = select_tag :cost_parameter
+          .form-group
+            .col-md-5
+              = label_tag :mode_of_implementation, 'Mode of Implementation'
+            .col-md-7
+              = select_tag :mode_of_implementation
+
+    .col-md-2
+      = label_tag :description
+    .col-md-10
+      = text_area_tag :description
+    
+    .col-md-12
+      strong Name of Development Financial Institution
+    
