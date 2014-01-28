@@ -8,8 +8,8 @@
     h5 Search
   .col-md-12
     .row
-      .col-md-6
-        form.form-horizontal
+      form.form-horizontal
+        .col-md-6
           .form-group
             .col-md-3
               = label_tag :spip_id, 'SPIP ID'
@@ -36,8 +36,7 @@
               = submit_tag 'Go'
               = submit_tag 'Clear'
 
-      .col-md-6
-        form.form-horizontal
+        .col-md-6
           .form-group
             .col-md-3
               = label_tag :region
