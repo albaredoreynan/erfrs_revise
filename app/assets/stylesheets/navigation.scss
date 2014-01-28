@@ -1,0 +1,26 @@
+@import "colors";
+
+body { padding-top: 70px; }
+
+nav.navbar{
+  background: $blue;
+  a{
+    color: $white !important;
+  }
+}
+
+ul.nav-tabs{
+  li.active a{
+    background: lighten($blue, 30%) 
+  }
+
+  li{
+    padding-left: 10px;  
+    padding-right: 10px;  
+  }
+  
+  li a{
+    background: $white-gray;  
+    color: $gray;
+  }
+}
