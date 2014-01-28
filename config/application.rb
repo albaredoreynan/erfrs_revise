@@ -15,6 +15,7 @@ Bundler.require(*Rails.groups)
 
 module Erfrs
   class Application < Rails::Application
+    config.secret_key_base = 'alkjsdfoiewqrulkajslkfasoi1234asfdalk(*&)(*^&%&weq'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
