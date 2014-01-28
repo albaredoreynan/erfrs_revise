@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Erfrs</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <%= render "layouts/header" %>
-  <%= render "layouts/navbar" %>
-<%= yield %>
+  <head>
+    <title>Erfrs</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render "layouts/header" %>
+    <%= render "layouts/navbar" %>
+    <div class="container">
+      <%= yield %>
+    </div>
 
-</body>
+  </body>
 </html>
