@@ -1,7 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.0.beta1'
-gem 'pg'
+#gem 'pg'
+gem 'tiny_tds', require: false
+gem 'activerecord-sqlserver-adapter', require: false
 
 gem 'jquery-rails'
 gem 'slim-rails'
@@ -17,3 +19,4 @@ end
 group :development do
   gem 'spring'
 end
+
