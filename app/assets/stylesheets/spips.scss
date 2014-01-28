@@ -1,6 +1,6 @@
 @import "colors";
 
-.spip-search{
+.spip{
   margin-top: 10px;
   border: 1px solid $gray;
 
@@ -17,4 +17,8 @@
     width: 100%;  
     th{ background: $light-blue; }
   }
+}
+
+.spip-search, .sp-search{
+  @extend .spip
 }

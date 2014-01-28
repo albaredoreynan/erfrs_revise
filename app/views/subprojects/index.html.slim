@@ -1,62 +1,89 @@
-h4 Sub-Projects
-button Create SP
+.row
+  h4 Sub-Project
+  hr
+  button.pull-right Create SP
 
-div
-  h5 Search
-  form
-    p
-      = label_tag :sp_id, 'SP ID'
-      = text_field_tag :sp_id
-    p
-      = label_tag :year
-      = text_field_tag :year
-    p
-      = label_tag :user_name, 'User Name'
-      = text_field_tag :user_name
-    p
-      = label_tag :status
-      = select_tag :status
-    p
-      = submit_tag 'Go'
-      = submit_tag 'Clear'
-    p
-      = label_tag :region
-      = select_tag :region
-    p
-      = label_tag :province
-      = text_field_tag :province
-    p
-      = label_tag :municipality
-      = text_field_tag :municipality
-    p
-      = label_tag :barangay
-      = text_field_tag :barangay
+.row.sp-search
+  .col-md-12.header
+    h5 Search
+  .col-md-12
+    .row
+      .col-md-6
+        form.form-horizontal
+          .form-group
+            .col-md-3
+              = label_tag :sp_id, 'SP ID'
+            .col-md-9
+              = text_field_tag :sp_id
+          .form-group
+            .col-md-3
+              = label_tag :year
+            .col-md-9
+              = text_field_tag :year
+          .form-group
+            .col-md-3
+              = label_tag :user_name, 'User Name'
+            .col-md-9
+              = text_field_tag :user_name
+          .form-group
+            .col-md-3
+              = label_tag :status
+            .col-md-9
+              = select_tag :status
+          .form-group
+            .col-md-3
+            .col-md-9
+              = submit_tag 'Go'
+              = submit_tag 'Clear'
 
-  table
-    thead
-      tr
-        th SP ID
-        th Year
-        th Region
-        th Province
-        th Municipality
-        th Barangay
-        th User Name
-        th Status
-        th View
-        th Update
-        th Delete
-    tbody
-      - 10.times do
+      .col-md-6
+        form.form-horizontal
+          .form-group
+            .col-md-3
+              = label_tag :region
+            .col-md-9
+              = select_tag :region
+          .form-group
+            .col-md-3
+              = label_tag :province
+            .col-md-9
+              = text_field_tag :province
+          .form-group
+            .col-md-3
+              = label_tag :municipality
+            .col-md-9
+              = text_field_tag :municipality
+          .form-group
+            .col-md-3
+              = label_tag :barangay
+            .col-md-9
+              = text_field_tag :barangay
+  .col-md-12
+    table
+      thead
         tr
-          td= link_to '999999', subproject_path(999999)
-          td 9999
-          td XXXXXX
-          td XXXXXXXXXXXXXXX
-          td XXXXXXXXXXXXXXX
-          td XXXXXXXXXXXXXXXXXXXX
-          td XXXXXXXXXX
-          td XXXXXXXXXX
-          td= link_to image_tag('view'), '#'
-          td= link_to image_tag('edit'), '#'
-          td= link_to image_tag('delete'), '#'
+          th SP ID
+          th Year
+          th Region
+          th Province
+          th Municipality
+          th Barangay
+          th Title
+          th Status
+          th View
+          th Update
+          th Delete
+      tbody
+        - 10.times do
+          tr
+            td= link_to '999999', subproject_path(999999)
+            td 9999
+            td XXXXXX
+            td XXXXXXXXXXXXXXX
+            td XXXXXXXXXXXXXXX
+            td XXXXXXXXXXXXXXXXXXXX
+            td XXXXXXXXXX
+            td XXXXXXXXXX
+            td= link_to image_tag('view'), '#'
+            td= link_to image_tag('edit'), '#'
+            td= link_to image_tag('delete'), '#'
