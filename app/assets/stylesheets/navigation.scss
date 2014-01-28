@@ -1,7 +1,5 @@
 @import "colors";
 
-body { padding-top: 70px; }
-
 nav.navbar{
   background: $blue;
   a{
@@ -13,6 +11,8 @@ ul.nav-tabs{
   li.active a{
     background: lighten($blue, 30%) 
   }
+
+  li.active a:hover{ background: $light-blue; }
 
   li{
     padding-left: 10px;  
