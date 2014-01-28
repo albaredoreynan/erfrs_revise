@@ -1,1 +1,37 @@
-h1 Dashboard
+section.news
+  h4 News and Information
+  ul
+    - 7.times do
+      li= link_to 'Sample News Article'
+
+section.another
+  h4 Another Section
+  p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis non tellus ac facilisis. Aliquam ut mattis nibh. Quisque porttitor erat vel sodales facilisis. Maecenas orci massa, commodo et felis ac, placerat rhoncus nulla. Nulla dictum lacus sit amet justo rhoncus tempus. Donec ullamcorper dapibus cursus. Nunc convallis est quis tortor semper, a ultricies dolor lobortis. Fusce a metus ac eros lacinia aliquet. Curabitur eget ipsum a sem luctus scelerisque et in libero. 
+
+section.statistics
+  h4 Statistics
+  ul
+    - 7.times do
+      li 
+        span.left Sample Statistic 
+        span.right = number_to_currency('201.342,924')
+        
+section.another
+  h4 Another Section
+  p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis non tellus ac facilisis. Aliquam ut mattis nibh. Quisque porttitor erat vel sodales facilisis. Maecenas orci massa, commodo et felis ac, placerat rhoncus nulla. Nulla dictum lacus sit amet justo rhoncus tempus. Donec ullamcorper dapibus cursus. Nunc convallis est quis tortor semper, a ultricies dolor lobortis. Fusce a metus ac eros lacinia aliquet. Curabitur eget ipsum a sem luctus scelerisque et in libero. 
+
+section.quickref
+  h4 Quick Reference Guides
+  ul
+    li= link_to 'Basic Operations', '#'
+    li= link_to 'Creating SPIP', '#'
+    li= link_to 'Creating an RFR', '#'
+    li= link_to 'Administration', '#'
+
+section.tech-support
+  h4 Tech Support
+  p
+    ' Having problems using eRFRS?
+    br
+    ' Please send an email regarding your concern to: 
+    = link_to 'erfrs@dswd.gov.ph', 'mailto:erfrs@dswd.gov.ph'
