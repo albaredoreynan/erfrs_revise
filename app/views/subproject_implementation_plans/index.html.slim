@@ -1,0 +1,62 @@
+h4 Sub-Project Implementation Plans
+button Create SPIP
+
+div
+  h5 Search
+  form
+    p
+      = label_tag :spip_id, 'SPIP ID'
+      = text_field_tag :spip_id
+    p
+      = label_tag :year
+      = text_field_tag :year
+    p
+      = label_tag :user_name, 'User Name'
+      = text_field_tag :user_name
+    p
+      = label_tag :status
+      = select_tag :status
+    p
+      = submit_tag 'Go'
+      = submit_tag 'Clear'
+    p
+      = label_tag :region
+      = select_tag :region
+    p
+      = label_tag :province
+      = text_field_tag :province
+    p
+      = label_tag :municipality
+      = text_field_tag :municipality
+    p
+      = label_tag :barangay
+      = text_field_tag :barangay
+
+  table
+    thead
+      tr
+        th SPIP ID
+        th Year
+        th Region
+        th Province
+        th Municipality
+        th Barangay
+        th User Name
+        th Status
+        th View
+        th Update
+        th Delete
+    tbody
+      - 10.times do
+        tr
+          td 999999
+          td 999999
+          td XXXXXX
+          td XXXXXXXXXXXXXXX
+          td XXXXXXXXXXXXXXX
+          td XXXXXXXXXXXXXXXXXXXX
+          td XXXXXXXXXX
+          td XXXXXXXXXX
+          td= link_to image_tag('view'), '#'
+          td= link_to image_tag('edit'), '#'
+          td= link_to image_tag('delete'), '#'
