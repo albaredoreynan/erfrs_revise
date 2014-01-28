@@ -6,6 +6,7 @@ gem 'rails', '4.1.0.beta1'
 gem 'pg'
 
 gem 'jquery-rails'
+gem 'slim-rails'
 gem 'turbolinks'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'sass-rails', '~> 4.0.0.rc1'
