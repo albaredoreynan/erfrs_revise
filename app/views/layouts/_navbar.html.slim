@@ -1,7 +1,10 @@
 ul.nav.nav-tabs
-  li.active= link_to "Dashboard", "/dashboard"
-  li= link_to "SPIPs", subproject_implementation_plans_path
-  li= link_to "SPs", subprojects_path
+  li class = active_class("static_pages")
+    = link_to "Dashboard", "/dashboard"
+  li class = active_class("subproject_implementation_plans")
+    = link_to "SPIPs", subproject_implementation_plans_path
+  li class = active_class("subprojects")
+    = link_to "SPs", subprojects_path
   li= link_to "RFRs", "#"
   li= link_to "Reports", "#"
   li= link_to "Admin", "#"
