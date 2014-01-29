@@ -9,4 +9,5 @@
     li class = active_class("request_for_fund_releases")
       = link_to "RFRs", request_for_fund_releases_path
     li= link_to "Reports", "#"
-    li= link_to "Admin", "#"
+    li class = active_class("admin")
+      = link_to "Admin", admin_index_path

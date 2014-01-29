@@ -1,0 +1,41 @@
+.row
+  .breadcrumbs
+    = link_to 'Admin', admin_index_path
+    '  > News
+  br
+  .tip
+    = image_tag('tip.png')
+    ' TIP: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ornare aliquet. Nulla dapibus fringilla pretium. In urna mi, rutrum vitae tincidunt sed, faucibus ut sapien. Nunc eget dictum nisi. Vestibulum lacinia rutrum mattis. Praesent imperdiet iaculis augue, ac vulputate mauris volutpat eget.
+
+  br
+  p= button_tag 'Add News'
+
+.row.admin-news
+  .col-md-12.header
+    h4 News and Information (for Dashboard)
+  .col-md-12
+    table
+      thead
+        tr
+          th Subject
+          th Display Start
+          th Display End
+          th Last Updated By
+          th Last Updated
+          th Update
+          th Delete
+      tbody
+        - subjects = ["News guidelines for RFR submission",
+                      "Training schedules for 2014",
+                      "New reports available",
+                      "Schedules server maintenance on March 21, 2014"]
+        - subjects.each do |subject|
+          tr
+            td= link_to subject, "#" 
+            td 15-Aug-2013
+            td 31-Dec-2013
+            td Juan Dela Cruz
+            td 5-Aug-2013
+            td= link_to image_tag('edit.png'), '#'
+            td= link_to image_tag('delete.png'), '#'
+
