@@ -1,0 +1,87 @@
+.row
+  h4 Request for Fun Releases
+  hr
+  button.pull-right Create RFR
+
+.row.rfr-index
+  .col-md-12.header
+    h5 Search
+  .col-md-12
+    .row
+      .col-md-6
+        form.form-horizontal
+          .form-group
+            .col-md-3
+              = label_tag :rfr_id, 'RFR ID'
+            .col-md-9
+              = text_field_tag :rfr_id
+          .form-group
+            .col-md-3
+              = label_tag :sp_id, 'SP ID'
+            .col-md-9
+              = text_field_tag :sp_id
+          .form-group
+            .col-md-3
+              = label_tag :user_name, 'User Name'
+            .col-md-9
+              = text_field_tag :user_name
+          .form-group
+            .col-md-3
+              = label_tag :status
+            .col-md-9
+              = select_tag :status
+          .form-group
+            .col-md-3
+            .col-md-9
+              = submit_tag 'Go'
+              = submit_tag 'Clear'
+
+      .col-md-6
+        form.form-horizontal
+          .form-group
+            .col-md-3
+              = label_tag :region
+            .col-md-9
+              = select_tag :region
+          .form-group
+            .col-md-3
+              = label_tag :province
+            .col-md-9
+              = text_field_tag :province
+          .form-group
+            .col-md-3
+              = label_tag :municipality
+            .col-md-9
+              = text_field_tag :municipality
+          .form-group
+            .col-md-3
+              = label_tag :barangay
+            .col-md-9
+              = text_field_tag :barangay
+  .col-md-12
+    table
+      thead
+        tr
+          th RFR ID
+          th SP ID
+          th Title
+          th Date
+          th Tranch
+          th Amount
+          th Status
+          th View
+          th Update
+          th Delete
+      tbody
+        - 10.times do
+          tr
+            td 99999
+            td 99999
+            td XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+            td DD-MM-YYY
+            td 1st
+            td 999,999,999
+            td XXXXXXXXXX
+            td= link_to image_tag('view.png'), '#'
+            td= link_to image_tag('edit.png'), '#'
+            td= link_to image_tag('delete.png'), '#'
