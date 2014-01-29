@@ -1,4 +1,30 @@
+@import "colors";
+
 body{
   padding-top: 70px;
   padding-bottom: 40px;
 }
+
+.rfrs{
+  margin-top: 10px;
+  border: 1px solid $gray;
+
+  .header{
+    background: $light-blue;
+    margin-bottom: 20px;
+  }
+
+  label{
+    float: right;  
+  }
+
+  table{
+    width: 100%;  
+    thead th{ background: $light-blue; }
+  }
+}
+
+.spip-search, .sp-search, .sp-show, .rfr-index{
+  @extend .rfrs
+}
+
