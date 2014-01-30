@@ -30,5 +30,9 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'awesome_print', require: false
+
+  gem 'capistrano', '3.1.0'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
   gem 'capistrano-rails', '~> 1.0.0', require: false
 end
