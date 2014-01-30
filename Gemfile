@@ -2,11 +2,17 @@ source 'https://rubygems.org'
 
 gem 'rake', '10.0.4'
 gem 'rails', '4.0.2'
-gem 'pg'
 
-# for ms sql server
-#gem 'tiny_tds'
-#gem 'activerecord-sqlserver-adapter', git: 'https://github.com/rails-sqlserver/activerecord-sqlserver-adapter.git'
+if ENV['ERFRS_USES_POSTGRESQL']
+  # Nad if you want to use postgresql locally, simply execute the ff 3 commands:
+  # echo 'export ERFRS_USES_POSTGRESQL=1' >> ~/.zshrc
+  # source ~/.zshrc
+  # bundle install
+  gem 'pg'
+else
+  gem 'tiny_tds'
+  gem 'activerecord-sqlserver-adapter', git: 'https://github.com/rails-sqlserver/activerecord-sqlserver-adapter.git'
+end
 
 gem 'jquery-rails'
 gem 'slim-rails'
@@ -23,4 +29,6 @@ group :development do
   gem 'quiet_assets'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'awesome_print', require: false
+  gem 'capistrano-rails', '~> 1.0.0', require: false
 end
