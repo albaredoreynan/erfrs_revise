@@ -1,10 +1,10 @@
 class SubprojectsController < ApplicationController
   def index
-    @subprojects = Subproject.all
+    @subprojects = Subproject.includes(:region, :province, :municipality, :barangay)
   end
 
   def show
-    @subproject = Subproject.find params[:id]
+    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find params[:id]
   end
 
   def new

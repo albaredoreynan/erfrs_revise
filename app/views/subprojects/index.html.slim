@@ -74,16 +74,16 @@
           th Update
           th Delete
       tbody
-        - 10.times do
+        - @subprojects.each do |sp|
           tr
-            td= link_to '999999', subproject_path(999999)
-            td 9999
-            td XXXXXX
-            td XXXXXXXXXXXXXXX
-            td XXXXXXXXXXXXXXX
-            td XXXXXXXXXXXXXXXXXXXX
-            td XXXXXXXXXX
-            td XXXXXXXXXX
-            td= link_to image_tag('view.png'), '#'
-            td= link_to image_tag('edit.png'), '#'
-            td= link_to image_tag('delete.png'), '#'
+            td= sp.id
+            td= sp.created_at.year
+            td= sp.region.try(:name)
+            td= sp.province.try(:name)
+            td= sp.municipality.try(:name)
+            td= sp.barangay.try(:name)
+            td= sp.title
+            td= sp.status
+            td= link_to image_tag('view.png'), sp
+            td= link_to image_tag('edit.png'), [:edit, sp]
+            td= link_to image_tag('delete.png'), sp, method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?'

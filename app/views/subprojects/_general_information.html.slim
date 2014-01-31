@@ -1,65 +1,64 @@
 .row.sp-show
   h4 General Information
   hr
-  form.form-horizontal
-    .col-md-2
-      = label_tag :title
-    .col-md-10
-      = text_field_tag :title
+  .col-md-2
+    = label_tag :title
+  .col-md-10
+    = @subproject.title
 
-    .col-md-12 style="margin-top: 10px;"
-      .row
-        .col-md-6
-          .form-group
-            .col-md-4
-              = label_tag :region
-            .col-md-8
-              = select_tag :region
-          .form-group
-            .col-md-4
-              = label_tag :province
-            .col-md-8
-              = text_field_tag :province
-          .form-group
-            .col-md-4
-              = label_tag :municipality
-            .col-md-8
-              = text_field_tag :municipality
-          .form-group
-            .col-md-4
-              = label_tag :barangay
-            .col-md-8
-              = text_field_tag :barangay
+  .col-md-12 style="margin-top: 10px;"
+    .row
+      .col-md-6
+        .form-group
+          .col-md-4
+            = label_tag :region
+          .col-md-8
+            = @subproject.region.try(:name)
+        .form-group
+          .col-md-4
+            = label_tag :province
+          .col-md-8
+            = @subproject.province.try(:name)
+        .form-group
+          .col-md-4
+            = label_tag :municipality
+          .col-md-8
+            = @subproject.municipality.try(:name)
+        .form-group
+          .col-md-4
+            = label_tag :barangay
+          .col-md-8
+            = @subproject.barangay.try(:name)
 
-        .col-md-6
-          .form-group
-            .col-md-5
-              = label_tag :category
-            .col-md-7
-              = select_tag :category
-          .form-group
-            .col-md-5
-              = label_tag :physical_target, 'Physical Target'
-            .col-md-7
-              = select_tag :physical_target
-          .form-group
-            .col-md-5
-              = label_tag :cost_parameter, 'Cost Parameter'
-            .col-md-7
-              = select_tag :cost_parameter
-          .form-group
-            .col-md-5
-              = label_tag :mode_of_implementation, 'Mode of Implementation'
-            .col-md-7
-              = select_tag :mode_of_implementation
+      .col-md-6
+        .form-group
+          .col-md-5
+            = label_tag :category
+          .col-md-7
+            = @subproject.category
+        .form-group
+          .col-md-5
+            = label_tag :physical_target, 'Physical Target'
+          .col-md-7
+            = @subproject.physical_target
+        .form-group
+          .col-md-5
+            = label_tag :cost_parameter, 'Cost Parameter'
+          .col-md-7
+            = @subproject.cost_parameter
+        .form-group
+          .col-md-5
+            = label_tag :mode_of_implementation, 'Mode of Implementation'
+          .col-md-7
+            = @subproject.mode_of_implementation
 
-    .col-md-2
-      = label_tag :description
-    .col-md-10
-      = text_area_tag :description
-    
-    .col-md-2 style="margin-top: 10px;"
-      = label_tag :source
-    .col-md-10 style="margin-top: 10px;"
-      strong Name of Development Financial Institution
-    
+  .col-md-2
+    = label_tag :description
+  .col-md-10
+    = text_area_tag :description, @subproject.description, readonly: true
+  
+  .col-md-2 style="margin-top: 10px;"
+    = label_tag :source
+  .col-md-10 style="margin-top: 10px;"
+    strong Name of Development Financial Institution
+  

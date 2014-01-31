@@ -3,6 +3,7 @@
   hr
   .col-md-12
     table border=1
+      - dc_subtotal = ic_subtotal = dc_total = ic_total = 0
       thead
         tr
           th  
@@ -11,39 +12,65 @@
           th TOTAL
           th % TOTAL
       tbody
-        tr
-          th GRANT Amount
-          - 4.times do
-            td
-        tr
-          th LCC: BLGU
-          - 4.times do
-            td
-        tr
-          th Community
-          - 4.times do
-            td
-        tr
-          th MLGU
-          - 4.times do
-            td
-        tr
-          th PLGU/Others
-          - 4.times do
-            td
+        tr#grant-amount
+          td GRANT Amount
+          td= number_to_currency(dc = @subproject.grant_amount_direct_cost)
+          td= number_to_currency(ic = @subproject.grant_amount_indirect_cost)
+          td.total= number_to_currency( sum = dc+ic )
+          - ic_subtotal += ic ; dc_subtotal += dc
+          td.percentage data-sum="#{sum}"
+        tr#lcc-blgu
+          td LCC: BLGU
+          td= number_to_currency(dc = @subproject.lcc_blgu_direct_cost)
+          td= number_to_currency(ic = @subproject.lcc_blgu_indirect_cost)
+          td.total= number_to_currency( sum = dc+ic )
+          - ic_subtotal += ic ; dc_subtotal += dc
+          td.percentage data-sum="#{sum}"
+        tr#community
+          td Community
+          td= number_to_currency(dc = @subproject.community_direct_cost)
+          td= number_to_currency(ic = @subproject.community_indirect_cost)
+          td.total= number_to_currency( sum = dc+ic )
+          - ic_subtotal += ic ; dc_subtotal += dc
+          td.percentage data-sum="#{sum}"
+        tr#mlgu
+          td MLGU
+          td= number_to_currency(dc = @subproject.mlgu_direct_cost)
+          td= number_to_currency(ic = @subproject.mlgu_indirect_cost)
+          td.total= number_to_currency( sum = dc+ic )
+          - ic_subtotal += ic ; dc_subtotal += dc
+          td.percentage data-sum="#{sum}"
+        tr#plgu-others
+          td PLGU/Others
+          td= number_to_currency(dc = @subproject.plgu_others_direct_cost)
+          td= number_to_currency(ic = @subproject.plgu_others_indirect_cost)
+          td.total= number_to_currency( sum = dc+ic )
+          - ic_subtotal += ic ; dc_subtotal += dc
+          td.percentage data-sum="#{sum}"
         tr
           th SUB-TOTAL
-          - 4.times do
-            td
+          td#direct_cost_subtotal = number_to_currency(dc = dc_subtotal)
+          td#indirect_cost_subtotal = number_to_currency(ic = ic_subtotal)
+          td.total= number_to_currency( sum = dc+ic )
+          - ic_total += ic ; dc_total += dc
+          td.percentage data-sum="#{sum}"
         tr
-          th Total LCC Cash
-          - 4.times do
-            td
+          td Total LCC Cash
+          td= number_to_currency(dc = @subproject.total_lcc_cash_direct_cost)
+          td= number_to_currency(ic = @subproject.total_lcc_cash_indirect_cost)
+          td.total= number_to_currency( dc+ic )
+          - ic_total += ic ; dc_total += dc
+          td.percentage data-sum="#{sum}"
         tr
-          th Total LCC in Kind
-          - 4.times do
-            td
-        tr
+          td Total LCC in Kind
+          td= number_to_currency(dc = @subproject.total_lcc_in_kind_direct_cost)
+          td= number_to_currency(ic = @subproject.total_lcc_in_kind_indirect_cost)
+          td.total= number_to_currency( dc+ic )
+          - ic_total += ic ; dc_total += dc
+          td.percentage data-sum="#{sum}"
+        tr#grand-total
           th TOTAL
-          - 4.times do
-            td
+          td#direct_cost_total = number_to_currency( dc_total )
+          td#indirect_cost_total = number_to_currency( ic_total )
+          td.total= number_to_currency( dc_total + ic_total )
+          td.percentage
