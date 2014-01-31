@@ -1,29 +1,39 @@
 require 'csv'
 
+def normalize(region_name)
+  if region_name.index '('
+    code, name = region_name.split('(')
+    [code.strip, name.strip.chop]
+  else
+    code, name = region_name.split('-')
+    [code.strip, name.strip]
+  end
+end
+
 def region(row)
   @region ||= begin
-                code, name = row['region'].split('-')
-                Region.find_or_create_by(code: code.strip, name: name.strip)
-              end
+                code, name = normalize(row['region'])
+                Region.find_or_create_by(code: code, name: name)
+  end
 end
 
 def province(row)
   @province ||= begin
                   name = row['province']
-                  region(row).provinces.find_or_create_by(name: name.strip)
+                  region(row).provinces.find_or_create_by(name: name.try(:strip))
                 end
 end
 
 def municipality(row)
   @municipality ||= begin
                       name = row['city']
-                      province(row).municipalities.find_or_create_by(name: name.strip)
+                      province(row).municipalities.find_or_create_by(name: name.try(:strip))
                     end
 end
 
 def parse_barangay(row)
   name = row['name']
-  municipality(row).barangays.find_or_create_by(name: name.strip)
+  municipality(row).barangays.find_or_create_by(name: name.try(:strip))
 end
 
 

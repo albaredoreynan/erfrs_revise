@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140131134541) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "barangays", force: true do |t|
     t.integer  "municipality_id"
     t.string   "name"
@@ -20,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140131134541) do
     t.datetime "updated_at"
   end
 
-  add_index "barangays", ["municipality_id"], name: "index_barangays_on_municipality_id"
+  add_index "barangays", ["municipality_id"], name: "index_barangays_on_municipality_id", using: :btree
 
   create_table "municipalities", force: true do |t|
     t.integer  "province_id"
@@ -29,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140131134541) do
     t.datetime "updated_at"
   end
 
-  add_index "municipalities", ["province_id"], name: "index_municipalities_on_province_id"
+  add_index "municipalities", ["province_id"], name: "index_municipalities_on_province_id", using: :btree
 
   create_table "provinces", force: true do |t|
     t.integer  "region_id"
@@ -38,7 +41,7 @@ ActiveRecord::Schema.define(version: 20140131134541) do
     t.datetime "updated_at"
   end
 
-  add_index "provinces", ["region_id"], name: "index_provinces_on_region_id"
+  add_index "provinces", ["region_id"], name: "index_provinces_on_region_id", using: :btree
 
   create_table "regions", force: true do |t|
     t.string   "code"
@@ -84,9 +87,9 @@ ActiveRecord::Schema.define(version: 20140131134541) do
     t.datetime "updated_at"
   end
 
-  add_index "subprojects", ["barangay_id"], name: "index_subprojects_on_barangay_id"
-  add_index "subprojects", ["municipality_id"], name: "index_subprojects_on_municipality_id"
-  add_index "subprojects", ["province_id"], name: "index_subprojects_on_province_id"
-  add_index "subprojects", ["region_id"], name: "index_subprojects_on_region_id"
+  add_index "subprojects", ["barangay_id"], name: "index_subprojects_on_barangay_id", using: :btree
+  add_index "subprojects", ["municipality_id"], name: "index_subprojects_on_municipality_id", using: :btree
+  add_index "subprojects", ["province_id"], name: "index_subprojects_on_province_id", using: :btree
+  add_index "subprojects", ["region_id"], name: "index_subprojects_on_region_id", using: :btree
 
 end

@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/rails-sqlserver/activerecord-sqlserver-adapter.git
-  revision: 6572df8ffc2f41e51a5c9da5380132e0a1c0b947
-  specs:
-    activerecord-sqlserver-adapter (4.0.0)
-      activerecord (~> 4.0.0)
-      arel (~> 4.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -81,6 +73,7 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
+    pg (0.17.1)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -147,7 +140,6 @@ GEM
       atomic
     tilt (1.4.1)
     tins (0.13.1)
-    tiny_tds (0.6.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -162,7 +154,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-sqlserver-adapter!
   awesome_print
   better_errors
   binding_of_caller
@@ -172,12 +163,12 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.0.0)
   jquery-rails
+  pg
   quiet_assets
   rails (= 4.0.2)
   rake (= 10.0.4)
   rspec-rails
   sass-rails (~> 4.0.0)
   slim-rails
-  tiny_tds
   turbolinks
   uglifier (>= 1.3.0)
