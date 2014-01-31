@@ -1,0 +1,64 @@
+.row.sp-show
+  h4 General Information
+  hr
+  .col-md-2
+    = f.label :title
+  .col-md-10
+    = f.text_field :title
+
+  .col-md-12 style="margin-top: 10px;"
+    .row
+      .col-md-6
+        .form-group
+          .col-md-4
+            = f.label :region_id
+          .col-md-8
+            = f.select :region_id, Region.values_for_select, prompt: 'Select Region'
+        .form-group
+          .col-md-4
+            = f.label :province_id
+          .col-md-8
+            = f.select :province_id, [], prompt: 'Select Provice'
+        .form-group
+          .col-md-4
+            = f.label :municipality_id
+          .col-md-8
+            = f.select :municipality_id, [], prompt: 'Select Municipality'
+        .form-group
+          .col-md-4
+            = f.label :barangay_id
+          .col-md-8
+            = f.select :barangay_id, [], prompt: 'Select Barangay'
+
+      .col-md-6
+        .form-group
+          .col-md-5
+            = f.label :category
+          .col-md-7
+            = f.select :category, Subproject::CATEGORIES, prompt: 'Select Category'
+        .form-group
+          .col-md-5
+            = f.label :physical_target, 'Physical Target'
+          .col-md-7
+            = f.select :physical_target, Subproject::PHYSICAL_TARGETS, prompt: 'Select Physical Target'
+        .form-group
+          .col-md-5
+            = f.label :cost_parameter, 'Cost Parameter'
+          .col-md-7
+            = f.select :cost_parameter, Subproject::COST_PARAMETERS, prompt: 'Select Cost Parameter'
+        .form-group
+          .col-md-5
+            = f.label :mode_of_implementation, 'Mode of Implementation'
+          .col-md-7
+            = f.select :mode_of_implementation, Subproject::MODES_OF_IMPLEMENTATION, prompt: 'Select Mode of Implementation'
+
+  .col-md-2
+    = label_tag :description
+  .col-md-10
+    = text_area_tag :description
+  
+  .col-md-2 style="margin-top: 10px;"
+    = label_tag :source
+  .col-md-10 style="margin-top: 10px;"
+    strong Name of Development Financial Institution
+  

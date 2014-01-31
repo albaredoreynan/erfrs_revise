@@ -1,7 +1,7 @@
 .row
   h4 Sub-Project
   hr
-  button.pull-right Create SP
+  = button_to 'Create SP', new_subproject_path, class: 'pull-right', method: :get
 
 .row.sp-search
   .col-md-12.header

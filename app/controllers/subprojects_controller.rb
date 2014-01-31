@@ -56,6 +56,7 @@ class SubprojectsController < ApplicationController
         :cost_parameter, # const lookup
         :mode_of_implementation, # const_lookup
         :description,
+        :fund_source_id,
         # financial information
         :grant_amount_direct_cost,
         :grant_amount_indirect_cost,

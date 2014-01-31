@@ -1,0 +1,30 @@
+- @hide_nav = true
+
+.breadcrumbs
+  = link_to 'Sub-Projects', subprojects_path
+  '  > New Sub-Project
+br
+.tip
+  = image_tag('tip.png')
+  ' TIP: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ornare aliquet. Nulla dapibus fringilla pretium. In urna mi, rutrum vitae tincidunt sed, faucibus ut sapien. Nunc eget dictum nisi. Vestibulum lacinia rutrum mattis. Praesent imperdiet iaculis augue, ac vulputate mauris volutpat eget.
+
+.row.sp-show
+  = form_for @subproject, html: { class: 'form-horizontal' } do |f|
+    .row
+      .col-md-6
+        .form-group
+          .col-md-4
+            = f.label :id, 'Sub-Project ID'
+          .col-md-8
+            = @subproject.id
+      .col-md-6
+        .form-group
+          .col-md-4
+            = f.label :status
+          .col-md-6
+            = f.select :status, options_for_select(Subproject::STATUSES)
+    
+    = render 'general_information_form', f: f
+    = render 'financial_information_form', f: f
+    = render 'projected_schedule'
+    = render 'team_information'
