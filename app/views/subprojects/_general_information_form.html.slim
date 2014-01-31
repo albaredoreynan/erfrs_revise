@@ -13,22 +13,22 @@
           .col-md-4
             = f.label :region_id
           .col-md-8
-            = f.select :region_id, Region.values_for_select, prompt: 'Select Region'
+            = f.select :region_id, Region.values_for_select, include_blank: true
         .form-group
           .col-md-4
             = f.label :province_id
           .col-md-8
-            = f.select :province_id, [], prompt: 'Select Provice'
+            = f.select :province_id, [], disabled: 'disabled'
         .form-group
           .col-md-4
             = f.label :municipality_id
           .col-md-8
-            = f.select :municipality_id, [], prompt: 'Select Municipality'
+            = f.select :municipality_id, []
         .form-group
           .col-md-4
             = f.label :barangay_id
           .col-md-8
-            = f.select :barangay_id, [], prompt: 'Select Barangay'
+            = f.select :barangay_id, []
 
       .col-md-6
         .form-group
