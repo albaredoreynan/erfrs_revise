@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   resources :subprojects
   resources :request_for_fund_releases
 
+  resources :regions
+  resources :provinces
+  resources :municipalities
+  resources :barangays
+
   scope '/admin' do
     get '/index', to: 'admin#index', as: 'admin_index'
     get '/news', to: 'admin#news', as: 'admin_news'

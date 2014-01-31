@@ -2,7 +2,7 @@
 
 .breadcrumbs
   = link_to 'Sub-Projects', subprojects_path
-  = " > Sub Project #{@subproject.id}"
+  '  > New Sub-Project
 br
 .tip
   = image_tag('tip.png')
@@ -22,9 +22,9 @@ br
           .col-md-4
             = f.label :status
           .col-md-6
-            = @subproject.status
+            = f.select :status, options_for_select(Subproject::STATUSES)
     
-    = render 'general_information'
-    = render 'financial_information'
+    = render 'general_information_form', f: f
+    = render 'financial_information_form', f: f
     = render 'projected_schedule'
     = render 'team_information'

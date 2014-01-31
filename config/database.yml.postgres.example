@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: ken
+  password:
+
+development:
+  <<: *default
+  database: erfrs_development
+
+test:
+  <<: *default
+  database: efrfs_test
+
+production:
+  <<: *default
+  database: erfrs_production
