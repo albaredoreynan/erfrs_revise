@@ -4,6 +4,8 @@ class Subproject < ActiveRecord::Base
   belongs_to :municipality
   belongs_to :barangay
 
+  belongs_to :user
+
   STATUSES = %w{Draft Published}
   CATEGORIES = %w{Category1 Category2}
   PHYSICAL_TARGETS = %w{Target1 Target2}
@@ -32,6 +34,6 @@ class Subproject < ActiveRecord::Base
 
   def self.fetch_all_created_by(username)
     users = User.where 'username like ?', "%#{username}%"
-    user.any? ? where( user_id: users.pluck(:id) ) : none
+    users.any? ? where( user_id: users.pluck(:id) ) : none
   end
 end
