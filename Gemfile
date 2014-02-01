@@ -2,7 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rake', '10.0.4'
 gem 'rails', '4.0.2'
+
 gem 'devise'
+gem 'has_scope'
 
 if ENV['ERFRS_USES_POSTGRESQL']
   # Nad if you want to use postgresql locally, simply execute the ff 3 commands:
