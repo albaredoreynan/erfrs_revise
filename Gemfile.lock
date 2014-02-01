@@ -28,6 +28,7 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     awesome_print (1.2.0)
+    bcrypt-ruby (3.1.2)
     better_errors (1.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -55,9 +56,16 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     debug_inspector (0.0.2)
+    devise (3.2.2)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
+    has_scope (0.5.1)
     hike (1.2.3)
     i18n (0.6.9)
     jquery-rails (3.0.4)
@@ -73,6 +81,7 @@ GEM
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
+    orm_adapter (0.5.0)
     pg (0.17.1)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
@@ -149,6 +158,8 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    warden (1.2.3)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
@@ -162,6 +173,8 @@ DEPENDENCIES
   capistrano-rails (~> 1.0.0)
   capistrano-rvm
   coffee-rails (~> 4.0.0)
+  devise
+  has_scope
   jquery-rails
   pg
   quiet_assets

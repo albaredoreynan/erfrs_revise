@@ -1,6 +1,11 @@
 class SubprojectsController < ApplicationController
+
+  %w[id user year status].each{ |e| has_scope "with_#{e}".intern }
+  %w[region province municipality barangay].each{ |e| has_scope "from_#{e}".intern }
+
   def index
-    @subprojects = Subproject.includes(:region, :province, :municipality, :barangay)
+    @subprojects = apply_scopes(Subproject).includes(
+      :region, :province, :municipality, :barangay)
   end
 
   def show
@@ -42,46 +47,46 @@ class SubprojectsController < ApplicationController
 
   private
 
-    def subproject_params
-      attrs = [
-        # general information
-        :status, # const lookup
-        :title,
-        :region_id,
-        :province_id,
-        :municipality_id,
-        :barangay_id,
-        :category, # cost lookup
-        :physical_target, # const lookup
-        :cost_parameter, # const lookup
-        :mode_of_implementation, # const_lookup
-        :description,
-        :fund_source_id,
-        # financial information
-        :grant_amount_direct_cost,
-        :grant_amount_indirect_cost,
-        :lcc_blgu_direct_cost,
-        :lcc_blgu_indirect_cost,
-        :community_direct_cost,
-        :community_indirect_cost,
-        :mlgu_direct_cost,
-        :mlgu_indirect_cost,
-        :plgu_others_direct_cost,
-        :plgu_others_indirect_cost,
-        :total_lcc_cash_direct_cost,
-        :total_lcc_cash_indirect_cost,
-        :total_lcc_in_kind_direct_cost,
-        :total_lcc_in_kind_indirect_cost,
-        # projected schedule of grant fund releases
-        :first_tranch_amount,
-        :first_tranch_date_required,
-        :second_tranch_amount,
-        :second_tranch_date_required,
-        :third_tranch_amount,
-        :third_tranch_date_required,
-        # team member params
-        team_members_attributes: [:name, :designation, :email, :phone]
-      ]
-      params.require(:subproject).permit(attrs)
-    end
+  def subproject_params
+    attrs = [
+      # general information
+      :status, # const lookup
+      :title,
+      :region_id,
+      :province_id,
+      :municipality_id,
+      :barangay_id,
+      :category, # cost lookup
+      :physical_target, # const lookup
+      :cost_parameter, # const lookup
+      :mode_of_implementation, # const_lookup
+      :description,
+      :fund_source_id,
+      # financial information
+      :grant_amount_direct_cost,
+      :grant_amount_indirect_cost,
+      :lcc_blgu_direct_cost,
+      :lcc_blgu_indirect_cost,
+      :community_direct_cost,
+      :community_indirect_cost,
+      :mlgu_direct_cost,
+      :mlgu_indirect_cost,
+      :plgu_others_direct_cost,
+      :plgu_others_indirect_cost,
+      :total_lcc_cash_direct_cost,
+      :total_lcc_cash_indirect_cost,
+      :total_lcc_in_kind_direct_cost,
+      :total_lcc_in_kind_indirect_cost,
+      # projected schedule of grant fund releases
+      :first_tranch_amount,
+      :first_tranch_date_required,
+      :second_tranch_amount,
+      :second_tranch_date_required,
+      :third_tranch_amount,
+      :third_tranch_date_required,
+      # team member params
+      team_members_attributes: [:name, :designation, :email, :phone]
+    ]
+    params.require(:subproject).permit(attrs)
+  end
 end
