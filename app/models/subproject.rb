@@ -14,7 +14,7 @@ class Subproject < ActiveRecord::Base
 
   ####################### SCOPES ###########################
 
-  scope :by_user,     -> username { fetch_all_created_by username }
+  scope :with_user,   -> username { fetch_all_created_by username }
   scope :with_id,     -> id { where id: id }
   scope :with_status, -> status { where status: status }
 
