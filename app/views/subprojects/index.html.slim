@@ -29,7 +29,7 @@
             .col-md-3
               = label_tag :status
             .col-md-9
-              = select_tag :status
+              = select_tag :status, options_for_select(Subproject::STATUSES)
           .form-group
             .col-md-3
             .col-md-9
@@ -40,24 +40,24 @@
         form.form-horizontal
           .form-group
             .col-md-3
-              = label_tag :region
+              = label_tag :subproject_region_id, 'Region'
             .col-md-9
-              = select_tag :region
+              = select_tag :subproject_region_id, options_for_select(Region.values_for_select), include_blank: true
           .form-group
             .col-md-3
-              = label_tag :province
+              = label_tag :subproject_province_id, 'Province'
             .col-md-9
-              = text_field_tag :province
+              = select_tag :subproject_province_id, []
           .form-group
             .col-md-3
-              = label_tag :municipality
+              = label_tag :subproject_municipality_id, 'Municipality'
             .col-md-9
-              = text_field_tag :municipality
+              = select_tag :subproject_municipality_id, []
           .form-group
             .col-md-3
-              = label_tag :barangay
+              = label_tag :subproject_barangay_id, 'Barangay'
             .col-md-9
-              = text_field_tag :barangay
+              = select_tag :subproject_barangay_id, []
   .col-md-12
     table
       thead
