@@ -128,4 +128,16 @@ ActiveRecord::Schema.define(version: 20140201033414) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  create_table "team_members", force: true do |t|
+    t.integer  "subproject_id"
+    t.string   "name"
+    t.string   "designation"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "team_members", ["subproject_id"], name: "index_team_members_on_subproject_id", using: :btree
+
 end
