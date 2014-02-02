@@ -2,7 +2,6 @@
   h4 Project Team Information
   hr
   .col-md-12
-    button Add Member
     table border=1
       thead
         tr
@@ -11,23 +10,9 @@
           th Email Address
           th Phone
       tbody
-        tr
-          td Juan Dela Cruz
-          td Head
-          td juandelacruz@hotmail.com
-          td (2) 456-2345
-        tr
-          td Juan Dela Cruz
-          td Barangay Chairperson
-          td juandelacruz@hotmail.com
-          td (2) 456-2345
-        tr
-          td Juan Dela Cruz
-          td BSPMC Chairperson
-          td juandelacruz@hotmail.com
-          td (2) 456-2345
-        tr
-          td Juan Dela Cruz
-          td Barangay Treasurer
-          td juandelacruz@hotmail.com
-          td (2) 456-2345
+        - @subproject.team_members.each do |tm|
+          tr
+            td= tm.name
+            td= tm.designation
+            td= tm.email
+            td= tm.phone
