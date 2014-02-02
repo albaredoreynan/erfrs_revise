@@ -5,6 +5,9 @@ class Subproject < ActiveRecord::Base
   belongs_to :barangay
 
   belongs_to :user
+  
+  has_many :team_members
+  accepts_nested_attributes_for :team_members
 
   STATUSES = %w{Draft Published}
   CATEGORIES = %w{Category1 Category2}

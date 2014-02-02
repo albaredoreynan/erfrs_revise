@@ -1,0 +1,19 @@
+.row.sp-show
+  h4 Project Team Information
+  hr
+  .col-md-12
+    button Add Member
+    table border=1
+      thead
+        tr
+          th Name
+          th Designation
+          th Email Address
+          th Phone
+      tbody
+      = f.fields_for :team_members do |ff|
+        tr
+          td= ff.text_field :name
+          td= ff.text_field :designation
+          td= ff.text_field :email
+          td= ff.text_field :phone
