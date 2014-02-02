@@ -5,6 +5,9 @@ class Subproject < ActiveRecord::Base
   belongs_to :barangay
 
   belongs_to :user
+  
+  has_many :team_members
+  accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
 
   STATUSES = %w{Draft Published}
   CATEGORIES = %w{Category1 Category2}
@@ -35,5 +38,9 @@ class Subproject < ActiveRecord::Base
   def self.fetch_all_created_by(username)
     users = User.where 'username like ?', "%#{username}%"
     users.any? ? where( user_id: users.pluck(:id) ) : none
+  end
+
+  def reject_team_members(attributed)
+    attributed['name'].blank?
   end
 end
