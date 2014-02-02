@@ -1,8 +1,8 @@
-.row.sp-show
+.row.sp-show#team_members
   h4 Project Team Information
   hr
   .col-md-12
-    button Add Member
+    = link_to_add_association 'add member', f, :team_members, 'data-association-insertion-node' => '#team-members-body', class: 'btn btn-default'
     table border=1
       thead
         tr
@@ -10,10 +10,7 @@
           th Designation
           th Email Address
           th Phone
-      tbody
-      = f.fields_for :team_members do |ff|
-        tr
-          td= ff.text_field :name
-          td= ff.text_field :designation
-          td= ff.text_field :email
-          td= ff.text_field :phone
+      tbody#team-members-body
+        = f.fields_for :team_members do |team_member|
+          = render 'team_member_fields', f: team_member
+

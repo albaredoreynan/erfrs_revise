@@ -14,7 +14,6 @@ class SubprojectsController < ApplicationController
 
   def new
     @subproject = Subproject.new
-    @subproject.team_members.build
   end
 
   def edit
