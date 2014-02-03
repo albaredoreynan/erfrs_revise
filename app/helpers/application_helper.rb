@@ -13,4 +13,8 @@ module ApplicationHelper
     end
   end
 
+  def devise_layout(controlr)
+    'clear-container' if controlr == 'devise/sessions'
+  end
+
 end
