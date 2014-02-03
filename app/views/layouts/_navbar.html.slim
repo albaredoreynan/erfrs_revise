@@ -1,4 +1,4 @@
-- unless @hide_nav
+- if user_signed_in?
   ul.nav.nav-tabs
     li class = active_class("static_pages")
       = link_to "Dashboard", "/dashboard"
