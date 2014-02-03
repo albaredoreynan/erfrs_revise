@@ -55,7 +55,7 @@
   .col-md-2
     = label_tag :description
   .col-md-10
-    = text_area_tag :description, @subproject.description, readonly: true
+    = text_area_tag :description, @subproject.description, disabled: :true
   
   .col-md-2 style="margin-top: 10px;"
     = label_tag :source

@@ -25,7 +25,19 @@ gem 'uglifier', '>= 1.3.0'
 gem 'cocoon'
 
 group :development, :test do
-  gem 'rspec-rails'
+  gem 'rspec-rails'   
+end
+
+group :test do
+  gem 'capybara'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'rb-fsevent'
+  gem 'shoulda-matchers'
+  gem 'launchy'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
