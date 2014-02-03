@@ -29,7 +29,7 @@
             .col-md-3
               = label_tag :with_status, 'Status'
             .col-md-6
-              = select_tag :with_status, options_for_select(Subproject::STATUSES), class: 'form-control'
+              = select_tag :with_status, options_for_select(Subproject::STATUSES), class: 'form-control', include_blank: true
           .form-group
             .col-md-3
             .col-md-9
