@@ -3,11 +3,30 @@
 body{
   padding-top: 70px;
   padding-bottom: 40px;
+  background: $bg-light-gray;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.container{
+  margin-top: 30px;
+  padding: 1em 2em;
+  min-height: 600px;
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+
+.clear-container{
+  background: $bg-light-gray;
+  border: none;
+  min-height: 0;
 }
 
 .rfrs{
   margin-top: 10px;
-  border: 1px solid $gray;
+  border: 1px solid $border-color;
+  border-radius: 4px;
 
   .header{
     background: $light-blue;
@@ -24,7 +43,7 @@ body{
   }
 }
 
-.spip-search, .sp-search, .sp-show, .rfr-index, .admin-news{
+.spip-search, .sp-search, .sp-table, .sp-show, .rfr-index, .admin-news{
   @extend .rfrs
 }
 

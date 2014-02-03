@@ -9,7 +9,8 @@
   <body>
     <%= render "layouts/header" %>
     <%= render "layouts/navbar" %>
-    <div class="container">
+    <%= render "layouts/flash" %>
+    <div class="container <%= devise_layout(params[:controller]) %>">
       <%= yield %>
     </div>
 

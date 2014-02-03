@@ -1,7 +1,7 @@
 .row
   h4 Request for Fun Releases
   hr
-  button.pull-right Create RFR
+  = link_to 'Create RFR', '#', class: 'pull-right btn btn-primary'
 
 .row.rfr-index
   .col-md-12.header
@@ -13,53 +13,55 @@
           .form-group
             .col-md-3
               = label_tag :rfr_id, 'RFR ID'
-            .col-md-9
-              = text_field_tag :rfr_id
+            .col-md-6
+              = text_field_tag :rfr_id, '', class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :sp_id, 'SP ID'
-            .col-md-9
-              = text_field_tag :sp_id
+            .col-md-6
+              = text_field_tag :sp_id, '', class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :user_name, 'User Name'
-            .col-md-9
-              = text_field_tag :user_name
+            .col-md-6
+              = text_field_tag :user_name, '', class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :status
-            .col-md-9
-              = select_tag :status
+            .col-md-6
+              = select_tag :status, '', class: 'form-control'
           .form-group
             .col-md-3
             .col-md-9
-              = submit_tag 'Go'
-              = submit_tag 'Clear'
+              = submit_tag 'Search', class: 'btn btn-default'
+              = submit_tag 'Clear', class: 'btn btn-default clear'
 
       .col-md-6
         form.form-horizontal
           .form-group
             .col-md-3
               = label_tag :region
-            .col-md-9
-              = select_tag :region
+            .col-md-6
+              = select_tag :region, '', class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :province
-            .col-md-9
-              = text_field_tag :province
+            .col-md-6
+              = text_field_tag :province, '', class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :municipality
-            .col-md-9
-              = text_field_tag :municipality
+            .col-md-6
+              = text_field_tag :municipality, '', class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :barangay
-            .col-md-9
-              = text_field_tag :barangay
+            .col-md-6
+              = text_field_tag :barangay, '', class: 'form-control'
+
+.row.sp-table
   .col-md-12
-    table
+    table.table.table-hover.table-striped
       thead
         tr
           th RFR ID

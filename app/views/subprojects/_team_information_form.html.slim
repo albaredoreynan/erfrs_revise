@@ -1,9 +1,9 @@
-.row.sp-show#team_members
+.row.sp-table#team_members
   h4 Project Team Information
   hr
   .col-md-12
     = link_to_add_association 'add member', f, :team_members, 'data-association-insertion-node' => '#team-members-body', class: 'btn btn-default'
-    table border=1
+    table.table.table-bordered
       thead
         tr
           th Name
