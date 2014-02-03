@@ -78,30 +78,28 @@
           td.grand-total-percentage
 
 javascript:
-  $(function(){
-    var percentGrandSubtotal = 0.0;
-    var grandSubtotal = parseFloat($('.subtotal').data('sum'));
-    $('.percentage').each(function(){
-      percentSubtotal = parseFloat($(this).data('sum')) / grandSubtotal * 100;
-      percentGrandSubtotal += percentSubtotal;
-      $(this).text(percentSubtotal.toFixed(2) + '%');
-    });
-    $('.subtotal-percentage').text(percentGrandSubtotal.toFixed()+'%');
-
-    // *************************************
-
-    percentGrandSubtotal = 0.0;
-    //grandSubtotal = parseFloat($('#grand-total .total').data('sum'));
-    grandSubtotal = 0.0;
-
-    $('.lcc-percentage').each(function(){
-      grandSubtotal += parseFloat( $(this).data('sum') );
-    });
-
-    $('.lcc-percentage').each(function(){
-      percentSubtotal = parseFloat($(this).data('sum')) / grandSubtotal * 100;
-      percentGrandSubtotal += percentSubtotal;
-      $(this).text(percentSubtotal.toFixed(2) + '%');
-    });
-    $('.grand-total-percentage').text(percentGrandSubtotal.toFixed()+'%');
+  var percentGrandSubtotal = 0.0;
+  var grandSubtotal = parseFloat($('.subtotal').data('sum'));
+  $('.percentage').each(function(){
+    percentSubtotal = parseFloat($(this).data('sum')) / grandSubtotal * 100;
+    percentGrandSubtotal += percentSubtotal;
+    $(this).text(percentSubtotal.toFixed(2) + '%');
   });
+  $('.subtotal-percentage').text(percentGrandSubtotal.toFixed()+'%');
+
+  // *************************************
+
+  percentGrandSubtotal = 0.0;
+  //grandSubtotal = parseFloat($('#grand-total .total').data('sum'));
+  grandSubtotal = 0.0;
+
+  $('.lcc-percentage').each(function(){
+    grandSubtotal += parseFloat( $(this).data('sum') );
+  });
+
+  $('.lcc-percentage').each(function(){
+    percentSubtotal = parseFloat($(this).data('sum')) / grandSubtotal * 100;
+    percentGrandSubtotal += percentSubtotal;
+    $(this).text(percentSubtotal.toFixed(2) + '%');
+  });
+  $('.grand-total-percentage').text(percentGrandSubtotal.toFixed()+'%');

@@ -32,6 +32,14 @@ class Subproject < ActiveRecord::Base
   end
 
   ####################### SCOPES ###########################
+  
+  %i[first second third].each do |nth| 
+    method_name = "#{nth}_tranch_date_required"
+    define_method(method_name) do
+      value = read_attribute(method_name)
+      value ? value.to_s(:long)[0..-7] : value
+    end
+  end
 
   private
 
