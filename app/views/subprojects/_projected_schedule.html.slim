@@ -2,7 +2,7 @@
   h4 Project Schedule of Grant Fund Releases
   hr
   .col-md-8
-    table.table.table-bordered
+    table.table.table-bordered#schedule
       thead
         tr
           th Tranches
@@ -10,25 +10,30 @@
           th % TOTAL
           th Date Required
       tbody
-        tr
-          th First
-          - 3.times do
-            td
-        tr
-          th Second
-          - 3.times do
-            td
-        tr
-          th Third
-          - 3.times do
-            td
-        tr
+        - total = 0
+        - %w[first second third].each do |ordinal|
+          tr
+            - value = @subproject.send "#{ordinal}_tranch_amount"
+            - total += value
+            th= ordinal.titleize
+            td= number_to_currency value
+            td.percentage data-value="#{value}"
+            td= @subproject.send "#{ordinal}_tranch_date_required"
+        tr#total
           th TOTAL
-          - 3.times do
-            td
+          td.subtotal data-value="#{total}"= number_to_currency total
+          td.subtotal-percentage
     
   .col-md-4
     = image_tag('tip.png')
     ' TIP: If the exact date cannot be projected, enter either the start of the month or week.
 
-
+javascript:
+  var percentGrandSubtotal = 0.0;
+  var grandSubtotal = parseFloat($('#schedule .subtotal').data('value'));
+  $('#schedule .percentage').each(function(){
+    percentSubtotal = parseFloat($(this).data('value')) / grandSubtotal * 100;
+    percentGrandSubtotal += percentSubtotal;
+    $(this).text(percentSubtotal.toFixed(2) + '%');
+  });
+  $('.subtotal-percentage').text(percentGrandSubtotal.toFixed()+'%');

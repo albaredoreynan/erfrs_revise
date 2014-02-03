@@ -6,38 +6,37 @@
 .row.sp-search
   .col-md-12.header
     h5 Search
-  .col-md-12
-    .row
-      .col-md-6
-        form.form-horizontal
+  form.form-horizontal
+    .col-md-12
+      .row
+        .col-md-6
           .form-group
             .col-md-3
-              = label_tag :sp_id, 'SP ID'
+              = label_tag :with_id, 'SP ID'
             .col-md-6
-              = text_field_tag :sp_id, '', class: 'form-control'
+              = text_field_tag :with_id, '', class: 'form-control'
           .form-group
             .col-md-3
-              = label_tag :year
+              = label_tag :with_year, 'Year'
             .col-md-6
-              = text_field_tag :year, '', class: 'form-control'
+              = text_field_tag :with_year, '', class: 'form-control'
           .form-group
             .col-md-3
-              = label_tag :user_name, 'User Name'
+              = label_tag :with_user, 'User Name'
             .col-md-6
-              = text_field_tag :user_name, '', class: 'form-control'
+              = text_field_tag :with_user, '', class: 'form-control'
           .form-group
             .col-md-3
-              = label_tag :status
+              = label_tag :with_status, 'Status'
             .col-md-6
-              = select_tag :status, options_for_select(Subproject::STATUSES), class: 'form-control'
+              = select_tag :with_status, options_for_select(Subproject::STATUSES), class: 'form-control'
           .form-group
             .col-md-3
             .col-md-9
               = submit_tag 'Search', class: 'btn btn-default'
-              = submit_tag 'Clear', class: 'btn btn-default clear'
+              = submit_tag 'Clear', class: 'btn btn-default clear', type: 'reset'
 
-      .col-md-6
-        form.form-horizontal
+        .col-md-6
           .form-group
             .col-md-3
               = label_tag :subproject_region_id, 'Region'

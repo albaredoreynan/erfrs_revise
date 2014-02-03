@@ -28,10 +28,18 @@ class Subproject < ActiveRecord::Base
   end
 
   %w{region province municipality barangay}.each do |place|
-    scope "from_#{place}".intern, -> place_id { where "#{place}_id" => place_id }
+    scope "subproject_#{place}_id".intern, -> place_id { where "#{place}_id" => place_id }
   end
 
   ####################### SCOPES ###########################
+  
+  %i[first second third].each do |nth| 
+    method_name = "#{nth}_tranch_date_required"
+    define_method(method_name) do
+      value = read_attribute(method_name)
+      value ? value.to_s(:long)[0..-7] : value
+    end
+  end
 
   private
 

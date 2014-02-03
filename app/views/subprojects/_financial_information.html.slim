@@ -51,26 +51,55 @@
           th SUB-TOTAL
           td#direct_cost_subtotal = number_to_currency(dc = dc_subtotal)
           td#indirect_cost_subtotal = number_to_currency(ic = ic_subtotal)
-          td.total= number_to_currency( sum = dc+ic )
+          - sum = dc + ic
+          td.subtotal data-sum="#{sum}" = number_to_currency( sum )
           - ic_total += ic ; dc_total += dc
-          td.percentage data-sum="#{sum}"
+          td.subtotal-percentage data-sum="#{sum}"
         tr
           td Total LCC Cash
           td= number_to_currency(dc = @subproject.total_lcc_cash_direct_cost)
           td= number_to_currency(ic = @subproject.total_lcc_cash_indirect_cost)
-          td.total= number_to_currency( dc+ic )
+          td.total= number_to_currency( sum = dc+ic )
           - ic_total += ic ; dc_total += dc
-          td.percentage data-sum="#{sum}"
+          td.lcc-percentage data-sum="#{sum}"
         tr
           td Total LCC in Kind
           td= number_to_currency(dc = @subproject.total_lcc_in_kind_direct_cost)
           td= number_to_currency(ic = @subproject.total_lcc_in_kind_indirect_cost)
-          td.total= number_to_currency( dc+ic )
+          td.total= number_to_currency( sum = dc+ic )
           - ic_total += ic ; dc_total += dc
-          td.percentage data-sum="#{sum}"
+          td.lcc-percentage data-sum="#{sum}"
         tr#grand-total
           th TOTAL
           td#direct_cost_total = number_to_currency( dc_total )
           td#indirect_cost_total = number_to_currency( ic_total )
-          td.total= number_to_currency( dc_total + ic_total )
-          td.percentage
+          - sum = dc_total + ic_total
+          td.total data-sum="#{sum}" = number_to_currency( sum )
+          td.grand-total-percentage
+
+javascript:
+  var percentGrandSubtotal = 0.0;
+  var grandSubtotal = parseFloat($('.subtotal').data('sum'));
+  $('.percentage').each(function(){
+    percentSubtotal = parseFloat($(this).data('sum')) / grandSubtotal * 100;
+    percentGrandSubtotal += percentSubtotal;
+    $(this).text(percentSubtotal.toFixed(2) + '%');
+  });
+  $('.subtotal-percentage').text(percentGrandSubtotal.toFixed()+'%');
+
+  // *************************************
+
+  percentGrandSubtotal = 0.0;
+  //grandSubtotal = parseFloat($('#grand-total .total').data('sum'));
+  grandSubtotal = 0.0;
+
+  $('.lcc-percentage').each(function(){
+    grandSubtotal += parseFloat( $(this).data('sum') );
+  });
+
+  $('.lcc-percentage').each(function(){
+    percentSubtotal = parseFloat($(this).data('sum')) / grandSubtotal * 100;
+    percentGrandSubtotal += percentSubtotal;
+    $(this).text(percentSubtotal.toFixed(2) + '%');
+  });
+  $('.grand-total-percentage').text(percentGrandSubtotal.toFixed()+'%');
