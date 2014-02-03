@@ -17,9 +17,11 @@
     width: 100%;  
     thead th{ background: $light-blue; }
   }
+
+  img{ width: 28px;}
 }
 
-.spip-search, .sp-search, .sp-show, .rfr-index{
+.spip-search, .sp-search, .sp-table, .sp-show, .rfr-index{
   @extend .spip
 }
 

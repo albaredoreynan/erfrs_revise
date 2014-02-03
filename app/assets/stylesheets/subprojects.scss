@@ -1,0 +1,15 @@
+@import 'colors';
+
+.sp-search{
+  .clear{
+    margin-left: 10px;  
+  }
+}
+
+.sp-table{
+  padding: 2em 1em;  
+
+  table{
+    border: 1px solid $border-color;  
+  }
+}
