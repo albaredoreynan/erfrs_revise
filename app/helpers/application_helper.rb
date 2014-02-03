@@ -14,7 +14,8 @@ module ApplicationHelper
   end
 
   def devise_layout(controlr)
-    'clear-container' if controlr == 'devise/sessions'
+    devise_controller = %w(devise/sessions devise/passwords devise/registrations)
+    'clear-container' if devise_controller.include?(controlr)
   end
 
 end
