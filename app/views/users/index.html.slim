@@ -10,6 +10,7 @@
       th Username
       th First Name
       th Last Name
+      th Update
     tbody
     - @users.each do |user|
       tr
@@ -17,3 +18,4 @@
         td= user.username
         td= user.first_name
         td= user.last_name
+        td= link_to image_tag('edit.png'), [:edit, user]
