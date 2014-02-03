@@ -6,38 +6,37 @@
 .row.sp-search
   .col-md-12.header
     h5 Search
-  .col-md-12
-    .row
-      .col-md-6
-        form.form-horizontal
+  form.form-horizontal
+    .col-md-12
+      .row
+        .col-md-6
           .form-group
             .col-md-3
-              = label_tag :sp_id, 'SP ID'
+              = label_tag :with_id, 'SP ID'
             .col-md-9
-              = text_field_tag :sp_id
+              = text_field_tag :with_id
           .form-group
             .col-md-3
-              = label_tag :year
+              = label_tag :with_year, 'Year'
             .col-md-9
-              = text_field_tag :year
+              = text_field_tag :with_year
           .form-group
             .col-md-3
-              = label_tag :user_name, 'User Name'
+              = label_tag :with_user, 'User Name'
             .col-md-9
-              = text_field_tag :user_name
+              = text_field_tag :with_user
           .form-group
             .col-md-3
-              = label_tag :status
+              = label_tag :with_status, 'Status'
             .col-md-9
-              = select_tag :status, options_for_select(Subproject::STATUSES)
+              = select_tag :with_status, options_for_select(Subproject::STATUSES)
           .form-group
             .col-md-3
             .col-md-9
               = submit_tag 'Go'
-              = submit_tag 'Clear'
+              button type='reset' Clear
 
-      .col-md-6
-        form.form-horizontal
+        .col-md-6
           .form-group
             .col-md-3
               = label_tag :subproject_region_id, 'Region'

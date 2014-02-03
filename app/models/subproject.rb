@@ -28,7 +28,7 @@ class Subproject < ActiveRecord::Base
   end
 
   %w{region province municipality barangay}.each do |place|
-    scope "from_#{place}".intern, -> place_id { where "#{place}_id" => place_id }
+    scope "subproject_#{place}_id".intern, -> place_id { where "#{place}_id" => place_id }
   end
 
   ####################### SCOPES ###########################
