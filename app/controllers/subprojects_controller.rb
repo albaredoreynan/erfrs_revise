@@ -42,7 +42,7 @@ class SubprojectsController < ApplicationController
 
   def destroy
     Subproject.find(params[:id]).destroy
-    redirect_to subproject_paths, notie: 'Subproject was deleted successfully'
+    redirect_to subprojects_path, notie: 'Subproject was deleted successfully'
   end
 
   private
