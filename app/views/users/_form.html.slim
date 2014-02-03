@@ -1,0 +1,25 @@
+.row.signup
+  .col-md-4.col-md-offset-4.signin-form
+    h2
+      | New User
+    = form_for @user do |f|
+      .form-group
+        = f.label :email
+        = f.email_field :email, :autofocus => true, class: 'form-control'
+      .form-group
+        = f.label :username
+        = f.text_field :username, class: 'form-control'
+      .form-group
+        = f.label :first_name
+        = f.text_field :first_name, class: 'form-control'
+      .form-group
+        = f.label :last_name
+        = f.text_field :last_name, class: 'form-control'
+      .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control'
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: 'form-control'
+      div
+        = f.submit nil, class: 'btn btn-primary btn-lg btn-block'

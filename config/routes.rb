@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  #devise_for :users
   root to: 'static_pages#home'
 
   get '/dashboard' => 'static_pages#dashboard'
@@ -18,5 +17,7 @@ Rails.application.routes.draw do
     get '/news', to: 'admin#news', as: 'admin_news'
   end
 
-  devise_for :users, path: 'admin', path_names: {sign_in: 'login', sign_out: 'logout'}
+  resources :users
+  devise_for :users
+  devise_for :super_users
 end
