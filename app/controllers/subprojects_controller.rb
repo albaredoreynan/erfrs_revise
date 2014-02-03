@@ -10,6 +10,9 @@ class SubprojectsController < ApplicationController
 
   def show
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find params[:id]
+    @total = %w[first second third].reduce(0.0) do |sum, ordinal|
+      sum += @subproject.send "#{ordinal}_tranch_amount"
+    end
   end
 
   def new
