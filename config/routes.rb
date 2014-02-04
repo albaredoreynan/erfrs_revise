@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  authenticated :super_user do
+    root to: 'static_pages#dashboard', as: 'authenticated_root'
+  end
+
   root to: 'static_pages#home'
 
   get '/dashboard' => 'static_pages#dashboard'

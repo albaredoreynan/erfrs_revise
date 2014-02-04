@@ -1,0 +1,12 @@
+= form_for @province, html: { class: 'form-horizontal', role: 'form' } do |f|
+  .form-group
+    = f.label :region_id, 'Region', class: 'control-label col-sm-1'
+    .col-sm-11
+      = f.select :region_id, Region.values_for_select, {}, class: 'form-control'
+  .form-group
+    = f.label :name, 'Province', class: 'control-label col-sm-1'
+    .col-sm-11
+      = f.text_field :name, class: 'form-control'
+  .form-group
+    .col-sm-offset-1.col-sm-11
+      = f.submit 'Save', class: 'btn btn-large btn-primary'
