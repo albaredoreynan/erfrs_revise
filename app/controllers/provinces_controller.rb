@@ -14,5 +14,6 @@ class ProvincesController < InheritedResources::Base
     def collection
       @provinces = apply_scopes(Province)
       @provinces = @provinces.paginate(page: params[:page]) unless request.url =~ /json$/
+      @provinces
     end
 end

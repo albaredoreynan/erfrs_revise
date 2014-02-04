@@ -1,0 +1,22 @@
+.row.sp-table
+  table.table.table-hover
+    thead
+      tr
+        th Region
+        th municipality
+        th Municipality
+        th Actions
+    tbody
+      - @municipalities.each do |municipality|
+        tr
+          td= municipality.province.region.code
+          td= municipality.province.name
+          td= municipality.name
+          td
+            = link_to image_tag('edit.png'), [:edit, municipality]
+            = link_to image_tag('delete.png'), municipality, method: :delete, 'data-confirm' => 'Are you sure you want to delete this municipality?'
+
+.row
+  = will_paginate @municipalities
+.row
+  = link_to 'Add municipality', new_municipality_path, class: 'btn btn-primary btn-large'
