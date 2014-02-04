@@ -1,2 +1,9 @@
-h1 Edit Subproject
-= render 'form'
+= form_for @subproject, html: { class: 'form-horizontal' } do |f|
+  .row
+    .col-md-10
+      h3 Edit Subproject
+    .col-md-2
+      = f.submit 'Save', class: 'btn btn-primary pull-right'
+    .col-md-12
+      hr
+  = render 'form', f: f
