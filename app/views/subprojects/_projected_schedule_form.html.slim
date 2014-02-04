@@ -7,28 +7,20 @@
         tr
           th Tranches
           th Amount
-          th % TOTAL
           th Date Required
       tbody
         tr
           th First
           td = f.text_field :first_tranch_amount
-          td.percentage
           td = f.text_field :first_tranch_date_required, value: @subproject.first_tranch_date_required, placeholder: 'Example: Jan 1, 2014'
         tr
           th Second
           td = f.text_field :second_tranch_amount
-          td.percentage
           td = f.text_field :second_tranch_date_required, value: @subproject.second_tranch_date_required, placeholder: 'Example: Feb 2, 2015'
         tr
           th Third
           td = f.text_field :third_tranch_amount
-          td.percentage
           td = f.text_field :third_tranch_date_required, value: @subproject.third_tranch_date_required, placeholder: 'Example: Mar 3, 2016'
-        tr
-          th TOTAL
-          td
-          td
     
   .col-md-4
     = image_tag('tip.png')

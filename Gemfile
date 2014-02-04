@@ -5,6 +5,7 @@ gem 'rails', '4.0.2'
 
 gem 'devise'
 gem 'has_scope'
+gem 'inherited_resources', git: 'https://github.com/josevalim/inherited_resources.git'
 
 #if ENV['ERFRS_USES_POSTGRESQL']
   # Nad if you want to use postgresql locally, simply execute the ff 3 commands:

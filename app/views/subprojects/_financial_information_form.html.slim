@@ -8,60 +8,32 @@
           th  
           th Direct Cost
           th Indirect Cost
-          th TOTAL
-          th % TOTAL
       tbody
         tr#grant-amount
           td GRANT Amount
           td= f.text_field :grant_amount_direct_cost
           td= f.text_field :grant_amount_indirect_cost
-          td.total
-          td.percentage
         tr#lcc-blgu
           td LCC: BLGU
           td= f.text_field :lcc_blgu_direct_cost
           td= f.text_field :lcc_blgu_indirect_cost
-          td.total
-          td.percentage
         tr#community
           td Community
           td= f.text_field :community_direct_cost
           td= f.text_field :community_indirect_cost
-          td.total
-          td.percentage
         tr#mlgu
           td MLGU
           td= f.text_field :mlgu_direct_cost
           td= f.text_field :mlgu_indirect_cost
-          td.total
-          td.percentage
         tr#plgu-others
           td PLGU/Others
           td= f.text_field :plgu_others_direct_cost
           td= f.text_field :plgu_others_indirect_cost
-          td.total
-          td.percentage
-        tr
-          th SUB-TOTAL
-          td#direct_cost_subtotal
-          td#indirect_cost_subtotal
-          td.total
-          td.percentage
         tr
           td Total LCC Cash
           td= f.text_field :total_lcc_cash_direct_cost
           td= f.text_field :total_lcc_cash_indirect_cost
-          td.total
-          td.percentage
         tr
           td Total LCC in Kind
           td= f.text_field :total_lcc_in_kind_direct_cost
           td= f.text_field :total_lcc_in_kind_indirect_cost
-          td.total
-          td.percentage
-        tr
-          th TOTAL
-          td#direct_cost_total
-          td#indirect_cost_total
-          td.total
-          td.percentage
