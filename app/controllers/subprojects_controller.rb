@@ -3,6 +3,12 @@ class SubprojectsController < ApplicationController
   %w[id user year status].each{ |e| has_scope "with_#{e}".intern }
   %w[region province municipality barangay].each{ |e| has_scope "subproject_#{e}_id".intern }
 
+  before_action :define_total, only: %i[show edit new]
+
+  def define_total
+    @total = 0.0
+  end
+
   def index
     @subprojects = apply_scopes(Subproject).includes(
       :region, :province, :municipality, :barangay)

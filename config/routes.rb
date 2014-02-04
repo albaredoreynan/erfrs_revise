@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     get '/news', to: 'admin#news', as: 'admin_news'
   end
 
-  resources :users
   devise_for :users
+  resources :users
   devise_for :super_users
 end
