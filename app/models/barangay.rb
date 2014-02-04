@@ -1,5 +1,5 @@
 class Barangay < ActiveRecord::Base
   belongs_to :municipality
   
-  default_scope order('name asc')
+  scope :municipality_id, -> id { where(municipality_id: id).order(:name) }
 end
