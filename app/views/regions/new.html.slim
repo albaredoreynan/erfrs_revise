@@ -1,13 +1,3 @@
-.row
-  .col-md-4.col-md-offset-4
-    h3 Region
-    = form_for @region, html: { class: 'form-horizontal' } do |f|
-      .form-group
-        = f.label :code
-        = f.text_field :code, class: 'form-control'
-      .form-group
-        = f.label :name
-        = f.text_field :name, class: 'form-control'
-      .form-group
-        = f.submit nil, class: 'btn btn-primary btn-lg'
-    
+h1 New Region
+= render 'form'
+
