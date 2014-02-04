@@ -32,7 +32,8 @@ class SubprojectsController < ApplicationController
   def create
     @subproject = Subproject.new subproject_params
     if @subproject.save
-      redirect_to subprojects_path, notice: 'Subproject created successfully'
+      flash[:success] = 'Subproject created successfully.'
+      redirect_to subprojects_path
     else
       flash[:error] = 'An error occured while creating project'
       render 'new'
@@ -42,7 +43,8 @@ class SubprojectsController < ApplicationController
   def update
     @subproject = Subproject.find params[:id]
     if @subproject.update_attributes subproject_params
-      redirect_to subprojects_path, notice: 'Subproject updated successfully'
+      flash[:success] = 'Subproject updated successfully.'
+      redirect_to subprojects_path
     else
       flash[:error] = 'An error occured while updating project'
       render 'edit'
@@ -51,7 +53,8 @@ class SubprojectsController < ApplicationController
 
   def destroy
     Subproject.find(params[:id]).destroy
-    redirect_to subprojects_path, notie: 'Subproject was deleted successfully'
+    flash[:success] = 'Subproject was deleted successfully.'
+    redirect_to subprojects_path
   end
 
   private
