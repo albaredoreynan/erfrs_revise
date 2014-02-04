@@ -1,8 +1,9 @@
 class ProvincesController < ApplicationController
   respond_to :html, :json
 
-  def index
-    @provinces = Province.where(region_id: params[:region_id])
-    respond_with @provinces
+  actions :all, except: :show
+
+  def permitted_params
+    params.permit(province: %i[region_id name])
   end
 end
