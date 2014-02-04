@@ -1,7 +1,7 @@
 .row.sp-header
   h4 Sub-Project
   hr
-  = link_to 'Create SP', new_subproject_path, class: 'pull-right btn btn-primary', method: :get
+  = link_to 'Create SP', new_subproject_path, class: 'pull-right btn btn-primary'
 
 .row.sp-search
   .col-md-12.header
@@ -14,22 +14,22 @@
             .col-md-3
               = label_tag :with_id, 'SP ID'
             .col-md-6
-              = text_field_tag :with_id, '', class: 'form-control'
+              = text_field_tag :with_id, params[:with_id], class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :with_year, 'Year'
             .col-md-6
-              = text_field_tag :with_year, '', class: 'form-control'
+              = text_field_tag :with_year, params[:with_year], class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :with_user, 'User Name'
             .col-md-6
-              = text_field_tag :with_user, '', class: 'form-control'
+              = text_field_tag :with_user, params[:with_user], class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :with_status, 'Status'
             .col-md-6
-              = select_tag :with_status, options_for_select(Subproject::STATUSES), class: 'form-control', include_blank: true
+              = select_tag :with_status, options_for_select(Subproject::STATUSES, selected: params[:with_status]), class: 'form-control', include_blank: true
           .form-group
             .col-md-3
             .col-md-9
@@ -41,7 +41,7 @@
             .col-md-3
               = label_tag :subproject_region_id, 'Region'
             .col-md-6
-              = select_tag :subproject_region_id, options_for_select(Region.values_for_select), include_blank: true, class: 'form-control'
+              = select_tag :subproject_region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control'
           .form-group
             .col-md-3
               = label_tag :subproject_province_id, 'Province'
