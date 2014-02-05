@@ -5,12 +5,15 @@
   .col-md-12
     = link_to 'Sub-Projects', subprojects_path
     '  > New Sub-Project
-  br
   .col-md-12
     = image_tag('tip.png')
     ' TIP: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ornare aliquet. Nulla dapibus fringilla pretium. In urna mi, rutrum vitae tincidunt sed, faucibus ut sapien. Nunc eget dictum nisi. Vestibulum lacinia rutrum mattis. Praesent imperdiet iaculis augue, ac vulputate mauris volutpat eget.
 br  
 = form_for @subproject, html: { class: 'form-horizontal' } do |f|
+  .row
+    br
+    .col-md-12
+      = f.submit 'Save', class: 'btn btn-primary pull-right'
   .row.sp-show
     .col-md-6
       .form-group
