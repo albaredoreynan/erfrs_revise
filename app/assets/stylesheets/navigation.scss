@@ -1,32 +1,32 @@
-@import "colors";
-
-nav.navbar{
-  background: $blue;
-  a{
-    color: $white !important;
-  }
-
-  .navbar-right{
-    li:last-child{
-      margin-right: 20px;  
-    }  
-  }
-}
-
-ul.nav-tabs{
-  li.active a{
-    background: lighten($blue, 30%) 
-  }
-
-  li.active a:hover{ background: $light-blue; }
-
-  li{
-    padding-left: 10px;  
-    padding-right: 10px;  
-  }
-  
-  li a{
-    background: $white-gray;  
-    color: $gray;
-  }
-}
+//@import "colors";
+//
+//nav.navbar{
+//  background: $blue;
+//  a{
+//    color: $white !important;
+//  }
+//
+//  .navbar-right{
+//    li:last-child{
+//      margin-right: 20px;  
+//    }  
+//  }
+//}
+//
+//ul.nav-tabs{
+//  li.active a{
+//    background: lighten($blue, 30%) 
+//  }
+//
+//  li.active a:hover{ background: $light-blue; }
+//
+//  li{
+//    padding-left: 10px;  
+//    padding-right: 10px;  
+//  }
+//  
+//  li a{
+//    background: $white-gray;  
+//    color: $gray;
+//  }
+//}
