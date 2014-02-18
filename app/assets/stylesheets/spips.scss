@@ -1,29 +1,35 @@
 @import "colors";
 
-.spip{
+.sp-index{
   margin-top: 10px;
-  border: 1px solid $gray;
 
   .header{
-    background: $light-blue;
+    padding: 9px;
+    color: #fff;
+    background: $primary;
     margin-bottom: 20px;
   }
+
+  .search{ margin-bottom: 30px;}
 
   label{
     float: right;  
   }
 
-  table{
-    width: 100%;  
-    thead th{ background: $light-blue; }
-  }
+  .btn.clear{ margin-left: 10px; }
 
-  img{ width: 28px;}
+  table{
+    td:nth-child(1), td:nth-child(9), td:nth-child(10), td:nth-child(11){
+      text-align: center;
+      width: 70px;
+    }
+  }
 }
 
-.spip-search, .sp-search, .sp-table, .sp-show, .rfr-index{
+.spip-index{
   @extend .spip
 }
+
 
 .sp-show{
   padding-right: 80px;
