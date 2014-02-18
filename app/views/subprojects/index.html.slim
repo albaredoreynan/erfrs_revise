@@ -1,14 +1,15 @@
-.row.sp-header
-  h3 Sub-Projects
-  hr
-  = link_to 'Create SP', new_subproject_path, class: 'pull-right btn btn-primary'
-
-.row.sp-search
-  .col-md-12.header
-    h5 Search
-  form.form-horizontal
-    .col-md-12
-      .row
+.row.sp-index
+  .col-sm-8
+    h3 Sub-Projects
+  .col-sm-4
+    = link_to "<i class='fa fa-plus'></i> Create SP".html_safe, new_subproject_path, class: 'pull-right btn btn-lg btn-primary'
+  .col-sm-12
+    hr
+  
+  .col-sm-12
+    h4.header Search
+    .row.search
+      form.form-horizontal
         .col-md-6
           .form-group
             .col-md-3
@@ -33,9 +34,9 @@
           .form-group
             .col-md-3
             .col-md-9
-              = submit_tag 'Search', class: 'btn btn-default'
-              = submit_tag 'Clear', class: 'btn btn-default clear', type: 'reset'
-
+              = submit_tag 'Search', class: 'btn btn-primary'
+              = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
+  
         .col-md-6
           .form-group
             .col-md-3
@@ -57,12 +58,11 @@
               = label_tag :subproject_barangay_id, 'Barangay'
             .col-md-6
               = select_tag :subproject_barangay_id, [], class: 'form-control'
-
-br
-
-.row.sp-table
+  
+  br
+  
   .col-md-12
-    table.table.table-hover.table-striped
+    table.table.table-hover.table-striped.table-bordered
       thead
         tr
           th SP ID
@@ -87,6 +87,6 @@ br
             td= sp.barangay.try(:name)
             td= sp.title
             td= sp.status
-            td= link_to image_tag('view.png'), sp
-            td= link_to image_tag('edit.png'), [:edit, sp]
-            td= link_to image_tag('delete.png'), sp, method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?'
+            td= link_to "<i class='fa fa-eye'></i>".html_safe, sp, class: 'btn btn-tiny btn-primary'
+            td= link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, sp], class: 'btn btn-tiny btn-warning'
+            td= link_to "<i class='fa fa-trash-o'></i>".html_safe, sp, method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-tiny btn-danger'
