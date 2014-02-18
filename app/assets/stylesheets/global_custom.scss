@@ -1,6 +1,8 @@
 @import "colors";
+@import "constants";
 
 body{
+  font-family: $open-sans;
   padding-top: 70px;
   padding-bottom: 40px;
   background: $bg-light-gray;
@@ -9,12 +11,16 @@ body{
 }
 
 .container{
-  margin-top: 30px;
+  max-width: 3000px;
+  margin-right: 53px;
+  margin-left: 53px;
   padding: 1em 2em;
   min-height: 600px;
   background: #fff;
   border-radius: 4px;
+  border-top-left-radius: 0px;
   border: 1px solid $border-color;
+  border-top: none;
 }
 
 .clear-container{
@@ -23,27 +29,50 @@ body{
   min-height: 0;
 }
 
-.rfrs{
-  margin-top: 10px;
-  border: 1px solid $border-color;
-  border-radius: 4px;
+.nav-tabs{
+  font-family: $continuum;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 53px;
+  margin-left: 53px;
+}
 
-  .header{
-    background: $light-blue;
-    margin-bottom: 20px;
+table{
+  th{
+    font-family: $continuum;
+    text-transform: uppercase;
+    background: $primary;
+    color: #fff;
+    border: none !important;
+    text-align: center;
   }
 
-  label{
-    float: right;  
-  }
-
-  table{
-    width: 100%;  
-    thead th{ background: $light-blue; }
+  td{
+    font-size: 12px;  
   }
 }
 
-.spip-search, .sp-search, .sp-table, .sp-show, .rfr-index, .admin-news{
-  @extend .rfrs
-}
+//.rfrs{
+//  margin-top: 10px;
+//  border: 1px solid $border-color;
+//  border-radius: 4px;
+//
+//  .header{
+//    background: $light-blue;
+//    margin-bottom: 20px;
+//  }
+//
+//  label{
+//    float: right;  
+//  }
+//
+//  table{
+//    width: 100%;  
+//    thead th{ background: $light-blue; }
+//  }
+//}
+//
+//.spip-search, .sp-search, .sp-table, .sp-show, .rfr-index, .admin-news{
+//  @extend .rfrs
+//}
 
