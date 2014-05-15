@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :subproject_implementation_plans
   resources :subprojects
   resources :request_for_fund_releases
+  resources :cgdps, only: :index
 
   resources :regions
   resources :provinces
