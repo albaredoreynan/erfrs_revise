@@ -57,16 +57,19 @@ hr
           th Update
           th Delete
       tbody
-        /- @subprojects.each do |sp|
+        - @subprojects.each do |m, spss|
           tr
-            td= sp.id
-            td= sp.created_at.year
-            td= sp.region.try(:name)
-            td= sp.province.try(:name)
-            td= sp.municipality.try(:name)
-            td= sp.barangay.try(:name)
-            td= sp.title
-            td= sp.status
-            td= link_to "<i class='fa fa-eye'></i>".html_safe, sp, class: 'btn btn-tiny btn-primary'
-            td= link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, sp], class: 'btn btn-tiny btn-warning'
-            td= link_to "<i class='fa fa-trash-o'></i>".html_safe, sp, method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-tiny btn-danger'
+          -spss.group_by{|u|u.created_at.year}.each do |ca, sps|
+            tr
+              td 
+            -sps.uniq_by{|a|a.created_at.year}.each do |sp|
+              tr
+    
+                td= sp.created_at.year
+                td= sp.region.try(:name)
+                td= sp.province.try(:name)
+                td= sp.municipality.try(:name)
+                td XXXX
+                td= link_to "<i class='fa fa-eye'></i>".html_safe, "#{municipality_path(sp.municipality_id)}?with_year=#{sp.created_at.year}", class: 'btn btn-tiny btn-primary'
+                td= link_to "<i class='fa fa-edit'></i>".html_safe, "#", class: 'btn btn-tiny btn-warning'
+                td= link_to "<i class='fa fa-trash-o'></i>".html_safe, "#", method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-tiny btn-danger'

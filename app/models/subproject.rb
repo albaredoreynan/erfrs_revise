@@ -14,6 +14,7 @@ class Subproject < ActiveRecord::Base
   PHYSICAL_TARGETS = %w{Target1 Target2}
   COST_PARAMETERS = %w{Parameter1 Parameter2}
   MODES_OF_IMPLEMENTATION = %w{Mode1 Mode2}
+  FUND_SOURCES = %w{ADB WB}
 
   ####################### SCOPES ###########################
 
