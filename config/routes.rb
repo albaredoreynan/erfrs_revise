@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :subprojects
   resources :request_for_fund_releases
 
+  resources :cgdps, path: 'community_grants_disburesment_plans'
+  
   resources :regions
   resources :provinces
   resources :municipalities

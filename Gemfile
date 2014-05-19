@@ -18,6 +18,7 @@ gem 'will_paginate', '~> 3.0.5'
 #  gem 'tiny_tds'
 #  gem 'activerecord-sqlserver-adapter', git: 'https://github.com/rails-sqlserver/activerecord-sqlserver-adapter.git'
 #end
+gem "ransack", github: "activerecord-hackery/ransack", branch: "rails-4"
 
 gem 'jquery-rails'
 gem 'slim-rails'

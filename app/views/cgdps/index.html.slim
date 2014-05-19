@@ -1,0 +1,47 @@
+
+h4.page-header
+  'Community Grants Disbursement Plans
+.panel.panel-primary
+  .panel-heading
+    h3.panel-title Search
+  .panel-body
+    =search_form_for @search, class: "form-horizontal" do |f|
+      .col-lg-6
+        .fieldset
+          .form-group
+            = f.label :year_eq, " Year", class: "col-lg-2 control-label"
+            .col-lg-10
+              = text_field_tag :year
+          .form-group
+            = f.label :username, "Username", class: "col-lg-2 control-label"
+            .col-lg-10
+              = text_field_tag :username, '', class: "col-lg-8"
+          .form-group
+            = f.label :username, "Username", class: "col-lg-2 control-label"
+            .col-lg-10
+              = text_field_tag :username, '', class: "col-lg-8"
+          .form-group
+            = f.label :status, "Status", class: "col-lg-2 control-label"
+            .col-lg-10 style= "padding-top: 2%;"
+              = f.select :status_cont, options_for_select(Subproject::STATUSES).insert(0,''), {}, { :class => 'col-lg-8' }
+          .col-lg-10
+            .pull-right
+              .actions= f.submit "Search"
+      .col-lg-6
+        .fieldset
+          .form-group
+            = f.label :region, "Region", class: "col-lg-2 control-label"
+            .col-lg-10 style= "padding-top: 2%;"
+              = f.select :region_id_eq, options_for_select(Region.all.map{|a|["#{a.code} - #{a.name}", a.id]}), {}, {"data-placeholder" => "Select Region", :class => 'col-lg-8 chosen' }
+          .form-group
+            = f.label :province, "Province", class: "col-lg-2 control-label"
+            .col-lg-10
+              = f.select :province_id_eq, '', {}, {class: "col-lg-8", id: "province"}
+          .form-group
+            = f.label :municipal, "Municipality", class: "col-lg-2 control-label"
+            .col-lg-10
+               = f.select :municipality_id_eq, '', {}, {class: "col-lg-8", id: "municipality"}
+
+     
+javascript:
+  $('.chosen').chosen();
