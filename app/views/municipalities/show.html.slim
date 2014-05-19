@@ -1,0 +1,95 @@
+h4 Community Grants Disbursement Plans
+hr
+.row.sp-index
+  .col-md-12
+    table.table.table-hover.table-striped.table-bordered
+      thead
+        tr
+          td Funds Allocation
+          td colspan="4" Entire Fund
+          td colspan="4" This Municipal Only
+        tr
+          td
+          td ADB
+          td %
+          td WB
+          td %
+          td ADB
+          td %
+          td WB
+          td %
+      tbody
+        tr
+          td Allocation
+          td 99,999,999
+          td 100
+          td 99,999,999
+          td
+          td colspan="4" 99,999,999
+        tr
+          td MIBF
+          td 99,999,999
+          td 100
+          td 99,999,999
+          td 99
+          td 99,999,999
+          td 99
+          td colspan="4" 99,999,999
+        tr
+          td Released
+          td 99,999,999
+          td 100
+          td 99,999,999
+          td 99
+          td 99,999,999
+          td 99
+          td colspan="4" 99,999,999
+        tr
+          td Excess
+          td 99,999,999
+          td 100
+          td 99,999,999
+          td 99
+          td 99,999,999
+          td 99
+          td colspan="4" 99,999,999
+        tr
+          td Surplus
+          td 99,999,999
+          td 100
+          td 99,999,999
+          td 99
+          td 99,999,999
+          td 99
+          td colspan="4" 99,999,999
+
+  .col-md-12
+    table.table.table-hover.table-striped.table-bordered
+      thead
+        tr
+          th SP ID
+          th Barangay
+          th Title
+          th Grant Amount
+          th Tranche 1
+          th Tranche 2
+          th Tranche 3
+          th Status
+          th Fund Source
+      tbody
+        button Assign Fund Sources
+        button View Cash Program
+        - @subprojects.each do |sp|
+          tr
+            td= sp.id
+            td= sp.barangay.try(:name)
+            td= sp.title
+            td 99999
+            td 99999
+            td 99999
+            td 99999
+            td= sp.status
+            td= select_tag :fund_source, options_for_select(Subproject::FUND_SOURCES), include_blank: true
+        tr
+         td colspan="4" Count: XX
+         td colspan="5" Total: 99999
