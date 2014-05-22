@@ -49,7 +49,7 @@ class Subproject < ActiveRecord::Base
     users.any? ? where( user_id: users.pluck(:id) ) : none
   end
 
-  def reject_team_members(attributed)
-    attributed['name'].blank?
+  def reject_team_members(attributes)
+    attributes['name'].blank?
   end
 end
