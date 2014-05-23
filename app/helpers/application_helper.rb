@@ -18,4 +18,12 @@ module ApplicationHelper
     'clear-container' if devise_controller.include?(controlr)
   end
 
+
+  
+  User.select(:type).distinct.map{|a|a.type}.each do |map|
+    define_method("#{map.underscore}_signed_in?") do
+      current_user.send("#{map.underscore}?")
+    end
+  end
+
 end

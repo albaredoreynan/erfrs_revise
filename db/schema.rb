@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519071219) do
+ActiveRecord::Schema.define(version: 20140520062402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,29 @@ ActiveRecord::Schema.define(version: 20140519071219) do
   create_table "regions", force: true do |t|
     t.string   "code"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "request_for_fund_releases", force: true do |t|
+    t.integer  "subproject_id"
+    t.string   "status"
+    t.string   "rfr_type"
+    t.datetime "request_date"
+    t.string   "bank_account_number"
+    t.string   "address"
+    t.string   "branch"
+    t.string   "city"
+    t.string   "province"
+    t.string   "phone"
+    t.decimal  "amount_approve"
+    t.string   "remarks"
+    t.string   "obr_number"
+    t.datetime "obr_date"
+    t.string   "dv_number"
+    t.datetime "dv_date"
+    t.string   "check_number"
+    t.string   "check_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

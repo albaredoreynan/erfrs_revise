@@ -1,0 +1,107 @@
+
+
+.col-sm-12  
+  .col-sm-2
+    .radio
+      'RFR Type
+  .col-sm-3
+    .radio
+      label
+        =radio_button_tag(:rfr_type, "sub_project")
+        ' Subproject
+  .col-sm-3 
+    .radio
+      label
+        =radio_button_tag(:rfr_type, "TA-fund")
+        ' TA Fund
+        
+
+.col-sm-12
+  hr
+
+.col-sm-12
+  h4.header Search
+  .row.search
+    =form_tag new_request_for_fund_release_path, method: 'get', class: "form-horizontal" do
+      .col-md-6
+        .form-group
+          .col-md-3
+            = label_tag :with_id, 'SP ID'
+          .col-md-6
+            = text_field_tag :with_id, params[:with_id], class: 'form-control'
+        .form-group
+          .col-md-3
+            = label_tag :with_year, 'Year'
+          .col-md-6
+            = text_field_tag :with_year, params[:with_year], class: 'form-control'
+        .form-group
+          .col-md-3
+            = label_tag :with_user, 'User Name'
+          .col-md-6
+            = text_field_tag :with_user, params[:with_user], class: 'form-control'
+        .form-group
+          .col-md-3
+            = label_tag :with_status, 'Status'
+          .col-md-6
+            = select_tag :with_status, options_for_select(Subproject::STATUSES, selected: params[:with_status]), class: 'form-control', include_blank: true
+        .form-group
+          .col-md-3
+          .col-md-9
+            = submit_tag 'Search', class: 'btn btn-primary'
+            = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
+      .col-md-6
+        .form-group
+          .col-md-3
+            = label_tag :subproject_region_id, 'Region'
+          .col-md-6
+            = select_tag :subproject_region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control'
+        .form-group
+          .col-md-3
+            = label_tag :subproject_province_id, 'Province'
+          .col-md-6
+            = select_tag :subproject_province_id, [], class: 'form-control'
+        .form-group
+          .col-md-3
+            = label_tag :subproject_municipality_id, 'Municipality'
+          .col-md-6
+            = select_tag :subproject_municipality_id, [], class: 'form-control'
+        .form-group
+          .col-md-3
+            = label_tag :subproject_barangay_id, 'Barangay'
+          .col-md-6
+            = select_tag :subproject_barangay_id, [], class: 'form-control'
+
+.col-md-12
+  =form_tag new_request_for_fund_release_path, method: 'get', class: "form-horizontal" do
+
+    table.table.table-hover.table-striped.table-bordered
+      thead
+        tr
+          th Select
+          th SP ID
+          th Year
+          th Region
+          th Province
+          th Municipality
+          th Barangay
+          th Title
+          th Status
+      tbody
+        - @subprojects.each do |sp|
+          tr
+            td.center-text = radio_button_tag(:sp_id, sp.id)
+            td= sp.id
+            td= sp.created_at.year
+            td= sp.region.try(:name)
+            td= sp.province.try(:name)
+            td= sp.municipality.try(:name)
+            td= sp.barangay.try(:name)
+            td= sp.title
+            td= sp.status
+    = submit_tag 'Create', class: 'btn btn-primary'
+
+
+css:
+  .center-text{
+    text-align: center;
+  }

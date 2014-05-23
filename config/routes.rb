@@ -9,7 +9,10 @@ Rails.application.routes.draw do
 
   resources :subproject_implementation_plans
   resources :subprojects
-  resources :request_for_fund_releases
+  resources :request_for_fund_releases do
+    get 'new'
+  end
+
   resources :cgdps, only: :index
 
   resources :cgdps, path: 'community_grants_disburesment_plans'
@@ -26,5 +29,5 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users
-  devise_for :super_users
+
 end
