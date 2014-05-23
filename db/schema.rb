@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520062402) do
+ActiveRecord::Schema.define(version: 20140523050946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,43 @@ ActiveRecord::Schema.define(version: 20140520062402) do
   end
 
   add_index "barangays", ["municipality_id"], name: "index_barangays_on_municipality_id", using: :btree
+
+  create_table "cgdps", force: true do |t|
+    t.integer  "municipality_id"
+    t.integer  "year"
+    t.string   "status"
+    t.string   "saa_number"
+    t.datetime "saa_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cgdps", ["municipality_id"], name: "index_cgdps_on_municipality_id", using: :btree
+
+  create_table "fund_allocations", force: true do |t|
+    t.integer  "region_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.decimal  "amount",     precision: 15, scale: 2, default: 0.0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fund_allocations", ["region_id"], name: "index_fund_allocations_on_region_id", using: :btree
+
+  create_table "fund_sources", force: true do |t|
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "code"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "municipalities", force: true do |t|
     t.integer  "province_id"
@@ -72,6 +109,24 @@ ActiveRecord::Schema.define(version: 20140520062402) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.integer  "code"
+    t.integer  "locale"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sub_regions", force: true do |t|
+    t.integer  "region_id"
+    t.string   "code"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sub_regions", ["region_id"], name: "index_sub_regions_on_region_id", using: :btree
 
   create_table "subprojects", force: true do |t|
     t.string   "status"
@@ -146,6 +201,8 @@ ActiveRecord::Schema.define(version: 20140520062402) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "type"
+    t.integer  "role_id"
+    t.string   "status"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
