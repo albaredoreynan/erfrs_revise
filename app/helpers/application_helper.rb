@@ -26,4 +26,8 @@ module ApplicationHelper
     end
   end
 
+  def dropdown_values
+    all.map{ |e| [e.name, e.id] }
+  end
+  
 end

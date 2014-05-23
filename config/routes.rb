@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :provinces
   resources :municipalities
   resources :barangays
+  resources :groups
 
   scope '/admin' do
     get '/index', to: 'admin#index', as: 'admin_index'

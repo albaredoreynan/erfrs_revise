@@ -46,4 +46,13 @@ csv.each do |row|
   [:@region, :@province, :@municipality].each &method(:remove_instance_variable)
 end
 
+role1 = Role.find_or_create_by(name: 'Admin', code: 0)
+role2 = Role.find_or_create_by(name: 'National', code: 10)
+role3 = Role.find_or_create_by(name: 'Regional', code: 20)
+role4 = Role.find_or_create_by(name: 'Sub Regional', code: 30)
+role5 = Role.find_or_create_by(name: 'Municipal', code: 40)
+role6 = Role.find_or_create_by(name: 'Barangay', code: 50)
+role6 = Role.find_or_create_by(name: 'Public', code: 100)
+
+
 

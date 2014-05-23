@@ -19,5 +19,5 @@
         td= user.username
         td= user.first_name
         td= user.last_name
-        td= link_to image_tag('edit.png'), [:edit, user]
-        td= link_to image_tag('delete.png'), user, method: :delete, confirm: 'Are you sure you want to delete this user?'
+        / td= link_to image_tag('edit.png'), user
+        / td= link_to image_tag('delete.png'), user, method: :delete, confirm: 'Are you sure you want to delete this user?'

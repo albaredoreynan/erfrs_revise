@@ -10,16 +10,28 @@
         = f.label :username
         = f.text_field :username, class: 'form-control'
       .form-group
+        = f.label :password
+        = f.password_field :password, class: 'form-control'
+      .form-group
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, class: 'form-control'
+      .form-group
         = f.label :first_name
         = f.text_field :first_name, class: 'form-control'
       .form-group
         = f.label :last_name
         = f.text_field :last_name, class: 'form-control'
       .form-group
-        = f.label :password
-        = f.password_field :password, class: 'form-control'
+        = f.label 'Role'
+        = f.select :role_id, Role.all.map{ |e| [e.name, e.id] }, {include_blank: true }, class: 'form-control'
       .form-group
-        = f.label :password_confirmation
-        = f.password_field :password_confirmation, class: 'form-control'
+        = f.label 'Status'
+        = f.radio_button :status, true
+        span.radio-btn-label &nbsp; Active
+        | &nbsp;
+        = f.radio_button :status, false
+        span.radio-btn-label &nbsp; Inactive
+              
       div
         = f.submit nil, class: 'btn btn-primary btn-lg btn-block'
+/ dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},

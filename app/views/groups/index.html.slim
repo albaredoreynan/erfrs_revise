@@ -1,0 +1,19 @@
+h1 Listing Groups
+.row.sp-table
+  table.table.table-hover
+    thead
+      tr
+        th Code
+        th Status
+        th Actions
+    tbody
+      - @groups.each do |grp|
+        tr
+          td= grp.code
+          td= grp.status
+          td
+            = link_to image_tag('edit.png'), [:edit, grp]
+            = link_to image_tag('delete.png'), grp, method: :delete, 'data-confirm' => 'Are you sure you want to delete this group?'
+
+.row
+  = link_to 'Add Group', new_group_path, class: 'btn btn-primary btn-large'
