@@ -9,13 +9,18 @@ class Subproject < ActiveRecord::Base
   has_many :team_members
   accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
 
-  STATUSES = %w{Draft Published}
+  STATUSES = %w{Draft Final}
   CATEGORIES = %w{Category1 Category2}
   PHYSICAL_TARGETS = %w{Target1 Target2}
   COST_PARAMETERS = %w{Parameter1 Parameter2}
   MODES_OF_IMPLEMENTATION = %w{Mode1 Mode2}
   FUND_SOURCES = %w{ADB WB}
+  ####################### Validation ########################
 
+  validates :subproject_id, :status, :rfr_type, :request_date,
+            :bank_account_number, :address, :branch, :city, :province,
+            :phone, :amount_approve, :obr_number, :obr_date, :dv_number,
+            :dv_date, presence: true 
   ####################### SCOPES ###########################
 
   scope :with_user,   -> username { fetch_all_created_by username }

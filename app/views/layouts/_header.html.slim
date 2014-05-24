@@ -1,5 +1,5 @@
 nav.navbar.navbar-default.navbar-fixed-top.bg-g-ln-gray role="navigation"
-  .navbar-header
+  .navbar-headernavbar 
     = link_to "eRFRS - Electronic Request for Fund Release System", root_url, class: "navbar-brand"
 
   .collapse.navbar-collapse
@@ -9,3 +9,4 @@ nav.navbar.navbar-default.navbar-fixed-top.bg-g-ln-gray role="navigation"
         li= link_to "Logout", destroy_user_session_path, method: :delete
       - else
         li= link_to 'Login', new_user_session_path
+
