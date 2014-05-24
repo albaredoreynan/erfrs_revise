@@ -6,9 +6,10 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body class= <%= @hide_nav ? "body-page-details" : "" %> >
     <%= render "layouts/header" %>
     <%= render "layouts/flash" %>
+    <%= render "layouts/subproject" %>
     <%= render "layouts/navbar" %>
     <div class="container <%= devise_layout(params[:controller]) %>">
       <%= yield %>
