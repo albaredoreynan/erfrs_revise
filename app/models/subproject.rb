@@ -3,7 +3,7 @@ class Subproject < ActiveRecord::Base
   belongs_to :province
   belongs_to :municipality
   belongs_to :barangay
-
+  belongs_to :fund_source
   belongs_to :user
   
   has_many :team_members
@@ -17,12 +17,10 @@ class Subproject < ActiveRecord::Base
   FUND_SOURCES = %w{ADB WB}
   CYCLE = %w{1 2 3 4 5}
   ####################### Validation ########################
-
-  validates :subproject_id, :status, :rfr_type, :request_date,
-            :bank_account_number, :address, :branch, :city, :province,
-            :phone, :amount_approve, :obr_number, :obr_date, :dv_number,
-            :dv_date, presence: true 
+  
+  
   ####################### SCOPES ###########################
+
 
   scope :with_user,   -> username { fetch_all_created_by username }
   scope :with_id,     -> id { where id: id }
@@ -58,4 +56,6 @@ class Subproject < ActiveRecord::Base
   def reject_team_members(attributes)
     attributes['name'].blank?
   end
+
+
 end

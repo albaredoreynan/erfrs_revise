@@ -37,20 +37,7 @@ body{
   margin-left: 53px;
 }
 
-table{
-  th{
-    font-family: $continuum;
-    text-transform: uppercase;
-    background: $primary;
-    color: #fff;
-    border: none !important;
-    text-align: center;
-  }
 
-  td{
-    font-size: 12px;  
-  }
-}
 
 
 /*!
@@ -308,7 +295,7 @@ th {
   }
   .table-bordered th,
   .table-bordered td {
-    border: 1px solid #ddd !important;
+    border: 1px solid #819CBC !important;
   }
 }
 * {
@@ -1503,7 +1490,7 @@ th {
   padding: 5px;
 }
 .table-bordered {
-  border: 1px solid #dddddd;
+  border: 1px solid #819CBC;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
@@ -1511,7 +1498,7 @@ th {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-  border: 1px solid #dddddd;
+  border: 1px solid #819CBC;
 }
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {

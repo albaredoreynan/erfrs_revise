@@ -3,7 +3,7 @@ br
   .col-md-6
     .form-group
       .col-md-4
-        = f.label :id, 'Sub-Project ID'
+
       .col-md-6
         = @subproject.id
   .col-md-6
@@ -40,13 +40,18 @@ br
             = f.label :barangay_id
           .col-md-8
             = f.select :barangay_id, [], { disabled: 'disabled' }, { :class => 'form-control'}
+        .form-group
+          .col-md-4
+            = f.label :group
+          .col-md-8
+            = 
 
       .col-md-6
         .form-group
           .col-md-5
             = f.label :date_of_mbif, "Date of MBIF"
           .col-md-7
-            = text_field_tag :date_of_mbif
+            = f.text_field :date_of_mbif
         .form-group
           .col-md-5
             = f.label :date_encoded, "Date Encoded"
@@ -54,14 +59,14 @@ br
             = DateTime.now.strftime("%d/%b/%Y")
         .form-group
           .col-md-5
-            = f.label :cost_parameter, 'Cost Parameter'
-          .col-md-7
-            = f.select :cost_parameter, Subproject::CYCLE, { prompt: 'Select Cost Parameter' }, { class: 'form-control' }
-        .form-group
-          .col-md-5
             = f.label :mode_of_implementation, 'Mode of Implementation'
           .col-md-7
-            = f.select :mode_of_implementation, Subproject::MODES_OF_IMPLEMENTATION, { prompt: 'Select Mode of Implementation' }, { class: 'form-control' }
+            = f.select :cycle, Subproject::CYCLE, { prompt: 'SELECT NO. OF CYCLE' }, { class: 'form-control' }
+        .form-group
+          .col-md-5
+            = f.label :fund_source, 'Fund Source'
+          .col-md-7
+            = @subproject.fund_source.present? ? @subproject.fund_source.name : ""
 
   .col-md-2
     = label_tag :description

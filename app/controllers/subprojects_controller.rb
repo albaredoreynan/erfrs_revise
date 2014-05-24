@@ -23,6 +23,7 @@ class SubprojectsController < ApplicationController
 
   def new
     @subproject = Subproject.new
+
   end
 
   def edit
@@ -57,7 +58,7 @@ class SubprojectsController < ApplicationController
     redirect_to subprojects_path
   end
 
-  private
+  protected
 
   def subproject_params
     attrs = [
@@ -74,21 +75,30 @@ class SubprojectsController < ApplicationController
       :mode_of_implementation, # const_lookup
       :description,
       :fund_source_id,
+      :cycle,
+      :date_of_mbif,
       # financial information
       :grant_amount_direct_cost,
       :grant_amount_indirect_cost,
+      :grant_amount_contingency_cost,
       :lcc_blgu_direct_cost,
       :lcc_blgu_indirect_cost,
+      :lcc_contingency_cost,
       :community_direct_cost,
       :community_indirect_cost,
+      :community_contingency_cost,
       :mlgu_direct_cost,
       :mlgu_indirect_cost,
+      :mlgu_contingency_cost,
       :plgu_others_direct_cost,
       :plgu_others_indirect_cost,
+      :plgu_contingency_cost,
       :total_lcc_cash_direct_cost,
       :total_lcc_cash_indirect_cost,
+      :total_lcc_cash_contingency_cost,
       :total_lcc_in_kind_direct_cost,
       :total_lcc_in_kind_indirect_cost,
+      :total_lcc_in_kind_contingency_cost,
       # projected schedule of grant fund releases
       :first_tranch_amount,
       :first_tranch_date_required,
