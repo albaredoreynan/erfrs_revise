@@ -10,4 +10,8 @@ class Municipality < ActiveRecord::Base
   else
     scope :with_year, -> year { where 'YEAR(created_at) = ?', year  }
   end
+
+  def budget_allocation
+
+  end
 end

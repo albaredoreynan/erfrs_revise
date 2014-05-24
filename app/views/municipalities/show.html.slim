@@ -21,14 +21,16 @@ hr
       tbody
         tr
           td Allocation
-          td 99,999,999
+          td 
+            = number_to_currency(budget_allocation('ADB'), unit: "Php ")
           td 100
-          td 99,999,999
           td
+            = number_to_currency(budget_allocation('WB'), unit: "Php ")
+          td 100
           td colspan="4" 99,999,999
         tr
           td MIBF
-          td 99,999,999
+          td = total_grant_amount
           td 100
           td 99,999,999
           td 99
@@ -76,20 +78,20 @@ hr
           th Tranche 3
           th Status
           th Fund Source
-      tbody
-        button Assign Fund Sources
-        button View Cash Program
-        - @subprojects.each do |sp|
-          tr
-            td= sp.id
-            td= sp.barangay.try(:name)
-            td= sp.title
-            td 99999
-            td 99999
-            td 99999
-            td 99999
-            td= sp.status
-            td= select_tag :fund_source, options_for_select(Subproject::FUND_SOURCES), include_blank: true
-        tr
-         td colspan="4" Count: XX
-         td colspan="5" Total: 99999
+      / tbody
+      /   button Assign Fund Sources
+      /   button View Cash Program
+      /   - @subprojects.each do |sp|
+      /     tr
+      /       td= sp.id
+      /       td= sp.barangay.try(:name)
+      /       td= sp.title
+      /       td 99999
+      /       td 99999
+      /       td 99999
+      /       td 99999
+      /       td= sp.status
+      /       td= select_tag :fund_source, options_for_select(Subproject::FUND_SOURCES), include_blank: true
+      /   tr
+      /    td colspan="4" Count: XX
+      /    td colspan="5" Total: 99999

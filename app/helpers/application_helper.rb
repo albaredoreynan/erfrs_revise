@@ -30,4 +30,15 @@ module ApplicationHelper
     all.map{ |e| [e.name, e.id] }
   end
   
+
+
+  def budget_allocation(code)
+    @fund_source = FundSource.where(code: code).last  
+    @budget = FundAllocation.select('amount').where( fund_source_id: @fund_source.id).last
+    @budget.amount
+  end
+
+  def total_grant_amount
+
+  end  
 end
