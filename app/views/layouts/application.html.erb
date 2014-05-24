@@ -8,9 +8,12 @@
   </head>
   <body class= <%= @hide_nav ? "body-page-details" : "" %> >
     <%= render "layouts/header" %>
-    <%= render "layouts/flash" %>
+   
     <%= render "layouts/subproject" %>
     <%= render "layouts/navbar" %>
+       <%= render "layouts/flash" %>
+
+
     <div class="container <%= devise_layout(params[:controller]) %>">
       <%= yield %>
     </div>

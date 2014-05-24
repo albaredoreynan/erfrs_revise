@@ -67,3 +67,40 @@
   padding-left: 0px;
   padding-right: 0px;
 }
+
+.gray{
+  background-color: #F2F2F5;
+}
+thead > tr > th {
+  background-color: #D0E0F3;
+  color: #000;
+}
+
+table{
+  font-family:Tahoma, Geneva, sans-serif;
+}
+.add_member_placeholder{
+  padding-bottom: 5px;
+  padding-top: 5px;
+  background-color: #EDF6FF;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+td > input {
+  width: 100%;
+}
+table.financial_form > thead > tr > th{
+  width: 16%;
+  text-align: center;
+}
+
+table.financial_form > tbody > tr > td{
+  text-align: right;
+}
+
+
+table.financial_form > tbody > tr > td:first-child{
+  padding-left: 35px;
+  text-align: left;
+}

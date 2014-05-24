@@ -1,6 +1,17 @@
+br
 .row.sp-show
-  h4 General Information
-  hr
+  .col-md-6
+    .form-group
+      .col-md-4
+
+      .col-md-6
+        = @subproject.id
+  .col-md-6
+    .form-group
+      .col-md-5
+        = f.label :status
+      .col-md-7
+        = f.select :status, options_for_select(Subproject::STATUSES), {}, { class: 'form-control'}
   .col-md-2
     = f.label :title
   .col-md-10
@@ -29,28 +40,33 @@
             = f.label :barangay_id
           .col-md-8
             = f.select :barangay_id, [], { disabled: 'disabled' }, { :class => 'form-control'}
+        .form-group
+          .col-md-4
+            = f.label :group
+          .col-md-8
+            = 
 
       .col-md-6
         .form-group
           .col-md-5
-            = f.label :category
+            = f.label :date_of_mbif, "Date of MBIF"
           .col-md-7
-            = f.select :category, Subproject::CATEGORIES, { prompt: 'Select Category' }, { class: 'form-control' }
+            = f.text_field :date_of_mbif
         .form-group
           .col-md-5
-            = f.label :physical_target, 'Physical Target'
+            = f.label :date_encoded, "Date Encoded"
           .col-md-7
-            = f.select :physical_target, Subproject::PHYSICAL_TARGETS, { prompt: 'Select Physical Target' }, { class: 'form-control' }
-        .form-group
-          .col-md-5
-            = f.label :cost_parameter, 'Cost Parameter'
-          .col-md-7
-            = f.select :cost_parameter, Subproject::COST_PARAMETERS, { prompt: 'Select Cost Parameter' }, { class: 'form-control' }
+            = DateTime.now.strftime("%d/%b/%Y")
         .form-group
           .col-md-5
             = f.label :mode_of_implementation, 'Mode of Implementation'
           .col-md-7
-            = f.select :mode_of_implementation, Subproject::MODES_OF_IMPLEMENTATION, { prompt: 'Select Mode of Implementation' }, { class: 'form-control' }
+            = f.select :cycle, Subproject::CYCLE, { prompt: 'SELECT NO. OF CYCLE' }, { class: 'form-control' }
+        .form-group
+          .col-md-5
+            = f.label :fund_source, 'Fund Source'
+          .col-md-7
+            = @subproject.fund_source.present? ? @subproject.fund_source.name : ""
 
   .col-md-2
     = label_tag :description
@@ -62,3 +78,15 @@
   .col-md-10 style="margin-top: 10px;"
     strong Name of Development Financial Institution
   
+
+css:
+  .form-group > .col-md-4 {
+    text-align: right;
+  }
+  .form-group > .col-md-5 {
+    text-align: right;
+  }
+
+  .sp-show > .col-md-2{
+    text-align: right;
+  }

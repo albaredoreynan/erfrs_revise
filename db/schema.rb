@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523055553) do
-
+ActiveRecord::Schema.define(version: 20140524084507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,29 +141,43 @@ ActiveRecord::Schema.define(version: 20140523055553) do
     t.string   "mode_of_implementation"
     t.string   "description"
     t.integer  "fund_source_id"
-    t.decimal  "grant_amount_direct_cost",        precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "grant_amount_indirect_cost",      precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "lcc_blgu_direct_cost",            precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "lcc_blgu_indirect_cost",          precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "community_direct_cost",           precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "community_indirect_cost",         precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "mlgu_direct_cost",                precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "mlgu_indirect_cost",              precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "plgu_others_direct_cost",         precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "plgu_others_indirect_cost",       precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "total_lcc_cash_direct_cost",      precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "total_lcc_cash_indirect_cost",    precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "total_lcc_in_kind_direct_cost",   precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "total_lcc_in_kind_indirect_cost", precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "first_tranch_amount",             precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "grant_amount_direct_cost",           precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "grant_amount_indirect_cost",         precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "lcc_blgu_direct_cost",               precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "lcc_blgu_indirect_cost",             precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "community_direct_cost",              precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "community_indirect_cost",            precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "mlgu_direct_cost",                   precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "mlgu_indirect_cost",                 precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "plgu_others_direct_cost",            precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "plgu_others_indirect_cost",          precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "total_lcc_cash_direct_cost",         precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "total_lcc_cash_indirect_cost",       precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "total_lcc_in_kind_direct_cost",      precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "total_lcc_in_kind_indirect_cost",    precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "first_tranch_amount",                precision: 15, scale: 2, default: 0.0, null: false
     t.datetime "first_tranch_date_required"
-    t.decimal  "second_tranch_amount",            precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "second_tranch_amount",               precision: 15, scale: 2, default: 0.0, null: false
     t.datetime "second_tranch_date_required"
-    t.decimal  "third_tranch_amount",             precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "third_tranch_amount",                precision: 15, scale: 2, default: 0.0, null: false
     t.datetime "third_tranch_date_required"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.date     "date_encoded"
+    t.date     "date_of_mbif"
+    t.integer  "cycle"
+    t.integer  "group_id"
+    t.decimal  "grant_amount_contingency_cost",      precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "lcc_contingency_cost",               precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "community_contingency_cost",         precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "mlgu_contingency_cost",              precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "plgu_contingency_cost",              precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "total_lcc_cash_contingency_cost",    precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "total_lcc_in_kind_contingency_cost", precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "first_tranch_revised_amount",        precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "second_tranch_revised_amount",       precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "third_tranch_revised_amount",        precision: 15, scale: 2, default: 0.0, null: false
   end
 
   add_index "subprojects", ["barangay_id"], name: "index_subprojects_on_barangay_id", using: :btree

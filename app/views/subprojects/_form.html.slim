@@ -17,19 +17,6 @@ br
     .col-md-12
       = image_tag('tip.png')
       ' TIP: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ornare aliquet. Nulla dapibus fringilla pretium. In urna mi, rutrum vitae tincidunt sed, faucibus ut sapien. Nunc eget dictum nisi. Vestibulum lacinia rutrum mattis. Praesent imperdiet iaculis augue, ac vulputate mauris volutpat eget.
-  .row.sp-show
-    .col-md-6
-      .form-group
-        .col-md-4
-          = f.label :id, 'Sub-Project ID'
-        .col-md-6
-          = @subproject.id
-    .col-md-6
-      .form-group
-        .col-md-5
-          = f.label :status
-        .col-md-7
-          = f.select :status, options_for_select(Subproject::STATUSES), {}, { class: 'form-control'}
   
   = render 'general_information_form', f: f
   = render 'financial_information_form', f: f
@@ -40,3 +27,4 @@ br
     br
     .col-md-2.col-md-offset-10
       = f.submit 'Save', class: 'btn btn-primary pull-right'
+
