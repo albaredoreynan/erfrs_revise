@@ -1,0 +1,14 @@
+.row.signup
+  .col-md-4.col-md-offset-4.signin-form
+    h2
+      | New Fund Source
+    = form_for @fund_source do |f|
+      .form-group
+        = f.label :code
+        = f.text_field :code, :autofocus => true, class: 'form-control'
+      .form-group
+        = f.label :name
+        = f.text_field :name, :autofocus => true, class: 'form-control'              
+      div
+        = f.submit nil, class: 'btn btn-primary btn-lg btn-block'
+/ dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},

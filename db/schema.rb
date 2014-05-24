@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523050946) do
+ActiveRecord::Schema.define(version: 20140524025752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,15 +38,13 @@ ActiveRecord::Schema.define(version: 20140523050946) do
   add_index "cgdps", ["municipality_id"], name: "index_cgdps_on_municipality_id", using: :btree
 
   create_table "fund_allocations", force: true do |t|
-    t.integer  "region_id"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.decimal  "amount",     precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "amount",         precision: 15, scale: 2, default: 0.0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "fund_source_id"
   end
-
-  add_index "fund_allocations", ["region_id"], name: "index_fund_allocations_on_region_id", using: :btree
 
   create_table "fund_sources", force: true do |t|
     t.string   "code"
