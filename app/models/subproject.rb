@@ -15,6 +15,7 @@ class Subproject < ActiveRecord::Base
   COST_PARAMETERS = %w{Parameter1 Parameter2}
   MODES_OF_IMPLEMENTATION = %w{Mode1 Mode2}
   FUND_SOURCES = %w{ADB WB}
+  CYCLE = %w{1 2 3 4 5}
   ####################### Validation ########################
 
   validates :subproject_id, :status, :rfr_type, :request_date,
