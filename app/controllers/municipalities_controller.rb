@@ -7,7 +7,9 @@ class MunicipalitiesController < InheritedResources::Base
   has_scope :province_id, :with_year
 
   def show
-    @subprojects = apply_scopes(@municipality.subprojects)
+    #@subprojects = apply_scopes(@municipality.subprojects)
+    @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
+    @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
   end
 
   protected

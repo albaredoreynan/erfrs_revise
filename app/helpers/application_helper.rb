@@ -30,7 +30,15 @@ module ApplicationHelper
     all.map{ |e| [e.name, e.id] }
   end
   
+  def icon_text(icon, text)
+    raw("<span class='glyphicon glyphicon-#{icon}'></span> #{text}")
+  end
 
+  # CGDPS computation per year and per municipality
+  def fund_source(code)
+    @fund_source = FundSource.where(code: code).last
+    @fund_source.id
+  end  
 
   def budget_allocation(code)
     @fund_source = FundSource.where(code: code).last  
@@ -38,7 +46,48 @@ module ApplicationHelper
     @budget.amount
   end
 
-  def total_grant_amount
+  def total_grant_amount_per_mncpl(municipality_id, year, fund_source)
+    @total = Array.new
+    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source(fund_source))
+    @val.each do |amount|
+      @total << amount.grant_amount_direct_cost.to_f
+    end
+    @total.inject(:+)
+  end
 
-  end  
+  def total_grant_amount_per_year(year, fund_source)
+    @total = Array.new
+    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source(fund_source))
+    @val.each do |amount|
+      @total << amount.grant_amount_direct_cost.to_f
+    end
+    @total.inject(:+)
+  end 
+
+  def total_amount_of_tranches(year, municipality_id)
+    @tranch1 = Array.new
+    @tranch2 = Array.new
+    @tranch3 = Array.new
+    @val = Subproject.select('first_tranch_amount, second_tranch_amount, third_tranch_amount').where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', year, municipality_id)
+    @val.each do |amount|
+      @tranch1 << amount.first_tranch_amount.to_f
+      @tranch2 << amount.second_tranch_amount.to_f
+      @tranch3 << amount.third_tranch_amount.to_f
+    end
+    @total = @tranch1.inject(:+) + @tranch2.inject(:+) + @tranch3.inject(:+)
+  end
+
+  def cfa_amounts(month, year, municipality_id, code)
+    @tranch1 = Array.new
+    @tranch2 = Array.new
+    @tranch3 = Array.new
+    @val = Subproject.select('first_tranch_amount, second_tranch_amount, third_tranch_amount').where('EXTRACT( MONTH from created_at) = ? AND EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', month, year, municipality_id, fund_source(code) )
+    @val.each do |amount|
+      @tranch1 << amount.first_tranch_amount.to_f
+      @tranch2 << amount.second_tranch_amount.to_f
+      @tranch3 << amount.third_tranch_amount.to_f
+    end
+    @total = @tranch1.inject(:+).to_f + @tranch2.inject(:+).to_f + @tranch3.inject(:+).to_f
+  end
+
 end

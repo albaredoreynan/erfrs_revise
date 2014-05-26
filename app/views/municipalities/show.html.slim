@@ -22,21 +22,27 @@ hr
         tr
           td Allocation
           td 
-            = number_to_currency(budget_allocation('ADB'), unit: "Php ")
+            - @fund_allocation = budget_allocation('ADB').to_f
+            = number_to_currency(@fund_allocation)
           td 100
           td
-            = number_to_currency(budget_allocation('WB'), unit: "Php ")
+            - @fund_allocation_other = budget_allocation('WB').to_f
+            = number_to_currency(@fund_allocation_other)
           td 100
           td colspan="4" 99,999,999
         tr
           td MIBF
-          td = total_grant_amount
+          td 
+            - @mibf = total_grant_amount_per_year(params[:with_year], 'ADB')
+            = number_to_currency(@mibf)
           td 100
-          td 99,999,999
+          td 
+            - @mibf_other = total_grant_amount_per_year(params[:with_year], 'WB')
+            = number_to_currency(@mibf_other)
           td 99
-          td 99,999,999
+          td = number_to_currency(total_grant_amount_per_mncpl(params[:id], params[:with_year], 'ADB'))
           td 99
-          td colspan="4" 99,999,999
+          td colspan="4" = number_to_currency(total_grant_amount_per_mncpl(params[:id], params[:with_year], 'WB'))
         tr
           td Released
           td 99,999,999
@@ -55,17 +61,26 @@ hr
           td 99,999,999
           td 99
           td colspan="4" 99,999,999
+        
         tr
           td Surplus
-          td 99,999,999
+          td 
+            - @amount_surplus = @fund_allocation - @mibf
+            = number_to_currency(@amount_surplus)
           td 100
-          td 99,999,999
+          td
+            - @amount_surplus_other = @fund_allocation_other - @mibf_other
+            = number_to_currency(@amount_surplus_other)
           td 99
           td 99,999,999
           td 99
           td colspan="4" 99,999,999
 
   .col-md-12
+    
+    button Assign Fund Sources
+    button data-toggle='modal' data-target='#view_cash_program'
+      = icon_text(nil, 'View Cash Program')
     table.table.table-hover.table-striped.table-bordered
       thead
         tr
@@ -78,20 +93,21 @@ hr
           th Tranche 3
           th Status
           th Fund Source
-      / tbody
-      /   button Assign Fund Sources
-      /   button View Cash Program
-      /   - @subprojects.each do |sp|
-      /     tr
-      /       td= sp.id
-      /       td= sp.barangay.try(:name)
-      /       td= sp.title
-      /       td 99999
-      /       td 99999
-      /       td 99999
-      /       td 99999
-      /       td= sp.status
-      /       td= select_tag :fund_source, options_for_select(Subproject::FUND_SOURCES), include_blank: true
-      /   tr
-      /    td colspan="4" Count: XX
-      /    td colspan="5" Total: 99999
+      tbody
+        
+        - @subprojects.each do |sp|
+          tr
+            td= sp.id
+            td= sp.barangay.try(:name)
+            td= sp.title
+            td= number_to_currency(sp.grant_amount_direct_cost)
+            td= number_to_currency(sp.first_tranch_amount)
+            td= number_to_currency(sp.second_tranch_amount)
+            td= number_to_currency(sp.third_tranch_amount)
+            td= sp.status
+            td= select_tag :fund_source, options_for_select(Subproject::FUND_SOURCES), include_blank: true
+        tr
+         td colspan="4" Count: #{@subprojects.count}
+         td colspan="5" Total: #{number_to_currency(total_amount_of_tranches(params[:with_year], params[:id]))}
+
+= render 'view_cash_program'
