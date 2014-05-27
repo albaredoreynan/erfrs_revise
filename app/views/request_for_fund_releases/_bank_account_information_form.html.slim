@@ -1,0 +1,52 @@
+.row.sp-table
+  .col-md-12
+    h4 Bank Account Information
+    hr
+  br
+br
+br
+.row.sp-show
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Bank
+      .col-md-6.bold
+        'Land Bank of the Philippines
+  .col-md-6
+    .form-group
+      .col-md-5
+        = f.label :address
+      .col-md-7
+        = f.text_area :address, cols:"2", rows:"2" 
+  .col-md-6
+    .form-group
+      .col-md-4
+        =f.label :branch
+      .col-md-6
+        =f.text_field :branch
+  .col-md-6
+    .form-group
+      .col-md-5
+        = f.label :city
+      .col-md-7
+        = f.text_field :city 
+  .col-md-6
+    .form-group
+      .col-md-4
+        =f.label :account_name, "Account Name"
+      .col-md-6
+        =f.text_field :account_name
+  .col-md-6
+    .form-group
+      .col-md-5
+        = f.label :province
+      .col-md-7
+        = f.text_field :province   
+  .col-md-6
+    .form-group
+      .col-md-4
+        =f.label :Phone
+      .col-md-6
+        =f.text_field :phone
+
+  

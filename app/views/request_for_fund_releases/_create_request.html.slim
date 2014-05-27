@@ -1,5 +1,3 @@
-
-
 .col-sm-12  
   .col-sm-2
     .radio
@@ -7,12 +5,12 @@
   .col-sm-3
     .radio
       label
-        =radio_button_tag(:rfr_type, "sub_project")
+        =radio_button_tag(:rfr_selector, "sub_project")
         ' Subproject
   .col-sm-3 
     .radio
       label
-        =radio_button_tag(:rfr_type, "TA-fund")
+        =radio_button_tag(:rfr_selector, "TA-fund")
         ' TA Fund
         
 
@@ -73,7 +71,14 @@
 
 .col-md-12
   =form_tag new_request_for_fund_release_path, method: 'get', class: "form-horizontal" do
+    .hide
+      =radio_button_tag(:rfr_type, "sub_project")
 
+
+      =radio_button_tag(:rfr_type, "TA-fund")
+
+    br
+    br  
     table.table.table-hover.table-striped.table-bordered
       thead
         tr
@@ -99,6 +104,14 @@
             td= sp.title
             td= sp.status
     = submit_tag 'Create', class: 'btn btn-primary'
+javascript:
+  $('#rfr_selector_sub_project').click(function(){
+    $('#rfr_type_sub_project').click();
+  });
+
+  $('#rfr_selector_TA-fund').click(function(){
+    $('#rfr_type_TA-fund').click();
+  });
 
 
 css:
