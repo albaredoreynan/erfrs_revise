@@ -1,0 +1,23 @@
+
+-if @hide_nav && params[:controller] == "subprojects"
+  ul.breadcrumb
+    li
+      a href="#"  Sub-Projects
+    li.active New Sub-Project
+
+
+
+-elsif @hide_nav && params[:controller] == "request_for_fund_releases"
+  ul.breadcrumb
+    li
+      a href="#"  Request for Fund Releases
+    li.active New RFRs 
+
+
+
+css:
+  ul.breadcrumb{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }

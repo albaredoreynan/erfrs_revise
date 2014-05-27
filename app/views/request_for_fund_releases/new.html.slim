@@ -1,10 +1,2 @@
-
 -if params[:sp_id].present? 
-  
-  -test = Subproject.find(params[:sp_id]).present?
-
-
--else
-  h4 Create Request for Fund Release
-  =render 'create_request'
-
+  =render 'process_request'

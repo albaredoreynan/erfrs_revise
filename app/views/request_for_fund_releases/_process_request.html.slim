@@ -1,0 +1,19 @@
+- @hide_nav = true
+br  
+= form_for @rfrs, html: { class: 'form-horizontal' } do |f|
+  .row
+    br
+    .page-details-main-buttons
+      button.btn.btn-primary Print
+      '&nbsp      
+      = f.submit 'Save', class: 'btn btn-primary'
+      '&nbsp
+      = link_to 'Cancel', request_for_fund_releases_path, class: 'btn btn-default'
+
+
+    .col-md-12.tip
+      = image_tag('tip.png')
+      ' TIP: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ornare aliquet. Nulla dapibus fringilla pretium. In urna mi, rutrum vitae tincidunt sed, faucibus ut sapien. Nunc eget dictum nisi. Vestibulum lacinia rutrum mattis. Praesent imperdiet iaculis augue, ac vulputate mauris volutpat eget.
+    .col-md-12
+      = render 'general_information_form', f:f
+      = render 'bank_account_information_form', f:f

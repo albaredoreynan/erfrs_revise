@@ -1,0 +1,99 @@
+br
+br
+br
+.row.sp-show
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'RFR ID
+      .col-md-6
+        = @rfrs.id
+  .col-md-6
+    .form-group
+      .col-md-5
+        = f.label :status
+      .col-md-7
+        = f.select :status, options_for_select(Subproject::STATUSES), {}, { class: 'form-control'}
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Tranche
+      .col-md-6
+        ' X
+  .col-md-6
+    .form-group
+      .col-md-5
+        = f.label :request_date
+      .col-md-7
+        = f.text_field :request_date  
+  .col-md-2
+    = f.label :title
+  .col-md-10
+    = @subproject.title
+  .col-md-12 style="margin-top: 10px;"
+    .row
+      .col-md-6
+        .form-group
+          .col-md-4
+            = f.label :region_id
+          .col-md-8
+            = @subproject.region.name
+        .form-group
+          .col-md-4
+            = f.label :province_id
+          .col-md-8
+            = @subproject.province.name
+        .form-group
+          .col-md-4
+            = f.label :municipality_id
+          .col-md-8
+            = @subproject.municipality.name
+        .form-group
+          .col-md-4
+            = f.label :barangay_id
+          .col-md-8
+            = @subproject.barangay.name
+        .form-group
+          .col-md-4
+            = f.label :group
+          .col-md-8
+
+
+      .col-md-6
+        .form-group
+          .col-md-5
+            = f.label :sub_project, "Sub-Project ID"
+          .col-md-7
+            = @subproject.id
+        .form-group
+          .col-md-5
+            = f.label :total_sub_project_cost, "Total Sub-Project Cost"
+          .col-md-7
+            ' Total Sub-Project Cost Compute here
+        .form-group
+          .col-md-5
+            = f.label :grant_funds, 'Grant Funds'
+          .col-md-7
+            ' Compute grant funds
+        .form-group
+          .col-md-5
+            = f.label :lcc, 'LCC'
+          .col-md-7
+            ' Compute LCC
+        .form-group
+          .col-md-5
+            = f.label :fund_source, 'Fund Source'
+          .col-md-7
+            = @subproject.fund_source.present? ? @subproject.fund_source.name : ""
+
+css:
+  .form-group > .col-md-4 {
+    text-align: right;
+  }
+  .form-group > .col-md-5 {
+    text-align: right;
+  }
+
+  .sp-show > .col-md-2{
+    text-align: right;
+  }

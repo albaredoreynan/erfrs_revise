@@ -5,7 +5,8 @@ class Subproject < ActiveRecord::Base
   belongs_to :barangay
   belongs_to :fund_source
   belongs_to :user
-  
+
+  has_many :request_for_fund_releases
   has_many :team_members
   accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
 
@@ -17,8 +18,8 @@ class Subproject < ActiveRecord::Base
   FUND_SOURCES = %w{ADB WB}
   CYCLE = %w{1 2 3 4 5}
   ####################### Validation ########################
-  
-  
+
+
   ####################### SCOPES ###########################
 
 

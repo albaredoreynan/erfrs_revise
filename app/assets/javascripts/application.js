@@ -15,7 +15,11 @@
 //= require cocoon
 //= require chosen.jquery
 //= require_tree .
-
+  function parseNaN(num) {
+    a = $(num).children().first().val();
+    if (isNaN(a)) a = 0;
+    return a;
+  }
 
   function compute(){
     var total_grant = 0.0;
@@ -35,45 +39,52 @@
     var total_lcc_cash_val = 0.0; 
 
     $('.grant').each(function(){
-     total_grant += parseFloat($(this).children().first().val());
+      total_grant += parseFloat(parseNaN(this));
     });
 
     $('.lcc').each(function(){
-     total_lcc += parseFloat($(this).children().first().val());
+      total_lcc += parseFloat(parseNaN(this));
     });
 
     $('.plgu').each(function(){
-     total_plgu += parseFloat($(this).children().first().val());
+      total_plgu += parseFloat(parseNaN(this));
     });
 
     $('.mlgu').each(function(){
-     total_mlgu += parseFloat($(this).children().first().val());
+
+      total_mlgu += parseFloat(parseNaN(this));
     });
 
     $('.community').each(function(){
-     total_community += parseFloat($(this).children().first().val());
+     total_community += parseFloat(parseNaN(this));
     });
     $('.total_lcc_cash').each(function(){
-      total_lcc_cash_val += parseFloat($(this).children().first().val());
+      total_lcc_cash_val += parseFloat(parseNaN(this));
     });
 
     $('.sdc > input').each(function(){
-      subtotal_direct += parseFloat($(this).val())
+      a = $(this).val();
+      if (isNaN(a)) a = 0;
+      subtotal_direct += parseFloat(a);
     });
     $('.sic > input').each(function(){
-      subtotal_indirect += parseFloat($(this).val())
+      a = $(this).val();
+      if (isNaN(a)) a = 0;
+      subtotal_indirect += parseFloat(a)
     });
 
     $('.scc > input').each(function(){
-      subtotal_contingency += parseFloat($(this).val())
+      a = $(this).val();
+      if (isNaN(a)) a = 0;
+      subtotal_contingency += parseFloat(a);
     });
 
     $('.total_lcc_cash').each(function(){
-     total_lcc_cash += parseFloat($(this).children().first().val());
+     total_lcc_cash += parseFloat(parseNaN(this));
     });
     
     $('.total_lcc_in_kind').each(function(){
-     total_lcc_in_kind += parseFloat($(this).children().first().val());
+     total_lcc_in_kind += parseFloat(parseNaN(this));
     });
 
     subtotal_total = subtotal_direct + subtotal_indirect + subtotal_contingency;
@@ -83,25 +94,25 @@
     total_contingency = subtotal_contingency + parseFloat($('#subproject_total_lcc_cash_contingency_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_contingency_cost').val());
     total_total =  total_direct + total_indirect + total_contingency 
 
-    $('#total_grant').html(total_grant);
-    $('#total_plgu').html(total_plgu);
-    $('#total_mlgu').html(total_mlgu);
-    $('#total_community').html(total_community);
-    $('#total_lcc').html(total_lcc);
+    $('#total_grant').html(total_grant.toFixed(2));
+    $('#total_plgu').html(total_plgu.toFixed(2));
+    $('#total_mlgu').html(total_mlgu.toFixed(2));
+    $('#total_community').html(total_community.toFixed(2));
+    $('#total_lcc').html(total_lcc.toFixed(2));
     
-    $('#subtotal_direct').html(subtotal_direct);
-    $('#subtotal_indirect').html(subtotal_indirect);
-    $('#subtotal_contingency').html(subtotal_contingency);
-    $('#subtotal_total').html(subtotal_total);
+    $('#subtotal_direct').html(subtotal_direct.toFixed(2));
+    $('#subtotal_indirect').html(subtotal_indirect.toFixed(2));
+    $('#subtotal_contingency').html(subtotal_contingency.toFixed(2));
+    $('#subtotal_total').html(subtotal_total.toFixed(2));
 
-    $('#total_lcc_cash').html(total_lcc_cash_val)
-    $('#total_lcc_in_kind').html(total_lcc_in_kind);
+    $('#total_lcc_cash').html(total_lcc_cash_val.toFixed(2))
+    $('#total_lcc_in_kind').html(total_lcc_in_kind.toFixed(2));
     
 
-    $('#total_direct').html(total_direct);
-    $('#total_indirect').html(total_indirect);
-    $('#total_contingency').html(total_contingency);
-    $('#total_total').html(total_total)
+    $('#total_direct').html(total_direct.toFixed(2));
+    $('#total_indirect').html(total_indirect.toFixed(2));
+    $('#total_contingency').html(total_contingency.toFixed(2));
+    $('#total_total').html(total_total.toFixed(2))
 
   }
 

@@ -36,30 +36,29 @@ hr
                '&nbsp
 
               = submit_tag 'Clear', class: 'btn btn-default clear'
-
       .col-md-6
-        form.form-horizontal
+        .form-horizontal
           .form-group
             .col-md-3
-              = label_tag :region
+              = label_tag :subproject_region_id, 'Region'
             .col-md-6
-              = select_tag :region, '', class: 'form-control'
+              = select_tag :subproject_region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control'
           .form-group
             .col-md-3
-              = label_tag :province
+              = label_tag :subproject_province_id, 'Province'
             .col-md-6
-              = text_field_tag :province, '', class: 'form-control'
+              = select_tag :subproject_province_id, [], class: 'form-control'
           .form-group
             .col-md-3
-              = label_tag :municipality
+              = label_tag :subproject_municipality_id, 'Municipality'
             .col-md-6
-              = text_field_tag :municipality, '', class: 'form-control'
+              = select_tag :subproject_municipality_id, [], class: 'form-control'
           .form-group
             .col-md-3
-              = label_tag :barangay
+              = label_tag :subproject_barangay_id, 'Barangay'
             .col-md-6
-              = text_field_tag :barangay, '', class: 'form-control'
-
+              = select_tag :subproject_barangay_id, [], class: 'form-control'
+      
 .row.sp-table
   .col-md-12
     table.table.table-hover.table-striped
@@ -76,15 +75,18 @@ hr
           th Update
           th Delete
       tbody
-        - 10.times do
-          tr
-            td 99999
-            td 99999
-            td XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            td DD-MM-YYY
-            td 1st
-            td 999,999,999
-            td XXXXXXXXXX
-            td= link_to image_tag('view.png'), '#'
-            td= link_to image_tag('edit.png'), '#'
-            td= link_to image_tag('delete.png'), '#'
+
+        - @rfrs.each do |rf|
+          tr 
+            td =rf.id
+            td =rf.subproject.id
+            td =rf.subproject.title
+            td =rf.subproject.date
+            td 'place tranch here
+            td =rf.amount_approve
+            td =rf.status
+            td
+            td
+            td
+
+        

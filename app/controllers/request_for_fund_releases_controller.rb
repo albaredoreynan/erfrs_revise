@@ -4,13 +4,19 @@ class RequestForFundReleasesController < ApplicationController
   %w[region province municipality barangay].each{ |e| has_scope "subproject_#{e}_id".intern }
   
   def index
+    @rfrs = apply_scopes(RequestForFundRelease).includes(subproject:[:region, :province, :municipality, :barangay])
   end
-  
-  def show
+
+  def select_subproject
+    @subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality, :barangay)    
   end
 
   def new
-    @subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality, :barangay)
+
+    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+    @rfrs = RequestForFundRelease.new
+  rescue ActiveRecord::RecordNotFound
+    redirect_to :action => 'select_subproject'
   end
 
 end
