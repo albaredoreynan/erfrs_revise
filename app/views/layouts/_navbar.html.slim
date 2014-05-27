@@ -10,6 +10,15 @@
       = link_to "CGDPs", cgdps_path
     li class = active_class("request_for_fund_releases")
       = link_to "RFRs", request_for_fund_releases_path
-    li= link_to "Reports", "#"
+    / li.dropdown class = active_class("request_for_fund_releases")
+    li.dropdown
+      a.dropdown-toggle data-toggle="dropdown" href="#" 
+        | REPORTS
+        span.caret
+      ul.dropdown-menu
+        li = link_to "SOE", soe_reports_reports_path 
+        li = link_to "MGA", mga_reports_reports_path
+        li = link_to "CG", cg_reports_reports_path
+        li = link_to "Cash Program", cash_program_reports_reports_path
     li class = active_class("admin")
       = link_to "Admin", admin_index_path

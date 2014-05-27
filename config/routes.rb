@@ -25,6 +25,13 @@ Rails.application.routes.draw do
   resources :fund_sources
   resources :fund_allocations
   
+  resources :reports do
+    get :soe_reports, on: :collection
+    get :mga_reports, on: :collection
+    get :cg_reports, on: :collection
+    get :cash_program_reports, on: :collection
+  end
+  
 
   scope '/admin' do
     get '/index', to: 'admin#index', as: 'admin_index'
