@@ -11,15 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140602050923) do
+ActiveRecord::Schema.define(version: 20140602082438) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "approval_informations", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "barangays", force: true do |t|
     t.integer  "municipality_id"
@@ -55,11 +50,6 @@ ActiveRecord::Schema.define(version: 20140602050923) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "fund_source_id"
-  end
-
-  create_table "fund_informations", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "fund_sources", force: true do |t|
@@ -240,11 +230,11 @@ ActiveRecord::Schema.define(version: 20140602050923) do
   create_table "team_members", force: true do |t|
     t.integer  "subproject_id"
     t.string   "name"
-    t.string   "designation"
     t.string   "email"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "designation_id"
   end
 
   add_index "team_members", ["subproject_id"], name: "index_team_members_on_subproject_id", using: :btree

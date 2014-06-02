@@ -1,5 +1,5 @@
 tr
   td= f.text_field :name
-  td= f.text_field :designation
+  td= f.select :designation_id, Designation.all.map{ |e| [e.name, e.id] }, {include_blank: true }, class: 'form-control'
   td= f.text_field :email
   td= f.text_field :phone
