@@ -2,7 +2,9 @@
   .col-md-4.col-md-offset-4.signin-form
     h2
       | New 
+    
     = form_for @fund_allocation do |f|
+
       .form-group
         = f.label 'Fund Source'
         = f.select :fund_source_id, FundSource.all.map{ |e| [e.code, e.id] }, {include_blank: true }, class: 'form-control'

@@ -4,6 +4,10 @@ module ApplicationHelper
     params[:controller] == current_controller ? "active" : nil
   end
 
+  def trail_id(t, id)
+    id.to_s.rjust(t, '0')  
+  end
+
   def flash_class(level)
     case level
       when :notice  then "alert alert-info"
@@ -18,8 +22,6 @@ module ApplicationHelper
     'clear-container' if devise_controller.include?(controlr)
   end
 
-
-  
   User.select(:type).distinct.map{|a|a.type}.each do |map|
     define_method("#{map.underscore}_signed_in?") do
       current_user.send("#{map.underscore}?")
@@ -62,6 +64,7 @@ module ApplicationHelper
       @total << amount.grant_amount_direct_cost.to_f
     end
     @total.inject(:+)
+
   end 
 
   def total_amount_of_tranches(year, municipality_id)
@@ -89,5 +92,6 @@ module ApplicationHelper
     end
     @total = @tranch1.inject(:+).to_f + @tranch2.inject(:+).to_f + @tranch3.inject(:+).to_f
   end
+
 
 end

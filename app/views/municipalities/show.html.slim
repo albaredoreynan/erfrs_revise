@@ -36,8 +36,8 @@ hr
             - @mibf = total_grant_amount_per_year(params[:with_year], 'ADB')
             = number_to_currency(@mibf)
           td 100
-          td 
-            - @mibf_other = total_grant_amount_per_year(params[:with_year], 'WB')
+          td  
+            -# @mibf_other = total_grant_amount_per_year(params[:with_year], 'WB')
             = number_to_currency(@mibf_other)
           td 99
           td = number_to_currency(total_grant_amount_per_mncpl(params[:id], params[:with_year], 'ADB'))
@@ -69,7 +69,7 @@ hr
             = number_to_currency(@amount_surplus)
           td 100
           td
-            - @amount_surplus_other = @fund_allocation_other - @mibf_other
+            -# @amount_surplus_other = @fund_allocation_other - @mibf_other
             = number_to_currency(@amount_surplus_other)
           td 99
           td 99,999,999

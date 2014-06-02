@@ -1,5 +1,6 @@
 .row.flash-msg
   .col-md-4.col-md-offset-4
+
     - flash.each do |key, value|
       - unless value =~ /Signed in successfully/
         div class = "#{flash_class(key)}"

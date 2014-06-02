@@ -32,6 +32,7 @@ class SubprojectsController < ApplicationController
 
   def create
     @subproject = Subproject.new subproject_params
+    @subproject.date_encoded = DateTime.now.strftime("%d/%b/%Y")
     if @subproject.save
       flash[:success] = 'Subproject created successfully.'
       redirect_to subprojects_path
@@ -77,6 +78,7 @@ class SubprojectsController < ApplicationController
       :fund_source_id,
       :cycle,
       :date_of_mbif,
+      :date_encoded,
       # financial information
       :grant_amount_direct_cost,
       :grant_amount_indirect_cost,

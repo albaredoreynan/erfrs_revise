@@ -33,24 +33,24 @@
       .col-md-6
         .form-group
           .col-md-5
-            = label_tag :category
+            = label_tag :date_of_mbif, "Date of MBIF"
           .col-md-7
-            = @subproject.category
+            = @subproject.date_of_mbif
         .form-group
           .col-md-5
-            = label_tag :physical_target, 'Physical Target'
+            = label_tag :date_encoded, 'Date Encoded'
           .col-md-7
-            = @subproject.physical_target
+            = @subproject.date_encoded
         .form-group
           .col-md-5
-            = label_tag :cost_parameter, 'Cost Parameter'
+            = label_tag :cycle
           .col-md-7
-            = @subproject.cost_parameter
+            = @subproject.cycle
         .form-group
           .col-md-5
-            = label_tag :mode_of_implementation, 'Mode of Implementation'
+            = label_tag :fund_source
           .col-md-7
-            = @subproject.mode_of_implementation
+            = @subproject.fund_source.try(:name)
 
   .col-md-2
     = label_tag :description

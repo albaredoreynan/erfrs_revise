@@ -17,3 +17,11 @@ br
     .col-md-12
       = render 'general_information_form', f:f
       = render 'bank_account_information_form', f:f
+
+      
+    .page-details-main-buttons
+      button.btn.btn-primary Print
+      '&nbsp      
+      = f.submit 'Save', class: 'btn btn-primary'
+      '&nbsp
+      = link_to 'Cancel', request_for_fund_releases_path, class: 'btn btn-default'

@@ -1,9 +1,15 @@
 
 -if @hide_nav && params[:controller] == "subprojects"
-  ul.breadcrumb
-    li
-      a href="#"  Sub-Projects
-    li.active New Sub-Project
+  -if @subproject.id.present?
+    ul.breadcrumb
+      li
+        a href="/subprojects"  Sub-Projects
+      li.active Sub-Project - #{trail_id(6, @subproject.id)} 
+  -else
+    ul.breadcrumb
+      li
+        a href="#"  Sub-Projects
+      li.active New Sub-Project
 
 
 
@@ -12,8 +18,6 @@
     li
       a href="#"  Request for Fund Releases
     li.active New RFRs 
-
-
 
 css:
   ul.breadcrumb{

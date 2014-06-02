@@ -18,11 +18,8 @@ class Subproject < ActiveRecord::Base
   FUND_SOURCES = %w{ADB WB}
   CYCLE = %w{1 2 3 4 5}
   ####################### Validation ########################
-
-
+    
   ####################### SCOPES ###########################
-
-
   scope :with_user,   -> username { fetch_all_created_by username }
   scope :with_id,     -> id { where id: id }
   scope :with_status, -> status { where status: status }

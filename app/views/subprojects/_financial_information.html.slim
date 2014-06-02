@@ -1,105 +1,96 @@
+-total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost    + @subproject.grant_amount_contingency_cost
+-total_plgu = @subproject.plgu_others_direct_cost   + @subproject.plgu_others_indirect_cost     + @subproject.plgu_contingency_cost
+-total_mlgu = @subproject.mlgu_direct_cost          + @subproject.mlgu_indirect_cost            + @subproject.mlgu_contingency_cost
+-total_community= @subproject.community_direct_cost + @subproject.community_indirect_cost       + @subproject.community_contingency_cost
+-total_lcc = @subproject.lcc_blgu_direct_cost       + @subproject.lcc_blgu_indirect_cost        + @subproject.lcc_contingency_cost
+-total_lcc_cash = @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_cash_contingency_cost
+-total_lcc_kind = @subproject.total_lcc_in_kind_direct_cost + @subproject.total_lcc_in_kind_indirect_cost +  @subproject.total_lcc_in_kind_contingency_cost
+
+-subtotal_direct = @subproject.grant_amount_direct_cost + @subproject.plgu_others_direct_cost   + @subproject.mlgu_direct_cost + @subproject.community_direct_cost + @subproject.lcc_blgu_direct_cost
+-subtotal_indirect = @subproject.grant_amount_indirect_cost + @subproject.plgu_others_indirect_cost + @subproject.mlgu_indirect_cost  + @subproject.community_indirect_cost + @subproject.lcc_blgu_indirect_cost  
+-subtotal_contingency = @subproject.grant_amount_contingency_cost + @subproject.plgu_contingency_cost + @subproject.mlgu_contingency_cost + @subproject.community_contingency_cost + @subproject.lcc_contingency_cost
+
+-total_direct = subtotal_direct + @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_in_kind_direct_cost
+-total_indirect = subtotal_indirect + @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_in_kind_indirect_cost
+-total_contingency = subtotal_contingency + @subproject.total_lcc_cash_contingency_cost + @subproject.total_lcc_in_kind_contingency_cost
+-total_total =  total_direct + total_indirect + total_contingency
 .row.sp-table
-  h4 Financial Information
-  hr
   .col-md-12
-    table.table.table-hover.table-bordered.financial
-      - dc_subtotal = ic_subtotal = dc_total = ic_total = 0
+    h4 Financial Information
+    hr
+  .col-md-12
+    table.table.table-bordered.financial_form
       thead
         tr
           th  
           th Direct Cost
           th Indirect Cost
-          th TOTAL
-          th % TOTAL
-      tbody
+          th Contingency
+          th Total
+          th %Total
+      tbody#finance
         tr#grant-amount
           td GRANT Amount
-          td= number_to_currency(dc = @subproject.grant_amount_direct_cost)
-          td= number_to_currency(ic = @subproject.grant_amount_indirect_cost)
-          td.total= number_to_currency( sum = dc+ic )
-          - ic_subtotal += ic ; dc_subtotal += dc
-          td.percentage data-sum="#{sum}"
+          td.grant.sdc= number_to_currency @subproject.grant_amount_direct_cost
+          td.grant.sic= number_to_currency @subproject.grant_amount_indirect_cost
+          td.grant.scc= number_to_currency @subproject.grant_amount_contingency_cost
+          td#total_grant.gray = number_to_currency total_grant
+          td#percent_grant.gray #{(total_grant / total_total * 100).round(2)}%
         tr#lcc-blgu
           td LCC: BLGU
-          td= number_to_currency(dc = @subproject.lcc_blgu_direct_cost)
-          td= number_to_currency(ic = @subproject.lcc_blgu_indirect_cost)
-          td.total= number_to_currency( sum = dc+ic )
-          - ic_subtotal += ic ; dc_subtotal += dc
-          td.percentage data-sum="#{sum}"
+          td.lcc.sdc= number_to_currency @subproject.lcc_blgu_direct_cost
+          td.lcc.sic= number_to_currency @subproject.lcc_blgu_indirect_cost
+          td.lcc.scc= number_to_currency @subproject.lcc_contingency_cost
+          td#total_lcc.gray= number_to_currency total_lcc
+          td#percent_lcc.gray #{(total_lcc/total_total*100).round(2)}%
         tr#community
           td Community
-          td= number_to_currency(dc = @subproject.community_direct_cost)
-          td= number_to_currency(ic = @subproject.community_indirect_cost)
-          td.total= number_to_currency( sum = dc+ic )
-          - ic_subtotal += ic ; dc_subtotal += dc
-          td.percentage data-sum="#{sum}"
+          td.community.sdc= number_to_currency @subproject.community_direct_cost
+          td.community.sic= number_to_currency @subproject.community_indirect_cost
+          td.community.scc= number_to_currency @subproject.community_contingency_cost
+          td#total_community.gray = number_to_currency total_community
+          td#percent_community.gray #{(total_community/total_total*100).round(2)}%
         tr#mlgu
           td MLGU
-          td= number_to_currency(dc = @subproject.mlgu_direct_cost)
-          td= number_to_currency(ic = @subproject.mlgu_indirect_cost)
-          td.total= number_to_currency( sum = dc+ic )
-          - ic_subtotal += ic ; dc_subtotal += dc
-          td.percentage data-sum="#{sum}"
+          td.mlgu.sdc= number_to_currency @subproject.mlgu_direct_cost
+          td.mlgu.sic= number_to_currency @subproject.mlgu_indirect_cost
+          td.mlgu.scc= number_to_currency @subproject.mlgu_contingency_cost
+          td#total_mlgu.gray = number_to_currency total_mlgu
+          td#percent_mlgu.gray #{(total_mlgu/total_total*100).round(2)}%
         tr#plgu-others
           td PLGU/Others
-          td= number_to_currency(dc = @subproject.plgu_others_direct_cost)
-          td= number_to_currency(ic = @subproject.plgu_others_indirect_cost)
-          td.total= number_to_currency( sum = dc+ic )
-          - ic_subtotal += ic ; dc_subtotal += dc
-          td.percentage data-sum="#{sum}"
-        tr
-          th SUB-TOTAL
-          td#direct_cost_subtotal = number_to_currency(dc = dc_subtotal)
-          td#indirect_cost_subtotal = number_to_currency(ic = ic_subtotal)
-          - sum = dc + ic
-          td.subtotal data-sum="#{sum}" = number_to_currency( sum )
-          - ic_total += ic ; dc_total += dc
-          td.subtotal-percentage data-sum="#{sum}"
+          td.plgu.sdc= number_to_currency @subproject.plgu_others_direct_cost
+          td.plgu.sic= number_to_currency @subproject.plgu_others_indirect_cost
+          td.plgu.scc= number_to_currency @subproject.plgu_contingency_cost
+          td#total_plgu.gray =number_to_currency total_plgu
+          td#percent_plgu.gray #{(total_plgu/total_total*100).round(2)}%
+        tr#subtotal.gray
+          td.bold SUB-TOTAL
+          td#subtotal_direct= number_to_currency subtotal_direct
+          td#subtotal_indirect= number_to_currency subtotal_indirect
+          td#subtotal_contingency= number_to_currency subtotal_contingency
+          td#subtotal_total.bold = number_to_currency (subtotal_direct + subtotal_indirect + subtotal_contingency)
+          td#subtotal_total_percent
         tr
           td Total LCC Cash
-          td= number_to_currency(dc = @subproject.total_lcc_cash_direct_cost)
-          td= number_to_currency(ic = @subproject.total_lcc_cash_indirect_cost)
-          td.total= number_to_currency( sum = dc+ic )
-          - ic_total += ic ; dc_total += dc
-          td.lcc-percentage data-sum="#{sum}"
+          td.total_lcc_cash= number_to_currency @subproject.total_lcc_cash_direct_cost
+          td.total_lcc_cash= number_to_currency @subproject.total_lcc_cash_indirect_cost
+          td.total_lcc_cash= number_to_currency @subproject.total_lcc_cash_contingency_cost
+          td#total_lcc_cash.gray= number_to_currency total_lcc_cash
+          td#percent_lcc_percent.gray #{(total_lcc_cash/total_total*100).round(2)}%
         tr
           td Total LCC in Kind
-          td= number_to_currency(dc = @subproject.total_lcc_in_kind_direct_cost)
-          td= number_to_currency(ic = @subproject.total_lcc_in_kind_indirect_cost)
-          td.total= number_to_currency( sum = dc+ic )
-          - ic_total += ic ; dc_total += dc
-          td.lcc-percentage data-sum="#{sum}"
-        tr#grand-total
-          th TOTAL
-          td#direct_cost_total = number_to_currency( dc_total )
-          td#indirect_cost_total = number_to_currency( ic_total )
-          - sum = dc_total + ic_total
-          td.total data-sum="#{sum}" = number_to_currency( sum )
-          td.grand-total-percentage
+          td.total_lcc_in_kind= number_to_currency @subproject.total_lcc_in_kind_direct_cost
+          td.total_lcc_in_kind= number_to_currency @subproject.total_lcc_in_kind_indirect_cost
+          td.total_lcc_in_kind= number_to_currency @subproject.total_lcc_in_kind_contingency_cost
+          td#total_lcc_in_kind.gray = number_to_currency total_lcc_kind
+          td#percent_lcc_in_kind.gray #{(total_lcc_kind/total_total*100).round(2)}%
+        tr#total.gray
+          td.bold  TOTAL
+          td#total_direct= number_to_currency total_direct
+          td#total_indirect= number_to_currency total_indirect
+          td#total_contingency= number_to_currency total_contingency
+          td#total_total.bold #{number_to_currency total_total}
+          td#total_percent 100%
 
-javascript:
-  var percentGrandSubtotal = 0.0;
-  var grandSubtotal = parseFloat($('.subtotal').data('sum'));
-  $('.percentage').each(function(){
-    percentSubtotal = parseFloat($(this).data('sum')) / grandSubtotal * 100;
-    percentGrandSubtotal += percentSubtotal;
-    $(this).text(percentSubtotal.toFixed(2) + '%');
-  });
-  $('.subtotal-percentage').text(percentGrandSubtotal.toFixed()+'%');
-
-  // *************************************
-
-  percentGrandSubtotal = 0.0;
-  //grandSubtotal = parseFloat($('#grand-total .total').data('sum'));
-  grandSubtotal = 0.0;
-
-  $('.lcc-percentage').each(function(){
-    grandSubtotal += parseFloat( $(this).data('sum') );
-  });
-
-  $('.lcc-percentage').each(function(){
-    percentSubtotal = parseFloat($(this).data('sum')) / grandSubtotal * 100;
-    percentGrandSubtotal += percentSubtotal;
-    $(this).text(percentSubtotal.toFixed(2) + '%');
-  });
-  $('.grand-total-percentage').text(percentGrandSubtotal.toFixed()+'%');
+  
