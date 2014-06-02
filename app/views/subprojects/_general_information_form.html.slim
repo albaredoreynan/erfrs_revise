@@ -2,10 +2,10 @@ br
 .row.sp-show
   .col-md-6
     .form-group
-      .col-md-4
-
+      .col-md-4.bold
+        ' Sub-project ID
       .col-md-6
-        = @subproject.id
+        = trail_id(6, @subproject.id) if @subproject.id.present?
   .col-md-6
     .form-group
       .col-md-5
@@ -59,14 +59,15 @@ br
             = DateTime.now.strftime("%d/%b/%Y")
         .form-group
           .col-md-5
-            = f.label :mode_of_implementation, 'Mode of Implementation'
+            = f.label :cycle
           .col-md-7
             = f.select :cycle, Subproject::CYCLE, { prompt: 'SELECT NO. OF CYCLE' }, { class: 'form-control' }
-        .form-group
-          .col-md-5
-            = f.label :fund_source, 'Fund Source'
-          .col-md-7
-            = @subproject.fund_source.present? ? @subproject.fund_source.name : ""
+        - if @subproject.fund_source.present?  
+          .form-group
+            .col-md-5
+              = f.label :fund_source, 'Fund Source'
+            .col-md-7
+              = @subproject.fund_source.try(:name)
 
   .col-md-2
     = label_tag :description
@@ -77,7 +78,6 @@ br
     = label_tag :source
   .col-md-10 style="margin-top: 10px;"
     strong Name of Development Financial Institution
-  
 
 css:
   .form-group > .col-md-4 {

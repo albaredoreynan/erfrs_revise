@@ -77,9 +77,10 @@
           td#total_total
           td#total_percent
 javascript: 
+
   compute();
-  
   $('#finance > tr > td > input').blur(function(){
+    if ($(this).val()=='') $(this).val("0.0")
     compute();
   });
 

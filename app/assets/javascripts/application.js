@@ -37,6 +37,13 @@
     var total_contingency = 0.0;
     var total_total = 0.0;
     var total_lcc_cash_val = 0.0; 
+    var percent_total_grant = 0.0;
+    var percent_total_lcc = 0.0;
+    var percent_total_plgu = 0.0;
+    var percent_total_mlgu = 0.0;
+    var percent_total_community = 0.0;
+    var percent_total_lcc_cash_val = 0.0;
+    var percent_total_lcc_in_kind = 0.0;
 
     $('.grant').each(function(){
       total_grant += parseFloat(parseNaN(this));
@@ -94,6 +101,16 @@
     total_contingency = subtotal_contingency + parseFloat($('#subproject_total_lcc_cash_contingency_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_contingency_cost').val());
     total_total =  total_direct + total_indirect + total_contingency 
 
+
+    // Percent Formula
+    percent_total_grant = (total_grant / total_total) * 100
+    percent_total_lcc = (total_lcc / total_total) * 100
+    percent_total_plgu =(total_plgu / total_total) * 100
+    percent_total_mlgu = (total_mlgu / total_total) * 100
+    percent_total_community = (total_community / total_total) * 100
+    percent_total_lcc_cash_val = (total_lcc_cash_val / total_total) * 100
+    percent_total_lcc_in_kind = (total_lcc_in_kind / total_total) * 100
+
     $('#total_grant').html(total_grant.toFixed(2));
     $('#total_plgu').html(total_plgu.toFixed(2));
     $('#total_mlgu').html(total_mlgu.toFixed(2));
@@ -107,13 +124,22 @@
 
     $('#total_lcc_cash').html(total_lcc_cash_val.toFixed(2))
     $('#total_lcc_in_kind').html(total_lcc_in_kind.toFixed(2));
-    
 
     $('#total_direct').html(total_direct.toFixed(2));
     $('#total_indirect').html(total_indirect.toFixed(2));
     $('#total_contingency').html(total_contingency.toFixed(2));
     $('#total_total').html(total_total.toFixed(2))
 
+    if (total_total != ""){
+        $('#percent_grant').html(percent_total_grant.toFixed(2) + "%");
+        $('#percent_lcc').html(percent_total_lcc.toFixed(2) + "%" );
+        $('#percent_plgu').html(percent_total_plgu.toFixed(2) + "%" );
+        $('#percent_community').html(percent_total_community.toFixed(2) + "%");
+        $('#percent_mlgu').html(percent_total_mlgu.toFixed(2) + "%");
+        $('#percent_lcc_percent').html(percent_total_lcc_cash_val.toFixed(2) + "%");
+        $('#percent_lcc_in_kind').html(percent_total_lcc_in_kind.toFixed(2) + "%");
+        $('#total_percent').html("100%");
+    }
   }
 
 

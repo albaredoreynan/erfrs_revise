@@ -2,7 +2,7 @@
   .col-sm-8
     h3 Sub-Projects
   .col-sm-4
-    = link_to "<i class='fa fa-plus'></i> Create SP".html_safe, new_subproject_path, class: 'pull-right btn btn-lg btn-primary'
+    = link_to "<i class='fa fa-plus'></i> Create Sub-project".html_safe, new_subproject_path, class: 'pull-right btn btn-lg btn-primary'
   .col-sm-12
     hr
   
@@ -13,7 +13,7 @@
         .col-md-6
           .form-group
             .col-md-3
-              = label_tag :with_id, 'SP ID'
+              = label_tag :with_id, 'Sub-project ID'
             .col-md-6
               = text_field_tag :with_id, params[:with_id], class: 'form-control'
           .form-group
@@ -65,7 +65,7 @@
     table.table.table-hover.table-striped.table-bordered
       thead
         tr
-          th SP ID
+          th ID
           th Year
           th Region
           th Province
@@ -79,7 +79,7 @@
       tbody
         - @subprojects.each do |sp|
           tr
-            td= sp.id
+            td= trail_id(6, sp.id)
             td= sp.created_at.year
             td= sp.region.try(:name)
             td= sp.province.try(:name)

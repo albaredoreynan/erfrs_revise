@@ -8,15 +8,26 @@ class RequestForFundReleasesController < ApplicationController
   end
 
   def select_subproject
+    # @subprojects = apply_scopes(Subproject).eager_load(:region, :province, :municipality, :barangay)
     @subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality, :barangay)    
   end
 
   def new
-
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
     @rfrs = RequestForFundRelease.new
   rescue ActiveRecord::RecordNotFound
     redirect_to :action => 'select_subproject'
   end
+
+  def create
+
+  end
+
+  protected
+
+    def permitted_params
+      params.permit(barangay: %i[municipality_id name])
+    end
+
 
 end
