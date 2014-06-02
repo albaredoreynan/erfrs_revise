@@ -90,4 +90,8 @@ module ApplicationHelper
     @total = @tranch1.inject(:+).to_f + @tranch2.inject(:+).to_f + @tranch3.inject(:+).to_f
   end
 
+  def total_amount_release(municipality_id, year, fund_source)
+    
+  end
+
 end

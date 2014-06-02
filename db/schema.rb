@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527052857) do
+ActiveRecord::Schema.define(version: 20140602050923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "approval_informations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "barangays", force: true do |t|
     t.integer  "municipality_id"
@@ -37,6 +42,12 @@ ActiveRecord::Schema.define(version: 20140527052857) do
 
   add_index "cgdps", ["municipality_id"], name: "index_cgdps_on_municipality_id", using: :btree
 
+  create_table "designations", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fund_allocations", force: true do |t|
     t.datetime "start_date"
     t.datetime "end_date"
@@ -44,6 +55,11 @@ ActiveRecord::Schema.define(version: 20140527052857) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "fund_source_id"
+  end
+
+  create_table "fund_informations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "fund_sources", force: true do |t|
@@ -70,6 +86,15 @@ ActiveRecord::Schema.define(version: 20140527052857) do
 
   add_index "municipalities", ["group_id"], name: "index_municipalities_on_group_id", using: :btree
   add_index "municipalities", ["province_id"], name: "index_municipalities_on_province_id", using: :btree
+
+  create_table "news_informations", force: true do |t|
+    t.string   "title"
+    t.datetime "publish_start"
+    t.datetime "publish_end"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "content"
+  end
 
   create_table "provinces", force: true do |t|
     t.integer  "region_id"
@@ -109,6 +134,31 @@ ActiveRecord::Schema.define(version: 20140527052857) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "account_name"
+    t.integer  "requested_by_first"
+    t.string   "designation_first"
+    t.datetime "date_first"
+    t.integer  "requested_by_second"
+    t.string   "designation_second"
+    t.datetime "date_second"
+    t.datetime "date_received"
+    t.integer  "reviewed_by_first"
+    t.string   "rev_designation_first"
+    t.datetime "rev_date_first"
+    t.integer  "reviewed_by_second"
+    t.string   "rev_designation_second"
+    t.datetime "rev_date_second"
+    t.datetime "srpmo_date_received"
+    t.integer  "srpmo_reviewed_by"
+    t.string   "srpmo_designation"
+    t.datetime "srpmo_date"
+    t.integer  "srpmo_recommend_by"
+    t.string   "srpmo_rec_designation"
+    t.datetime "srpmo_rec_date"
+    t.datetime "rpmo_date_received"
+    t.integer  "rpmo_approved_by"
+    t.string   "rpmo_designation"
+    t.datetime "rpmo_date"
+    t.boolean  "approved_as_requested"
   end
 
   create_table "roles", force: true do |t|

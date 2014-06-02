@@ -1,0 +1,31 @@
+/ h1 News and Informations
+.row
+  .col-md-12
+    .panel.panel-default
+      .panel-heading 
+        h5 
+          = @news_information.title
+      .panel-body
+        = @news_information.content
+
+
+
+/   table.table.table-hover
+/     thead
+/       tr
+/         th News Header
+/         th Publish Start
+/         th Publish End
+/         th Action
+/     tbody
+/       - @news_informations.each do |news_info|
+/         tr
+/           td= news_info.title
+/           td= news_info.publish_start.strftime("%b %d, %Y")
+/           td= news_info.publish_end.strftime("%b %d, %Y")
+/           td
+/             = link_to image_tag('edit.png'), [:edit, news_info]
+/             = link_to image_tag('delete.png'), news_info, method: :delete, 'data-confirm' => 'Are you sure you want to delete this news and information entry ?'
+
+/ .row
+/   = link_to 'Add Designation', new_news_information_path, class: 'btn btn-primary btn-large'

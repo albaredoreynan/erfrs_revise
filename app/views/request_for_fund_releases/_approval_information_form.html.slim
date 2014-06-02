@@ -1,0 +1,148 @@
+.row.sp-table
+  .col-md-12
+    h4 Approval Information
+    hr
+  br
+.row.sp-show
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Requested By:
+      .col-md-6.bold
+        = f.select :requested_by_first, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Requested By:
+      .col-md-6.bold
+        = f.select :requested_by_second, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Designation:
+      .col-md-6
+        =f.text_field :designation_first
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Designation:
+      .col-md-6
+        =f.text_field :designation_second 
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Date:
+      .col-md-6
+        =f.text_field :date_first
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Date:
+      .col-md-6
+        =f.text_field :date_second
+  
+  .col-md-12
+    .form-group
+      .col-md-2.bold.text-right
+        'Date Received:
+      .col-md-3
+        =f.text_field :date_received
+
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Reviewed By:
+      .col-md-6
+        =f.text_field :reviewed_by_first
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Reviewed By:
+      .col-md-6
+        =f.text_field :reviewed_by_second
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Designation:
+      .col-md-6
+        =f.text_field :rev_designation_first
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Designation:
+      .col-md-6
+        =f.text_field :rev_designation_second
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Date:
+      .col-md-6
+        =f.text_field :rev_date_first
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Date:
+      .col-md-6
+        =f.text_field :rev_date_second
+              
+.row.sp-table
+  .col-md-12
+    h5 Sub-Region Project Management Office (SRPMO):
+
+.row.sp-show
+  .col-md-12
+    .form-group
+      .col-md-4.bold
+        'Date Received:
+      .col-md-6
+        =f.text_field :srpmo_date_received
+      
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Reviewed By:
+      .col-md-6
+        =f.text_field :srpmo_reviewed_by
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Recommended By:
+      .col-md-6
+        =f.text_field :srpmo_recommend_by
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Designation:
+      .col-md-6
+        =f.text_field :srpmo_designation
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Designation:
+      .col-md-6
+        =f.text_field :srpmo_rec_designation
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Date:
+      .col-md-6
+        =f.text_field :srpmo_date
+  .col-md-6
+    .form-group
+      .col-md-5.bold
+        'Date:
+      .col-md-6
+        =f.text_field :srpmo_rec_date
+
+.row.sp-table
+  .col-md-12
+    h5 Regional Project Management Office (RPMO):
+.row.sp-show
+  .col-md-12
+    .form-group
+      .col-md-4.bold
+        'Date Received:
+      .col-md-6
+        =f.text_field :rpmo_date_received
+
+  

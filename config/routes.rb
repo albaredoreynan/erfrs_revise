@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   resources :groups
   resources :fund_sources
   resources :fund_allocations
+  resources :news_informations
+  resources :designations
   
   resources :reports do
     get :soe_reports, on: :collection
@@ -32,11 +34,14 @@ Rails.application.routes.draw do
     get :cash_program_reports, on: :collection
   end
   
+  get '/download_file', to: 'reports#download_file', as: 'download_file'
 
   scope '/admin' do
     get '/index', to: 'admin#index', as: 'admin_index'
     get '/news', to: 'admin#news', as: 'admin_news'
   end
+
+
 
   devise_for :users
   resources :users

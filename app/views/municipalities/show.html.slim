@@ -42,7 +42,8 @@ hr
           td 99
           td = number_to_currency(total_grant_amount_per_mncpl(params[:id], params[:with_year], 'ADB'))
           td 99
-          td colspan="4" = number_to_currency(total_grant_amount_per_mncpl(params[:id], params[:with_year], 'WB'))
+          td = number_to_currency(total_grant_amount_per_mncpl(params[:id], params[:with_year], 'WB'))
+          td 100
         tr
           td Released
           td 99,999,999
@@ -51,7 +52,8 @@ hr
           td 99
           td 99,999,999
           td 99
-          td colspan="4" 99,999,999
+          td 99,999,999
+          td 100
         tr
           td Excess
           td 99,999,999
@@ -60,8 +62,8 @@ hr
           td 99
           td 99,999,999
           td 99
-          td colspan="4" 99,999,999
-        
+          td 99,999,999
+          td 100
         tr
           td Surplus
           td 
@@ -74,8 +76,9 @@ hr
           td 99
           td 99,999,999
           td 99
-          td colspan="4" 99,999,999
-
+          td 99,999,999
+          td 100
+          
   .col-md-12
     
     button Assign Fund Sources
@@ -94,8 +97,9 @@ hr
           th Status
           th Fund Source
       tbody
-        
+        - @grant_total = Array.new
         - @subprojects.each do |sp|
+          - @grant_total << sp.grant_amount_direct_cost
           tr
             td= sp.id
             td= sp.barangay.try(:name)
@@ -107,7 +111,7 @@ hr
             td= sp.status
             td= select_tag :fund_source, options_for_select(Subproject::FUND_SOURCES), include_blank: true
         tr
-         td colspan="4" Count: #{@subprojects.count}
-         td colspan="5" Total: #{number_to_currency(total_amount_of_tranches(params[:with_year], params[:id]))}
+         td colspan="3" Count: #{@subprojects.count}
+         td colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}
 
 = render 'view_cash_program'

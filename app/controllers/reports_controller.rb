@@ -14,6 +14,10 @@ class ReportsController < ApplicationController
 
 	def cash_program_reports
 
+	end
+
+	def download_file
+		send_file 'public/sample_file.pdf', type: 'image/pdf', disposition: 'inline'	
 	end	
 
 end

@@ -12,8 +12,9 @@ br
 
 
     .col-md-12.tip
-      = image_tag('tip.png')
-      ' TIP: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ornare aliquet. Nulla dapibus fringilla pretium. In urna mi, rutrum vitae tincidunt sed, faucibus ut sapien. Nunc eget dictum nisi. Vestibulum lacinia rutrum mattis. Praesent imperdiet iaculis augue, ac vulputate mauris volutpat eget.
+      / = image_tag('tip.png')
+      / ' TIP: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In fermentum ornare aliquet. Nulla dapibus fringilla pretium. In urna mi, rutrum vitae tincidunt sed, faucibus ut sapien. Nunc eget dictum nisi. Vestibulum lacinia rutrum mattis. Praesent imperdiet iaculis augue, ac vulputate mauris volutpat eget.
     .col-md-12
       = render 'general_information_form', f:f
       = render 'bank_account_information_form', f:f
+      = render 'approval_information_form', f:f

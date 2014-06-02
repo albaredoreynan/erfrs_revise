@@ -1,0 +1,20 @@
+.row.signup
+  .col-md-4.col-md-offset-4.signin-form
+    h2
+      | New 
+    = form_for @news_information do |f|
+      .form-group
+        = f.label 'News Header'
+        = f.text_field :title, class: 'form-control'                      
+      .form-group
+        = f.label 'Content'
+        = f.text_area :content, class: 'form-control', rows: 10                  
+      .form-group
+        = f.label 'Publish Start'
+        = f.text_field :publish_start, class: 'form-control'                      
+      .form-group
+        = f.label 'Publish End'
+        = f.text_field :publish_end, class: 'form-control'                                
+      div
+        = f.submit nil, class: 'btn btn-primary btn-lg btn-block'
+/ dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},
