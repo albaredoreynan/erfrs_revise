@@ -109,7 +109,7 @@ class SubprojectsController < ApplicationController
       :third_tranch_amount,
       :third_tranch_date_required,
       # team member params
-      team_members_attributes: [:id, :name, :designation, :email, :phone]
+      team_members_attributes: [:id, :name, :designation_id, :email, :phone]
     ]
     params.require(:subproject).permit(attrs)
   end
