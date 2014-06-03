@@ -20,9 +20,9 @@
           tr
             td = trail_id(6, rfrs.id)
             td 
-            td = rfrs.request_date
-            td = rfrs.amount_approve
-            td = rfrs.dv_date
+            td = !rfrs.request_date.nil? ? rfrs.request_date.strftime("%b %d, %Y") : ''
+            td = number_to_currency(rfrs.amount_approve)
+            td = !rfrs.dv_date.nil? ? rfrs.dv_date.strftime("%b %d, %Y") : ''
             td 
       / tbody
       /   - @subproject.team_members.each do |tm|
