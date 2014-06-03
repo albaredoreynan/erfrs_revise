@@ -1,22 +1,22 @@
-.row.signup
-  .col-md-4.col-md-offset-4.signin-form
-    h2
-      | New 
-    
-    = form_for @fund_allocation do |f|
 
-      .form-group
-        = f.label 'Fund Source'
-        = f.select :fund_source_id, FundSource.all.map{ |e| [e.code, e.id] }, {include_blank: true }, class: 'form-control'
-      .form-group
-        = f.label :start_date
-        = f.text_field :start_date, :autofocus => true, class: 'form-control'
-      .form-group
-        = f.label :end_date
-        = f.text_field :end_date, :autofocus => true, class: 'form-control'
-      .form-group
-        = f.label :amount
-        = f.text_field :amount, :autofocus => true, class: 'form-control'                      
-      div
-        = f.submit nil, class: 'btn btn-primary btn-lg btn-block'
+= form_for @fund_allocation do |f|
+  .col-md-6
+    .form-group
+      = f.label 'Fund Source'
+      = f.select :fund_source_id, FundSource.all.map{ |e| [e.code, e.id] }, {include_blank: true }, class: 'form-control'
+    .form-group
+      = f.label :start_date
+      = f.text_field :start_date, :autofocus => true, class: 'form-control'
+    .form-group
+      = f.label :end_date
+      = f.text_field :end_date, :autofocus => true, class: 'form-control'
+    .form-group
+      = f.label :amount
+      = f.text_field :amount, :autofocus => true, class: 'form-control'                      
+    div
+      = f.submit "Save", class: 'btn btn-primary pull-right'
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},
+css:
+  .container{
+    min-height: 100%;
+  }

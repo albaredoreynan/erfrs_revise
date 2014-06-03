@@ -1,5 +1,10 @@
+h4 Fund Allocations
+hr
+= link_to 'Add Fund Allocation', new_fund_allocation_path, class: 'btn btn-primary pull-right'
+br
+br
+
 .col-sm-12 
-  h1 Fund Allocations
   .row.sp-table
     table.table.table-hover
       thead
@@ -20,7 +25,3 @@
               = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, fund_allocation], class: 'btn btn-xs btn-warning'
               '&nbsp
               = link_to "<i class='fa fa-trash-o'></i>".html_safe, fund_allocation, method: :delete, 'data-confirm' => 'Are you sure you want to delete this fund allocation ?', class: 'btn btn-xs btn-danger'
-
-
-  .row
-    = link_to 'Add Fund Allocation', new_fund_allocation_path, class: 'btn btn-primary btn-large'

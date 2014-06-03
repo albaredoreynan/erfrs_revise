@@ -1,5 +1,9 @@
+h4 Designations
+hr
+= link_to 'Add Designation', new_designation_path, class: 'btn btn-primary pull-right'
+br
+br
 .col-sm-12  
-  h1 Designations
   .row.sp-table
     table.table.table-hover
       thead
@@ -16,4 +20,3 @@
               = link_to "<i class='fa fa-trash-o'></i>".html_safe, designation, method: :delete, 'data-confirm' => 'Are you sure you want to delete this designation ?', class: 'btn btn-xs btn-danger'
 
   .row
-    = link_to 'Add Designation', new_designation_path, class: 'btn btn-primary btn-large'

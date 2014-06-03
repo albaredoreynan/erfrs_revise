@@ -1,0 +1,61 @@
+Searching 468 files for "rfr-index"
+
+/Users/psalmaguilar/Documents/Web Development Projects/dswd/app/assets/stylesheets/global_custom.scss:
+ 5969  //}
+ 5970  //
+ 5971: //.spip-search, .sp-search, .sp-table, .sp-show, .rfr-index, .admin-news{
+ 5972  //  @extend .rfrs
+ 5973  //}
+
+/Users/psalmaguilar/Documents/Web Development Projects/dswd/app/assets/stylesheets/subprojects.scss:
+    1  //@import 'colors';
+    2  //
+    3: //.sp-search, .spip-search, .rfr-index{
+    4  //  .clear{
+    5  //    margin-left: 10px;  
+
+/Users/psalmaguilar/Documents/Web Development Projects/dswd/app/views/reports/cash_program_reports.html.slim:
+    1  h4 Cash Program REPORTS
+    2  hr
+    3: .row.rfr-index
+    4    .col-md-12.header
+    5      p.text-center Department of Social Welfare and Development
+
+/Users/psalmaguilar/Documents/Web Development Projects/dswd/app/views/reports/cg_reports.html.slim:
+    1  h4 CG REPORTS
+    2  hr
+    3: .row.rfr-index
+    4    .col-md-12.header
+    5      p.text-center Department of Social Welfare and Development
+
+/Users/psalmaguilar/Documents/Web Development Projects/dswd/app/views/reports/mga_reports.html.slim:
+    1  h4 MGA REPORTS
+    2  hr
+    3: .row.rfr-index
+    4    .col-md-12.header
+    5      p.text-center Department of Social Welfare and Development
+
+/Users/psalmaguilar/Documents/Web Development Projects/dswd/app/views/reports/soe_reports.html.slim:
+    1  h4 SOE REPORTS
+    2  hr
+    3: .row.rfr-index
+    4    .col-md-12.header
+    5      p.text-center Department of Social Welfare and Development
+
+/Users/psalmaguilar/Documents/Web Development Projects/dswd/app/views/request_for_fund_releases/index.html.slim:
+    3  = link_to 'Create RFR', new_request_for_fund_release_path, class: 'pull-right btn btn-primary'
+    4  br
+    5: .row.rfr-index
+    6    .col-md-12
+    7      .panel.panel-default
+
+~/Documents/Web Development Projects/dswd/log/development.log:
+    <binary>
+
+~/Documents/Web Development Projects/dswd/tmp/cache/assets/development/sass/2b9e49a3eac1f68ed3e52d5fec00f834f14f2520/global_custom.scssc:
+    <binary>
+
+~/Documents/Web Development Projects/dswd/tmp/cache/assets/development/sass/2b9e49a3eac1f68ed3e52d5fec00f834f14f2520/subprojects.scssc:
+    <binary>
+
+13 matches across 10 files

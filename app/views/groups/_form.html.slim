@@ -1,20 +1,25 @@
-.row.signup
-  .col-md-4.col-md-offset-4.signin-form
-    h2
-      | New Group
-    = form_for @group do |f|
-      .form-group
-        = f.label :code
+= form_for @group do |f|
+  .col-sm-6
+    .form-group
+      = f.label :code, class: 'control-label col-sm-2'
+      .col-sm-10
         = f.text_field :code, :autofocus => true, class: 'form-control'
-      .form-group
-        = f.label 'Status'
-        | &nbsp;
+    br
+    br
+    .form-group
+      = f.label 'Status', class: 'control-label col-sm-2'
+      .col-sm-10
+        | &nbsp
         = f.radio_button :status, 'Active'
-        span.radio-btn-label &nbsp; Active
-        | &nbsp;
+        span.radio-btn-label.bold &nbsp; Active
+        | &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         = f.radio_button :status, 'Inactive'
-        span.radio-btn-label &nbsp; Inactive
-              
-      div
-        = f.submit nil, class: 'btn btn-primary btn-lg btn-block'
+        span.radio-btn-label.bold &nbsp; Inactive
+    .form-group
+      .col-sm-12  
+        = f.submit nil, class: 'btn btn-primary pull-right'
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},
+css:
+  .container{
+    min-height: 100%;
+  }

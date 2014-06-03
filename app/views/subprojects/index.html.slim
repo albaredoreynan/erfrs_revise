@@ -1,61 +1,63 @@
-
 h4 Sub-Projects
 hr
 = link_to "Create Sub-project".html_safe, new_subproject_path, class: 'pull-right btn btn-primary'
+br
 .row.sp-index
   .col-sm-12
-    h4.header Search
-    .row.search
-      form.form-horizontal
-        .col-md-6
-          .form-group
-            .col-md-3
-              = label_tag :with_id, 'Sub-project ID'
+    .panel.panel-default
+      .panel-heading 
+        h4 Search
+      .panel-body
+        .row.search
+          form.form-horizontal
             .col-md-6
-              = text_field_tag :with_id, params[:with_id], class: 'form-control'
-          .form-group
-            .col-md-3
-              = label_tag :with_year, 'Year'
+              .form-group
+                .col-md-3
+                  = label_tag :with_id, 'Sub-project ID'
+                .col-md-6
+                  = text_field_tag :with_id, params[:with_id], class: 'form-control'
+              .form-group
+                .col-md-3
+                  = label_tag :with_year, 'Year'
+                .col-md-6
+                  = text_field_tag :with_year, params[:with_year], class: 'form-control'
+              .form-group
+                .col-md-3
+                  = label_tag :with_user, 'User Name'
+                .col-md-6
+                  = text_field_tag :with_user, params[:with_user], class: 'form-control'
+              .form-group
+                .col-md-3
+                  = label_tag :with_status, 'Status'
+                .col-md-6
+                  = select_tag :with_status, options_for_select(Subproject::STATUSES, selected: params[:with_status]), class: 'form-control', include_blank: true
             .col-md-6
-              = text_field_tag :with_year, params[:with_year], class: 'form-control'
-          .form-group
-            .col-md-3
-              = label_tag :with_user, 'User Name'
-            .col-md-6
-              = text_field_tag :with_user, params[:with_user], class: 'form-control'
-          .form-group
-            .col-md-3
-              = label_tag :with_status, 'Status'
-            .col-md-6
-              = select_tag :with_status, options_for_select(Subproject::STATUSES, selected: params[:with_status]), class: 'form-control', include_blank: true
-          .form-group
-            .col-md-3
-            .col-md-9
-              = submit_tag 'Search', class: 'btn btn-primary'
-              = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
-  
-        .col-md-6
-          .form-group
-            .col-md-3
-              = label_tag :subproject_region_id, 'Region'
-            .col-md-6
-              = select_tag :subproject_region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control'
-          .form-group
-            .col-md-3
-              = label_tag :subproject_province_id, 'Province'
-            .col-md-6
-              = select_tag :subproject_province_id, [], class: 'form-control'
-          .form-group
-            .col-md-3
-              = label_tag :subproject_municipality_id, 'Municipality'
-            .col-md-6
-              = select_tag :subproject_municipality_id, [], class: 'form-control'
-          .form-group
-            .col-md-3
-              = label_tag :subproject_barangay_id, 'Barangay'
-            .col-md-6
-              = select_tag :subproject_barangay_id, [], class: 'form-control'
-  
+              .form-group
+                .col-md-3
+                  = label_tag :subproject_region_id, 'Region'
+                .col-md-6
+                  = select_tag :subproject_region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control'
+              .form-group
+                .col-md-3
+                  = label_tag :subproject_province_id, 'Province'
+                .col-md-6
+                  = select_tag :subproject_province_id, [], class: 'form-control'
+              .form-group
+                .col-md-3
+                  = label_tag :subproject_municipality_id, 'Municipality'
+                .col-md-6
+                  = select_tag :subproject_municipality_id, [], class: 'form-control'
+              .form-group
+                .col-md-3
+                  = label_tag :subproject_barangay_id, 'Barangay'
+                .col-md-6
+                  = select_tag :subproject_barangay_id, [], class: 'form-control'
+              .form-group
+                .col-md-3
+                .col-md-9
+                  = submit_tag 'Search', class: 'btn btn-primary'
+                  | &nbsp;
+                  = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
   br
   
   .col-md-12

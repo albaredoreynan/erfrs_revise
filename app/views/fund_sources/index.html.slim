@@ -1,5 +1,9 @@
+h4 Fund Sources
+hr
+= link_to 'Add Source', new_fund_source_path, class: 'btn btn-primary pull-right'
+br
+br
 .col-sm-12  
-  h1 Fund Sources
   .row.sp-table
     table.table.table-hover
       thead
@@ -16,7 +20,3 @@
               = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, fund_source], class: 'btn btn-xs btn-warning'
               '&nbsp
               = link_to "<i class='fa fa-trash-o'></i>".html_safe, fund_source, method: :delete, 'data-confirm' => 'Are you sure you want to delete this fund source?', class: 'btn btn-xs btn-danger'
-
-
-  .row
-    = link_to 'Add Source', new_fund_source_path, class: 'btn btn-primary btn-large'

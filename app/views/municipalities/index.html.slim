@@ -1,5 +1,9 @@
+h4 Municipalities
+hr
+= link_to 'Add Municipality', new_municipality_path, class: 'btn btn-primary pull-right'
+br
+br
 .col-sm-12 
-  h1 Municipalities
   .row.sp-table
     table.table.table-hover
       thead
@@ -20,7 +24,5 @@
               = link_to "<i class='fa fa-trash-o'></i>".html_safe, municipality, method: :delete, 'data-confirm' => 'Are you sure you want to delete this municipality?', class: 'btn btn-xs btn-danger'
 
 
-  .row
+  .flickr_pagination
     = will_paginate @municipalities
-  .row
-    = link_to 'Add municipality', new_municipality_path, class: 'btn btn-primary btn-large'
