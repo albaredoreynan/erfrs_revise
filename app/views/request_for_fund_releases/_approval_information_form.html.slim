@@ -53,13 +53,13 @@
       .col-md-4.bold
         'Reviewed By:
       .col-md-6
-        =f.text_field :reviewed_by_first
+        =f.select :reviewed_by_first, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
   .col-md-6
     .form-group
       .col-md-5.bold
         'Reviewed By:
       .col-md-6
-        =f.text_field :reviewed_by_second
+        =f.select :reviewed_by_second, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
   .col-md-6
     .form-group
       .col-md-4.bold
@@ -92,23 +92,23 @@
 .row.sp-show
   .col-md-12
     .form-group
-      .col-md-4.bold
+      .col-md-2.bold.text-right
         'Date Received:
-      .col-md-6
+      .col-md-3
         =f.text_field :srpmo_date_received
-      
+
   .col-md-6
     .form-group
       .col-md-4.bold
         'Reviewed By:
       .col-md-6
-        =f.text_field :srpmo_reviewed_by
+        =f.select :srpmo_reviewed_by, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
   .col-md-6
     .form-group
       .col-md-5.bold
         'Recommended By:
       .col-md-6
-        =f.text_field :srpmo_recommend_by
+        =f.select :srpmo_recommend_by, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
   .col-md-6
     .form-group
       .col-md-4.bold
@@ -140,9 +140,28 @@
 .row.sp-show
   .col-md-12
     .form-group
-      .col-md-4.bold
+      .col-md-2.bold.text-right
         'Date Received:
-      .col-md-6
+      .col-md-3
         =f.text_field :rpmo_date_received
+  .col-md-12
+    .form-group
+      .col-md-2.bold.text-right
+        'Approved By:
+      .col-md-3
+        =f.select :rpmo_approved_by, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
+  .col-md-12
+    .form-group
+      .col-md-2.bold.text-right
+        'Designation:
+      .col-md-3
+        =f.text_field :rpmo_designation
+  .col-md-12
+    .form-group
+      .col-md-2.bold.text-right
+        'Date:
+      .col-md-3
+        =f.text_field :rpmo_date
+      
 
-  
+    

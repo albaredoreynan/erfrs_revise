@@ -1,0 +1,99 @@
+.row.sp-table
+  .col-md-12
+    h4 Fund Information
+    hr
+  br
+.row.sp-show
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Amount Requested:
+      .col-md-6
+        = number_to_currency(@subproject.first_tranch_amount)
+  .col-md-6
+    .form-group
+      .col-md-7.bold.text-right
+        'Cumulative Total Including this Request:
+      .col-md-3
+        '9999999
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'Previous Released:
+      .col-md-6
+        '9999999
+  .col-md-6
+    .form-group
+      .col-md-7.bold.text-right
+        'Balance After This Request:
+      .col-md-3
+        '9999999
+  
+  .col-md-12
+    .form-group
+      .col-md-2.bold.text-right
+        'Approved As Requested:
+      .col-md-6
+        span
+          = f.radio_button :approved_as_requested, 1, style: "width: 4%;"
+          | Yes
+          | &nbsp;&nbsp;&nbsp;
+        span
+          = f.radio_button :approved_as_requested, 0, style: "width: 4%;"
+          'No
+
+  .col-md-12
+    .form-group
+      .col-md-2.bold.text-right
+        'Amount Approved:
+      .col-md-3
+        =f.text_field :amount_approve
+  
+  .col-md-12
+    .form-group
+      .col-md-2.bold.text-right
+        'Remarks:
+      .col-md-9
+        =f.text_area :remarks, rows: 3
+  
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'ObR Number:
+      .col-md-6
+        =f.text_field :obr_number
+  .col-md-6
+    .form-group
+      .col-md-4.bold.text-right
+        'DV Number:
+      .col-md-6
+        =f.text_field :dv_number
+
+  .col-md-6
+    .form-group
+      .col-md-4.bold
+        'ObR Date:
+      .col-md-6
+        =f.text_field :obr_date
+  .col-md-6
+    .form-group
+      .col-md-4.bold.text-right
+        'DV Date:
+      .col-md-6
+        =f.text_field :dv_date
+
+  .col-md-12
+    .form-group
+      .col-md-8.bold.text-right
+        'Check Number:
+      .col-md-3
+        =f.text_field :check_number
+  
+  .col-md-12
+    .form-group
+      .col-md-8.bold.text-right
+        'Check Date:
+      .col-md-3
+        =f.text_field :check_date
+
+    

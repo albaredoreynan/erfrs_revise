@@ -68,7 +68,7 @@ module ApplicationHelper
   end 
 
   def total_amount_of_tranches(year, municipality_id)
-    @tranch1 = Array.new
+    @tranch1 = Array.new  
     @tranch2 = Array.new
     @tranch3 = Array.new
     @val = Subproject.select('first_tranch_amount, second_tranch_amount, third_tranch_amount').where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', year, municipality_id)
