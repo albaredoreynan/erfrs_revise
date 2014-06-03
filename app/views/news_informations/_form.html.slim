@@ -1,20 +1,26 @@
 .row.signup
-  .col-md-4.col-md-offset-4.signin-form
-    h2
-      | New 
-    = form_for @news_information do |f|
+  = form_for @news_information do |f|
+    .col-md-4
       .form-group
         = f.label 'News Header'
-        = f.text_field :title, class: 'form-control'                      
-      .form-group
-        = f.label 'Content'
-        = f.text_area :content, class: 'form-control', rows: 10                  
+        = f.text_field :title, class: 'form-control' 
+    .col-md-4
       .form-group
         = f.label 'Publish Start'
-        = f.text_field :publish_start, class: 'form-control', placeholder:"dd-Mmm-yyyy"                     
+        = f.text_field :publish_start, class: 'form-control', placeholder:"dd-Mmm-yyyy"    
+    .col-md-4                
       .form-group
         = f.label 'Publish End'
-        = f.text_field :publish_end, class: 'form-control', placeholder:"dd-Mmm-yyyy"                                   
-      div
-        = f.submit nil, class: 'btn btn-primary btn-lg btn-block'
+        = f.text_field :publish_end, class: 'form-control', placeholder:"dd-Mmm-yyyy"   
+    .col-md-12                      
+      .form-group
+        = f.label 'Content'
+        = f.text_area :content, class: 'form-control', rows: 10, style:"resize: none;"                  
+
+    .col-md-12
+      = f.submit nil, class: 'pull-right btn btn-primary'
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},
+css:
+  .container{
+    min-height: 100%;
+  }

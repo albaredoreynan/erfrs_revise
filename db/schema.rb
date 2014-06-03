@@ -16,11 +16,6 @@ ActiveRecord::Schema.define(version: 20140602135736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "approval_informations", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "barangays", force: true do |t|
     t.integer  "municipality_id"
     t.string   "name"
@@ -55,11 +50,6 @@ ActiveRecord::Schema.define(version: 20140602135736) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "fund_source_id"
-  end
-
-  create_table "fund_informations", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "fund_sources", force: true do |t|

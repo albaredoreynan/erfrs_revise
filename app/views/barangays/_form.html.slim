@@ -1,20 +1,27 @@
 = form_for @barangay, html: { class: 'form-horizontal', role: 'form' } do |f|
-  .form-group
-    = label_tag :subproject_region_id, 'Region', class: 'control-label col-sm-1'
-    .col-sm-11
-      = select_tag :subproject_region_id, options_for_select(Region.values_for_select), include_blank: true, class: 'form-control'
-  .form-group
-    = label_tag :subproject_province_id, 'Province', class: 'control-label col-sm-1'
-    .col-sm-11
-      = select_tag :subproject_province_id, nil, include_blank: true, class: 'form-control'
-  .form-group
-    = f.label :municipality_id, 'Region', class: 'control-label col-sm-1'
-    .col-sm-11
-      = f.select :municipality_id, [], {}, class: 'form-control', id: 'subproject_municipality_id'
-  .form-group
-    = f.label :name, 'Municipality', class: 'control-label col-sm-1'
-    .col-sm-11
-      = f.text_field :name, class: 'form-control'
-  .form-group
-    .col-sm-offset-1.col-sm-11
-      = f.submit 'Save', class: 'btn btn-large btn-primary'
+  .col-md-6
+    .form-group
+      = label_tag :subproject_region_id, 'Region', class: 'control-label col-sm-2'
+      .col-sm-10
+        = select_tag :subproject_region_id, options_for_select(Region.values_for_select), include_blank: true, class: 'form-control'
+    .form-group
+      = label_tag :subproject_province_id, 'Province', class: 'control-label col-sm-2'
+      .col-sm-10
+        = select_tag :subproject_province_id, nil, include_blank: true, class: 'form-control'
+    .form-group
+      = f.label :municipality_id, 'Municipality', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.select :municipality_id, [], {}, class: 'form-control', id: 'subproject_municipality_id'
+    .form-group
+      = f.label :name, 'Barangay', class: 'control-label col-sm-2'
+      .col-sm-10
+        = f.text_field :name, class: 'form-control'
+    .form-group
+      .col-sm-offset-1.col-sm-11
+        = f.submit 'Save', class: 'btn pull-right btn-primary'
+
+
+css:
+  .container{
+    min-height: 100%;
+  }
