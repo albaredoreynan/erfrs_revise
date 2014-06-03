@@ -1,19 +1,16 @@
 .row
   .col-md-9
-    .panel.panel-default
-      .panel-heading 
-        h4 News And Information
-      .panel-body
-        ul
-          - NewsInformation.all.each do |news|
-            li
-                h5
-                  = news.title
-                br/
-                = truncate(news.content, length: 250)
-                | &nbsp;
-                = link_to "Read More", news_information_path(news)
-            br    
+    h4 News And Information
+    hr
+      - NewsInformation.all.each do |news|
+        .well.well-sm
+          h5
+            = link_to news.title.titleize, news_information_path(news)
+          = truncate(news.content, length: 250)
+          | &nbsp;
+          br
+          br
+          = link_to "Read More...", news_information_path(news), class: "btn btn-primary btn-sm"
   .col-md-3
     .panel.panel-default
       .panel-heading 

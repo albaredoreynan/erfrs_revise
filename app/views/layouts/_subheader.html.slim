@@ -11,13 +11,17 @@
         a href="#"  Sub-Projects
       li.active New Sub-Project
 
-
-
 -elsif @hide_nav && params[:controller] == "request_for_fund_releases"
   ul.breadcrumb
     li
       a href="#"  Request for Fund Releases
     li.active New RFRs 
+
+-elsif @hide_nav && params[:controller] == "news_informations"
+  ul.breadcrumb
+    li
+      a href="#" News and Information
+    li.active = @news_information.title.titleize
 
 css:
   ul.breadcrumb{
