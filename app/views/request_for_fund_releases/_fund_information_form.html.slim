@@ -8,8 +8,15 @@
     .form-group
       .col-md-4.bold
         'Amount Requested:
-      .col-md-6
-        = number_to_currency(@subproject.first_tranch_amount)
+      .col-md-6.amt_requested
+        - if @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount == 0.00 && @subproject.third_tranch_amount = 0.00
+          = @subproject.first_tranch_amount
+        - elsif @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount != 0.00 && @subproject.third_tranch_amount == 0.00 
+          = @subproject.second_tranch_amount
+        - elsif @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount != 0.00 && @subproject.third_tranch_amount != 0.00 
+          = @subproject.third_tranch_amount
+        - else
+          'No Tranches specified
   .col-md-6
     .form-group
       .col-md-7.bold.text-right
@@ -33,9 +40,9 @@
     .form-group
       .col-md-2.bold.text-right
         'Approved As Requested:
-      .col-md-6
+      .col-md-6.approved
         span
-          = f.radio_button :approved_as_requested, 1, style: "width: 4%;"
+          = f.radio_button :approved_as_requested, 1, style: "width: 4%;", checked: 'checked'
           | Yes
           | &nbsp;&nbsp;&nbsp;
         span
@@ -47,7 +54,7 @@
       .col-md-2.bold.text-right
         'Amount Approved:
       .col-md-3
-        =f.text_field :amount_approve
+        =f.text_field :amount_approve, class: 'amount_approved'
   
   .col-md-12
     .form-group
@@ -96,4 +103,17 @@
       .col-md-3
         =f.text_field :check_date
 
-    
+javascript: 
+  $('.amount_approved').val( parseInt($('.amt_requested').text()) )
+  
+  $('input[type=radio]').click(function () { 
+    if ($(this).val() == 0){
+      $('#request_for_fund_release_amount_approve').val(0)
+    }
+    else{
+      $('#request_for_fund_release_amount_approve').val( parseInt($('.amt_requested').text()) )
+    }
+
+  });
+       
+      

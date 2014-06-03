@@ -3,9 +3,9 @@ Rails.application.routes.draw do
     root to: 'static_pages#dashboard', as: 'authenticated_root'
   end
 
-  root to: 'static_pages#home'
+  root to: 'static_pages#dashboard'
 
-  get '/dashboard' => 'static_pages#dashboard'
+  # get '/dashboard' => 'static_pages#dashboard'
 
   resources :subproject_implementation_plans
   resources :subprojects

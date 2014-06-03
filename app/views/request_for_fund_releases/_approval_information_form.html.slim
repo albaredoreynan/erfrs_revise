@@ -96,7 +96,7 @@
         'Date Received:
       .col-md-3
         =f.text_field :srpmo_date_received
-
+        =f.hidden_field :subproject_id, value: params[:sp_id] 
   .col-md-6
     .form-group
       .col-md-4.bold

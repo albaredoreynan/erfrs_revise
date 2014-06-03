@@ -71,25 +71,27 @@ br
           th Tranch
           th Amount
           th Status
-          th View
-          th Update
-          th Delete
+          th style="width: 10%;" Action
       tbody
 
         - @rfrs.each do |rf|
           tr 
-            td =trail_id(6, rf.id)
-            td =rf.subproject.id
-            td =rf.subproject.title
-            td =rf.subproject.date
-            td 'place tranch here
-            td =rf.amount_approve
-            td =rf.status
+            td = trail_id(6, rf.id)
+            td = trail_id(6, rf.subproject_id)
+            td = rf.subproject.title
+            td = rf.request_date
+            td = rf.subproject.first_tranch_amount
+            td = rf.amount_approve
+            td = rf.status
             td
-            td
-            td
+              = link_to "<i class='fa fa-eye'></i>".html_safe, rf, class: 'btn btn-xs btn-primary'
+              '&nbsp
+              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, rf], class: 'btn btn-xs btn-warning'
+              '&nbsp
+              = link_to "<i class='fa fa-trash-o'></i>".html_safe, rf, method: :delete, confirm: 'Are you sure you want to delete this request?', class: 'btn btn-xs btn-danger'
 css:
   .form-group > .col-md-3{
     text-align: right;
   }
+
         
