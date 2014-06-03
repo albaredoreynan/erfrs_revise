@@ -3,9 +3,11 @@ class NewsInformationsController < InheritedResources::Base
   
   respond_to :html, :json
 
-  # def show
-  # 	@news_information = NewsInformation.find params[:id]
-  # end
+  def show
+   	@news_information = NewsInformation.find params[:id]
+    @news_list = NewsInformation.all.sort_by(&:created_at).reverse
+
+  end
 
   protected
 

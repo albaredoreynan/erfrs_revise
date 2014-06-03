@@ -1,13 +1,29 @@
-/ h1 News and Informations
+-@hide_nav = 0
+br
+br
 .row
-  .col-md-12
-    .panel.panel-default
-      .panel-heading 
-        h5 
-          = @news_information.title
-      .panel-body
-        = @news_information.content
+  .col-sm-3
+    .list-group
+      .list-group-item.text-center
+        h3.list-group-item-heading
+          'Latest News
+      -@news_list.each do |news|
+        =content_tag(:a, :href => news_information_path(news), class: "list-group-item") do
+          h5.list-group-item-heading
+            = truncate(news.title.titleize, length: 25)
+          p.list-group-item-text
+            = truncate(news.content, length: 50)
 
+  .col-md-8
+    .panel.panel-default 
+      .panel-body
+        h2
+          = @news_information.title
+        hr
+        blockquote  
+          p
+            = @news_information.content
+  .col-md-2
 
 
 /   table.table.table-hover
