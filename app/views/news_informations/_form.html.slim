@@ -11,10 +11,10 @@
         = f.text_area :content, class: 'form-control', rows: 10                  
       .form-group
         = f.label 'Publish Start'
-        = f.text_field :publish_start, class: 'form-control'                      
+        = f.text_field :publish_start, class: 'form-control', placeholder:"dd-Mmm-yyyy"                     
       .form-group
         = f.label 'Publish End'
-        = f.text_field :publish_end, class: 'form-control'                                
+        = f.text_field :publish_end, class: 'form-control', placeholder:"dd-Mmm-yyyy"                                   
       div
         = f.submit nil, class: 'btn btn-primary btn-lg btn-block'
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},

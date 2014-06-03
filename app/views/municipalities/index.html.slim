@@ -1,23 +1,26 @@
-h1 Municipalities
-.row.sp-table
-  table.table.table-hover
-    thead
-      tr
-        th Region
-        th Province
-        th Municipality
-        th Actions
-    tbody
-      - @municipalities.each do |municipality|
+.col-sm-12 
+  h1 Municipalities
+  .row.sp-table
+    table.table.table-hover
+      thead
         tr
-          td= municipality.province.region.code
-          td= municipality.province.name
-          td= municipality.name
-          td
-            = link_to image_tag('edit.png'), [:edit, municipality]
-            = link_to image_tag('delete.png'), municipality, method: :delete, 'data-confirm' => 'Are you sure you want to delete this municipality?'
+          th Region
+          th Province
+          th Municipality
+          th Actions
+      tbody
+        - @municipalities.each do |municipality|
+          tr
+            td= municipality.province.region.code
+            td= municipality.province.name
+            td= municipality.name
+            td
+              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, municipality], class: 'btn btn-xs btn-warning'
+              '&nbsp
+              = link_to "<i class='fa fa-trash-o'></i>".html_safe, municipality, method: :delete, 'data-confirm' => 'Are you sure you want to delete this municipality?', class: 'btn btn-xs btn-danger'
 
-.row
-  = will_paginate @municipalities
-.row
-  = link_to 'Add municipality', new_municipality_path, class: 'btn btn-primary btn-large'
+
+  .row
+    = will_paginate @municipalities
+  .row
+    = link_to 'Add municipality', new_municipality_path, class: 'btn btn-primary btn-large'

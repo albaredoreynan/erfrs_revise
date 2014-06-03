@@ -44,7 +44,7 @@ br
           .col-md-4
             = f.label :group
           .col-md-8
-            = 
+            = f.select :group_id, Group.all.map{|a|[a.code, a.id]}, {include_blank: true}, { :class => 'form-control'}
 
       .col-md-6
         .form-group

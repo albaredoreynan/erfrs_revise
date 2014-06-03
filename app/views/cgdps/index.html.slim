@@ -45,7 +45,7 @@ hr
             .col-md-6
               = select_tag :subproject_municipality_id, [], class: 'form-control'
   .col-md-12
-    table.table.table-hover.table-striped.table-bordered
+    table.table.table-hover
       thead
         tr
           th Year
@@ -53,15 +53,13 @@ hr
           th Province
           th Municipality
           th Status
-          th View
-          th Update
-          th Delete
+          th style="width: 10%;" Action
       tbody
         - @subprojects.each do |m, spss|
           tr
           -spss.group_by{|u|u.created_at.year}.each do |ca, sps|
             tr
-              td 
+              td colspan="6"
             -sps.uniq_by{|a|a.created_at.year}.each do |sp|
               tr
     
@@ -70,6 +68,10 @@ hr
                 td= sp.province.try(:name)
                 td= sp.municipality.try(:name)
                 td XXXX
-                td= link_to "<i class='fa fa-eye'></i>".html_safe, "#{municipality_path(sp.municipality_id)}?with_year=#{sp.created_at.year}", class: 'btn btn-tiny btn-primary'
-                td= link_to "<i class='fa fa-edit'></i>".html_safe, "#", class: 'btn btn-tiny btn-warning'
-                td= link_to "<i class='fa fa-trash-o'></i>".html_safe, "#", method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-tiny btn-danger'
+                td
+                  = link_to "<i class='fa fa-eye'></i>".html_safe, "#{municipality_path(sp.municipality_id)}?with_year=#{sp.created_at.year}", class: 'btn btn-xs btn-primary'
+                  '&nbsp
+                  = link_to "<i class='fa fa-edit'></i>".html_safe, "#", class: 'btn btn-xs btn-warning'
+                  '&nbsp
+
+                  = link_to "<i class='fa fa-trash-o'></i>".html_safe, "#", method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-xs btn-danger'
