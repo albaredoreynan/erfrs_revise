@@ -1,3 +1,3 @@
 class RequestForFundRelease < ActiveRecord::Base
-  belongs_to :subprojects
+  belongs_to :subproject
 end
