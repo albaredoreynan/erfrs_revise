@@ -93,8 +93,24 @@ module ApplicationHelper
     @total = @tranch1.inject(:+).to_f + @tranch2.inject(:+).to_f + @tranch3.inject(:+).to_f
   end
 
-  def total_amount_release(municipality_id, year, fund_source)
-    
+  def total_amount_release(year, fund_source)
+    @amount_approve = Array.new
+    Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source(fund_source)).each do |sp_id|
+      RequestForFundRelease.select("amount_approve").where(subproject_id: sp_id.id).each do |rfrs|
+        @amount_approve << rfrs.amount_approve.to_f
+      end
+    end
+    @total = @amount_approve.inject(:+).to_f
+  end
+
+  def total_amount_release_per_mncpl(municipality_id, year, fund_source)
+    @amount_approve = Array.new
+    Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source(fund_source)).each do |sp_id|
+      RequestForFundRelease.select("amount_approve").where(subproject_id: sp_id.id).each do |rfrs|
+        @amount_approve << rfrs.amount_approve.to_f
+      end
+    end
+    @total = @amount_approve.inject(:+).to_f
   end
 
 end
