@@ -1,4 +1,4 @@
-- if user_signed_in? && super_user_signed_in? && !@hide_nav
+- if user_signed_in? && !@hide_nav
   ul.nav.nav-tabs
     li class = active_class("static_pages")
       = link_to "Dashboard", "/"
