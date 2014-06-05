@@ -1,10 +1,10 @@
 h4 SOE REPORTS
 hr
 .row.rfr-index
-  =render "report_filter_subproject"
   .col-md-12.header
     p.text-center 
       b Department of Social Welfare and Development
+      br
       |Statement of Expenditures
   .col-md-12
     
@@ -29,20 +29,21 @@ hr
           th Exchange Rate
           th Remarks
       tbody
-        tr
-	       	td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-	        td
-          
+        - @soe.each_with_index do |soe, index|
+          tr
+  	       	td= index + 1
+  	        td #{soe.subproject.barangay.name}, #{soe.subproject.municipality.name.titleize}
+  	        td= trail_id(6, soe.subproject_id)
+  	        td= soe.subproject.date_of_mbif
+  	        td
+  	        td= number_to_currency soe.subproject.total_grant_amount
+  	        td= number_to_currency soe.subproject.total_dv_amount
+  	        td= soe.rpmo_date
+  	        td= soe.check_number
+  	        td= soe.check_date.to_date
+  	        td 100%
+  	        td= number_to_currency soe.subproject.total_dv_amount
+  	        td= number_to_currency soe.subproject.total_dv_amount * 45
+  	        td 45
+  	        td= soe.remarks
+            

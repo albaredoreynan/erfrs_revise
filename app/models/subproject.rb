@@ -51,6 +51,16 @@ class Subproject < ActiveRecord::Base
     end
   end
 
+
+  def total_grant_amount
+    return self.grant_amount_direct_cost + self.grant_amount_indirect_cost + self.grant_amount_contingency_cost
+  end
+
+  def total_dv_amount
+    return self.request_for_fund_releases.sum(:amount_approve)
+  end
+
+
   private
 
   def self.fetch_all_created_by(username)
