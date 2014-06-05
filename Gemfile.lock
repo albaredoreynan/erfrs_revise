@@ -285,7 +285,6 @@ DEPENDENCIES
   pg
   quiet_assets
   rails (= 4.0.2)
-  rake (= 10.0.4)
   ransack!
   rb-fsevent
   rspec-rails
