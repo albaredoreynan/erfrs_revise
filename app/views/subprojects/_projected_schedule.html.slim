@@ -1,7 +1,9 @@
 .row.sp-table
   h4 Project Schedule of Grant Fund Releases
   hr
-  .col-md-8
+  .col-md-12
+    = image_tag('tip.png')
+    ' TIP: If the exact date cannot be projected, enter either the start of the month or week.
     table.table.table-bordered
       thead
         tr
@@ -10,28 +12,34 @@
           th Revised Amount
           th Released Amount
           th % TOTAL
-          th Date Required
+          th colspan=2 Date Required
       tbody
         - %w[first second third].each do |ordinal|
           tr
             - value = @subproject.send "#{ordinal}_tranch_amount"
             th= ordinal.titleize
             td= number_to_currency value
-            td= @subproject.send "#{ordinal}_tranch_revised_amount"
             td
+              - revise_amount = @subproject.send "#{ordinal}_tranch_revised_amount"
+              / - if ordinal == 'first'
+                    
+              / - elsif ordinal == 'second'
+
+              / - else
+              
+            td 
+
+
             td= number_to_percentage 100*(value/@total), precision: 2
             
             td
               - @date = @subproject.send "#{ordinal}_tranch_date_required" 
-              
               = @date.nil? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+            td = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => ordinal), class: 'btn btn-small btn-primary' 
         tr#total
           th TOTAL
           td= number_to_currency @total
           td= number_to_currency @total
           td
-          
           td
-  .col-md-4
-    = image_tag('tip.png')
-    ' TIP: If the exact date cannot be projected, enter either the start of the month or week.
+  

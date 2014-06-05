@@ -1,3 +1,15 @@
+- if params[:tranch] == 'first'
+  - @amount_requested = @subproject.first_tranch_amount
+  - @previous_released = 0
+  - @cumulative_amount = @subproject.first_tranch_amount
+- elsif params[:tranch] == 'second'
+  - @amount_requested = @subproject.second_tranch_amount
+  - @previous_released = 0
+  - @cumulative_amount = @subproject.first_tranch_amount
+- else
+  - @amount_requested = @subproject.third_tranch_amount
+  - @previous_released = 0
+  - @cumulative_amount = @subproject.first_tranch_amount
 .row.sp-table
   .col-md-12
     h4 Fund Information
@@ -9,26 +21,19 @@
       .col-md-4.bold
         'Amount Requested:
       .col-md-6.amt_requested
-        - if @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount == 0.00 && @subproject.third_tranch_amount = 0.00
-          = @subproject.first_tranch_amount
-        - elsif @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount != 0.00 && @subproject.third_tranch_amount == 0.00 
-          = @subproject.second_tranch_amount
-        - elsif @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount != 0.00 && @subproject.third_tranch_amount != 0.00 
-          = @subproject.third_tranch_amount
-        - else
-          'No Tranches specified
+        = @amount_requested
   .col-md-6
     .form-group
       .col-md-7.bold.text-right
         'Cumulative Total Including this Request:
       .col-md-3
-        '9999999
+        = @cumulative_amount 
   .col-md-6
     .form-group
       .col-md-4.bold
         'Previous Released:
       .col-md-6
-        '9999999
+        = @previous_released
   .col-md-6
     .form-group
       .col-md-7.bold.text-right
