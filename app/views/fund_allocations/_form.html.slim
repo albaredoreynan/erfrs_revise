@@ -2,7 +2,7 @@
 = form_for @fund_allocation do |f|
   .col-md-6
     .form-group
-      = f.label 'Fund Source'
+      = f.label :fund_source, 'Fund Source'
       = f.select :fund_source_id, FundSource.all.map{ |e| [e.code, e.id] }, {include_blank: true }, class: 'form-control'
     .form-group
       = f.label :start_date
