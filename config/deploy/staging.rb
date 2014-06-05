@@ -1,4 +1,5 @@
 set :rails_env, :staging
+set :branch, :staging
 set :deploy_to, '/home/azureuser'
 set :user, :azureuser
 set :nginx_server_name, 'dswd-erfrs.cloudapp.net'
