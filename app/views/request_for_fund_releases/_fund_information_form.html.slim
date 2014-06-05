@@ -81,13 +81,13 @@
       .col-md-4.bold
         'ObR Date:
       .col-md-6
-        =f.text_field :obr_date
+        =f.text_field :obr_date, placeholder: 'DD-MMM-YYYY'
   .col-md-6
     .form-group
       .col-md-4.bold.text-right
         'DV Date:
       .col-md-6
-        =f.text_field :dv_date
+        =f.text_field :dv_date, placeholder: 'DD-MMM-YYYY'
 
   .col-md-12
     .form-group
@@ -101,7 +101,7 @@
       .col-md-8.bold.text-right
         'Check Date:
       .col-md-3
-        =f.text_field :check_date
+        =f.text_field :check_date, placeholder: 'DD-MMM-YYYY'
 
 javascript: 
   $('.amount_approved').val( parseInt($('.amt_requested').text()) )

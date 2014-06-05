@@ -19,7 +19,7 @@
       .col-md-4.bold
         'Date:
       .col-md-6
-        =f.text_field :date_first
+        =f.text_field :date_first, placeholder: 'DD-MMM-YYYY'
   .col-md-6
     .form-group
       .col-md-5.bold
@@ -35,7 +35,7 @@
       .col-md-5.bold
         'Date:
       .col-md-6
-        =f.text_field :date_second
+        =f.text_field :date_second, placeholder: 'DD-MMM-YYYY'
 
     
   .col-md-12 
@@ -44,7 +44,7 @@
       .col-md-2.bold.text-right
         'Date Received:
       .col-md-3
-        =f.text_field :date_received
+        =f.text_field :date_received, placeholder: 'DD-MMM-YYYY'
 
   .col-md-6
     .form-group
@@ -61,7 +61,7 @@
       .col-md-4.bold
         'Date:
       .col-md-6
-        =f.text_field :rev_date_first
+        =f.text_field :rev_date_first, placeholder: 'DD-MMM-YYYY'
 
   .col-md-6
     .form-group
@@ -78,7 +78,7 @@
       .col-md-5.bold
         'Date:
       .col-md-6
-        =f.text_field :rev_date_second
+        =f.text_field :rev_date_second, placeholder: 'DD-MMM-YYYY'
               
 .row.sp-table
   .col-md-12
@@ -89,7 +89,7 @@
       .col-md-2.bold.text-right
         'Date Received:
       .col-md-3
-        =f.text_field :srpmo_date_received
+        =f.text_field :srpmo_date_received, placeholder: 'DD-MMM-YYYY'
         =f.hidden_field :subproject_id, value: params[:sp_id] 
   .col-md-6
     .form-group
@@ -106,7 +106,7 @@
       .col-md-4.bold
         'Date:
       .col-md-6
-        =f.text_field :srpmo_date
+        =f.text_field :srpmo_date, placeholder: 'DD-MMM-YYYY'
 
 
   .col-md-6
@@ -124,7 +124,7 @@
       .col-md-5.bold
         'Date:
       .col-md-6
-        =f.text_field :srpmo_rec_date
+        =f.text_field :srpmo_rec_date, placeholder: 'DD-MMM-YYYY'
 
 .row.sp-table
   .col-md-12
@@ -135,7 +135,7 @@
       .col-md-2.bold.text-right
         'Date Received:
       .col-md-3
-        =f.text_field :rpmo_date_received
+        =f.text_field :rpmo_date_received, placeholder: 'DD-MMM-YYYY'
   .col-md-12
     .form-group
       .col-md-2.bold.text-right
@@ -151,7 +151,7 @@
       .col-md-2.bold.text-right
         'Date:
       .col-md-3
-        =f.text_field :rpmo_date
+        =f.text_field :rpmo_date, placeholder: 'DD-MMM-YYYY'
       
 css:
   .sp-show{

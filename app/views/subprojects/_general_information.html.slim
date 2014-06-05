@@ -35,7 +35,7 @@
           .col-md-5
             = label_tag :date_of_mbif, "Date of MBIF"
           .col-md-7
-            = @subproject.date_of_mbif
+            = @subproject.date_of_mbif.strftime("%d-%b-%Y")
         .form-group
           .col-md-5
             = label_tag :date_encoded, 'Date Encoded'
@@ -48,7 +48,7 @@
             = @subproject.cycle
         .form-group
           .col-md-5
-            = label_tag :fund_source
+            = label_tag :fund_source, "Fund Source"
           .col-md-7
             = @subproject.fund_source.try(:name)
 
@@ -57,8 +57,9 @@
   .col-md-10
     = text_area_tag :description, @subproject.description, disabled: :true
   
-  .col-md-2 style="margin-top: 10px;"
-    = label_tag :source
-  .col-md-10 style="margin-top: 10px;"
-    strong Name of Development Financial Institution
+  / .col-md-2 style="margin-top: 10px;"
+  /   = label_tag :source
+  / .col-md-10 style="margin-top: 10px;"
+  /   strong Name of Development Financial Institution
+br
   

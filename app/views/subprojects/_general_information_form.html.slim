@@ -3,7 +3,7 @@ br
   .col-md-6
     .form-group
       .col-md-4.bold
-        ' Sub-project ID
+        ' Sub-Project ID
       .col-md-6
         = trail_id(6, @subproject.id) if @subproject.id.present?
   .col-md-6
@@ -44,8 +44,8 @@ br
         .form-group
           .col-md-4
             = f.label :group
-          .col-md-8
-            = f.select :group_id, Group.all.map{|a|[a.code, a.id]}, {include_blank: true}, { :class => 'form-control'}
+          / .col-md-8
+          /   = f.select :group_id, Group.all.map{|a|[a.code, a.id]}, {include_blank: true}, { :class => 'form-control'}
 
       .col-md-6
         .form-group
@@ -57,29 +57,29 @@ br
           .col-md-5
             = f.label :date_encoded, "Date Encoded"
           .col-md-7
-            = DateTime.now.strftime("%d/%b/%Y")
+            = DateTime.now.strftime("%d-%b-%Y")
         .form-group
           .col-md-5
             = f.label :cycle
           .col-md-7
-            = f.select :cycle, Subproject::CYCLE, { prompt: 'SELECT NO. OF CYCLE' }, { class: 'form-control' }
-        - if @subproject.fund_source.present?  
-          .form-group
-            .col-md-5
-              = f.label :fund_source, 'Fund Source'
-            .col-md-7
-              = @subproject.fund_source.try(:name)
+            = f.select :cycle, Subproject::CYCLE, { prompt: ' ' }, { class: 'form-control' }
+        / - if @subproject.fund_source.present?  
+        .form-group
+          .col-md-5
+            = f.label :fund_source, 'Fund Source'
+          .col-md-7
+            = @subproject.fund_source.try(:name)
 
   .col-md-2
     = label_tag :description
   .col-md-10
     = f.text_area :description, class: 'form-control'
   
-  .col-md-2 style="margin-top: 10px;"
-    = label_tag :source
-  .col-md-10 style="margin-top: 10px;"
-    strong Name of Development Financial Institution
-
+  / .col-md-2 style="margin-top: 10px;"
+  /   = label_tag :source
+  / .col-md-10 style="margin-top: 10px;"
+  /   strong Name of Development Financial Institution
+br/
 css:
   .form-group > .col-md-4 {
     text-align: right;
