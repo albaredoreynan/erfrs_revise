@@ -6,7 +6,9 @@
       thead
         tr
           th Tranches
-          th Amount
+          th Original Amount
+          th Revised Amount
+          th Released Amount
           th % TOTAL
           th Date Required
       tbody
@@ -15,13 +17,21 @@
             - value = @subproject.send "#{ordinal}_tranch_amount"
             th= ordinal.titleize
             td= number_to_currency value
+            td= @subproject.send "#{ordinal}_tranch_revised_amount"
+            td
             td= number_to_percentage 100*(value/@total), precision: 2
-            td= @subproject.send "#{ordinal}_tranch_date_required"
+            
+            td
+              - @date = @subproject.send "#{ordinal}_tranch_date_required" 
+              
+              = @date.nil? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
         tr#total
           th TOTAL
           td= number_to_currency @total
-          td= number_to_percentage 100, precision: 2
-    
+          td= number_to_currency @total
+          td
+          
+          td
   .col-md-4
     = image_tag('tip.png')
     ' TIP: If the exact date cannot be projected, enter either the start of the month or week.

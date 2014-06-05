@@ -15,7 +15,7 @@ class MunicipalitiesController < InheritedResources::Base
 
   def update
     @municipality = Municipality.find(params[:id])
-    if @municipality.update_attributes municipality_params
+    if @municipality.update_attributes update-params
       flash[:success] = 'Updated Successfully.'
       redirect_to municipalities_path
     else
@@ -35,9 +35,13 @@ class MunicipalitiesController < InheritedResources::Base
       @municipalities = @municipalities.paginate(page: params[:page]) unless request.url =~ /json$/
     end
 
+    def update_params
+      attrs = [:group_id, :name, :province_id]
+      params.require(:municipality).permit(attrs) 
+    end
+
   private
     def municipality_params
-      attrs = [:group_id, :name, :province_id]
-      params.require(:municipality).permit(attrs)
+      @municipality = Municipality.find(params[:id])
     end
 end
