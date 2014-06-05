@@ -6,141 +6,142 @@ hr
       thead
         tr
           td Funds Allocation
-          td colspan="4" Entire Fund
-          td colspan="4" This Municipal Only
+          td.text-center colspan="4" Entire Fund
+          td.text-center colspan="4" This Municipal Only
         tr
           td
-          td ADB
-          td %
-          td WB
-          td %
-          td ADB
-          td %
-          td WB
-          td %
+          td.text-right ADB
+          td.text-center %
+          td.text-right WB
+          td.text-center %
+          td.text-right ADB
+          td.text-center %
+          td.text-right WB
+          td.text-center %
       tbody
         tr
           td Allocation
-          td 
+          td.text-right 
             - @fund_allocation = budget_allocation('ADB').to_f
             = number_to_currency(@fund_allocation.to_f)
-          td 100
-          td
+          td.text-right 100
+          td.text-right
             - @fund_allocation_other = budget_allocation('WB').to_f
             = number_to_currency(@fund_allocation_other.to_f)
-          td 100
-          td 
+          td.text-right 100
+          td.text-right 
             - @fund_allocation_per_mun = budget_allocation('ADB').to_f
             = number_to_currency(@fund_allocation_per_mun.to_f)
-          td 100
-          td
+          td.text-right 100
+          td.text-right
             - @fund_allocation_per_mun_other = budget_allocation('WB').to_f
             = number_to_currency(@fund_allocation_per_mun_other.to_f)
-          td 100
+          td.text-right 100
         tr
-          td MIBF
-          td 
+          td.text-right MIBF
+          td.text-right 
             - @mibf = total_grant_amount_per_year(params[:with_year], 'ADB')
             = number_to_currency(@mibf.to_f)
-          td
+          td.text-right
             - @mibf_per = (@mibf.to_f / @fund_allocation.to_f) * 100
             = @mibf_per.round(2)
-          td  
+          td.text-right  
             - @mibf_other = total_grant_amount_per_year(params[:with_year], 'WB')
             = number_to_currency(@mibf_other.to_f)
-          td 
+          td.text-right 
             - @mibf_per_other = (@mibf_other.to_f / @fund_allocation.to_f ) * 100
             = @mibf_per_other.round(2)
-          td
+          td.text-right
             - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 'ADB') 
             = number_to_currency(@mibf_this_mncpl.to_f)
-          td 
+          td.text-right 
             - @mibf_this_mncpl_per = ( @mibf_this_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
             = @mibf_this_mncpl_per.round(2)
-          td 
+          td.text-right 
             - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 'WB')
             = number_to_currency(@mibf_this_mncpl_other.to_f)
-          td 
+          td.text-right 
             - @mibf_this_mncpl_other_per = ( @mibf_this_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
             = @mibf_this_mncpl_other_per.round(2)
         tr
           td Released
-          td 
+          td.text-right 
             - @release = total_amount_release(params[:with_year], 'ADB').to_f
             = number_to_currency(@release.to_f)
-          td 
+          td.text-right 
             - @release_per = ( @release.to_f / @fund_allocation.to_f) * 100
             = @release_per.round(2)
-          td 
+          td.text-right 
             - @release_other = total_amount_release(params[:with_year], 'WB').to_f
             = number_to_currency(@release_other.to_f)
-          td 
+          td.text-right 
             - @release_other_per = ( @release_other.to_f / @fund_allocation.to_f ) * 100
             = @release_other_per.round(2)
-          td 
+          td.text-right 
             - @release_per_mncpl = total_amount_release_per_mncpl(params[:id], params[:with_year], 'ADB')
             = number_to_currency(@release_per_mncpl.to_f)
 
-          td
+          td.text-right
             - @release_per_mncpl_percent = ( @release_per_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
             = @release_per_mncpl_percent.round(2)
-          td
+          td.text-right
             - @release_per_mncpl_other = total_amount_release_per_mncpl(params[:id], params[:with_year], 'WB')
             = number_to_currency(@release_per_mncpl_other.to_f)
-          td
+          td.text-right
             - @release_per_mncpl_other_percent = (@release_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
             = @release_per_mncpl_other_percent.round(2)
         tr
           td Excess
           td 
             - @excess = @mibf.to_f - @release.to_f
+
             = number_to_currency(@excess.to_f)
-          td
+          td.text-right
             - @excess_per = (@excess.to_f / @fund_allocation.to_f) * 100
             = @excess_per.round(2)
-          td 
+          td.text-right 
             - @excess_other = @mibf_other.to_f - @release_other.to_f
             = number_to_currency(@excess_other.to_f)
-          td
+          td.text-right
             - @excess_other_per = (@excess_other.to_f / @fund_allocation_other.to_f) * 100
             = @excess_other_per.round(2)
-          td 
+          td.text-right 
             - @excess_per_mncpl = @mibf_this_mncpl.to_f - @release_per_mncpl.to_f
             = number_to_currency(@excess_per_mncpl.to_f)
-          td
+          td.text-right
             - @excess_per_mncpl_per = (@excess_per_mncpl.to_f / @fund_allocation_per_mun.to_f) * 100
             = @excess_per_mncpl_per.round(2)
-          td
+          td.text-right
             - @excess_per_mncpl_other = @mibf_this_mncpl_other.to_f - @release_per_mncpl_other.to_f
             = number_to_currency(@excess_per_mncpl_other.to_f)
-          td
+          td.text-right
             - @excess_per_mncpl_other_per = (@excess_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f) * 100
             = @excess_per_mncpl_other_per.round(2)
         tr
           td Surplus
-          td 
+          td.text-right 
             - @amount_surplus = @fund_allocation.to_f - @mibf.to_f
             = number_to_currency(@amount_surplus.to_f)
-          td 
+          td.text-right 
             - @amount_surplus_per = (@amount_surplus.to_f / @fund_allocation.to_f ) * 100
             = @amount_surplus_per.round(2)
-          td
+          td.text-right
             - @amount_surplus_other = @fund_allocation_other - @mibf_other
             = number_to_currency(@amount_surplus_other.to_f)
-          td
+          td.text-right
             - @amount_surplus_other_per = (@amount_surplus_other.to_f / @fund_allocation_other.to_f ) * 100
             = @amount_surplus_other_per.round(2)
 
-          td 
+          td.text-right 
             - @amount_surplus_per_mncpl = @fund_allocation_per_mun.to_f - @mibf_this_mncpl.to_f
             = number_to_currency(@amount_surplus_per_mncpl.to_f)
-          td
+          td.text-right
             - @amount_surplus_per_mncpl_per = (@amount_surplus_per_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
             = @amount_surplus_per_mncpl_per.round(2)
-          td
+          td.text-right
             - @amount_surplus_per_mncpl_other = @fund_allocation_per_mun_other.to_f - @mibf_this_mncpl_other.to_f
             = number_to_currency(@amount_surplus_per_mncpl_other.to_f)
-          td
+          td.text-right
             - @amount_surplus_per_mncpl_other_per = (@amount_surplus_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
             = @amount_surplus_per_mncpl_other_per.round(2) 
           
@@ -155,10 +156,10 @@ hr
           th SP ID
           th Barangay
           th Title
-          th Grant Amount
-          th Tranche 1
-          th Tranche 2
-          th Tranche 3
+          th.text-right Grant Amount
+          th.text-right Tranche 1
+          th.text-right Tranche 2
+          th.text-right Tranche 3
           th Status
           th Fund Source
       tbody
@@ -169,14 +170,14 @@ hr
             td= sp.id
             td= sp.barangay.try(:name)
             td= sp.title
-            td= number_to_currency(sp.grant_amount_direct_cost)
-            td= number_to_currency(sp.first_tranch_amount)
-            td= number_to_currency(sp.second_tranch_amount)
-            td= number_to_currency(sp.third_tranch_amount)
+            td.text-right= number_to_currency(sp.grant_amount_direct_cost)
+            td.text-right= number_to_currency(sp.first_tranch_amount)
+            td.text-right= number_to_currency(sp.second_tranch_amount)
+            td.text-right= number_to_currency(sp.third_tranch_amount)
             td= sp.status
             td= select_tag :fund_source, options_for_select(Subproject::FUND_SOURCES), include_blank: true
         tr
          td colspan="3" Count: #{@subprojects.count}
-         td colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}
+         td.text-left colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}
 
 = render 'view_cash_program'
