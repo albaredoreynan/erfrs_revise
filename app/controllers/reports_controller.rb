@@ -1,5 +1,7 @@
 class ReportsController < ApplicationController
 
+	%w[region province municipality barangay].each{ |e| has_scope "subproject_#{e}_id".intern }
+
 	def soe_reports
 		
 	end
@@ -9,7 +11,7 @@ class ReportsController < ApplicationController
 	end
 
 	def cg_reports
-
+		raise
 	end
 
 	def cash_program_reports

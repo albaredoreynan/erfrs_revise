@@ -10,25 +10,11 @@
         'Requested By:
       .col-md-6.bold
         = f.select :requested_by_first, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
-  .col-md-6
-    .form-group
-      .col-md-5.bold
-        'Requested By:
-      .col-md-6.bold
-        = f.select :requested_by_second, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
-  .col-md-6
     .form-group
       .col-md-4.bold
         'Designation:
       .col-md-6
-        =f.text_field :designation_first
-  .col-md-6
-    .form-group
-      .col-md-5.bold
-        'Designation:
-      .col-md-6
-        =f.text_field :designation_second 
-  .col-md-6
+        = f.select :designation_first, Designation.all.map{|e| [e.name, e.id]}, {include_blank: true}
     .form-group
       .col-md-4.bold
         'Date:
@@ -37,11 +23,23 @@
   .col-md-6
     .form-group
       .col-md-5.bold
+        'Requested By:
+      .col-md-6.bold
+        = f.select :requested_by_second, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
+    .form-group
+      .col-md-5.bold
+        'Designation:
+      .col-md-6
+        =f.select :designation_second, Designation.all.map{|e| [e.name, e.id]}, {include_blank: true}
+    .form-group
+      .col-md-5.bold
         'Date:
       .col-md-6
         =f.text_field :date_second
-  
-  .col-md-12
+
+    
+  .col-md-12 
+    hr
     .form-group
       .col-md-2.bold.text-right
         'Date Received:
@@ -54,31 +52,28 @@
         'Reviewed By:
       .col-md-6
         =f.select :reviewed_by_first, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
+    .form-group
+      .col-md-4.bold
+        'Designation:
+      .col-md-6
+        =f.select :rev_designation_first, Designation.all.map{|e| [e.name, e.id]}, {include_blank: true}
+    .form-group
+      .col-md-4.bold
+        'Date:
+      .col-md-6
+        =f.text_field :rev_date_first
+
   .col-md-6
     .form-group
       .col-md-5.bold
         'Reviewed By:
       .col-md-6
         =f.select :reviewed_by_second, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
-  .col-md-6
-    .form-group
-      .col-md-4.bold
-        'Designation:
-      .col-md-6
-        =f.text_field :rev_designation_first
-  .col-md-6
     .form-group
       .col-md-5.bold
         'Designation:
       .col-md-6
-        =f.text_field :rev_designation_second
-  .col-md-6
-    .form-group
-      .col-md-4.bold
-        'Date:
-      .col-md-6
-        =f.text_field :rev_date_first
-  .col-md-6
+        =f.select :rev_designation_second, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
     .form-group
       .col-md-5.bold
         'Date:
@@ -88,7 +83,6 @@
 .row.sp-table
   .col-md-12
     h5 Sub-Region Project Management Office (SRPMO):
-
 .row.sp-show
   .col-md-12
     .form-group
@@ -103,31 +97,29 @@
         'Reviewed By:
       .col-md-6
         =f.select :srpmo_reviewed_by, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
+    .form-group
+      .col-md-4.bold
+        'Designation:
+      .col-md-6
+        =f.select :srpmo_designation, Designation.all.map{|e| [e.name, e.id]}, {include_blank: true}
+    .form-group
+      .col-md-4.bold
+        'Date:
+      .col-md-6
+        =f.text_field :srpmo_date
+
+
   .col-md-6
     .form-group
       .col-md-5.bold
         'Recommended By:
       .col-md-6
         =f.select :srpmo_recommend_by, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
-  .col-md-6
-    .form-group
-      .col-md-4.bold
-        'Designation:
-      .col-md-6
-        =f.text_field :srpmo_designation
-  .col-md-6
     .form-group
       .col-md-5.bold
         'Designation:
       .col-md-6
-        =f.text_field :srpmo_rec_designation
-  .col-md-6
-    .form-group
-      .col-md-4.bold
-        'Date:
-      .col-md-6
-        =f.text_field :srpmo_date
-  .col-md-6
+        =f.select :srpmo_rec_designation, Designation.all.map{|e| [e.name, e.id]}, {include_blank: true}
     .form-group
       .col-md-5.bold
         'Date:
@@ -150,18 +142,18 @@
         'Approved By:
       .col-md-3
         =f.select :rpmo_approved_by, TeamMember.all.map{ |e| [e.name, e.id] }, {include_blank: true }
-  .col-md-12
     .form-group
       .col-md-2.bold.text-right
         'Designation:
       .col-md-3
-        =f.text_field :rpmo_designation
-  .col-md-12
+        =f.select :rpmo_designation, Designation.all.map{|e| [e.name, e.id]}, {include_blank: true}
     .form-group
       .col-md-2.bold.text-right
         'Date:
       .col-md-3
         =f.text_field :rpmo_date
       
-
-    
+css:
+  .sp-show{
+    padding-right: 0px;
+  }

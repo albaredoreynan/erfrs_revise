@@ -29,17 +29,18 @@ br
           .col-md-4
             = f.label :province_id
           .col-md-8
-            = f.select :province_id, [], { disabled: 'disabled' }, { :class => 'form-control'}
+
+            = f.select :province_id, @subproject.province.present? ? [[@subproject.province.name, @subproject.province.id]] : [], { disabled: 'disabled' }, { :class => 'form-control'}
         .form-group
           .col-md-4
             = f.label :municipality_id
           .col-md-8
-            = f.select :municipality_id, [], { disabled: 'disabled' }, { :class => 'form-control'}
+            = f.select :municipality_id, @subproject.municipality.present? ? [[@subproject.municipality.name, @subproject.municipality.id]] : [], { disabled: 'disabled' }, { :class => 'form-control'}
         .form-group
           .col-md-4
             = f.label :barangay_id
           .col-md-8
-            = f.select :barangay_id, [], { disabled: 'disabled' }, { :class => 'form-control'}
+            = f.select :barangay_id, @subproject.barangay.present? ? [[@subproject.barangay.name, @subproject.barangay.id]] : [], { disabled: 'disabled' }, { :class => 'form-control'}
         .form-group
           .col-md-4
             = f.label :group

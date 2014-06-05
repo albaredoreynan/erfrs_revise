@@ -92,8 +92,9 @@ hr
             = @release_per_mncpl_other_percent.round(2)
         tr
           td Excess
-          td.text-right 
-            - @excess = @mibf - @release
+          td 
+            - @excess = @mibf.to_f - @release.to_f
+
             = number_to_currency(@excess.to_f)
           td.text-right
             - @excess_per = (@excess.to_f / @fund_allocation.to_f) * 100
