@@ -3,6 +3,7 @@ class Municipality < ActiveRecord::Base
   belongs_to :province
   has_many :barangays
   has_many :subprojects
+  belongs_to :group
 
   scope :province_id, -> id { where(province_id: id).order(:name) }
 

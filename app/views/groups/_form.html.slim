@@ -1,21 +1,24 @@
-= form_for @group do |f|
-  .col-sm-6
+= form_for @group, html: { class: 'form-horizontal'} do |f|
+  .col-sm-8
     .form-group
       = f.label :code, class: 'control-label col-sm-2'
       .col-sm-10
         = f.text_field :code, :autofocus => true, class: 'form-control'
-    br
-    br
+    .form-group
+      = f.label :fund_source, "Fund Source", class: "control-label col-sm-2"
+      .col-sm-10
+        =f.select :fund_source_id, FundSource.all.map{|a|[a.code, a.id]}, {include_blank: true} ,class: 'form-control'
+    .form-group
+      .col-sm-12  
     .form-group
       = f.label 'Status', class: 'control-label col-sm-2'
-      .col-sm-10
+      .col-sm-10 style="padding-top: 10px;"
         | &nbsp
         = f.radio_button :status, 'Active'
         span.radio-btn-label.bold &nbsp; Active
         | &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
         = f.radio_button :status, 'Inactive'
         span.radio-btn-label.bold &nbsp; Inactive
-    .form-group
       .col-sm-12  
         = f.submit nil, class: 'btn btn-primary pull-right'
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},

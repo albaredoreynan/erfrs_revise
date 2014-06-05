@@ -5,11 +5,12 @@ class Subproject < ActiveRecord::Base
   belongs_to :barangay
   belongs_to :fund_source
   belongs_to :user
-
-
+  belongs_to :group
   has_many :request_for_fund_releases
   has_many :team_members
   accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
+
+  before_save :check_for_group
 
   STATUSES = %w{Draft Final}
   CATEGORIES = %w{Category1 Category2}
@@ -36,7 +37,12 @@ class Subproject < ActiveRecord::Base
   end
 
   ####################### SCOPES ###########################
-  
+  def check_for_group
+    if self.municipality.group.present? 
+      self.group_id = self.municipality.group.id
+    end
+  end
+
   %i[first second third].each do |nth| 
     method_name = "#{nth}_tranch_date_required"
     define_method(method_name) do
