@@ -21,6 +21,27 @@
     return a;
   }
 
+
+  function compute_tranch(){
+    var total_grant = 0.0
+    var subproject_first_tranch_amount = 0.0
+    var subproject_two_tranch_amount = 0.0
+    var subproject_three_tranch_amount = 0.0
+
+
+    total_grant = parseFloat($('#total_grant').html());
+
+
+    subproject_first_tranch_amount = (parseFloat($('#tranch_one_percentage').val()))/Math.pow(10, 2);
+    subproject_two_tranch_amount = (parseFloat($('#tranch_two_percentage').val()))/Math.pow(10, 2);
+    subproject_three_tranch_amount = (parseFloat($('#tranch_three_percentage').val()))/Math.pow(10, 2);
+
+    $('#subproject_first_tranch_amount').val(total_grant * subproject_first_tranch_amount);
+    $('#subproject_second_tranch_amount').val(total_grant * subproject_two_tranch_amount);
+    $('#subproject_third_tranch_amount').val(total_grant * subproject_three_tranch_amount);
+
+  }
+
   function compute(){
     var total_grant = 0.0;
     var total_lcc = 0.0;
