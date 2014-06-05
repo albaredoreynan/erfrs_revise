@@ -93,7 +93,7 @@ hr
         tr
           td Excess
           td 
-            - @excess = @mibf - @release
+            - @excess = @mibf.to_f - @release.to_f
             = number_to_currency(@excess.to_f)
           td
             - @excess_per = (@excess.to_f / @fund_allocation.to_f) * 100

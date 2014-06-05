@@ -13,6 +13,6 @@
         - @subproject.team_members.each do |tm|
           tr
             td= tm.name
-            td= tm.designation.name
+            td= tm.designation.try(:name)
             td= tm.email
             td= tm.phone
