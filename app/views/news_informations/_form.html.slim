@@ -2,15 +2,15 @@
   = form_for @news_information do |f|
     .col-md-4
       .form-group
-        = f.label 'News Header'
+        = f.label :news_header, 'News Header'
         = f.text_field :title, class: 'form-control' 
     .col-md-4
       .form-group
-        = f.label 'Publish Start'
+        = f.label :publish_start, 'Publish Start'
         = f.text_field :publish_start, class: 'form-control', placeholder:"dd-Mmm-yyyy"    
     .col-md-4                
       .form-group
-        = f.label 'Publish End'
+        = f.label :publish_end, 'Publish End'
         = f.text_field :publish_end, class: 'form-control', placeholder:"dd-Mmm-yyyy"   
     .col-md-12                      
       .form-group

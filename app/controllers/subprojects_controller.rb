@@ -1,5 +1,6 @@
 class SubprojectsController < ApplicationController
 
+
   %w[id user year status].each{ |e| has_scope "with_#{e}".intern }
   %w[region province municipality barangay].each{ |e| has_scope "subproject_#{e}_id".intern }
 
@@ -11,7 +12,11 @@ class SubprojectsController < ApplicationController
 
   def index
     @subprojects = apply_scopes(Subproject).includes(
-      :region, :province, :municipality, :barangay)
+      :region, :province, :municipality, :barangay).order(created_at: :asc)
+                                                   .sort!{ |a,b| a.barangay.name.downcase <=>  b.barangay.name.downcase }
+                                                   .sort!{ |a,b| a.municipality.name.downcase <=>  b.municipality.name.downcase }
+                                                   .sort!{ |a,b| a.province.name.downcase <=>  b.province.name.downcase }
+                                                   .sort!{ |a,b| a.region.name.downcase <=>  b.region.name.downcase }
   end
 
   def show

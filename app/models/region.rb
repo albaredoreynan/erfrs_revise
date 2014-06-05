@@ -1,4 +1,5 @@
 class Region < ActiveRecord::Base
+
   has_many :provinces
 
   def self.values_for_select

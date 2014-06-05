@@ -26,11 +26,3 @@
             / td = number_to_currency(rfrs.amount_approve)
             td = !rfrs.dv_date.nil? ? rfrs.dv_date.strftime("%d-%b-%Y") : ''
             td = rfrs.dv_date.nil? ? '' : number_to_currency(rfrs.amount_approve)
-
-      / tbody
-      /   - @subproject.team_members.each do |tm|
-      /     tr
-      /       td= tm.name
-      /       td= tm.designation.name
-      /       td= tm.email
-      /       td= tm.phone
