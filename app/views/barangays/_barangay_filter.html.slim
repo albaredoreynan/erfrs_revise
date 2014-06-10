@@ -1,0 +1,33 @@
+.panel.panel-default
+  .panel-heading 
+    h4 Search
+  .panel-body
+    .row.search
+      form.form-horizontal
+        .col-md-10
+          .form-group
+            .col-md-2.text-right
+              = label_tag :subproject_region_id, 'Region', class: "text-right"
+            .col-md-6
+              = select_tag :region_id, options_for_select(Region.values_for_select, selected: params[:region_id]), include_blank: true, class: 'form-control', id: "subproject_region_id"
+          .form-group
+            .col-md-2.text-right
+              = label_tag :subproject_province_id, 'Province'
+            .col-md-6
+              = select_tag :province_id, [], class: 'form-control', id: "subproject_province_id"
+          .form-group
+            .col-md-2.text-right
+              = label_tag :subproject_municipality_id, 'Municipality'
+            .col-md-6
+              = select_tag :municipality_id, [], class: 'form-control', id: "subproject_municipality_id"
+          .form-group
+            .col-md-2.text-right
+              = label_tag :subproject_barangay_id, 'Barangay'
+            .col-md-6
+              = select_tag :with_id, [], class: 'form-control', id: "subproject_barangay_id"
+          .form-group
+            .col-md-2
+            .col-md-6.pull-right
+              = submit_tag 'Search', class: 'btn btn-primary'
+              ' &nbsp
+              = link_to "Clear", barangays_path, class: 'btn btn-primary clear'

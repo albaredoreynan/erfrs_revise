@@ -4,8 +4,7 @@ class MunicipalitiesController < InheritedResources::Base
 
   respond_to :html, :json
 
-  has_scope :province_id, :with_year
-
+  has_scope :province_id, :with_year,:region_id, :with_id
 
   def show
     #@subprojects = apply_scopes(@municipality.subprojects)

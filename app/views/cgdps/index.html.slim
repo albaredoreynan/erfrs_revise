@@ -24,12 +24,6 @@ hr
                   = label_tag :with_status, 'Status'
                 .col-md-6
                   = select_tag :with_status, options_for_select(Subproject::STATUSES, selected: params[:with_status]), class: 'form-control', include_blank: true
-              .form-group
-                .col-md-3
-                .col-md-9
-                  = submit_tag 'Search', class: 'btn btn-primary'
-                  = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
-      
             .col-md-6
               .form-group
                 .col-md-3
@@ -46,6 +40,13 @@ hr
                   = label_tag :subproject_municipality_id, 'Municipality'
                 .col-md-6
                   = select_tag :subproject_municipality_id, [], class: 'form-control'
+              .form-group
+                .col-md-3
+                .col-md-9
+                  = submit_tag 'Search', class: 'btn btn-primary'
+                  = link_to "Clear", cgdps_path, class: 'btn btn-primary clear'
+      
+
   .col-md-12
     table.table.table-hover
       thead
