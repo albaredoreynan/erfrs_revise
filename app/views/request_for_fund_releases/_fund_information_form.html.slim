@@ -1,3 +1,29 @@
+- @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost + @subproject.grant_amount_contingency_cost
+- @total_release = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release
+- @total_grant_less_con = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
+- if params[:tranch] == 'first'
+  - @amount_requested = @subproject.first_tranch_amount
+  - @previous_released = 0
+  - @cumulative_amount = @subproject.first_tranch_amount
+  - @tranch = 1
+  - @contingency = @subproject.grant_amount_contingency_cost
+- elsif params[:tranch] == 'second'
+  - @amount_requested = @subproject.second_tranch_amount
+  - @previous_released = @subproject.first_tranch_amount_release
+  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
+  - @tranch = 2
+  - @contingency = @subproject.grant_amount_contingency_cost
+- else
+  - @amount_requested = @subproject.third_tranch_amount
+  - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
+  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
+  - @tranch = 3
+  - if @total_release > @total_grant_less_con 
+    - @contingency = @subproject.grant_amount_contingency_cost - (@total_release - @total_grant_less_con)
+  - else
+    - @contingency = @subproject.grant_amount_contingency_cost
+
+- @balance_amount = @total_grant - @cumulative_amount
 .row.sp-table
   .col-md-12
     h4 Fund Information
@@ -9,36 +35,29 @@
       .col-md-4.bold
         'Amount Requested:
       .col-md-6.amt_requested
-        - if @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount == 0.00 && @subproject.third_tranch_amount = 0.00
-          = @subproject.first_tranch_amount
-        - elsif @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount != 0.00 && @subproject.third_tranch_amount == 0.00 
-          = @subproject.second_tranch_amount
-        - elsif @subproject.first_tranch_amount != 0.00 && @subproject.second_tranch_amount != 0.00 && @subproject.third_tranch_amount != 0.00 
-          = @subproject.third_tranch_amount
-        - else
-          'No Tranches specified
+        = @amount_requested
   .col-md-6
     .form-group
       .col-md-7.bold.text-right
         'Cumulative Total Including this Request:
       .col-md-3
-        '9999999
+        = @cumulative_amount 
   .col-md-6
     .form-group
       .col-md-4.bold
         'Previous Released:
       .col-md-6
-        '9999999
+        = @previous_released
   .col-md-6
     .form-group
       .col-md-7.bold.text-right
         'Balance After This Request:
       .col-md-3
-        '9999999
+        = @balance_amount
   
-  .col-md-12
+  .col-md-6
     .form-group
-      .col-md-2.bold.text-right
+      .col-md-4.bold.text-right
         'Approved As Requested:
       .col-md-6.approved
         span
@@ -48,7 +67,13 @@
         span
           = f.radio_button :approved_as_requested, 0, style: "width: 4%;"
           'No
-
+  .col-md-6
+    .form-group
+      .col-md-7.bold.text-right
+        'Contingency:
+      .col-md-3
+        = @contingency
+                
   .col-md-12
     .form-group
       .col-md-2.bold.text-right
@@ -102,7 +127,7 @@
         'Check Date:
       .col-md-3
         =f.text_field :check_date, placeholder: 'DD-MMM-YYYY'
-
+        =f.hidden_field :tranch_for, value: @tranch
 javascript: 
   $('.amount_approved').val( parseInt($('.amt_requested').text()) )
   

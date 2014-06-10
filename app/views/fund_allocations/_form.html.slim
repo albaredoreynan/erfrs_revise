@@ -5,11 +5,14 @@
       = f.label :fund_source, 'Fund Source'
       = f.select :fund_source_id, FundSource.all.map{ |e| [e.code, e.id] }, {include_blank: true }, class: 'form-control'
     .form-group
-      = f.label :start_date
-      = f.text_field :start_date, :autofocus => true, class: 'form-control'
-    .form-group
-      = f.label :end_date
-      = f.text_field :end_date, :autofocus => true, class: 'form-control'
+      = f.label :year
+      = f.text_field :year, :autofocus => true, class: 'form-control'
+    / .form-group
+    /   = f.label :start_date
+    /   = f.text_field :start_date, :autofocus => true, class: 'form-control'
+    / .form-group
+    /   = f.label :end_date
+    /   = f.text_field :end_date, :autofocus => true, class: 'form-control'
     .form-group
       = f.label :amount
       = f.text_field :amount, :autofocus => true, class: 'form-control'                      

@@ -1,37 +1,72 @@
 .row.sp-table
   h4 Project Schedule of Grant Fund Releases
   hr
-  .col-md-8
+  .col-md-12
+    = image_tag('tip.png')
+    ' TIP: If the exact date cannot be projected, enter either the start of the month or week.
     table.table.table-bordered
       thead
         tr
           th Tranches
-          th Original Amount
-          th Revised Amount
-          th Released Amount
           th % TOTAL
           th Date Required
+          th Original Amount
+          th Current Amount
+          th Released Amount
+          / th
       tbody
-        - %w[first second third].each do |ordinal|
-          tr
-            - value = @subproject.send "#{ordinal}_tranch_amount"
-            th= ordinal.titleize
-            td= number_to_currency value
-            td= @subproject.send "#{ordinal}_tranch_revised_amount"
-            td
-            td= number_to_percentage 100*(value/@total), precision: 2
-            
-            td
-              - @date = @subproject.send "#{ordinal}_tranch_date_required" 
-              
-              = @date.nil? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
-        tr#total
-          th TOTAL
-          td= number_to_currency @total
-          td= number_to_currency @total
+        tr
+          - if @subproject.first_tranch_revised_amount == 0 
+            - first_amount = @subproject.first_tranch_amount
+          - else
+            - first_amount = @subproject.first_tranch_revised_amount
+
+          th First
+          td = number_to_percentage 100*(first_amount/@total), precision: 2
           td
+            - @date = @subproject.first_tranch_date_required.to_s
+            = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+          td.text-right = number_to_currency @subproject.first_tranch_amount
+          td.text-right
+            = number_to_currency first_amount
+          td.text-right = number_to_currency @subproject.first_tranch_amount_release
+        tr
+          - if @subproject.second_tranch_revised_amount == 0 && @subproject.first_tranch_amount_release == 0
+            - second_amount = @subproject.second_tranch_amount
+          - elsif @subproject.second_tranch_amount_release != 0
+            - second_amount = @subproject.second_tranch_amount_release
+          - else 
+            - if @subproject.first_tranch_amount_release != 0
+              - second_amount = (@subproject.first_tranch_amount + @subproject.second_tranch_amount) - @subproject.first_tranch_revised_amount
+
+          th Second 
+          td = number_to_percentage 100*(second_amount/@total), precision: 2
+          td
+            - @date = @subproject.second_tranch_date_required.to_s
+            = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+          td.text-right = number_to_currency @subproject.second_tranch_amount
+          td.text-right
+            = number_to_currency second_amount
+          td.text-right = number_to_currency @subproject.second_tranch_amount_release
+        tr
+          - if @subproject.third_tranch_revised_amount == 0 && @subproject.first_tranch_amount_release == 0
+            - third_amount = @subproject.third_tranch_amount
+          - else 
+            - if @subproject.first_tranch_amount_release != 0
+              - third_amount = (@total - first_amount) - second_amount
+
+          th Third 
+          td = number_to_percentage 100*(third_amount/@total), precision: 2
+          td
+            - @date = @subproject.third_tranch_date_required.to_s
+            = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+          td.text-right = number_to_currency @subproject.third_tranch_amount
+          td.text-right
+            = number_to_currency third_amount
+          td.text-right = number_to_currency @subproject.third_tranch_amount_release
+        tr
+          th colspan=3 TOTAL
+          td.text-right = number_to_currency (@subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount)
+          td.text-right = number_to_currency (first_amount + second_amount + third_amount)
+          td.text-right = number_to_currency (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release)
           
-          td
-  .col-md-4
-    = image_tag('tip.png')
-    ' TIP: If the exact date cannot be projected, enter either the start of the month or week.

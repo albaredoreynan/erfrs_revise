@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def create
+
     @user = User.new(user_params)
     if @user.save
       flash[:success] = 'User was successfully created.'
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:email, :username, :first_name, :last_name, :password, :password_confirmation, :region_id, :municipality_id, :barangay_id, :province_id)
+      params.require(:user).permit(:email, :username, :first_name, :last_name, :password, :password_confirmation, :region_id, :municipality_id, :barangay_id, :province_id, :role_id)
     end
-
 end
+

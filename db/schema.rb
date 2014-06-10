@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140602135736) do
+ActiveRecord::Schema.define(version: 20140609034734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140602135736) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "fund_source_id"
+    t.integer  "year"
   end
 
   create_table "fund_sources", force: true do |t|
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 20140602135736) do
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "fund_source_id"
   end
 
   create_table "municipalities", force: true do |t|
@@ -100,6 +102,12 @@ ActiveRecord::Schema.define(version: 20140602135736) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "for_regional_accounting"
+    t.string   "for_management_division_head"
+    t.string   "for_regional_director"
+    t.string   "for_asst_regional_director_opt"
+    t.string   "for_asst_regional_director_adm"
+    t.string   "for_budget_officer"
   end
 
   create_table "request_for_fund_releases", force: true do |t|
@@ -149,6 +157,7 @@ ActiveRecord::Schema.define(version: 20140602135736) do
     t.string   "rpmo_designation"
     t.datetime "rpmo_date"
     t.boolean  "approved_as_requested"
+    t.integer  "tranch_for"
   end
 
   create_table "roles", force: true do |t|
@@ -219,6 +228,9 @@ ActiveRecord::Schema.define(version: 20140602135736) do
     t.decimal  "first_tranch_revised_amount",        precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "second_tranch_revised_amount",       precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "third_tranch_revised_amount",        precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "first_tranch_amount_release",        precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "second_tranch_amount_release",       precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "third_tranch_amount_release",        precision: 15, scale: 2, default: 0.0, null: false
   end
 
   add_index "subprojects", ["barangay_id"], name: "index_subprojects_on_barangay_id", using: :btree

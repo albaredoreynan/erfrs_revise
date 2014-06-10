@@ -3,7 +3,7 @@
     h4 Schedule of Grant Fund Releases
     hr
   .col-md-8
-    table.table.table-bordered
+    table.table.table-bordered.tranch
       thead
         tr
           th Tranches
@@ -14,21 +14,21 @@
       tbody
         tr
           th First
-          td = text_field_tag :tranch_one_percentage
+          td = text_field_tag :tranch_one_percentage, "" , class: "tranch_input"
           td = f.text_field :first_tranch_amount, readonly: "readonly"
-          td = f.text_field :first_tranch_revised_amount
+          td = f.text_field :first_tranch_revised_amount, value: ""
           td = f.text_field :first_tranch_date_required, value: @subproject.first_tranch_date_required, placeholder: 'DD-MMM-YYYY'
         tr
           th Second
-          td = text_field_tag :tranch_two_percentage
-          td = f.text_field :second_tranch_amount
-          td = f.text_field :second_tranch_revised_amount
+          td = text_field_tag :tranch_two_percentage, "" , class: "tranch_input"
+          td = f.text_field :second_tranch_amount, readonly: "readonly"
+          td = f.text_field :second_tranch_revised_amount, value: ""
           td = f.text_field :second_tranch_date_required, value: @subproject.second_tranch_date_required, placeholder: 'DD-MMM-YYYY'
         tr
           th Third
-          td = text_field_tag :tranch_three_percentage
-          td = f.text_field :third_tranch_amount
-          td = f.text_field :third_tranch_revised_amount
+          td = text_field_tag :tranch_three_percentage, "" , class: "tranch_input"
+          td = f.text_field :third_tranch_amount, readonly: "readonly"
+          td = f.text_field :third_tranch_revised_amount, value: ""
           td = f.text_field :third_tranch_date_required, value: @subproject.third_tranch_date_required, placeholder: 'DD-MMM-YYYY'
     
   .col-md-4
@@ -36,7 +36,11 @@
     ' TIP: If the exact date cannot be projected, enter either the start of the month or week.
 
 javascript:
-  var total_grant = parseInt( $('#total_grant').text() );
-  $('#tranch_one_percentage').blur(function () {
-    var tr_one = ( $('#tranch_one_percentage').val() * total_grant) / 100
-  }); 
+  $('.grant').find('input').blur(function(){
+     compute_tranch();
+  });
+
+
+  $('.tranch_input').blur(function(){
+     compute_tranch();
+  });

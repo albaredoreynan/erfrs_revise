@@ -23,8 +23,10 @@ module ApplicationHelper
   end
 
   User.select(:type).distinct.map{|a|a.type}.each do |map|
-    define_method("#{map.underscore}_signed_in?") do
-      current_user.send("#{map.underscore}?")
+    if map.present?
+      define_method("#{map.underscore}_signed_in?") do
+        current_user.send("#{map.underscore}?")
+      end
     end
   end
 
@@ -42,9 +44,9 @@ module ApplicationHelper
     @fund_source.id
   end  
 
-  def budget_allocation(code)
+  def budget_allocation(code, year)
     @fund_source = FundSource.where(code: code).last  
-    @budget = FundAllocation.select('amount').where( fund_source_id: @fund_source.id).last
+    @budget = FundAllocation.select('amount').where( fund_source_id: @fund_source.id, year: year).last
     @budget.amount
   end
 

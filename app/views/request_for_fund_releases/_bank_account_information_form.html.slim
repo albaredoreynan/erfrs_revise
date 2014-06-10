@@ -12,43 +12,81 @@ br
         'Bank
       .col-md-6.bold
         'Land Bank of the Philippines
-  .col-md-6
-    .form-group
-      .col-md-5
-        = f.label :address
-      .col-md-7
-        = f.text_area :address, cols:"2", rows:"2" 
-  .col-md-6
-    .form-group
-      .col-md-4
-        =f.label :branch
-      .col-md-6
-        =f.text_field :branch
-  .col-md-6
-    .form-group
-      .col-md-5
-        = f.label :city
-      .col-md-7
-        = f.text_field :city 
-  .col-md-6
-    .form-group
-      .col-md-4
-        =f.label :account_name, "Account Name"
-      .col-md-6
-        =f.text_field :account_name
-  .col-md-6
-    .form-group
-      .col-md-5
-        = f.label :province
-      .col-md-7
-        = f.text_field :province   
-  .col-md-6
-    .form-group
-      .col-md-4
-        =f.label :Phone
-      .col-md-6
-        =f.text_field :phone
-
+  - if params[:tranch] == 'first'
+    .col-md-6
+      .form-group
+        .col-md-5
+          = f.label :address
+        .col-md-7
+          = f.text_area :address, cols:"2", rows:"2" 
+    .col-md-6
+      .form-group
+        .col-md-4
+          =f.label :branch
+        .col-md-6
+          =f.text_field :branch
+    .col-md-6
+      .form-group
+        .col-md-5
+          = f.label :city
+        .col-md-7
+          = f.text_field :city 
+    .col-md-6
+      .form-group
+        .col-md-4
+          =f.label :account_name, "Account Name"
+        .col-md-6
+          =f.text_field :account_name
+    .col-md-6
+      .form-group
+        .col-md-5
+          = f.label :province
+        .col-md-7
+          = f.text_field :province   
+    .col-md-6
+      .form-group
+        .col-md-4
+          =f.label :Phone
+        .col-md-6
+          =f.text_field :phone
+  - else
+    - @subproject_tranch_one = RequestForFundRelease.select('address, branch, city, account_name, province, phone').where('subproject_id = ? AND tranch_for = ?', params[:sp_id], 1).first
+    .col-md-6
+      .form-group
+        .col-md-5
+          = f.label :address
+        .col-md-7
+          = f.text_area :address, cols:"2", rows:"2", value: @subproject_tranch_one.address
+    .col-md-6
+      .form-group
+        .col-md-4
+          =f.label :branch
+        .col-md-6
+          =f.text_field :branch, value: @subproject_tranch_one.branch
+    .col-md-6
+      .form-group
+        .col-md-5
+          = f.label :city
+        .col-md-7
+          = f.text_field :city, value: @subproject_tranch_one.city 
+    .col-md-6
+      .form-group
+        .col-md-4
+          =f.label :account_name, "Account Name"
+        .col-md-6
+          =f.text_field :account_name, value: @subproject_tranch_one.account_name
+    .col-md-6
+      .form-group
+        .col-md-5
+          = f.label :province
+        .col-md-7
+          = f.text_field :province, value: @subproject_tranch_one.province   
+    .col-md-6
+      .form-group
+        .col-md-4
+          =f.label :Phone
+        .col-md-6
+          =f.text_field :phone, value: @subproject_tranch_one.phone
   
 
   

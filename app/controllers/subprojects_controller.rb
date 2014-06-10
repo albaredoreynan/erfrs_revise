@@ -64,6 +64,15 @@ class SubprojectsController < ApplicationController
     redirect_to subprojects_path
   end
 
+  def display_group
+
+    p "////////////////" 
+    p 
+    p "////////////////" 
+    @municipality = Municipality.find(params[:municipality_id])
+    @group = @municipality.group
+  end
+
   protected
 
   def subproject_params

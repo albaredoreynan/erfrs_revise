@@ -5,12 +5,14 @@ br
 br
 .col-sm-12 
   .row.sp-table
+    = render 'municipality_filter'
     table.table.table-hover
       thead
         tr
           th Region
           th Province
           th Municipality
+          th Group
           th Actions
       tbody
         - @municipalities.each do |municipality|
@@ -18,6 +20,7 @@ br
             td= municipality.province.region.code
             td= municipality.province.name
             td= municipality.name
+            td= municipality.group.try(:code)
             td
               = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, municipality], class: 'btn btn-xs btn-warning'
               '&nbsp
