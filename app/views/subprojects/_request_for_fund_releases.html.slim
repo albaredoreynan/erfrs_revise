@@ -1,11 +1,24 @@
+- if @subproject.first_tranch_amount_release == 0
+  - tranch = 'first'
+- elsif @subproject.first_tranch_amount_release != 0 && @subproject.second_tranch_amount_release == 0
+  - tranch = 'second'
+- elsif @subproject.first_tranch_amount_release != 0 && @subproject.second_tranch_amount_release != 0 && @subproject.third_tranch_amount_release == 0
+  - tranch = 'third'
+- else
+  - tranch = 'other'
+
 .row.sp-table
   h4 Request For Fund Releases
   hr
   .col-md-12
     = image_tag('tip.png')
     ' TIP: You are only allowed to create an RFR if the Sub-Project has been approved.
-    p
-      = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id]), class: 'btn btn-small btn-primary'
+    - if tranch != 'other'
+      p
+        = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => tranch), class: 'btn btn-small btn-primary'
+    - else
+      p
+        = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => tranch), disabled: 'disabled', class: 'btn btn-small btn-primary'
     table.table.table-hover.table-striped
       thead
         tr
@@ -15,14 +28,21 @@
           th Amount Requested
           th DV Date
           th DV Amount
+          th
       tbody
         - RequestForFundRelease.where(subproject_id: params[:id]).each do |rfrs|
           tr
             td = trail_id(6, rfrs.id)
-            td
-            / td = number_to_currency rfrs.amount_approve
+            td = rfrs.tranch_for
             td = !rfrs.request_date.nil? ? rfrs.request_date.strftime("%d-%b-%Y") : ''
-            td 
-            / td = number_to_currency(rfrs.amount_approve)
+            td = number_to_currency rfrs.amount_approve
             td = !rfrs.dv_date.nil? ? rfrs.dv_date.strftime("%d-%b-%Y") : ''
             td = rfrs.dv_date.nil? ? '' : number_to_currency(rfrs.amount_approve)
+            td
+              = link_to "<i class='fa fa-eye'></i>".html_safe, rfrs, class: 'btn btn-xs btn-primary'
+              '&nbsp
+              = link_to "<i class='fa fa-edit'></i>".html_safe, edit_request_for_fund_release_path(rfrs, :sp_id => params[:id]), class: 'btn btn-xs btn-warning'
+              '&nbsp
+              = link_to "<i class='fa fa-trash-o'></i>".html_safe, rfrs, method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-xs btn-danger'
+              '&nbsp
+              = link_to "<i class='fa fa-file'></i>".html_safe, rfrs, class: 'btn btn-xs btn-success'

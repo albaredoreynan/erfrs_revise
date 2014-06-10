@@ -20,11 +20,44 @@ class RequestForFundReleasesController < ApplicationController
     redirect_to :action => 'select_subproject'
   end
 
+  def edit
+    @rfrs = RequestForFundRelease.find params[:id]
+    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+  end
+
+  def update
+    @rfrs = RequestForFundRelease.find params[:id]
+    @subproj = Subproject.find rfrs_params[:subproject_id]
+    if @rfrs.update_attributes rfrs_params
+      if rfrs_params[:tranch_for] == '1'
+        @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve], first_tranch_revised_amount: rfrs_params[:amount_approve])
+      elsif rfrs_params[:tranch_for] == '2'
+        @subproj.update(second_tranch_amount_release: rfrs_params[:amount_approve], second_tranch_revised_amount: rfrs_params[:amount_approve])
+      else  
+        @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve], third_tranch_revised_amount: rfrs_params[:amount_approve])
+      end 
+      flash[:success] = 'Request for release updated successfully.'
+      redirect_to subprojects_path
+    else
+      flash[:error] = 'An error occured while updating project'
+      render 'edit'
+    end
+  end
+
   def create
     @rfrs = RequestForFundRelease.new rfrs_params
-    if @rfrs.save
+    @subproj = Subproject.find rfrs_params[:subproject_id]
+    if @rfrs.save 
+      if rfrs_params[:tranch_for] == '1'
+        @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve], first_tranch_revised_amount: rfrs_params[:amount_approve])
+      elsif rfrs_params[:tranch_for] == '2'
+        @subproj.update(second_tranch_amount_release: rfrs_params[:amount_approve], second_tranch_revised_amount: rfrs_params[:amount_approve])
+      else  
+        @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve], third_tranch_revised_amount: rfrs_params[:amount_approve])
+      end 
       flash[:success] = 'Request for release created successfully.'
-      redirect_to request_for_fund_releases_path
+      # redirect_to request_for_fund_releases_path
+      redirect_to subproject_path(@subproj)
     else
       flash[:error] = 'An error occured while creating request'
       render 'new'
@@ -47,7 +80,7 @@ class RequestForFundReleasesController < ApplicationController
         :requested_by_second, :designation_second, :date_second, :date_received, :reviewed_by_first, :reviewed_by_second,
         :rev_date_first, :rev_date_second, :rev_designation_first, :rev_designation_second, :srpmo_designation, :srpmo_date,
         :srpmo_date_received, :srpmo_reviewed_by, :srpmo_recommend_by, :srpmo_rec_designation, :srpmo_rec_date, :rpmo_designation,
-        :rpmo_date, :rpmo_date_received, :rpmo_approved_by, :approved_as_requested ]
+        :rpmo_date, :rpmo_date_received, :rpmo_approved_by, :approved_as_requested, :tranch_for ]
       params.require(:request_for_fund_release).permit(attrs)
     end
 end

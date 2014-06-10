@@ -22,19 +22,19 @@ hr
         tr
           td Allocation
           td.text-right 
-            - @fund_allocation = budget_allocation('ADB').to_f
+            - @fund_allocation = budget_allocation('ADB', params[:with_year]).to_f
             = number_to_currency(@fund_allocation.to_f)
           td.text-right 100
           td.text-right
-            - @fund_allocation_other = budget_allocation('WB').to_f
+            - @fund_allocation_other = budget_allocation('WB', params[:with_year]).to_f
             = number_to_currency(@fund_allocation_other.to_f)
           td.text-right 100
           td.text-right 
-            - @fund_allocation_per_mun = budget_allocation('ADB').to_f
+            - @fund_allocation_per_mun = budget_allocation('ADB', params[:with_year]).to_f
             = number_to_currency(@fund_allocation_per_mun.to_f)
           td.text-right 100
           td.text-right
-            - @fund_allocation_per_mun_other = budget_allocation('WB').to_f
+            - @fund_allocation_per_mun_other = budget_allocation('WB', params[:with_year]).to_f
             = number_to_currency(@fund_allocation_per_mun_other.to_f)
           td.text-right 100
         tr
@@ -147,7 +147,8 @@ hr
           
   .col-md-12
     
-    button Assign Fund Sources
+    button data-toggle='modal' data-target='#assigned_fund_source'
+      = icon_text(nil, 'Assign Fund Sources')
     button data-toggle='modal' data-target='#view_cash_program'
       = icon_text(nil, 'View Cash Program')
     table.table.table-hover.table-striped.table-bordered
@@ -181,3 +182,4 @@ hr
          td.text-left colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}
 
 = render 'view_cash_program'
+= render 'assigned_fund_source'

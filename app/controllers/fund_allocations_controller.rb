@@ -6,7 +6,7 @@ class FundAllocationsController < InheritedResources::Base
   protected
 
     def permitted_params
-      params.permit(fund_allocation: %i[fund_source_id start_date end_date amount])
+      params.permit(fund_allocation: %i[fund_source_id start_date end_date amount year])
     end
 
     def collection

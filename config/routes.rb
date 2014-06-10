@@ -41,9 +41,12 @@ Rails.application.routes.draw do
     get '/news', to: 'admin#news', as: 'admin_news'
   end
 
-
-
-  devise_for :users
+  devise_for :users, :path_prefix => 'dswd'
   resources :users
 
+
+  # ajax
+  get '/display_group', to: 'subprojects#display_group', as:'display_group'
+  
+  
 end

@@ -44,9 +44,8 @@ br
         .form-group
           .col-md-4
             = f.label :group
-          / .col-md-8
-          /   = f.select :group_id, Group.all.map{|a|[a.code, a.id]}, {include_blank: true}, { :class => 'form-control'}
-
+          .col-md-8
+            = text_field_tag :group, '', class: 'form-control', disabled:'true'
       .col-md-6
         .form-group
           .col-md-5
@@ -91,3 +90,17 @@ css:
   .sp-show > .col-md-2{
     text-align: right;
   }
+
+javascript:
+  $("#subproject_municipality_id").change(function(){
+    item_val = $(this).val();
+    $.ajax({
+      url: "/display_group",
+      data: {
+        municipality_id : item_val
+      },
+        dataType: "script"
+      });
+    $('.ui.modal').modal('show');
+    
+  });

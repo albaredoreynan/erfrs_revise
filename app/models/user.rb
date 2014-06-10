@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   has_many :subprojects
+  belongs_to :role
 
   [SuperUser].each do |role|
     define_method("#{role.name.underscore}?") do

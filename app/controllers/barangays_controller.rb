@@ -4,7 +4,9 @@ class BarangaysController < InheritedResources::Base
   respond_to :html, :json
 
   has_scope :municipality_id
-
+  has_scope :province_id, :with_id
+  has_scope :region_id
+  
   protected
 
     def permitted_params
