@@ -1,5 +1,5 @@
 
-= form_for @user, html: { class: 'form-horizontal' } do |f|
+= form_for @user, html: { class: '' } do |f|
   .col-md-4.signin-form
     .form-group
       = f.label :email
@@ -45,7 +45,7 @@
         = f.label :barangay_id
         = f.select :barangay_id, [], { disabled: 'disabled' }, {id:"subproject_barangay_id", :class => 'form-control'}
     div
-      = f.submit nil, class: 'pull-right btn btn-primary btn'
+      = f.submit "Save", class: 'pull-right btn btn-primary btn'
 css:
   .container{
     min-height: 100%;
