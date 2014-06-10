@@ -22,7 +22,8 @@ br
           td= user.username
           td= user.first_name
           td= user.last_name
-          td= user.role.name
+
+          td= user.role.try(:name)
           td 
             = link_to "<i class='fa fa-edit'></i>".html_safe, edit_user_path(user), class: 'btn btn-xs btn-warning'
             '&nbsp
