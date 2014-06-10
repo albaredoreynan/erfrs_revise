@@ -5,7 +5,13 @@ class Municipality < ActiveRecord::Base
   has_many :subprojects
   belongs_to :group
 
+  scope :region_id, -> region_id {
+    joins(:province).where('provinces.region_id' => region_id) 
+  }
   scope :province_id, -> id { where(province_id: id).order(:name) }
+  scope :with_id,     -> id { where id: id }
+
+  # scope :region_id, -> id {joins(:province).where('province.region' == id)}
 
   if ENV['ERFRS_USES_POSTGRESQL']
     scope :with_year, -> year { where 'EXTRACT(YEAR FROM created_at) = ?', year }
