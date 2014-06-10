@@ -37,7 +37,7 @@
           .col-md-7
             
             - @date = @subproject.date_of_mbif
-            = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+            = @date.blank? ? '' : @date.strftime('%d-%b-%Y')
         .form-group
           .col-md-5
             = label_tag :date_encoded, 'Date Encoded'
