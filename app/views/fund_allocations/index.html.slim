@@ -11,16 +11,18 @@ br
         tr
           th Fund Source
           th Amount
-          th Start Date
-          th End Date
+          th Year
+          / th Start Date
+          / th End Date
           th Action
       tbody
         - @fund_allocations.each do |fund_allocation|
           tr
             td= fund_allocation.fund_source.name
             td= number_to_currency(fund_allocation.amount)
-            td= fund_allocation.start_date.strftime("%b %d, %Y")
-            td= fund_allocation.end_date.strftime("%b %d, %Y")
+            td= fund_allocation.year
+            / td= fund_allocation.start_date.strftime("%b %d, %Y")
+            / td= fund_allocation.end_date.strftime("%b %d, %Y")
             td
               = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, fund_allocation], class: 'btn btn-xs btn-warning'
               '&nbsp

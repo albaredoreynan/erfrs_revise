@@ -11,12 +11,14 @@ br
         tr
           th Code
           th Name
+          th Regional Director
           th Actions
       tbody
-        - @regions.each do |region|
+        - @regions.order("id").each do |region|
           tr
             td= region.code
             td= region.name
+            td= region.for_regional_director
             td
               = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, region], class: 'btn btn-xs btn-warning'
               '&nbsp

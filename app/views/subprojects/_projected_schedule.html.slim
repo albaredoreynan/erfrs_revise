@@ -12,34 +12,76 @@
           th Revised Amount
           th Released Amount
           th % TOTAL
-          th colspan=2 Date Required
+          th Date Required
+          / th
       tbody
-        - %w[first second third].each do |ordinal|
-          tr
-            - value = @subproject.send "#{ordinal}_tranch_amount"
-            th= ordinal.titleize
-            td= number_to_currency value
-            td
-              - revise_amount = @subproject.send "#{ordinal}_tranch_revised_amount"
-              / - if ordinal == 'first'
-                    
-              / - elsif ordinal == 'second'
-
-              / - else
-              
-            td 
-
-
-            td= number_to_percentage 100*(value/@total), precision: 2
-            
-            td
-              - @date = @subproject.send "#{ordinal}_tranch_date_required" 
-              = @date.nil? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
-            td = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => ordinal), class: 'btn btn-small btn-primary' 
-        tr#total
-          th TOTAL
-          td= number_to_currency @total
-          td= number_to_currency @total
+        tr
+          th First
+          td.text-right = number_to_currency @subproject.first_tranch_amount
+          td.text-right
+            - if @subproject.first_tranch_revised_amount == 0 
+              - first_amount = @subproject.first_tranch_amount
+              = number_to_currency first_amount
+            - else
+              - first_amount = @subproject.first_tranch_revised_amount
+              = number_to_currency first_amount
+          td.text-right = number_to_currency @subproject.first_tranch_amount_release
+          td = number_to_percentage 100*(first_amount/@total), precision: 2
           td
+            - @date = @subproject.first_tranch_date_required.to_s
+            = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+          / td 
+          /   - if @subproject.first_tranch_amount_release != 0
+          /     = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => 'first'), disabled: 'disabled', class: 'btn btn-small btn-primary'
+          /   - else  
+          /     = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => 'first'), class: 'btn btn-small btn-primary'
+        tr
+          th Second 
+          td.text-right = number_to_currency @subproject.second_tranch_amount
+          td.text-right
+            - if @subproject.second_tranch_revised_amount == 0 && @subproject.first_tranch_amount_release == 0
+              - second_amount = @subproject.second_tranch_amount
+              = number_to_currency second_amount
+            - elsif @subproject.second_tranch_amount_release != 0
+              - second_amount = @subproject.second_tranch_amount_release
+              = number_to_currency second_amount
+            - else 
+              - if @subproject.first_tranch_amount_release != 0
+                - second_amount = (@subproject.first_tranch_amount + @subproject.second_tranch_amount) - @subproject.first_tranch_revised_amount
+                = number_to_currency second_amount
+
+          td.text-right = number_to_currency @subproject.second_tranch_amount_release
+          td = number_to_percentage 100*(second_amount/@total), precision: 2
           td
-  
+            - @date = @subproject.second_tranch_date_required.to_s
+            = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+          / td 
+          /   - if @subproject.second_tranch_amount_release != 0
+          /     = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => 'second'), disabled: 'disabled', class: 'btn btn-small btn-primary'
+          /   - else  
+          /     = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => 'second'), class: 'btn btn-small btn-primary'
+        tr
+          th Third 
+          td.text-right = number_to_currency @subproject.third_tranch_amount
+          td.text-right
+            - if @subproject.third_tranch_revised_amount == 0 && @subproject.first_tranch_amount_release == 0
+              - third_amount = @subproject.third_tranch_amount
+              = number_to_currency third_amount
+            - else 
+              - if @subproject.first_tranch_amount_release != 0
+                - third_amount = (@total - first_amount) - second_amount
+                = number_to_currency third_amount          
+          td.text-right = number_to_currency @subproject.third_tranch_amount_release
+          td = number_to_percentage 100*(third_amount/@total), precision: 2
+          td
+            - @date = @subproject.third_tranch_date_required.to_s
+            = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+          / td 
+          /   - if @subproject.third_tranch_amount_release != 0
+          /     = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => 'third'), disabled: 'disabled', class: 'btn btn-small btn-primary'
+          /   - else  
+          /     = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => 'third'), class: 'btn btn-small btn-primary'
+
+
+
+        

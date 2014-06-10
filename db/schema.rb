@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606014921) do
+ActiveRecord::Schema.define(version: 20140609034734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20140606014921) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "fund_source_id"
+    t.integer  "year"
   end
 
   create_table "fund_informations", force: true do |t|
@@ -111,6 +112,12 @@ ActiveRecord::Schema.define(version: 20140606014921) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "for_regional_accounting"
+    t.string   "for_management_division_head"
+    t.string   "for_regional_director"
+    t.string   "for_asst_regional_director_opt"
+    t.string   "for_asst_regional_director_adm"
+    t.string   "for_budget_officer"
   end
 
   create_table "request_for_fund_releases", force: true do |t|

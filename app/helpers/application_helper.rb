@@ -42,9 +42,9 @@ module ApplicationHelper
     @fund_source.id
   end  
 
-  def budget_allocation(code)
+  def budget_allocation(code, year)
     @fund_source = FundSource.where(code: code).last  
-    @budget = FundAllocation.select('amount').where( fund_source_id: @fund_source.id).last
+    @budget = FundAllocation.select('amount').where( fund_source_id: @fund_source.id, year: year).last
     @budget.amount
   end
 
