@@ -20,6 +20,30 @@ class RequestForFundReleasesController < ApplicationController
     redirect_to :action => 'select_subproject'
   end
 
+  def edit
+    @rfrs = RequestForFundRelease.find params[:id]
+    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+  end
+
+  def update
+    @rfrs = RequestForFundRelease.find params[:id]
+    @subproj = Subproject.find rfrs_params[:subproject_id]
+    if @rfrs.update_attributes rfrs_params
+      if rfrs_params[:tranch_for] == '1'
+        @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve], first_tranch_revised_amount: rfrs_params[:amount_approve])
+      elsif rfrs_params[:tranch_for] == '2'
+        @subproj.update(second_tranch_amount_release: rfrs_params[:amount_approve], second_tranch_revised_amount: rfrs_params[:amount_approve])
+      else  
+        @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve], third_tranch_revised_amount: rfrs_params[:amount_approve])
+      end 
+      flash[:success] = 'Request for release updated successfully.'
+      redirect_to subprojects_path
+    else
+      flash[:error] = 'An error occured while updating project'
+      render 'edit'
+    end
+  end
+
   def create
     @rfrs = RequestForFundRelease.new rfrs_params
     @subproj = Subproject.find rfrs_params[:subproject_id]
