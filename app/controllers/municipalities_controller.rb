@@ -22,7 +22,13 @@ class MunicipalitiesController < InheritedResources::Base
       redirect_to municipalities_path
     end
   end
-
+  def update_fund_source
+    @sp = Subproject.find(params[:subproject_id])
+    @fs = FundSource.find(params[:fund_source_id])
+    if @sp.fund_source.nil?
+      @sp.update(fund_source_id: @fs.id)
+    end     
+  end
   protected
 
     def permitted_params
