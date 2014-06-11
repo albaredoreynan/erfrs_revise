@@ -50,7 +50,7 @@ br
         .col-md-6
           =f.text_field :phone
   - else
-    - @subproject_tranch_one = RequestForFundRelease.select('address, branch, city, account_name, province, phone').where('subproject_id = ? AND tranch_for = ?', params[:sp_id], 1).first
+    - @subproject_tranch_one = RequestForFundRelease.select('address, branch, city, account_name, province, phone').where('subproject_id = ?', params[:sp_id]).order("id ASC").first
     .col-md-6
       .form-group
         .col-md-5

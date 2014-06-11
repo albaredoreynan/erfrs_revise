@@ -14,7 +14,7 @@
       .col-md-4.bold
         'Designation:
       .col-md-6
-        = f.select :designation_first, Designation.all.map{|e| [e.name, e.id]}, {include_blank: true}
+        = f.text_field :designation_first, readonly: true
     .form-group
       .col-md-4.bold
         'Date:
@@ -157,3 +157,17 @@ css:
   .sp-show{
     padding-right: 0px;
   }
+
+javascript:
+  $("#request_for_fund_release_requested_by_first").change(function(){
+    item_val = $(this).val();
+    alert();
+    $.ajax({
+      url: "/display_designation",
+      data: {
+        designation_first : item_val
+      },
+        dataType: "script"
+      });
+    
+  });
