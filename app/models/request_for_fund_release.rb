@@ -1,5 +1,8 @@
 class RequestForFundRelease < ActiveRecord::Base
   belongs_to :subproject
+  # TODO fix relationship to disregard requested_by_first_designation
+  # belongs_to :requested_by_first, class_name: 'TeamMember', foreign_key: "requested_by_first"
+
 
   validates_presence_of :obr_number, :if => :confirm_presence_of_obr_date?, :message => "test 123"
   validates_presence_of :obr_date, :if => :confirm_presence_of_obr_number?, :message => "test 456"
