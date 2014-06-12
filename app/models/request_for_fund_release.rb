@@ -14,6 +14,10 @@ class RequestForFundRelease < ActiveRecord::Base
 
   scope :start_year, -> year {where("dv_date >= ?", Date.new(year.to_i).beginning_of_year)}
   scope :end_year, -> year {where("dv_date <= ?", Date.new(year.to_i).end_of_year)}
+  scope :start_date, -> year {where("dv_date >= ?", Date.parse(year))}
+  scope :end_date, -> year {where("dv_date <= ?", Date.parse(year))}
+
+
 
   # scope :upcoming, lambda {
   # where("start_date between ? and ?", Date.today, Date.today.next_month.beginning_of_month) }
