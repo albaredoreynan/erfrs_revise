@@ -1,6 +1,7 @@
-h4 SOE REPORTS
+h4 SOE REPORT
 hr
 .row.rfr-index
+  =render 'soe_filter'
   .col-md-12.header
     p.text-center 
       b Department of Social Welfare and Development
@@ -9,15 +10,16 @@ hr
   .col-md-12
     
 .panel.panel-primary
-  .table-responsive
+  .table-responsive.scrollable
     table.table.table-hover.sortable
       thead
         tr
           th Item No.
           th Name of Contractor / Supplier / Consultant
-          th Contact Number
+          th Contract Number
           th Contract Date
           th Contract Prior Reviewed
+          th Control Number
           th Contract Amount (In PHP)
           th Invoice Amount (In PHP)
           th Invoice Date
@@ -35,15 +37,21 @@ hr
   	        td #{soe.subproject.barangay.name}, #{soe.subproject.municipality.name.titleize}
   	        td= trail_id(6, soe.subproject_id)
   	        td= soe.subproject.date_of_mbif
-  	        td
+  	        td 
+            td
   	        td= number_to_currency soe.subproject.total_grant_amount
-  	        td= number_to_currency soe.subproject.total_dv_amount
+  	        td= number_to_currency soe.amount_approve
   	        td= soe.rpmo_date
   	        td= soe.check_number
-  	        td= soe.check_date.to_date
+  	        td= soe.dv_date.to_date
   	        td 100%
   	        td= number_to_currency soe.subproject.total_dv_amount
   	        td= number_to_currency soe.subproject.total_dv_amount * 45
-  	        td 45
+  	        td
   	        td= soe.remarks
+css:
+  .scrollable {
+    width: 100%;
+    overflow-x: auto;
+  }
             

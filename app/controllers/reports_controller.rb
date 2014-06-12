@@ -1,9 +1,10 @@
 class ReportsController < ApplicationController
 
-	%w[region province municipality barangay].each{ |e| has_scope "subproject_#{e}_id".intern }
-
+	%w[region province municipality barangay].each{ |e| has_scope "#{e}_id".intern }
+	has_scope :start_year
+	has_scope :end_year
 	def soe_reports
-		@soe = RequestForFundRelease.all
+		@soe = apply_scopes(RequestForFundRelease).includes(subproject:[:region, :province, :municipality, :barangay])
 	end
 
 	def mga_reports

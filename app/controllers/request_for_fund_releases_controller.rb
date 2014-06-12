@@ -1,8 +1,10 @@
 class RequestForFundReleasesController < ApplicationController
 
   %w[id user year status].each{ |e| has_scope "with_#{e}".intern }
-  %w[region province municipality barangay].each{ |e| has_scope "subproject_#{e}_id".intern }
+  %w[region province municipality barangay].each{ |e| has_scope "#{e}_id".intern }
   
+  respond_to :js, only: :new
+
   def index
     @rfrs = apply_scopes(RequestForFundRelease).includes(subproject:[:region, :province, :municipality, :barangay])
     #@rfrs = RequestForFundRelease.all
@@ -18,6 +20,7 @@ class RequestForFundReleasesController < ApplicationController
     @rfrs = RequestForFundRelease.new
   rescue ActiveRecord::RecordNotFound
     redirect_to :action => 'select_subproject'
+    
   end
 
   def edit
@@ -62,6 +65,11 @@ class RequestForFundReleasesController < ApplicationController
       flash[:error] = 'An error occured while creating request'
       render 'new'
     end
+  end
+
+  def display_designation
+    @designation_id = params[:designation_first]
+    @designation_name = Designation.where(id: @designation_id)
   end
 
   protected
