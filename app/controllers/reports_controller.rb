@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
 	end
 
 	def cash_program_reports
-
+		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
 	end
 
 	def download_file
