@@ -12,8 +12,9 @@ class RequestForFundRelease < ActiveRecord::Base
     scope "#{place}_id".intern, -> place_id { joins(:subproject).where "subprojects.#{place}_id" => place_id }
   end
 
-  scope :start_year, -> year {where("dv_date >= ?", Date.new(year.to_i).beginning_of_year)}
-  scope :end_year, -> year {where("dv_date <= ?", Date.new(year.to_i).end_of_year)}
+  # scope :start_year, -> year {where("dv_date >= ?", Date.new(year.to_i).beginning_of_year)}
+  # scope :end_year, -> year {where("dv_date <= ?", Date.new(year.to_i).end_of_year)}
+  
   scope :start_date, -> year {where("dv_date >= ?", Date.parse(year))}
   scope :end_date, -> year {where("dv_date <= ?", Date.parse(year))}
 

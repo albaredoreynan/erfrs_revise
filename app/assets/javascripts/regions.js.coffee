@@ -4,9 +4,9 @@ $ ->
   municipalities = $('#subproject_municipality_id')
   barangays      = $('#subproject_barangay_id')
 
-  provinces.attr('disabled', 'disabled')
-  municipalities.attr('disabled', 'disabled')
-  barangays.attr('disabled', 'disabled')
+  provinces.attr('readonly', 'readonly')
+  municipalities.attr('readonly', 'readonly')
+  barangays.attr('readonly', 'readonly')
 
   fetch_province = (region_id)->
     url = "/provinces.json?region_id=" + region_id

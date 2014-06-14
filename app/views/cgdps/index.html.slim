@@ -65,7 +65,6 @@ hr
               td colspan="6"
             -sps.uniq_by{|a|a.created_at.year}.each do |sp|
               tr
-    
                 td= sp.created_at.year
                 td= sp.region.try(:name)
                 td= sp.province.try(:name)
