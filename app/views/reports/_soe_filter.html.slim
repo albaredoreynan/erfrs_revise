@@ -43,3 +43,5 @@
                 = submit_tag 'Search', class: 'btn btn-primary'
                 | &nbsp;
                 = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
+                | &nbsp;    
+                = link_to "Excel", soe_reports_reports_path(params.merge(:format => :xls)) , class: "btn btn-success"          

@@ -9,7 +9,6 @@ hr
       br
       ' NCDDP MUNICIPAL GRANTS ALLOCATION
       br
-      ' As of DD MM YYYY
 
 .row.sp-table
   .col-md-12
@@ -29,9 +28,9 @@ hr
             th.text-center Total  
         tbody
           -@subprojects.each do |m, sps|
-            -allocation = 0
-            -release = 0
-            -excess = 0
+            - allocation = 0
+            - release = 0
+            - excess = 0
             - allocation += sps.map{|c|c.grant_amount_direct_cost + c.grant_amount_indirect_cost + c.grant_amount_contingency_cost}.first
             - release += sps.map{|c|c.first_tranch_revised_amount + c.second_tranch_revised_amount + c.third_tranch_revised_amount}.first
             - excess += sps.map{|c|c.first_tranch_amount + c.second_tranch_amount + c.third_tranch_amount}.first

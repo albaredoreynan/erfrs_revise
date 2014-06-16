@@ -10,14 +10,26 @@ class ReportsController < ApplicationController
 	has_scope :fund_source
 	def soe_reports
 		@soe = apply_scopes(RequestForFundRelease).includes(subproject:[:region, :province, :municipality, :barangay])
+		respond_to do |format|
+    	format.html
+    	format.xls # { send_data @products.to_csv(col_sep: "\t") }
+  	end
 	end
 
 	def mga_reports
 		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
+		respond_to do |format|
+    	format.html
+    	format.xls # { send_data @products.to_csv(col_sep: "\t") }
+  	end
 	end
 
 	def cg_reports
 		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
+		respond_to do |format|
+    	format.html
+    	format.xls # { send_data @products.to_csv(col_sep: "\t") }
+  	end
 	end
 
 	def cash_program_reports
