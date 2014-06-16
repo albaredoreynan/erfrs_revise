@@ -1,21 +1,39 @@
 class ReportsController < ApplicationController
 
+	%w[region province municipality barangay].each{ |e| has_scope "#{e}_id".intern }
 	%w[region province municipality barangay].each{ |e| has_scope "subproject_#{e}_id".intern }
-
+	has_scope :start_year
+	has_scope :end_year
+	has_scope	:start_date
+	has_scope :end_date
+	has_scope :year
+	has_scope :fund_source
 	def soe_reports
-		@soe = RequestForFundRelease.all
+		@soe = apply_scopes(RequestForFundRelease).includes(subproject:[:region, :province, :municipality, :barangay])
+		respond_to do |format|
+    	format.html
+    	format.xls # { send_data @products.to_csv(col_sep: "\t") }
+  	end
 	end
 
 	def mga_reports
-
+		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
+		respond_to do |format|
+    	format.html
+    	format.xls # { send_data @products.to_csv(col_sep: "\t") }
+  	end
 	end
 
 	def cg_reports
-
+		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
+		respond_to do |format|
+    	format.html
+    	format.xls # { send_data @products.to_csv(col_sep: "\t") }
+  	end
 	end
 
 	def cash_program_reports
-
+		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
 	end
 
 	def download_file

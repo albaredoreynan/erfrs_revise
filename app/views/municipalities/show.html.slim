@@ -29,14 +29,17 @@ hr
             - @fund_allocation_other = budget_allocation('WB', params[:with_year]).to_f
             = number_to_currency(@fund_allocation_other.to_f)
           td.text-right 100
-          td.text-right 
-            - @fund_allocation_per_mun = budget_allocation('ADB', params[:with_year]).to_f
+          td.text-center colspan="4"
+            = number_to_currency @subprojects.sum("grant_amount_direct_cost + grant_amount_indirect_cost + grant_amount_contingency_cost")
+          - @fund_allocation_per_mun = budget_allocation('ADB', params[:with_year]).to_f
+          - @fund_allocation_per_mun_other = budget_allocation('WB', params[:with_year]).to_f
+
+          /td.text-right 
             = number_to_currency(@fund_allocation_per_mun.to_f)
-          td.text-right 100
-          td.text-right
-            - @fund_allocation_per_mun_other = budget_allocation('WB', params[:with_year]).to_f
+          /td.text-right 100
+          /td.text-right
             = number_to_currency(@fund_allocation_per_mun_other.to_f)
-          td.text-right 100
+
         tr
           td.text-right MIBF
           td.text-right 
@@ -176,10 +179,30 @@ hr
             td.text-right= number_to_currency(sp.second_tranch_amount)
             td.text-right= number_to_currency(sp.third_tranch_amount)
             td= sp.status
-            td= select_tag :fund_source, options_for_select(Subproject::FUND_SOURCES), include_blank: true
+            -if sp.fund_source.present?
+              td= sp.fund_source.code
+            -else 
+              td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}), include_blank: true, id: "#{sp.id}", class: "fund_source"
         tr
          td colspan="3" Count: #{@subprojects.count}
          td.text-left colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}
 
 = render 'view_cash_program'
 = render 'assigned_fund_source'
+
+javascript:
+  $(".fund_source").change(function(){
+
+    item_val = $(this).val();
+    selected = $(this).find('option:selected').text(); 
+    sp_id = $(this).attr("id");
+    $.ajax({
+      url: "/update_fund_source",
+      data: {
+        fund_source_id : item_val,
+        subproject_id : sp_id
+      },
+        dataType: "script"
+      });
+    $(this).parent().html(selected)
+  });
