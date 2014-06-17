@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :subproject_implementation_plans
   resources :subprojects
   resources :request_for_fund_releases do
-    get 'select_subproject', on: :collection
+    get :select_subproject, on: :collection
+    get :obr, on: :collection
+    get :dv, on: :collection
   end
 
   resources :cgdps, only: :index

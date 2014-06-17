@@ -28,6 +28,11 @@ class RequestForFundReleasesController < ApplicationController
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
   end
 
+  def show
+    @rfrs = RequestForFundRelease.find params[:id]
+    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+  end
+
   def update
     @rfrs = RequestForFundRelease.find params[:id]
     @subproj = Subproject.find rfrs_params[:subproject_id]
@@ -70,6 +75,16 @@ class RequestForFundReleasesController < ApplicationController
   def display_designation
     @designation_id = params[:designation_first]
     @designation_name = Designation.where(id: @designation_id)
+  end
+
+  def obr
+    @rfrs = RequestForFundRelease.find params[:rfrs_id]
+    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+  end
+
+  def dv
+    @rfrs = RequestForFundRelease.find params[:rfrs_id]
+    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
   end
 
   protected

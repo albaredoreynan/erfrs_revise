@@ -1,0 +1,135 @@
+h4 DV
+hr
+.row.rfr-index
+  .col-md-12.header
+    p.text-center
+      b Republic of the Philippines
+      |
+      br 
+      b Department of Social Welfare and Development
+      br
+      |
+      b Batasan Pambansa Complex, Constitution Hills, Quezon City
+.panel.panel-primary
+  
+  .table-responsive
+    table.table.table-bordered
+      tr 
+        td.text-center rowspan=2 colspan=3 width='80%'
+          h4 DISBURSEMENT VOUCHER
+        td width='20%' No:
+      tr
+        td  
+      tr
+        td.text-left width='20%' Mode of Payment
+        td colspan=3 style='padding-left: 50px;'
+        	form.form-horizontal
+        		= check_box_tag :a, disabled: true
+           		|&nbsp; MDS Check &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           		= check_box_tag :b, disabled: true
+              	|&nbsp; Commercial Check &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	= check_box_tag :c, disabled: true
+              	|&nbsp; ADA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	= check_box_tag :d, disabled: true
+              	|&nbsp; Others 
+      tr
+        td.text-left rowspan=2 width='10%' Payee
+        td width='50' rowspan=2
+        td.text-left width='20%' TIN/Employee No.
+        td.text-left width='20%' OR/BUR No.
+      tr
+      	td.text-left width='20%'
+      	td.text-left width='20%'
+      tr
+        td.text-left rowspan=3 width='10%' Address
+        td.text-left rowspan=3 width='50%'
+        td.text-center Responsibility Center
+      tr
+      	td.text-left width='20%' Office/Unit/Project
+      	td.text-left width='20%' Code
+      tr
+      	td.text-left width='20%'
+      	td.text-left width='20%'	
+      tr
+      	td.text-center width='80%' colspan=3 
+      		b Explanation
+      	td.text-center width='20%' 
+      		b Amount
+      tr
+      	td.text-center height=400 width='80%' colspan=3 
+      	td.text-center height=400 width='20%' 
+      		
+    table.table.table-bordered
+      
+        tr
+          td.text-left width='2%'
+            b A.
+          td.text-left width='48%'
+            b Certified
+            
+          td.text-left width='2%'
+            b B.
+          td.text-left width='48%'
+            b Approved Payment
+        tr
+          td colspan=2 style='padding-left: 50px;'
+            .form-group
+              = check_box_tag :a, disabled: true
+              |&nbsp; Cash Available
+              br
+              = check_box_tag :b, disabled: true
+              |&nbsp; Subject to Authority to Debit Account (when applicable)
+              br
+              = check_box_tag :c, disabled: true
+              |&nbsp; Supporting documents complete
+          td colspan=2 style='padding-left: 50px;'
+            .form-group 
+    table.table.table-bordered
+      tr    
+        td.text-center width='10%' Signature
+        td.text-left width='40%'
+        td.text-center width='10%' Signature
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Printed Name
+        td.text-left width='40%'
+        td.text-center width='10%' Printed Name
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Position
+        td.text-left width='40%'
+        td.text-center width='10%' Position
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Date
+        td.text-left width='40%'
+        td.text-center width='10%' Date
+        td.text-left width='40%'
+    table.table.table-bordered
+      tr
+        td.text-left width='2%'
+          b C.
+        td.text-left width='78%'
+          b Received Payment
+        td.text-left width='30%' JEV No.
+    table.table.table-bordered
+    	tr
+    		td.text-left width='10%' Check / ADA No.
+    		td.text-left width='35%'
+    		td.text-left width='15%' Date
+    		td.text-left width='20%' Bank Name
+    		td.text-left width='25%'
+    	tr
+    		td.text-left width='10%' Signature
+    		td.text-left width='35%'
+    		td.text-left width='15%' Date
+    		td.text-left width='20%' Printed Name
+    		td.text-left width='25%' rowspan=2 Date
+    	tr
+    		td.text-left colspan=4 Official Receipt / Other Documents
+css:      
+  .form-group > .col-md-3{
+    text-align: right;
+  }
+
+        

@@ -1,0 +1,120 @@
+- @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost + @subproject.grant_amount_contingency_cost
+- @total_release = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release
+- @total_grant_less_con = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
+- if params[:tranch] == 'first'
+  - @amount_requested = @subproject.first_tranch_amount
+  - @previous_released = 0
+  - @cumulative_amount = @subproject.first_tranch_amount
+  - @tranch = 1
+  - @contingency = @subproject.grant_amount_contingency_cost
+- elsif params[:tranch] == 'second'
+  - @amount_requested = @subproject.second_tranch_amount
+  - @previous_released = @subproject.first_tranch_amount_release
+  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
+  - @tranch = 2
+  - @contingency = @subproject.grant_amount_contingency_cost
+- else
+  - @amount_requested = @subproject.third_tranch_amount
+  - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
+  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
+  - @tranch = 3
+  - if @total_release > @total_grant_less_con 
+    - @contingency = @subproject.grant_amount_contingency_cost - (@total_release - @total_grant_less_con)
+  - else
+    - @contingency = @subproject.grant_amount_contingency_cost
+
+- @balance_amount = @total_grant - @cumulative_amount
+.row.sp-table
+  .col-md-12
+    h4 Fund Information
+    hr
+  br
+.row.sp-show
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Amount Requested:
+      .col-md-2.amt_requested.bold
+        = @amount_requested
+  .col-md-6
+    .form-group
+      .col-md-8.text-right
+        'Cumulative Total Including this Request:
+      .col-md-3.bold
+        = @cumulative_amount 
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Previous Released:
+      .col-md-2.bold
+        = @previous_released
+  .col-md-6
+    .form-group
+      .col-md-8.text-right
+        'Balance After This Request:
+      .col-md-3.bold
+        = @balance_amount
+  .col-md-6
+    .form-group
+      .col-md-4.text-right
+        'Amount Approved:
+      .col-md-2.bold
+        = @rfrs.amount_approve
+  .col-md-6
+    .form-group
+      .col-md-8.text-right
+        'Contingency:
+      .col-md-3.bold
+        = @contingency
+                
+  
+  
+  .col-md-12
+    .form-group
+      .col-md-2.text-right
+        'Remarks:
+      .col-md-9.bold
+        = @rfrs.remarks
+  
+  .col-md-6
+    .form-group
+      .col-md-4
+        'ObR Number:
+      .col-md-6.bold
+        = @rfrs.obr_number
+        | &nbsp;&nbsp;&nbsp;
+        = link_to "Print ObR".html_safe, obr_request_for_fund_releases_path(:rfrs_id => params[:id], :sp_id => params[:sp_id]), class: 'btn btn-xs btn-primary'
+  .col-md-6
+    .form-group
+      .col-md-4.text-right
+        'DV Number:
+      .col-md-6.bold
+        = @rfrs.dv_number
+        | &nbsp;&nbsp;&nbsp;
+        = link_to "Print DV".html_safe, dv_request_for_fund_releases_path(:rfrs_id => params[:id], :sp_id => params[:sp_id]), class: 'btn btn-xs btn-primary'
+  .col-md-6
+    .form-group
+      .col-md-4
+        'ObR Date:
+      .col-md-6.bold
+        = @rfrs.obr_date
+  .col-md-6
+    .form-group
+      .col-md-4.text-right
+        'DV Date:
+      .col-md-6.bold
+        = @rfrs.dv_date
+
+  .col-md-12
+    .form-group
+      .col-md-8.text-right
+        'Check Number:
+      .col-md-3.bold
+        = @rfrs.check_number
+  
+  .col-md-12
+    .form-group
+      .col-md-8.text-right
+        'Check Date:
+      .col-md-3.bold
+        = @rfrs.check_date

@@ -28,6 +28,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'cocoon'
 gem 'font-awesome-sass'
 
+# utilities
+gem 'faker', require: false
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 group :development, :test do
   gem 'rspec-rails'   
 end

@@ -1,0 +1,94 @@
+h4 ObR
+hr
+.row.rfr-index
+  .col-md-12.header
+    p.text-center
+      b Republic of the Philippines
+      |
+      br 
+      b Department of Social Welfare and Development
+      br
+      |
+      b Batasan Pambansa Complex, Constitution Hills, Quezon City
+.panel.panel-primary
+  .table-responsive
+    table.table.table-bordered
+      tr 
+        td.text-center rowspan=2 colspan=4 width='85%'
+          h4 OBLIGATION REQUEST
+        td No:
+      tr
+        td Date: 
+      tr
+        td.text-center width='20%' Payee
+        td colspan=4
+      tr
+        td.text-center width='20%' Office
+        td colspan=4
+      tr
+        td.text-center width='20%' Address
+        td colspan=4
+      tr
+        td.text-center width='10%' Responsibility Center
+        td.text-center width='50%' Particulars
+        td.text-center width='12%' P.P.A
+        td.text-center width='8%' Accunt Code
+        td.text-center width='10%' Amount
+      tr
+        td.text-center width='10%' 
+        td.text-center width='50%' 
+        td.text-center width='12%' 
+        td.text-center width='8%' 
+        td.text-center width='10%'
+      tr
+        td.text-right colspan=4 Total
+        td.text-center 
+    table.table.table-bordered
+      form.form-horizontal
+        tr
+          td.text-left width='2%'
+            b A.
+          td.text-left width='48%'
+            b Certified
+            
+          td.text-left width='2%'
+            b B.
+          td.text-left width='48%'
+            b Certified
+        tr
+          td colspan=2 style='padding-left: 50px;'
+            .form-group
+              = check_box_tag :a, disabled: true
+              |&nbsp; Charges to appropriation/allotment necessary, lawful and under my direct supervision
+              br
+              = check_box_tag :a, disabled: true
+              |&nbsp; Supporting documents valid, proper and legal
+          td colspan=2 style='padding-left: 50px;'
+            .form-group Allotment available and obligated for the purpose as indicated above      
+    table.table.table-bordered
+      tr    
+        td.text-center width='10%' Signature
+        td.text-left width='40%'
+        td.text-center width='10%' Signature
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Printed Name
+        td.text-left width='40%'
+        td.text-center width='10%' Printed Name
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Position
+        td.text-left width='40%'
+        td.text-center width='10%' Position
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Date
+        td.text-left width='40%'
+        td.text-center width='10%' Date
+        td.text-left width='40%'
+css:      
+  .form-group > .col-md-3{
+    text-align: right;
+  }
+
+        
