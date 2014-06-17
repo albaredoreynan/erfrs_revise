@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
+# gem 'rails', '4.1.0.beta1'
+gem 'rails', '4.0.2' 
 gem 'rake', '10.0.4'
-gem 'rails', '4.0.2'
 
 gem 'devise'
 gem 'has_scope'
@@ -53,15 +54,15 @@ group :development do
   gem 'quiet_assets'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'awesome_print', require: false
-
-  gem 'capistrano', '3.1.0'
-  gem 'capistrano-rvm'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails', '~> 1.0.0', require: false
+  gem 'awesome_print'
+  gem 'spring', require: false
+  gem 'capistrano', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano3-nginx_unicorn', require: false
 end
 
 group :production do
-  gem 'rails_12factor'
+  gem 'unicorn'
 end
 

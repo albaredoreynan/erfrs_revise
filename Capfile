@@ -13,13 +13,18 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/chruby
 #   https://github.com/capistrano/bundler
 #   https://github.com/capistrano/rails
-#
+
 require 'capistrano/rvm'
+require 'capistrano/rails'
+require 'capistrano3/nginx_unicorn'
+#require 'rvm1/capistrano3'
+
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
-require 'capistrano/bundler'
-require 'capistrano/rails/assets'
-require 'capistrano/rails/migrations'
+# require 'capistrano/bundler'
+# require 'capistrano/rails/assets'
+# require 'capistrano/rails/migrations'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
+

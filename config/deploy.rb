@@ -1,8 +1,8 @@
 # config valid only for Capistrano 3.1
-lock '3.1.0'
+lock '3.2.1'
 
 set :application, 'erfrs'
-set :repo_url, 'git@github.com:AppSource/eRFRS.git'
+set :repo_url, 'git@bitbucket.org:appsource/erfrs.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
