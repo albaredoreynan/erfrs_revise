@@ -30,7 +30,7 @@
           th DV Amount
           th
       tbody
-        - RequestForFundRelease.where(subproject_id: params[:id]).each do |rfrs|
+        - RequestForFundRelease.where(subproject_id: params[:id]).order(:tranch_for).each do |rfrs|
           tr
             td = trail_id(6, rfrs.id)
             td = rfrs.tranch_for

@@ -14,35 +14,57 @@ hr
   .table-responsive
     table.table.table-bordered
       tr 
-        td.text-center rowspan=2 colspan=4 width='85%'
+        td.text-center rowspan=2 colspan=4 width='80%'
           h4 OBLIGATION REQUEST
-        td No:
+        td.text-left No: #{@rfrs.obr_number}
       tr
-        td Date: 
+        td.text-left Date: #{ !@rfrs.obr_date.nil? ? @rfrs.obr_date.strftime("%d-%b-%Y") : '' }
       tr
-        td.text-center width='20%' Payee
+        td.text-center width='10%' Payee
+        td colspan=4
+          = @rfrs.account_name.upcase
+          | &nbsp;/&nbsp;
+          = @rfrs.bank_account_number
+
+      tr
+        td.text-center width='10%' Office
         td colspan=4
       tr
-        td.text-center width='20%' Office
+        td.text-center width='10%' Address
         td colspan=4
-      tr
-        td.text-center width='20%' Address
-        td colspan=4
+          = @subproject.municipality.try(:name)
+          |&nbsp; 
+          = @subproject.province.try(:name)
+          |,&nbsp;
+          = @subproject.region.try(:name)
+          
+  .table-responsive
+    table.table.table-bordered
       tr
         td.text-center width='10%' Responsibility Center
         td.text-center width='50%' Particulars
         td.text-center width='12%' P.P.A
         td.text-center width='8%' Accunt Code
         td.text-center width='10%' Amount
-      tr
+      tr height=400 
         td.text-center width='10%' 
-        td.text-center width='50%' 
+        td.text-left width='50%'
+          .col-md-12
+            p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
+            p Sub-Project Name: &nbsp; #{@subproject.title}
+            p Tranche: &nbsp; #{@rfrs.tranch_for}
+            p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
+            P
+              h5 Attachment
         td.text-center width='12%' 
         td.text-center width='8%' 
         td.text-center width='10%'
+          .col-md-12
+            p #{number_to_currency @subproject.second_tranch_amount_release}
       tr
         td.text-right colspan=4 Total
-        td.text-center 
+        td.text-center
+          = number_to_currency @subproject.second_tranch_amount_release
     table.table.table-bordered
       form.form-horizontal
         tr
