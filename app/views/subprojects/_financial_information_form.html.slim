@@ -13,18 +13,18 @@
           th Total
           th %Total
       tbody#finance
-        tr#grant-amount
+        tr#grant-amount.gray
           td GRANT Amount
-          td.grant.sdc= f.text_field :grant_amount_direct_cost
-          td.grant.sic= f.text_field :grant_amount_indirect_cost
-          td.grant.scc= f.text_field :grant_amount_contingency_cost
+          td.grant= f.text_field :grant_amount_direct_cost
+          td.grant= f.text_field :grant_amount_indirect_cost
+          td.grant= f.text_field :grant_amount_contingency_cost
           td#total_grant.gray
           td#percent_grant.gray
         tr#lcc-blgu
           td LCC: BLGU
           td.lcc.sdc= f.text_field :lcc_blgu_direct_cost
           td.lcc.sic= f.text_field :lcc_blgu_indirect_cost
-          td.lcc.scc= f.text_field :lcc_contingency_cost
+          td.lcc.scc= f.text_field :lcc_blgu_contingency_cost
           td#total_lcc.gray
           td#percent_lcc.gray
         tr#community
@@ -45,11 +45,11 @@
           td PLGU/Others
           td.plgu.sdc= f.text_field :plgu_others_direct_cost
           td.plgu.sic= f.text_field :plgu_others_indirect_cost
-          td.plgu.scc= f.text_field :plgu_contingency_cost
+          td.plgu.scc= f.text_field :plgu_others_contingency_cost
           td#total_plgu.gray
           td#percent_plgu.gray
         tr#subtotal.gray
-          td.bold SUB-TOTAL
+          td.bold TOTAL
           td#subtotal_direct
           td#subtotal_indirect
           td#subtotal_contingency
@@ -70,7 +70,7 @@
           td#total_lcc_in_kind.gray
           td#percent_lcc_in_kind.gray
         tr#total.gray
-          td.bold TOTAL
+          td.bold TOTAL LCC
           td#total_direct
           td#total_indirect
           td#total_contingency

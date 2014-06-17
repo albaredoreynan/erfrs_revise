@@ -22,7 +22,8 @@ class Subproject < ActiveRecord::Base
   FUND_SOURCES = %w{ADB WB}
   CYCLE = %w{1 2 3 4 5}
   ####################### Validation ########################
-    
+  validate :equal_financial_information
+  validate :first_tranch_validation
   ####################### SCOPES ###########################
   scope :with_user,   -> username { fetch_all_created_by username }
   scope :with_id,     -> id { where id: id }
@@ -45,7 +46,37 @@ class Subproject < ActiveRecord::Base
     scope "subproject_#{place}_id".intern, -> place_id { where "#{place}_id" => place_id }
   end
 
-  ####################### SCOPES ###########################
+  ####################### END ###########################
+
+  ################# CUSTOM VALIDATION #####################
+
+  def first_tranch_validation
+    if self.first_tranch_amount < ((self.grant_amount_direct_cost + self.grant_amount_indirect_cost + self.grant_amount_contingency_cost) * 0.50)
+      errors.add(:alert, 'Errors in First Tranch')
+    end
+  end
+  def equal_financial_information
+    total_direct = 0
+    total_indirect = 0
+    total_contingency = 0
+    total_lcc_direct = 0
+    total_lcc_indirect = 0
+    total_lcc_contingency = 0
+    %w{lcc_blgu community mlgu plgu_others}.each do |cash|
+      total_direct += eval("self.#{cash}_direct_cost")
+      total_indirect += eval("self.#{cash}_indirect_cost")
+      total_contingency += eval("self.#{cash}_contingency_cost")
+    end
+    %w{total_lcc_cash total_lcc_in_kind}.each do |cash|
+      total_lcc_direct += eval("self.#{cash}_direct_cost")
+      total_lcc_indirect += eval("self.#{cash}_indirect_cost")
+      total_lcc_contingency += eval("self.#{cash}_contingency_cost")
+    end
+    if total_direct != total_lcc_direct || total_contingency != total_lcc_contingency || total_lcc_indirect != total_indirect
+      errors.add(:alert, 'Financial Information')
+    end
+  end
+  ###################### END ############################
   def check_for_group
     if self.municipality.group.present? 
       self.group_id = self.municipality.group.id

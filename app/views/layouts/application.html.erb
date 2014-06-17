@@ -11,6 +11,7 @@
     <%= render "layouts/subheader" %>
     <%= render "layouts/navbar" %>
     <%= render "layouts/flash" %>
+
     <div class="container <%= devise_layout(params[:controller]) %>">
       <%= yield %>
     </div>
