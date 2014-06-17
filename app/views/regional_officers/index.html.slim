@@ -1,0 +1,5 @@
+label Region
+= select_tag :regional_officers, options_for_select(Region.values_for_select, params[:region_id]), include_blank: true
+
+- @regional_officers.each do |ro|
+  p = "#{ro.name} - #{ro.designation}"

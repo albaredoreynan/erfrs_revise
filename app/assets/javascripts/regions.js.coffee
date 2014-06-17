@@ -1,8 +1,9 @@
 $ ->
-  regions        = $('#subproject_region_id')
-  provinces      = $('#subproject_province_id')
-  municipalities = $('#subproject_municipality_id')
-  barangays      = $('#subproject_barangay_id')
+  regions           = $('#subproject_region_id')
+  provinces         = $('#subproject_province_id')
+  municipalities    = $('#subproject_municipality_id')
+  barangays         = $('#subproject_barangay_id')
+  regional_officers = $("#regional_officers")
 
   provinces.attr('readonly', 'readonly')
   municipalities.attr('readonly', 'readonly')
@@ -67,6 +68,11 @@ $ ->
       barangays.append('<option value></option>')
       $.each data, ->
         barangays.append($('<option></option>').attr('value', this.id).text(this.name))
+
+  regional_officers.on 'change', ->
+    region_id = regional_officers.val()
+    url = '/regional_officers/?region_id='+region_id
+    window.location.href = url
 
   $(document).ready ->
     if (regions.val() != '')

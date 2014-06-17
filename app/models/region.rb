@@ -10,4 +10,5 @@ class Region < ActiveRecord::Base
   def to_s
     "#{code} - #{name}"
   end
+
 end
