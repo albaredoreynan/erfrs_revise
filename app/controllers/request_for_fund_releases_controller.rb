@@ -19,6 +19,8 @@ class RequestForFundReleasesController < ApplicationController
     @team_member = Subproject.find(params[:sp_id]).team_members
     if !@team_member.present? 
       @team_member = TeamMember.all
+    else
+      @team_member = @team_member
     end
 
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)

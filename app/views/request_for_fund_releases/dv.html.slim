@@ -17,9 +17,10 @@ hr
       tr 
         td.text-center rowspan=2 colspan=3 width='80%'
           h4 DISBURSEMENT VOUCHER
-        td width='20%' No:
-      tr
-        td  
+        td width='20%' No: #{@rfrs.dv_number}
+
+  .table-responsive
+    table.table.table-bordered	
       tr
         td.text-left width='20%' Mode of Payment
         td colspan=3 style='padding-left: 50px;'
@@ -34,31 +35,52 @@ hr
               	|&nbsp; Others 
       tr
         td.text-left rowspan=2 width='10%' Payee
-        td width='50' rowspan=2
+        td width='40' rowspan=2
+					= @rfrs.account_name.upcase
+					| &nbsp;/&nbsp;
+					= @rfrs.bank_account_number
         td.text-left width='20%' TIN/Employee No.
-        td.text-left width='20%' OR/BUR No.
+        td.text-left width='30%' OR/BUR No.
       tr
-      	td.text-left width='20%'
-      	td.text-left width='20%'
+      	td.text-left width='20%' height=35
+      	td.text-left width='20%' height=35
       tr
         td.text-left rowspan=3 width='10%' Address
-        td.text-left rowspan=3 width='50%'
-        td.text-center Responsibility Center
+        td.text-left rowspan=3 width='40%'
+					= @subproject.municipality.try(:name)
+					|&nbsp; 
+					= @subproject.province.try(:name)
+					|,&nbsp;
+					= @subproject.region.try(:name)
+        td.text-center colspan=2 Responsibility Center
       tr
       	td.text-left width='20%' Office/Unit/Project
-      	td.text-left width='20%' Code
+      	td.text-left width='30%' Code
       tr
-      	td.text-left width='20%'
-      	td.text-left width='20%'	
+      	td.text-left width='20%' height=35
+      	td.text-left width='20%' height=35
       tr
       	td.text-center width='80%' colspan=3 
       		b Explanation
       	td.text-center width='20%' 
       		b Amount
       tr
-      	td.text-center height=400 width='80%' colspan=3 
-      	td.text-center height=400 width='20%' 
-      		
+      	td.text-left height=300 width='80%' colspan=3
+					.col-md-12
+					  p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
+					  p Sub-Project Name: &nbsp; #{@subproject.title}
+					  p Tranche: &nbsp; #{@rfrs.tranch_for}
+					  p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
+					  P
+					    h5 Attachment
+      	td.text-right height=300 width='20%'
+					.col-md-12
+					  p #{number_to_currency @subproject.second_tranch_amount_release} 
+      tr
+      	td.text-right	width='80%' colspan=3
+      		b Php
+      	td.text-right
+      		= number_to_currency @subproject.second_tranch_amount_release		
     table.table.table-bordered
       
         tr
@@ -114,17 +136,17 @@ hr
         td.text-left width='30%' JEV No.
     table.table.table-bordered
     	tr
-    		td.text-left width='10%' Check / ADA No.
-    		td.text-left width='35%'
-    		td.text-left width='15%' Date
+    		td.text-left width='10%' BTF No.
+    		td.text-left width='35%' #{@rfrs.check_number}
+    		td.text-left width='15%' Date: #{ !@rfrs.check_date.nil? ? Date.parse(@rfrs.check_date).strftime("%d-%b-%Y") : '' }
     		td.text-left width='20%' Bank Name
-    		td.text-left width='25%'
+    		td.text-left width='25%' LandBank of the Philippines
     	tr
     		td.text-left width='10%' Signature
     		td.text-left width='35%'
     		td.text-left width='15%' Date
     		td.text-left width='20%' Printed Name
-    		td.text-left width='25%' rowspan=2 Date
+    		td.text-left width='25%' rowspan=2 Date: #{!@rfrs.dv_date.nil? ? @rfrs.dv_date.strftime("%d-%b-%Y") : '' }
     	tr
     		td.text-left colspan=4 Official Receipt / Other Documents
 css:      
