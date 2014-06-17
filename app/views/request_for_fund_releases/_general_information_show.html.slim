@@ -16,93 +16,89 @@
 -total_total =  total_direct + total_indirect + total_contingency
 
 - grand_total_lcc = total_lcc + total_lcc_cash + total_lcc_kind
-
-br
-br
-br
 .row.sp-show
   .col-md-6
     .form-group
-      .col-md-4.bold
+      .col-md-4
         'RFR ID
-      .col-md-6
+      .col-md-6.bold
         = trail_id(6, @rfrs.id)
   .col-md-6
     .form-group
       .col-md-5
-        = f.label :status
-      .col-md-7
-        = f.select :status, options_for_select(Subproject::STATUSES), {}, { class: 'form-control'}
+        ' Status
+      .col-md-7.bold
+        = @subproject.status
   .col-md-6
     .form-group
-      .col-md-4.bold
+      .col-md-4
         'Tranche
-      .col-md-6
+      .col-md-6.bold
         = @rfrs.tranch_for
   .col-md-6
     .form-group
       .col-md-5
-        = f.label :request_date
-      .col-md-7
-        = f.text_field :request_date, placeholder: 'DD-MMM-YYYY'  
+        ' Request Date
+      .col-md-7.bold
+        = @rfrs.request_date
   .col-md-2
-    = f.label :title
-  .col-md-10
+    ' Title
+  .col-md-10.bold
     = @subproject.title
   .col-md-12 style="margin-top: 10px;"
     .row
       .col-md-6
         .form-group
           .col-md-4
-            = f.label :region_id
-          .col-md-8
+            'Region
+          .col-md-8.bold
             = @subproject.region.name
         .form-group
           .col-md-4
-            = f.label :province_id
-          .col-md-8
+            'Province
+          .col-md-8.bold
             = @subproject.province.name
         .form-group
           .col-md-4
-            = f.label :municipality_id
-          .col-md-8
+            'Municipality
+          .col-md-8.bold
             = @subproject.municipality.name
         .form-group
           .col-md-4
-            = f.label :barangay_id
-          .col-md-8
+            'Barangay
+          .col-md-8.bold
             = @subproject.barangay.name
         .form-group
           .col-md-4
-            = f.label :group
+            'Group
           .col-md-8
 
 
       .col-md-6
         .form-group
           .col-md-5
-            = f.label :sub_project, "Sub-Project ID"
-          .col-md-7
+            'Sub-Project ID
+          .col-md-7.bold
             = trail_id(6, @subproject.id)
         .form-group
           .col-md-5
-            = f.label :total_sub_project_cost, "Total Sub-Project Cost"
-          .col-md-7
+            'Total Sub-Project Cost
+          .col-md-7.bold
             = number_to_currency total_total
         .form-group
           .col-md-5
-            = f.label :grant_funds, 'Grant Funds'
-          .col-md-7
+           'Grant Funds
+          .col-md-7.bold
             = number_to_currency total_grant
         .form-group
           .col-md-5
-            = f.label :lcc, 'LCC'
-          .col-md-7
+            'LCC
+          .col-md-7.bold
             = number_to_currency grand_total_lcc
         .form-group
           .col-md-5
-            = f.label :fund_source, 'Fund Source'
-          .col-md-7
+            'Fund Source
+          .col-md-7.bold
             = @subproject.fund_source.present? ? @subproject.fund_source.name : ""
 
 css:

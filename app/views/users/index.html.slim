@@ -25,6 +25,7 @@ br
           td= user.username
           td= user.first_name
           td= user.last_name
+          td= user.role.try(:name) 
           td= user.region.try(:code)
           td= user.municipality.try(:name)
           td= user.barangay.try(:name)
