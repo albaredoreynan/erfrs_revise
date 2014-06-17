@@ -28,7 +28,6 @@ class SubprojectsController < ApplicationController
 
   def new
     @subproject = Subproject.new
-
   end
 
   def edit
@@ -122,6 +121,9 @@ class SubprojectsController < ApplicationController
       :second_tranch_date_required,
       :third_tranch_amount,
       :third_tranch_date_required,
+      :first_tranch_revised_amount,
+      :second_tranch_revised_amount,
+      :third_tranch_revised_amount,
       # team member params
       team_members_attributes: [:id, :name, :designation_id, :email, :phone]
     ]

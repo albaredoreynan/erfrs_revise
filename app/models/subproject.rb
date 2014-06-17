@@ -8,6 +8,8 @@ class Subproject < ActiveRecord::Base
   belongs_to :group
   has_many :request_for_fund_releases
   has_many :team_members
+  has_many :rfrs, foreign_key: 'request_for_fund_releases_id' ,class_name: "RequestForFundReleases"
+
   accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
 
   before_save :check_for_group
@@ -25,6 +27,13 @@ class Subproject < ActiveRecord::Base
   scope :with_user,   -> username { fetch_all_created_by username }
   scope :with_id,     -> id { where id: id }
   scope :with_status, -> status { where status: status }
+  scope :fund_source, -> fs { where fund_source_id: fs}
+
+  if ENV['ERFRS_USES_POSTGRESQL']
+    scope :year, -> year { where 'EXTRACT(YEAR FROM date_of_mbif) = ?', year }
+  else
+    scope :year, -> year { where 'YEAR(date_of_mbif) = ?', year  }
+  end
 
   if ENV['ERFRS_USES_POSTGRESQL']
     scope :with_year, -> year { where 'EXTRACT(YEAR FROM created_at) = ?', year }

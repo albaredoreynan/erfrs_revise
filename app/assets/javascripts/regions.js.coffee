@@ -4,9 +4,9 @@ $ ->
   municipalities = $('#subproject_municipality_id')
   barangays      = $('#subproject_barangay_id')
 
-  provinces.attr('disabled', 'disabled')
-  municipalities.attr('disabled', 'disabled')
-  barangays.attr('disabled', 'disabled')
+  provinces.attr('readonly', 'readonly')
+  municipalities.attr('readonly', 'readonly')
+  barangays.attr('readonly', 'readonly')
 
   fetch_province = (region_id)->
     url = "/provinces.json?region_id=" + region_id
@@ -46,3 +46,38 @@ $ ->
   municipalities.change ->
     mid = $(this).val()
     fetch_barangays(mid)
+
+  retrieve_province = (region_id)->
+    url = "/provinces.json?region_id=" + region_id
+    $.get url, (data)->
+      provinces.append('<option value></option>')
+      $.each data, ->
+        provinces.append($('<option></option>').attr('value', this.id).text(this.name))
+
+  retrieve_municipalities = (province_id)->
+    url = "/municipalities.json?province_id=" + province_id
+    $.get url, (data)->
+      municipalities.append('<option value></option>')
+      $.each data, ->
+        municipalities.append($('<option></option>').attr('value', this.id).text(this.name))
+
+  retrieve_barangays = (municipality_id)->
+    url = "/barangays.json?municipality_id=" + municipality_id
+    $.get url, (data)->
+      barangays.append('<option value></option>')
+      $.each data, ->
+        barangays.append($('<option></option>').attr('value', this.id).text(this.name))
+
+  $(document).ready ->
+    if (regions.val() != '')
+      rid = $(regions).val()
+      retrieve_province(rid)
+
+    if (provinces.val() != '')
+      pid = $(provinces).val()
+      retrieve_municipalities(pid)
+
+    if (municipalities.val() != '')
+      mid = $(municipalities).val()
+      retrieve_barangays(mid)
+

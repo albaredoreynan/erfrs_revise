@@ -1,10 +1,11 @@
-h4 Cash Program REPORTS
+h4 CGDP Report
 hr
 .row.rfr-index
+  =render "cg_filter"
   .col-md-12.header
     p.text-center Department of Social Welfare and Development
     p.text-center COMMUNITY GRANTS DISBURSEMENT PLAN
-    p.text-center As of DD MM YYYY
+    p.text-center As of #{DateTime.now.strftime("%d %b %Y")}
   .col-md-12
     
 .panel.panel-primary
@@ -30,10 +31,32 @@ hr
           th.text-center Nov
           th.text-center Dec
       tbody
-        tr
-	       	td
-	        td
-	        td
-	        td
-	        td
-	        td
+        - @subprojects.each do |m, sps|
+          tr
+  	       	td rowspan=3 = m.province.region.code
+  	        td rowspan=3 = m.province.name
+  	        td rowspan=3 = m.name
+            -if params[:year].present?
+              -data_f = initial_tranch_per_month(sps, params[:year].to_i)
+              -data_s = revised_tranch_per_month(sps, params[:year].to_i)
+            -else
+              -data_f = initial_tranch_per_month(sps, DateTime.now.year)
+              -data_s = revised_tranch_per_month(sps, DateTime.now.year)
+
+            -12.times do |index|
+              td = number_to_currency data_f[index].sum
+          tr
+            -12.times do |index|
+              td = number_to_currency data_s[index].sum
+          tr
+            -12.times do |index|
+              td 
+                - if data_s[index].sum != 0 && data_f[index].sum != 0
+                  = number_to_currency(((data_s[index].sum - data_f[index].sum) / data_f[index].sum) * 100).to_s + "%"
+                - else
+                  ' 0%
+
+
+
+
+
