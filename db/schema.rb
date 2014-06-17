@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617141755) do
+ActiveRecord::Schema.define(version: 20140617045123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -231,10 +231,10 @@ ActiveRecord::Schema.define(version: 20140617141755) do
     t.integer  "cycle"
     t.integer  "group_id"
     t.decimal  "grant_amount_contingency_cost",      precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "lcc_contingency_cost",               precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "lcc_blgu_contingency_cost",          precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "community_contingency_cost",         precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "mlgu_contingency_cost",              precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "plgu_contingency_cost",              precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "plgu_others_contingency_cost",       precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "total_lcc_cash_contingency_cost",    precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "total_lcc_in_kind_contingency_cost", precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "first_tranch_revised_amount",        precision: 15, scale: 2, default: 0.0, null: false

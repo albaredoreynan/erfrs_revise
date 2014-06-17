@@ -58,16 +58,20 @@ class SubprojectsController < ApplicationController
   end
 
   def destroy
-    Subproject.find(params[:id]).destroy
-    flash[:success] = 'Subproject was deleted successfully.'
+
+    @subproject = Subproject.find(params[:id])
+
+    if @subproject.status != "Final"
+      @subproject.destroy
+      flash[:success] = 'Subproject was deleted successfully.'
+    else
+      flash[:alert] = "Subproject is in Final status"
+    end
+
     redirect_to subprojects_path
   end
 
   def display_group
-
-    p "////////////////" 
-    p 
-    p "////////////////" 
     @municipality = Municipality.find(params[:municipality_id])
     @group = @municipality.group
   end
@@ -98,7 +102,7 @@ class SubprojectsController < ApplicationController
       :grant_amount_contingency_cost,
       :lcc_blgu_direct_cost,
       :lcc_blgu_indirect_cost,
-      :lcc_contingency_cost,
+      :lcc_blgu_contingency_cost,
       :community_direct_cost,
       :community_indirect_cost,
       :community_contingency_cost,
@@ -107,7 +111,7 @@ class SubprojectsController < ApplicationController
       :mlgu_contingency_cost,
       :plgu_others_direct_cost,
       :plgu_others_indirect_cost,
-      :plgu_contingency_cost,
+      :plgu_others_contingency_cost,
       :total_lcc_cash_direct_cost,
       :total_lcc_cash_indirect_cost,
       :total_lcc_cash_contingency_cost,
