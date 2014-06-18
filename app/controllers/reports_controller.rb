@@ -40,4 +40,16 @@ class ReportsController < ApplicationController
 		send_file 'public/sample_file.pdf', type: 'image/pdf', disposition: 'inline'	
 	end	
 
+  def update_exchange_rate
+    puts 'success enter'
+    rfr= RequestForFundRelease.find(params[:rfrs_id].to_i)
+    puts 'succes line 1'
+    rfr.update(exchange_rate: params[:exchange_rate].to_i)
+    puts 'success line 2'
+  end
+
+  protected
+    def soe_report_params
+      params.permit(request_for_fund_release: %i[exchange_rate])
+    end
 end
