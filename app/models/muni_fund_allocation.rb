@@ -7,5 +7,4 @@ class MuniFundAllocation < ActiveRecord::Base
   scope :region_id, -> region_id { includes(municipality: :province).where('provinces.region_id' => region_id) 
   }
   scope :province_id, -> id{joins(:municipality).where('municipalities.province_id' => id)}
-
 end

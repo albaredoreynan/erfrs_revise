@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618055754) do
+ActiveRecord::Schema.define(version: 20140618064233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,6 +191,7 @@ ActiveRecord::Schema.define(version: 20140618055754) do
     t.datetime "rpmo_date"
     t.boolean  "approved_as_requested"
     t.integer  "tranch_for"
+    t.integer  "exchange_rate"
   end
 
   create_table "roles", force: true do |t|

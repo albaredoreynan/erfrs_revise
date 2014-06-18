@@ -14,7 +14,7 @@ class MunicipalitiesController < InheritedResources::Base
 
   def update
     @municipality = Municipality.find(params[:id])
-    if @municipality.update_attributes update-params
+    if @municipality.update_attributes update_params
       flash[:success] = 'Updated Successfully.'
       redirect_to municipalities_path
     else

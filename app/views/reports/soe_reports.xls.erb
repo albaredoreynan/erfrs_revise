@@ -69,6 +69,7 @@
         <Cell><Data ss:Type="String"><%= trail_id(6, soe.subproject_id) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= soe.subproject.date_of_mbif%></Data></Cell>
         <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell/>
         <Cell><Data ss:Type="Number"><%= number_to_currency soe.subproject.total_grant_amount%></Data></Cell>
         <Cell><Data ss:Type="Number"><%= number_to_currency soe.amount_approve %></Data></Cell>
         <Cell><Data ss:Type="String"><%= soe.rpmo_date %></Data></Cell>
@@ -76,7 +77,8 @@
         <Cell><Data ss:Type="String"><%= soe.dv_date.to_date %></Data></Cell>
         <Cell><Data ss:Type="String"> 100% </Data></Cell>
         <Cell><Data ss:Type="Number"><%= number_to_currency soe.subproject.total_dv_amount %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= number_to_currency soe.subproject.total_dv_amount * 45 %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= soe.exchange_rate.present? ? number_to_currency(soe.subproject.total_dv_amount * soe.exchange_rate) : ''%></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= soe.exchange_rate.present? ? number_to_currency(soe.exchange_rate) : '' %></Data></Cell>
         <Cell><Data ss:Type="String"><%= soe.remarks%></Data></Cell>
       </Row>
     <% end %>
