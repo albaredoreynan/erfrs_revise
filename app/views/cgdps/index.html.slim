@@ -69,7 +69,7 @@ hr
                 td= sp.region.try(:name)
                 td= sp.province.try(:name)
                 td= sp.municipality.try(:name)
-                td XXXX
+                td= sp.status
                 td
                   = link_to "<i class='fa fa-eye'></i>".html_safe, "#{municipality_path(sp.municipality_id)}?with_year=#{sp.created_at.year}", class: 'btn btn-xs btn-primary'
                   '&nbsp

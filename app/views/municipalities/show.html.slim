@@ -179,10 +179,10 @@ hr
             td.text-right= number_to_currency(sp.second_tranch_amount)
             td.text-right= number_to_currency(sp.third_tranch_amount)
             td= sp.status
-            -if sp.fund_source.present?
+            -if sp.fund_source.present? && sp.status == "Final"
               td= sp.fund_source.code
             -else 
-              td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}), include_blank: true, id: "#{sp.id}", class: "fund_source"
+              td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
         tr
          td colspan="3" Count: #{@subprojects.count}
          td.text-left colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}
@@ -192,7 +192,6 @@ hr
 
 javascript:
   $(".fund_source").change(function(){
-
     item_val = $(this).val();
     selected = $(this).find('option:selected').text(); 
     sp_id = $(this).attr("id");
@@ -204,5 +203,4 @@ javascript:
       },
         dataType: "script"
       });
-    $(this).parent().html(selected)
   });
