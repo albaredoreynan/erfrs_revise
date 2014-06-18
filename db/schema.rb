@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617045123) do
+ActiveRecord::Schema.define(version: 20140618055754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "approval_informations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "barangays", force: true do |t|
     t.integer  "municipality_id"
@@ -54,6 +59,11 @@ ActiveRecord::Schema.define(version: 20140617045123) do
     t.integer  "year"
   end
 
+  create_table "fund_informations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fund_sources", force: true do |t|
     t.string   "code"
     t.string   "name"
@@ -69,12 +79,22 @@ ActiveRecord::Schema.define(version: 20140617045123) do
     t.integer  "fund_source_id"
   end
 
+  create_table "muni_fund_allocations", force: true do |t|
+    t.integer  "year"
+    t.decimal  "amount",          precision: 15, scale: 2, default: 0.0, null: false
+    t.integer  "municipality_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "municipalities", force: true do |t|
     t.integer  "province_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+    t.decimal  "grant_allocation", precision: 15, scale: 2, default: 0.0, null: false
+    t.integer  "year"
   end
 
   add_index "municipalities", ["group_id"], name: "index_municipalities_on_group_id", using: :btree
@@ -105,6 +125,7 @@ ActiveRecord::Schema.define(version: 20140617045123) do
     t.integer  "region_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "box"
   end
 
   add_index "regional_officers", ["region_id"], name: "index_regional_officers_on_region_id", using: :btree

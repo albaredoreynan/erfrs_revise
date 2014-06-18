@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
 
   resources :cgdps, only: :index
-  resources :regional_officers, only: :index # for now
+  resources :regional_officers
 
   resources :cgdps, path: 'community_grants_disburesment_plans'
   
@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :fund_allocations
   resources :news_informations
   resources :designations
+  resources :muni_fund_allocations
   
   resources :reports do
     get :soe_reports, on: :collection

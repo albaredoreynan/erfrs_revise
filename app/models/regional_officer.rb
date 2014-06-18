@@ -5,4 +5,7 @@ class RegionalOfficer < ActiveRecord::Base
 
   scope :ro_type,   -> (type) { where(ro_type: type) }
   scope :region_id, -> (id)   { where(region_id: id) }
+
+  BOX = %w{A B}
+  ROTYPE= %w{OR DV}
 end
