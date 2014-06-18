@@ -19,9 +19,13 @@ namespace :fund_allocation do
     open_fund_allocation_file
     @spreadsheet.default_sheet = 'NCDDP 847'
 
+    NOT_MIGRATED = []
     (3..849).each do |row|
       set_municipality(row)
-      next unless @municipality.present?      
+      unless @municipality.present?
+        NOT_MIGRATED << "row #{row} - #{cell(row, MUNI_COLUMN[:name])}"
+        next
+      end
       
       puts "CREATING #{@municipality.name} funds..."
       MUNI_COLUMN[:funds].each do |column|
@@ -29,6 +33,10 @@ namespace :fund_allocation do
       end
 
     end
+
+    puts "*"*60
+    puts NOT_MIGRATED
+    puts "*"*60
   end
 
   def open_fund_allocation_file
