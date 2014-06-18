@@ -52,6 +52,8 @@ Rails.application.routes.draw do
   # ajax
   get '/display_group', to: 'subprojects#display_group', as:'display_group'
 
+  get '/update_exchange_rate', to: 'reports#update_exchange_rate', as:'update_exchange_rate'
+
   get '/update_fund_source', to: 'municipalities#update_fund_source', as:'update_fund_source'
   
   get '/display_designation', to: 'request_for_fund_releases#display_designation', as:'display_designation'

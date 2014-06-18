@@ -45,13 +45,28 @@ hr
   	        td= soe.check_number
   	        td= soe.dv_date.to_date
   	        td 100%
-  	        td= number_to_currency soe.subproject.total_dv_amount
-  	        td= number_to_currency soe.subproject.total_dv_amount * 45
-  	        td
+  	        td.dv_amount= number_to_currency soe.subproject.total_dv_amount
+  	        td.exchange 
+  	        td= text_field_tag :exchange_rate, [], id:"#{soe.id}", class:'exchange_rate'
   	        td= soe.remarks
 css:
   .scrollable {
     width: 100%;
     overflow-x: auto;
   }
+javascript:
+  $(".exchange_rate").blur(function(){
+    item_val = $(this).val();
+    sp_id = $(this).attr("id");
+    val = parseFloat($(this).parent().siblings('.dv_amount').html());
+    $.ajax({  
+      url: "/update_exchange_rate",
+      data: {
+        exchange_rate: item_val,
+        rfrs_id : sp_id
+      },
+        dataType: "script"
+      });
+    $(this).parent().siblings('.exchange').html( item_val * val)
+  });
             
