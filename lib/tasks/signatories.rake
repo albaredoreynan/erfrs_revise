@@ -67,6 +67,7 @@ namespace :signatories do
   def create_ro_at_box_a(row)
     @ro.name = cell(row, 'C')
     @ro.designation = cell(row, 'D')
+    @ro.box = "A" 
     return if missing_ro_fields? || ro_already_exist?
 
     puts_name_designation
@@ -76,6 +77,7 @@ namespace :signatories do
   def create_ro_at_box_b(row)
     @ro.name = cell(row, 'G')
     @ro.designation = cell(row, 'H')
+    @ro.box = "B" 
     return if missing_ro_fields? || ro_already_exist?
 
     puts_name_designation
@@ -88,7 +90,7 @@ namespace :signatories do
 
   def puts_name_designation
     if @ro.name.present? && @ro.designation.present?
-      puts "CREATING #{@ro.name} - #{@ro.designation}"
+      puts "CREATING #{@ro.name} - #{@ro.designation} - #{@ro.box}"
     end
   end
 

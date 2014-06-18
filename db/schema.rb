@@ -69,6 +69,14 @@ ActiveRecord::Schema.define(version: 20140618064233) do
     t.integer  "fund_source_id"
   end
 
+  create_table "muni_fund_allocations", force: true do |t|
+    t.integer  "year"
+    t.decimal  "amount",          precision: 15, scale: 2, default: 0.0, null: false
+    t.integer  "municipality_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "municipalities", force: true do |t|
     t.integer  "province_id"
     t.string   "name"
@@ -105,6 +113,7 @@ ActiveRecord::Schema.define(version: 20140618064233) do
     t.integer  "region_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "box"
   end
 
   add_index "regional_officers", ["region_id"], name: "index_regional_officers_on_region_id", using: :btree
