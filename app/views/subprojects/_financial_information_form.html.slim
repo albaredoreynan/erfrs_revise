@@ -13,11 +13,11 @@
           th Total
           th %Total
       tbody#finance
-        tr#grant-amount.gray
+        tr#grant-amount
           td GRANT Amount
-          td.grant= f.text_field :grant_amount_direct_cost
-          td.grant= f.text_field :grant_amount_indirect_cost
-          td.grant= f.text_field :grant_amount_contingency_cost
+          td.grant.sdc= f.text_field :grant_amount_direct_cost
+          td.grant.sic= f.text_field :grant_amount_indirect_cost
+          td.grant.scc= f.text_field :grant_amount_contingency_cost
           td#total_grant.gray
           td#percent_grant.gray
         tr#lcc-blgu
