@@ -3,6 +3,7 @@ class Municipality < ActiveRecord::Base
   belongs_to :province
   has_many :barangays
   has_many :subprojects
+  has_many :muni_fund_allocations
   belongs_to :group
 
   scope :region_id, -> region_id {
