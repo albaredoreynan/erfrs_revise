@@ -30,15 +30,15 @@ hr
             = number_to_currency(@fund_allocation_other.to_f)
           td.text-right 100
           td.text-center colspan="4"
-            = number_to_currency @subprojects.sum("grant_amount_direct_cost + grant_amount_indirect_cost + grant_amount_contingency_cost")
-          - @fund_allocation_per_mun = budget_allocation('ADB', params[:with_year]).to_f
-          - @fund_allocation_per_mun_other = budget_allocation('WB', params[:with_year]).to_f
-
-          /td.text-right 
+            / = number_to_currency @subprojects.sum("grant_amount_direct_cost + grant_amount_indirect_cost + grant_amount_contingency_cost")
+            - @fund_allocation_per_mun = budget_allocation_per_mun('ADB', params[:with_year], params[:id]).to_f
+            - @fund_allocation_per_mun_other = budget_allocation_per_mun('WB', params[:with_year], params[:id]).to_f
             = number_to_currency(@fund_allocation_per_mun.to_f)
+          /td.text-right 
+            /= number_to_currency(@fund_allocation_per_mun.to_f)
           /td.text-right 100
           /td.text-right
-            = number_to_currency(@fund_allocation_per_mun_other.to_f)
+            /= number_to_currency(@fund_allocation_per_mun_other.to_f)
 
         tr
           td.text-right MIBF
@@ -95,7 +95,7 @@ hr
             = @release_per_mncpl_other_percent.round(2)
         tr
           td Excess
-          td 
+          td.text-right 
             - @excess = @mibf.to_f - @release.to_f
 
             = number_to_currency(@excess.to_f)
