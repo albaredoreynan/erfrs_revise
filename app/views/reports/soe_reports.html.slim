@@ -56,7 +56,7 @@ css:
   }
 javascript:
   $(".exchange_rate").blur(function(){
-    item_val = $(this).val();
+    item_val = parseFloat($(this).val());
     sp_id = $(this).attr("id");
     val = parseFloat($(this).parent().siblings('.dv_amount').html());
     $.ajax({  

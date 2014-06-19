@@ -6,7 +6,7 @@ class GroupsController < InheritedResources::Base
   protected
 
     def permitted_params
-      params.permit(group: %i[code status])
+      params.permit(group: %i[code status fund_source_id])
     end
 
     def collection

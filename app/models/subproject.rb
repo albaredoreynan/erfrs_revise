@@ -22,8 +22,8 @@ class Subproject < ActiveRecord::Base
   FUND_SOURCES = %w{ADB WB}
   CYCLE = %w{1 2 3 4 5}
   ####################### Validation ########################
-  validate :equal_financial_information
-  validate :first_tranch_validation
+  validate :equal_financial_information, :on => :create
+  validate :first_tranch_validation, :on => :create
   ####################### SCOPES ###########################
   scope :with_user,   -> username { fetch_all_created_by username }
   scope :with_id,     -> id { where id: id }
