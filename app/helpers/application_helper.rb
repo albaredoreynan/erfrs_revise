@@ -50,6 +50,12 @@ module ApplicationHelper
     @budget.amount
   end
 
+  def budget_allocation_per_mun(code, year, municipality_id)
+    @fund_source = FundSource.where(code: code).last  
+    @budget = MuniFundAllocation.select('amount').where( municipality_id: municipality_id, year: year).last
+    @budget.amount
+  end
+
   def total_grant_amount_per_mncpl(municipality_id, year, fund_source)
     @total = Array.new
     @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source(fund_source))
@@ -94,7 +100,8 @@ module ApplicationHelper
     end
     @total = @tranch1.inject(:+).to_f + @tranch2.inject(:+).to_f + @tranch3.inject(:+).to_f
   end
-
+  
+  
   def total_amount_release(year, fund_source)
     @amount_approve = Array.new
     Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source(fund_source)).each do |sp_id|
