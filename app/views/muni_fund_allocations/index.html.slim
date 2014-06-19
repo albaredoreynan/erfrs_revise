@@ -1,6 +1,6 @@
 h4 Fund Allocation (Municipalities)
 hr
-= link_to 'Create Fund Allocation', new_muni_fund_allocation_path(:municipality_id => params[:municipality_id]), class: 'pull-right btn btn-primary'
+= link_to 'Create Fund Allocation', new_muni_fund_allocation_path(), class: 'pull-right btn btn-primary'
 br
 br
 .col-sm-12 
@@ -41,7 +41,7 @@ br
           th Fund Allocated
           th Actions
       tbody
-        - @muni_fund_allocation.each do |mfa|
+        - @muni_fund_allocations.each do |mfa|
           tr
             td= mfa.municipality.name
             td= mfa.year
@@ -50,5 +50,7 @@ br
               = link_to "<i class='fa fa-edit'></i>".html_safe, edit_muni_fund_allocation_path(mfa, :municipality_id => params[:municipality_id]), class: 'btn btn-xs btn-warning'
               '&nbsp
               = link_to "<i class='fa fa-trash-o'></i>".html_safe, mfa, method: :delete, 'data-confirm' => 'Are you sure you want to delete this region officer?', class: 'btn btn-xs btn-danger'
-
+  
+  .flickr_pagination
+    = will_paginate @muni_fund_allocations
     

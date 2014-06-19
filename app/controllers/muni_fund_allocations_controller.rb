@@ -5,12 +5,15 @@ class MuniFundAllocationsController < ApplicationController
   has_scope :municipality_id
 	
 	def index
-		@muni_fund_allocation = apply_scopes(MuniFundAllocation).all
+		# @muni_fund_allocation = apply_scopes(MuniFundAllocation).all
+		@muni_fund_allocations = apply_scopes(MuniFundAllocation)
+    @muni_fund_allocations = @muni_fund_allocations.paginate(page: params[:page]) unless request.url =~ /json$/
+    @muni_fund_allocations
 	end	
 
 	def new
 		@muni_fund_allocation = MuniFundAllocation.new
-		@municipality = Municipality.select('name').find(params[:municipality_id])
+		# @municipality = Municipality.select('name').find(params[:municipality_id])
 	end
 
 	def edit
