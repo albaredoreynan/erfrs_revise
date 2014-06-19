@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ss:Styles>
+    <ss:Style ss:ID="1">
+        <ss:Font ss:Bold="1" />
+        <ss:Alignment ss:Horizontal="Center"/>
+    </ss:Style>
+    <ss:Style ss:ID="2">
+      <ss:Alignment ss:Horizontal="Center"/>
+    </ss:Style>
+  </ss:Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Column ss:Width="50"/>
+      <Column ss:Width="300"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+
+      <Row>
+        <Cell ss:MergeAcross="7" ss:StyleID="1"> 
+          <Data ss:Type="String"> DEPARTMENT OF SOCIAL WELFARE AND DEVELOPMENT </Data>
+        </Cell> 
+      </Row>
+      <Row>
+        <Cell ss:MergeAcross="7" ss:StyleID="1"> 
+          <Data ss:Type="String"> <B> NCDDP MUNICIPAL GRANTS ALLOCATION </B> </Data> 
+        </Cell> 
+      </Row>
+      <Row> 
+        <Cell ss:MergeAcross="7" ss:StyleID="1"> 
+          <Data ss:Type="String"> </Data>
+        </Cell> 
+      </Row>
+      <Row>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Region </Data> </Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Province </Data> </Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Municipality </Data> </Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String">Allocation </Data></Cell>
+        <Cell ss:MergeAcross="2" ss:StyleID="2"> <Data ss:Type="String"> MIBF </Data> </Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Surplus </Data> </Cell>
+      </Row>
+      <Row>
+        <Cell ss:Index="5"><Data ss:Type="String"> Release </Data></Cell>
+        <Cell ss:Index="6"><Data ss:Type="String"> Excess </Data></Cell>
+        <Cell ss:Index="7"><Data ss:Type="String"> Total </Data></Cell>
+      </Row>
+      <% @subprojects.each do |m, sps|%>
+        <%allocation = 0 %>
+        <%release = 0 %>
+        <%excess = 0 %>
+        <%allocation += sps.map{|c|c.grant_amount_direct_cost + c.grant_amount_indirect_cost + c.grant_amount_contingency_cost}.first %>
+        <%release += sps.map{|c|c.first_tranch_revised_amount + c.second_tranch_revised_amount + c.third_tranch_revised_amount}.first %>
+        <%excess += sps.map{|c|c.first_tranch_amount + c.second_tranch_amount + c.third_tranch_amount}.first %>
+        <%total_m = release + excess %>
+        <Row>
+          <Cell><Data ss:Type="String"><%=m.province.region.code %> </Data></Cell>
+          <Cell><Data ss:Type="String"><%=m.province.name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%=m.name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%=number_to_currency allocation %></Data></Cell>
+          <Cell><Data ss:Type="String"><%=number_to_currency release %></Data></Cell>
+          <Cell><Data ss:Type="String"><%=number_to_currency excess %></Data></Cell>
+          <Cell><Data ss:Type="String"><%=number_to_currency total_m %></Data></Cell>
+          <Cell><Data ss:Type="String"><%=number_to_currency allocation - total_m %></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

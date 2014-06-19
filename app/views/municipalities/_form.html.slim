@@ -8,10 +8,11 @@
       = f.label :subproject_province_id, 'Province', class: 'control-label col-sm-2'
       .col-sm-10
         = f.select :province_id, [], {}, class: 'form-control', id: 'subproject_province_id'
-    .form-group
-      =f.label :group_id, "Group", class: "control-label col-sm-2"
-      .col-sm-10
-        = f.select :group_id, Group.all.map{|a|[a.code,a.id]}, {include_blank: true}, class: 'form-control'
+    -if params[:action] == "edit"
+      .form-group
+        =f.label :group_id, "Group", class: "control-label col-sm-2"
+        .col-sm-10
+          = f.select :group_id, Group.all.map{|a|[a.code,a.id]}, {include_blank: true}, class: 'form-control'
     .form-group
       = f.label :name, 'Municipality', class: 'control-label col-sm-2'
       .col-sm-10

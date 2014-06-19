@@ -1,0 +1,164 @@
+h4 DV
+hr
+.row.rfr-index
+  .col-md-12
+    = link_to "Print to PDF".html_safe, dv_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
+.row.rfr-index
+  .col-md-12.header
+    p.text-center
+      b Republic of the Philippines
+      |
+      br 
+      b Department of Social Welfare and Development
+      br
+      |
+      b Batasan Pambansa Complex, Constitution Hills, Quezon City
+.panel.panel-primary
+  
+  .table-responsive
+    table.table.table-bordered
+      tr 
+        td.text-center rowspan=2 colspan=3 width='80%'
+          h4 DISBURSEMENT VOUCHER
+        td width='20%' No: #{@rfrs.dv_number}
+
+  .table-responsive
+    table.table.table-bordered	
+      tr
+        td.text-left width='20%' Mode of Payment
+        td colspan=3 style='padding-left: 50px;'
+        	form.form-horizontal
+        		= check_box_tag :a, disabled: true
+           		|&nbsp; MDS Check &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           		= check_box_tag :b, disabled: true
+              	|&nbsp; Commercial Check &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	= check_box_tag :c, disabled: true
+              	|&nbsp; ADA &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	= check_box_tag :d, disabled: true
+              	|&nbsp; Others 
+      tr
+        td.text-left rowspan=2 width='10%' Payee
+        td width='40' rowspan=2
+					= @rfrs.account_name.upcase
+					| &nbsp;/&nbsp;
+					= @rfrs.bank_account_number
+        td.text-left width='20%' TIN/Employee No.
+        td.text-left width='30%' OR/BUR No.
+      tr
+      	td.text-left width='20%' height=35
+      	td.text-left width='20%' height=35
+      tr
+        td.text-left rowspan=3 width='10%' Address
+        td.text-left rowspan=3 width='40%'
+					= @subproject.municipality.try(:name)
+					|&nbsp; 
+					= @subproject.province.try(:name)
+					|,&nbsp;
+					= @subproject.region.try(:name)
+        td.text-center colspan=2 Responsibility Center
+      tr
+      	td.text-left width='20%' Office/Unit/Project
+      	td.text-left width='30%' Code
+      tr
+      	td.text-left width='20%' height=35
+      	td.text-left width='20%' height=35
+      tr
+      	td.text-center width='80%' colspan=3 
+      		b Explanation
+      	td.text-center width='20%' 
+      		b Amount
+      tr
+      	td.text-left height=300 width='80%' colspan=3
+					.col-md-12
+					  p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
+					  p Sub-Project Name: &nbsp; #{@subproject.title}
+					  p Tranche: &nbsp; #{@rfrs.tranch_for}
+					  p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
+					  P
+					    h5 Attachment
+      	td.text-right height=300 width='20%'
+					.col-md-12
+					  p #{number_to_currency @subproject.second_tranch_amount_release} 
+      tr
+      	td.text-right	width='80%' colspan=3
+      		b Php
+      	td.text-right
+      		= number_to_currency @subproject.second_tranch_amount_release		
+    table.table.table-bordered
+      
+        tr
+          td.text-left width='2%'
+            b A.
+          td.text-left width='48%'
+            b Certified
+            
+          td.text-left width='2%'
+            b B.
+          td.text-left width='48%'
+            b Approved Payment
+        tr
+          td colspan=2 style='padding-left: 50px;'
+            .form-group
+              = check_box_tag :a, disabled: true
+              |&nbsp; Cash Available
+              br
+              = check_box_tag :b, disabled: true
+              |&nbsp; Subject to Authority to Debit Account (when applicable)
+              br
+              = check_box_tag :c, disabled: true
+              |&nbsp; Supporting documents complete
+          td colspan=2 style='padding-left: 50px;'
+            .form-group 
+    table.table.table-bordered
+      tr    
+        td.text-center width='10%' Signature
+        td.text-left width='40%'
+        td.text-center width='10%' Signature
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Printed Name
+        td.text-left width='40%'
+        td.text-center width='10%' Printed Name
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Position
+        td.text-left width='40%'
+        td.text-center width='10%' Position
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Date
+        td.text-left width='40%'
+        td.text-center width='10%' Date
+        td.text-left width='40%'
+    table.table.table-bordered
+      tr
+        td.text-left width='2%'
+          b C.
+        td.text-left width='78%'
+          b Received Payment
+        td.text-left width='30%' JEV No.
+    table.table.table-bordered
+    	tr
+    		td.text-left width='10%' BTF No.
+    		td.text-left width='35%' #{@rfrs.check_number}
+    		td.text-left width='15%' Date: #{ !@rfrs.check_date.nil? ? Date.parse(@rfrs.check_date).strftime("%d-%b-%Y") : '' }
+    		td.text-left width='20%' Bank Name
+    		td.text-left width='25%' LandBank of the Philippines
+    	tr
+    		td.text-left width='10%' Signature
+    		td.text-left width='35%'
+    		td.text-left width='15%' Date
+    		td.text-left width='20%' Printed Name
+    		td.text-left width='25%' rowspan=2 Date: #{!@rfrs.dv_date.nil? ? @rfrs.dv_date.strftime("%d-%b-%Y") : '' }
+    	tr
+    		td.text-left colspan=4 Official Receipt / Other Documents
+.row.rfr-index
+  .col-md-12
+    = link_to "Print to PDF".html_safe, dv_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
+      
+css:      
+  .form-group > .col-md-3{
+    text-align: right;
+  }
+
+        

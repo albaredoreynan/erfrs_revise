@@ -21,6 +21,17 @@
     return a;
   }
 
+  function update_fund_source(item_val, sp_id){
+    $.ajax({
+      url: "/update_fund_source",
+      data: {
+        fund_source_id : item_val,
+        subproject_id : sp_id
+      },
+        dataType: "script"
+      });
+  }
+
 
   function compute_tranch(){
     var total_grant = 0.0
@@ -117,9 +128,9 @@
 
     subtotal_total = subtotal_direct + subtotal_indirect + subtotal_contingency;
 
-    total_direct = subtotal_direct + parseFloat($('#subproject_total_lcc_cash_direct_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_direct_cost').val());
-    total_indirect = subtotal_indirect + parseFloat($('#subproject_total_lcc_cash_indirect_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_indirect_cost').val());
-    total_contingency = subtotal_contingency + parseFloat($('#subproject_total_lcc_cash_contingency_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_contingency_cost').val());
+    total_direct = parseFloat($('#subproject_total_lcc_cash_direct_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_direct_cost').val());
+    total_indirect = parseFloat($('#subproject_total_lcc_cash_indirect_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_indirect_cost').val());
+    total_contingency = parseFloat($('#subproject_total_lcc_cash_contingency_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_contingency_cost').val());
     total_total =  total_direct + total_indirect + total_contingency 
 
 

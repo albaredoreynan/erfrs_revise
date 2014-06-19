@@ -11,16 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609034734) do
+ActiveRecord::Schema.define(version: 20140618064233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "approval_informations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "barangays", force: true do |t|
     t.integer  "municipality_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nscb_code"
   end
 
   add_index "barangays", ["municipality_id"], name: "index_barangays_on_municipality_id", using: :btree
@@ -53,6 +59,11 @@ ActiveRecord::Schema.define(version: 20140609034734) do
     t.integer  "year"
   end
 
+  create_table "fund_informations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fund_sources", force: true do |t|
     t.string   "code"
     t.string   "name"
@@ -68,12 +79,22 @@ ActiveRecord::Schema.define(version: 20140609034734) do
     t.integer  "fund_source_id"
   end
 
+  create_table "muni_fund_allocations", force: true do |t|
+    t.integer  "year"
+    t.decimal  "amount",          precision: 15, scale: 2, default: 0.0, null: false
+    t.integer  "municipality_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "municipalities", force: true do |t|
     t.integer  "province_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+    t.decimal  "grant_allocation", precision: 15, scale: 2, default: 0.0, null: false
+    t.integer  "year"
   end
 
   add_index "municipalities", ["group_id"], name: "index_municipalities_on_group_id", using: :btree
@@ -96,6 +117,18 @@ ActiveRecord::Schema.define(version: 20140609034734) do
   end
 
   add_index "provinces", ["region_id"], name: "index_provinces_on_region_id", using: :btree
+
+  create_table "regional_officers", force: true do |t|
+    t.string   "name"
+    t.string   "designation"
+    t.string   "ro_type"
+    t.integer  "region_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "box"
+  end
+
+  add_index "regional_officers", ["region_id"], name: "index_regional_officers_on_region_id", using: :btree
 
   create_table "regions", force: true do |t|
     t.string   "code"
@@ -158,6 +191,7 @@ ActiveRecord::Schema.define(version: 20140609034734) do
     t.datetime "rpmo_date"
     t.boolean  "approved_as_requested"
     t.integer  "tranch_for"
+    t.integer  "exchange_rate"
   end
 
   create_table "roles", force: true do |t|
@@ -219,10 +253,10 @@ ActiveRecord::Schema.define(version: 20140609034734) do
     t.integer  "cycle"
     t.integer  "group_id"
     t.decimal  "grant_amount_contingency_cost",      precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "lcc_contingency_cost",               precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "lcc_blgu_contingency_cost",          precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "community_contingency_cost",         precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "mlgu_contingency_cost",              precision: 15, scale: 2, default: 0.0, null: false
-    t.decimal  "plgu_contingency_cost",              precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "plgu_others_contingency_cost",       precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "total_lcc_cash_contingency_cost",    precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "total_lcc_in_kind_contingency_cost", precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "first_tranch_revised_amount",        precision: 15, scale: 2, default: 0.0, null: false

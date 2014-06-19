@@ -115,4 +115,90 @@ module ApplicationHelper
     @total = @amount_approve.inject(:+).to_f
   end
 
+  def initial_tranch_per_month(sps, year)
+
+    data_f = [[],[],[],[],[],[],[],[],[],[],[],[]]
+    sps.each do |a|
+      if a.first_tranch_date_required.present? and a.first_tranch_date_required.to_time.strftime("%Y") == year.to_s
+        %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
+          if a.first_tranch_date_required.to_time.strftime("%B") == month.to_s
+            data_f[index] << a.first_tranch_amount        
+            #condition if revised amount present
+          end
+        end 
+      end
+
+      if a.second_tranch_date_required.present? and a.second_tranch_date_required.to_time.strftime("%Y") == year.to_s
+        %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
+          if a.second_tranch_date_required.to_time.strftime("%B") == month.to_s
+            data_f[index] << a.second_tranch_amount      
+          end
+        end 
+      end
+
+      if a.third_tranch_date_required.present? and a.third_tranch_date_required.to_time.strftime("%Y") == year.to_s
+        %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
+          if a.third_tranch_date_required.to_time.strftime("%B") == month.to_s
+            data_f[index] << a.third_tranch_amount      
+          end
+        end 
+      end
+    end
+    data_f
+  end
+  def revised_tranch_per_month(sps, year)
+
+    data_f = [[],[],[],[],[],[],[],[],[],[],[],[]]
+    sps.each do |a|
+      if a.first_tranch_date_required.present? and a.first_tranch_date_required.to_time.strftime("%Y") == year.to_s
+        %i(January February March April May June July August September October November December).each_with_index do |month, index|
+          if a.first_tranch_date_required.to_time.strftime("%B") == month.to_s
+            data_f[index] << a.first_tranch_revised_amount        
+            #condition if revised amount present first_tranch_revised_amount
+          end
+        end 
+      end
+
+      if a.second_tranch_date_required.present? and a.second_tranch_date_required.to_time.strftime("%Y") == year.to_s
+        %i(January February March April May June July August September October November December).each_with_index do |month, index|
+          if a.second_tranch_date_required.to_time.strftime("%B") == month.to_s
+            data_f[index] << a.second_tranch_revised_amount      
+
+          end
+        end 
+      end
+
+      if a.third_tranch_date_required.present? and a.third_tranch_date_required.to_time.strftime("%Y") == year.to_s
+        %i(January February March April May June July August September October November December).each_with_index do |month, index|
+          if a.third_tranch_date_required.to_time.strftime("%B") == month.to_s
+            data_f[index] << a.third_tranch_revised_amount      
+          end
+        end 
+      end
+    end
+    data_f
+  end
+
+############################## Encryptor ################################
+
+  def cipher
+    OpenSSL::Cipher::Cipher.new('aes-256-cbc')
+  end
+ 
+  def cipher_key
+    'any string that you want'
+  end
+ 
+  def deobfuscate(value)
+    c = cipher.decrypt
+    c.key = Digest::SHA256.digest(cipher_key)
+    c.update(Base64.decode64(value.to_s)) + c.final
+  end
+ 
+  def obfuscate(value)
+    c = cipher.encrypt
+    c.key = Digest::SHA256.digest(cipher_key)
+    Base64.encode64(c.update(value.to_s) + c.final).squish
+  end
+##########################################################################
 end

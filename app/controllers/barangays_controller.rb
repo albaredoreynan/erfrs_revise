@@ -10,7 +10,7 @@ class BarangaysController < InheritedResources::Base
   protected
 
     def permitted_params
-      params.permit(barangay: %i[municipality_id name])
+      params.permit(barangay: %i[municipality_id name nscb_code])
     end
 
     def collection

@@ -14,6 +14,9 @@ br
           th First Name
           th Last Name
           th Role
+          th Region
+          th Municipality
+          th Barangay
           th Action
       tbody
       - @users.each do |user|
@@ -22,7 +25,10 @@ br
           td= user.username
           td= user.first_name
           td= user.last_name
-
+          td= user.role.try(:name) 
+          td= user.region.try(:code)
+          td= user.municipality.try(:name)
+          td= user.barangay.try(:name)
           td= user.role.try(:name)
           td 
             = link_to "<i class='fa fa-edit'></i>".html_safe, edit_user_path(user), class: 'btn btn-xs btn-warning'

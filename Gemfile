@@ -14,7 +14,7 @@ gem 'will_paginate', '~> 3.0.5'
   # echo 'export ERFRS_USES_POSTGRESQL=1' >> ~/.zshrc
   # source ~/.zshrc
   # bundle install
-  gem 'pg'
+gem 'pg'
 #else
 #  gem 'tiny_tds'
 #  gem 'activerecord-sqlserver-adapter', git: 'https://github.com/rails-sqlserver/activerecord-sqlserver-adapter.git'
@@ -28,6 +28,12 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'cocoon'
 gem 'font-awesome-sass'
+
+# utilities
+gem 'faker', require: false
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+gem 'roo'
 
 group :development, :test do
   gem 'rspec-rails'   

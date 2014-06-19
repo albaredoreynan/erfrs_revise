@@ -1,0 +1,124 @@
+h4 ObR
+hr
+.row.rfr-index
+  .col-md-12
+    = link_to "Print to PDF".html_safe, obr_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right', id:"generate-report", target: "_blank"
+
+.row.rfr-index
+  .col-md-12.header
+    p.text-center
+      b Republic of the Philippines
+      |
+      br 
+      b Department of Social Welfare and Development
+      br
+      |
+      b Batasan Pambansa Complex, Constitution Hills, Quezon City
+.panel.panel-primary
+  .table-responsive
+    table.table.table-bordered
+      tr 
+        td.text-center rowspan=2 colspan=4 width='80%'
+          h4 OBLIGATION REQUEST
+        td.text-left No: #{@rfrs.obr_number}
+      tr
+        td.text-left Date: #{ !@rfrs.obr_date.nil? ? @rfrs.obr_date.strftime("%d-%b-%Y") : '' }
+      tr
+        td.text-center width='10%' Payee
+        td colspan=4
+          = @rfrs.account_name.upcase
+          | &nbsp;/&nbsp;
+          = @rfrs.bank_account_number
+
+      tr
+        td.text-center width='10%' Office
+        td colspan=4
+      tr
+        td.text-center width='10%' Address
+        td colspan=4
+          = @subproject.municipality.try(:name)
+          |&nbsp; 
+          = @subproject.province.try(:name)
+          |,&nbsp;
+          = @subproject.region.try(:name)
+          
+  .table-responsive
+    table.table.table-bordered
+      tr
+        td.text-center width='10%' Responsibility Center
+        td.text-center width='50%' Particulars
+        td.text-center width='12%' P.P.A
+        td.text-center width='8%' Accunt Code
+        td.text-center width='10%' Amount
+      tr height=400 
+        td.text-center width='10%' 
+        td.text-left width='50%'
+          .col-md-12
+            p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
+            p Sub-Project Name: &nbsp; #{@subproject.title}
+            p Tranche: &nbsp; #{@rfrs.tranch_for}
+            p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
+            P
+              h5 Attachment
+        td.text-center width='12%' 
+        td.text-center width='8%' 
+        td.text-center width='10%'
+          .col-md-12
+            p #{number_to_currency @subproject.second_tranch_amount_release}
+      tr
+        td.text-right colspan=4 Total
+        td.text-center
+          = number_to_currency @subproject.second_tranch_amount_release
+    table.table.table-bordered
+      form.form-horizontal
+        tr
+          td.text-left width='2%'
+            b A.
+          td.text-left width='48%'
+            b Certified
+            
+          td.text-left width='2%'
+            b B.
+          td.text-left width='48%'
+            b Certified
+        tr
+          td colspan=2 style='padding-left: 50px;'
+            .form-group
+              = check_box_tag :a, disabled: true
+              |&nbsp; Charges to appropriation/allotment necessary, lawful and under my direct supervision
+              br
+              = check_box_tag :a, disabled: true
+              |&nbsp; Supporting documents valid, proper and legal
+          td colspan=2 style='padding-left: 50px;'
+            .form-group Allotment available and obligated for the purpose as indicated above      
+    table.table.table-bordered
+      tr    
+        td.text-center width='10%' Signature
+        td.text-left width='40%'
+        td.text-center width='10%' Signature
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Printed Name
+        td.text-left width='40%'
+        td.text-center width='10%' Printed Name
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Position
+        td.text-left width='40%'
+        td.text-center width='10%' Position
+        td.text-left width='40%'
+      tr    
+        td.text-center width='10%' Date
+        td.text-left width='40%'
+        td.text-center width='10%' Date
+        td.text-left width='40%'
+.row.rfr-index
+  .col-md-12
+    = link_to "Print to PDF".html_safe, obr_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
+
+css:      
+  .form-group > .col-md-3{
+    text-align: right;
+  }
+
+        

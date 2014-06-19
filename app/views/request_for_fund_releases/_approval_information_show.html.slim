@@ -1,0 +1,165 @@
+.row.sp-table
+  .col-md-12
+    h4 Approval Information
+    hr
+  br
+.row.sp-show
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Requested By
+      .col-md-6.bold
+        = @rfrs.requested_by_first
+  .col-md-6  
+    .form-group
+      .col-md-5
+        'Requested By
+      .col-md-7.bold
+        = @rfrs.requested_by_second
+  .col-md-6 
+    .form-group
+      .col-md-4
+        'Designation
+      .col-md-6.bold
+        = @rfrs.designation_first
+  .col-md-6 
+    .form-group
+      .col-md-5
+        'Designation
+      .col-md-7.bold
+        = @rfrs.designation_second
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Date
+      .col-md-6.bold
+        = @rfrs.date_first.nil? ? "" : @rfrs.date_first.strftime('%d-%b-%Y')
+  .col-md-6 
+    .form-group
+      .col-md-5
+        'Date:
+      .col-md-7.bold
+        = @rfrs.date_second.nil? ? "" : @rfrs.date_second.strftime('%d-%b-%Y')
+
+    
+  .col-md-12 
+    hr
+    .form-group
+      .col-md-2.text-right
+        'Date Received
+      .col-md-3.bold
+        = @rfrs.date_received.nil? ? "" : @rfrs.date_received.strftime('%d-%b-%Y')
+
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Reviewed By
+      .col-md-6.bold
+        = @rfrs.reviewed_by_first
+  .col-md-6
+    .form-group
+      .col-md-5
+        'Reviewed By
+      .col-md-7.bold
+        = @rfrs.reviewed_by_second
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Designation
+      .col-md-6.bold
+        = @rfrs.rev_designation_first
+  .col-md-6
+    .form-group
+      .col-md-5
+        'Designation
+      .col-md-7.bold
+        = @rfrs.rev_designation_second
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Date
+      .col-md-6.bold
+        = @rfrs.rev_date_first.nil? ? "" : @rfrs.rev_date_first.strftime('%d-%b-%Y')
+  .col-md-6
+    .form-group
+      .col-md-5
+        'Date
+      .col-md-7.bold
+        = @rfrs.rev_date_second.nil? ? "" : @rfrs.rev_date_second.strftime('%d-%b-%Y')
+              
+.row.sp-table
+  .col-md-12
+    h5 Sub-Region Project Management Office (SRPMO):
+.row.sp-show
+  .col-md-12
+    .form-group
+      .col-md-2.text-right
+        'Date Received
+      .col-md-3.bold
+        = @rfrs.srpmo_date_received.nil? ? "" : @rfrs.srpmo_date_received.strftime('%d-%b-%Y')
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Reviewed By
+      .col-md-6.bold
+        = @rfrs.srpmo_reviewed_by
+  .col-md-6
+    .form-group
+      .col-md-5
+        'Recommended By
+      .col-md-6.bold
+        = @rfrs.srpmo_recommend_by
+  .col-md-6  
+    .form-group
+      .col-md-4
+        'Designation
+      .col-md-6.bold
+        = @rfrs.srpmo_designation
+  .col-md-6
+    .form-group
+      .col-md-5
+        'Designation
+      .col-md-6.bold
+        = @rfrs.srpmo_rec_designation
+  .col-md-6
+    .form-group
+      .col-md-4
+        'Date
+      .col-md-6.bold
+        = @rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')
+  .col-md-6  
+    .form-group
+      .col-md-5
+        'Date
+      .col-md-6.bold
+        = @rfrs.srpmo_rec_date.nil? ? "" : @rfrs.srpmo_rec_date.strftime('%d-%b-%Y')
+
+.row.sp-table
+  .col-md-12
+    h5 Regional Project Management Office (RPMO):
+.row.sp-show
+  .col-md-12
+    .form-group
+      .col-md-2.text-right
+        'Date Received
+      .col-md-3.bold
+        = @rfrs.rpmo_date_received.nil? ? "" : @rfrs.rpmo_date_received.strftime('%d-%b-%Y')
+  .col-md-12
+    .form-group
+      .col-md-2.text-right
+        'Approved By
+      .col-md-3.bold
+        = @rfrs.rpmo_approved_by
+  .col-md-12
+    .form-group
+      .col-md-2.text-right
+        'Designation
+      .col-md-3.bold
+        = @rfrs.rpmo_designation
+  .col-md-12
+    .form-group
+      .col-md-2.text-right
+        'Date
+      .col-md-3.bold
+        = @rfrs.rpmo_date.nil? ? "" : @rfrs.rpmo_date.strftime('%d-%b-%Y')
+

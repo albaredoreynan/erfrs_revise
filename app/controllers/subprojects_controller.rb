@@ -28,7 +28,6 @@ class SubprojectsController < ApplicationController
 
   def new
     @subproject = Subproject.new
-
   end
 
   def edit
@@ -59,16 +58,20 @@ class SubprojectsController < ApplicationController
   end
 
   def destroy
-    Subproject.find(params[:id]).destroy
-    flash[:success] = 'Subproject was deleted successfully.'
+
+    @subproject = Subproject.find(params[:id])
+
+    if @subproject.status != "Final"
+      @subproject.destroy
+      flash[:success] = 'Subproject was deleted successfully.'
+    else
+      flash[:alert] = "Subproject is in Final status"
+    end
+
     redirect_to subprojects_path
   end
 
   def display_group
-
-    p "////////////////" 
-    p 
-    p "////////////////" 
     @municipality = Municipality.find(params[:municipality_id])
     @group = @municipality.group
   end
@@ -99,7 +102,7 @@ class SubprojectsController < ApplicationController
       :grant_amount_contingency_cost,
       :lcc_blgu_direct_cost,
       :lcc_blgu_indirect_cost,
-      :lcc_contingency_cost,
+      :lcc_blgu_contingency_cost,
       :community_direct_cost,
       :community_indirect_cost,
       :community_contingency_cost,
@@ -108,7 +111,7 @@ class SubprojectsController < ApplicationController
       :mlgu_contingency_cost,
       :plgu_others_direct_cost,
       :plgu_others_indirect_cost,
-      :plgu_contingency_cost,
+      :plgu_others_contingency_cost,
       :total_lcc_cash_direct_cost,
       :total_lcc_cash_indirect_cost,
       :total_lcc_cash_contingency_cost,
@@ -122,6 +125,9 @@ class SubprojectsController < ApplicationController
       :second_tranch_date_required,
       :third_tranch_amount,
       :third_tranch_date_required,
+      :first_tranch_revised_amount,
+      :second_tranch_revised_amount,
+      :third_tranch_revised_amount,
       # team member params
       team_members_attributes: [:id, :name, :designation_id, :email, :phone]
     ]

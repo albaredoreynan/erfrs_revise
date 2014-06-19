@@ -30,7 +30,7 @@
           th DV Amount
           th
       tbody
-        - RequestForFundRelease.where(subproject_id: params[:id]).each do |rfrs|
+        - RequestForFundRelease.where(subproject_id: params[:id]).order(:tranch_for).each do |rfrs|
           tr
             td = trail_id(6, rfrs.id)
             td = rfrs.tranch_for
@@ -39,7 +39,7 @@
             td = !rfrs.dv_date.nil? ? rfrs.dv_date.strftime("%d-%b-%Y") : ''
             td = rfrs.dv_date.nil? ? '' : number_to_currency(rfrs.amount_approve)
             td
-              = link_to "<i class='fa fa-eye'></i>".html_safe, rfrs, class: 'btn btn-xs btn-primary'
+              = link_to "<i class='fa fa-eye'></i>".html_safe, request_for_fund_release_path(rfrs, :sp_id => params[:id]), class: 'btn btn-xs btn-primary'
               '&nbsp
               = link_to "<i class='fa fa-edit'></i>".html_safe, edit_request_for_fund_release_path(rfrs, :sp_id => params[:id]), class: 'btn btn-xs btn-warning'
               '&nbsp

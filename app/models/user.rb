@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :subprojects
   belongs_to :role
+  belongs_to :region
+  belongs_to :municipality
+  belongs_to :barangay
 
   [SuperUser].each do |role|
     define_method("#{role.name.underscore}?") do

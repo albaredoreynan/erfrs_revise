@@ -46,8 +46,14 @@ br
     .col-md-6
       .form-group
         .col-md-4
-          =f.label :Phone
+          =f.label :account_name, "Account Number"
         .col-md-6
+          =f.text_field :bank_account_number
+    .col-md-6
+      .form-group
+        .col-md-5
+          =f.label :Phone
+        .col-md-7
           =f.text_field :phone
   - else
     - @subproject_tranch_one = RequestForFundRelease.select('address, branch, city, account_name, province, phone').where('subproject_id = ?', params[:sp_id]).order("id ASC").first
@@ -84,9 +90,15 @@ br
     .col-md-6
       .form-group
         .col-md-4
-          =f.label :Phone
+          =f.label :account_name, "Account Number"
         .col-md-6
-          =f.text_field :phone, value: @subproject_tranch_one.phone
+          =f.text_field :bank_account_number
+    .col-md-6
+      .form-group
+        .col-md-5
+          =f.label :Phone
+        .col-md-7
+          =f.text_field :phone
   
 
   

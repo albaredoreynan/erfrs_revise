@@ -1,4 +1,6 @@
 class MunicipalitiesController < InheritedResources::Base
+  include ApplicationHelper
+
   actions :all, except: :show
   before_action :municipality_params, only: :show
 
@@ -14,7 +16,7 @@ class MunicipalitiesController < InheritedResources::Base
 
   def update
     @municipality = Municipality.find(params[:id])
-    if @municipality.update_attributes update-params
+    if @municipality.update_attributes update_params
       flash[:success] = 'Updated Successfully.'
       redirect_to municipalities_path
     else
@@ -22,9 +24,42 @@ class MunicipalitiesController < InheritedResources::Base
       redirect_to municipalities_path
     end
   end
+  
+  def update_fund_source
+    @sp = Subproject.find(params[:subproject_id])
+
+    @fs = FundSource.find(params[:fund_source_id])
+
+    if @sp.status != "Final"
+      @sp.update(fund_source_id: @fs.id)
+    end     
+  end
+
+  def assigned_fund_source
+    @sp = Subproject.find(params[:subproject_id])
+    @id = params[:subproject_id]
+    if @sp.status != "Final"
+      @group = @sp.municipality.group
+      if @group.present?
+        if @group.code == "293"
+          @fs = FundSource.where(code: "WB").first
+          @sp.update(fund_source_id: @fs.id)
+        elsif @group.code == "177"
+          @fs = FundSource.where(code: "ADB").first
+          @sp.update(fund_source_id: @fs.id)
+        else
+          
+        end
+      else
+        # Condition in Assign Fundsource without group
+        # @fs = FundSource.where(code: "ADB").first
+        # @sp.update(fund_source_id: @fs.id)
+      end
+    end
+
+  end
 
   protected
-
     def permitted_params
       params.permit(municipality: %i[province_id name group_id])
     end

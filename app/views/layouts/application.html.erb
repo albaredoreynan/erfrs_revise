@@ -11,7 +11,8 @@
     <%= render "layouts/subheader" %>
     <%= render "layouts/navbar" %>
     <%= render "layouts/flash" %>
-    <div class="container <%= devise_layout(params[:controller]) %>">
+
+    <div class="container <%= devise_layout(params[:controller]) %>" style= <%= @hide_nav ? 'padding-top:2%;' : '' %> >
       <%= yield %>
     </div>
 
