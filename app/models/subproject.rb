@@ -24,6 +24,9 @@ class Subproject < ActiveRecord::Base
   ####################### Validation ########################
   validate :equal_financial_information, :on => :create
   validate :first_tranch_validation, :on => :create
+  validates :region_id, :municipality_id, :province_id, :barangay_id, 
+            :title, presence: true
+  validate :mbif_date
   ####################### SCOPES ###########################
   scope :with_user,   -> username { fetch_all_created_by username }
   scope :with_id,     -> id { where id: id }
@@ -49,12 +52,18 @@ class Subproject < ActiveRecord::Base
   ####################### END ###########################
 
   ################# CUSTOM VALIDATION #####################
+  def mbif_date
+    if self.date_of_mbif.present?
+      errors.add(:error, 'Wrong MBIF Date Input' ) unless self.date_of_mbif.is_a?(Date)
+    end
+  end
 
   def first_tranch_validation
     if self.first_tranch_amount < ((self.grant_amount_direct_cost + self.grant_amount_indirect_cost + self.grant_amount_contingency_cost) * 0.50)
-      errors.add(:alert, 'Errors in First Tranch')
+      errors.add(:error, 'Errors in First Tranch')
     end
   end
+
   def equal_financial_information
     total_direct = 0
     total_indirect = 0

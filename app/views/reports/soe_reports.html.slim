@@ -43,7 +43,7 @@ hr
   	        td= number_to_currency soe.amount_approve
   	        td= soe.rpmo_date
   	        td= soe.check_number
-  	        td= soe.dv_date.to_date
+  	        td= soe.try(:dv_date).try(:to_date)
   	        td 100%
   	        td.dv_amount= number_to_currency soe.subproject.total_dv_amount
   	        td.exchange 
