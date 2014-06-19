@@ -33,13 +33,13 @@
       .col-md-4
         'Date
       .col-md-6.bold
-        = @rfrs.date_first
+        = @rfrs.date_first.nil? ? "" : @rfrs.date_first.strftime('%d-%b-%Y')
   .col-md-6 
     .form-group
       .col-md-5
         'Date:
       .col-md-7.bold
-        = @rfrs.date_second
+        = @rfrs.date_second.nil? ? "" : @rfrs.date_second.strftime('%d-%b-%Y')
 
     
   .col-md-12 
@@ -48,7 +48,7 @@
       .col-md-2.text-right
         'Date Received
       .col-md-3.bold
-        = @rfrs.date_received
+        = @rfrs.date_received.nil? ? "" : @rfrs.date_received.strftime('%d-%b-%Y')
 
   .col-md-6
     .form-group
@@ -79,13 +79,13 @@
       .col-md-4
         'Date
       .col-md-6.bold
-        = @rfrs.rev_date_first
+        = @rfrs.rev_date_first.nil? ? "" : @rfrs.rev_date_first.strftime('%d-%b-%Y')
   .col-md-6
     .form-group
       .col-md-5
         'Date
       .col-md-7.bold
-        = @rfrs.rev_date_second
+        = @rfrs.rev_date_second.nil? ? "" : @rfrs.rev_date_second.strftime('%d-%b-%Y')
               
 .row.sp-table
   .col-md-12
@@ -96,7 +96,7 @@
       .col-md-2.text-right
         'Date Received
       .col-md-3.bold
-        = @rfrs.srpmo_date_received 
+        = @rfrs.srpmo_date_received.nil? ? "" : @rfrs.srpmo_date_received.strftime('%d-%b-%Y')
   .col-md-6
     .form-group
       .col-md-4
@@ -126,13 +126,13 @@
       .col-md-4
         'Date
       .col-md-6.bold
-        = @rfrs.srpmo_date
+        = @rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')
   .col-md-6  
     .form-group
       .col-md-5
         'Date
       .col-md-6.bold
-        = @rfrs.srpmo_rec_date
+        = @rfrs.srpmo_rec_date.nil? ? "" : @rfrs.srpmo_rec_date.strftime('%d-%b-%Y')
 
 .row.sp-table
   .col-md-12
@@ -143,7 +143,7 @@
       .col-md-2.text-right
         'Date Received
       .col-md-3.bold
-        = @rfrs.rpmo_date_received
+        = @rfrs.rpmo_date_received.nil? ? "" : @rfrs.rpmo_date_received.strftime('%d-%b-%Y')
   .col-md-12
     .form-group
       .col-md-2.text-right
@@ -161,4 +161,5 @@
       .col-md-2.text-right
         'Date
       .col-md-3.bold
-        = @rfrs.rpmo_date
+        = @rfrs.rpmo_date.nil? ? "" : @rfrs.rpmo_date.strftime('%d-%b-%Y')
+

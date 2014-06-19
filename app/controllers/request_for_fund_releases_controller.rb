@@ -88,11 +88,27 @@ class RequestForFundReleasesController < ApplicationController
   def obr
     @rfrs = RequestForFundRelease.find params[:rfrs_id]
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf         => "ObR",
+              :orientation  => 'Portrait',
+              :page_width   => '13in'
+      end
+    end
   end
 
   def dv
     @rfrs = RequestForFundRelease.find params[:rfrs_id]
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf         => "DV",
+              :orientation  => 'Portrait',
+              :page_width   => '13in'
+      end
+    end
   end
 
   protected

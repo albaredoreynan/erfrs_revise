@@ -1,6 +1,10 @@
 h4 ObR
 hr
 .row.rfr-index
+  .col-md-12
+    = link_to "Print to PDF".html_safe, obr_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right', id:"generate-report", target: "_blank"
+
+.row.rfr-index
   .col-md-12.header
     p.text-center
       b Republic of the Philippines
@@ -108,6 +112,10 @@ hr
         td.text-left width='40%'
         td.text-center width='10%' Date
         td.text-left width='40%'
+.row.rfr-index
+  .col-md-12
+    = link_to "Print to PDF".html_safe, obr_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
+
 css:      
   .form-group > .col-md-3{
     text-align: right;

@@ -35,37 +35,37 @@
       .col-md-4
         'Amount Requested:
       .col-md-2.amt_requested.bold
-        = @amount_requested
+        = number_to_currency @amount_requested
   .col-md-6
     .form-group
       .col-md-8.text-right
         'Cumulative Total Including this Request:
       .col-md-3.bold
-        = @cumulative_amount 
+        = number_to_currency @cumulative_amount 
   .col-md-6
     .form-group
       .col-md-4
         'Previous Released:
       .col-md-2.bold
-        = @previous_released
+        = number_to_currency @previous_released
   .col-md-6
     .form-group
       .col-md-8.text-right
         'Balance After This Request:
       .col-md-3.bold
-        = @balance_amount
+        = number_to_currency @balance_amount
   .col-md-6
     .form-group
       .col-md-4.text-right
         'Amount Approved:
       .col-md-2.bold
-        = @rfrs.amount_approve
+        = number_to_currency @rfrs.amount_approve
   .col-md-6
     .form-group
       .col-md-8.text-right
         'Contingency:
       .col-md-3.bold
-        = @contingency
+        = number_to_currency @contingency
                 
   
   
@@ -97,13 +97,13 @@
       .col-md-4
         'ObR Date:
       .col-md-6.bold
-        = @rfrs.obr_date
+        = @rfrs.obr_date.strftime('%d-%b-%Y')
   .col-md-6
     .form-group
       .col-md-4.text-right
         'DV Date:
       .col-md-6.bold
-        = @rfrs.dv_date
+        = @rfrs.dv_date.strftime('%d-%b-%Y')
 
   .col-md-12
     .form-group
@@ -117,4 +117,4 @@
       .col-md-8.text-right
         'Check Date:
       .col-md-3.bold
-        = @rfrs.check_date
+        = Date.parse(@rfrs.check_date).strftime('%d-%b-%Y')

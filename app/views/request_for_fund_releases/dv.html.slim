@@ -1,6 +1,9 @@
 h4 DV
 hr
 .row.rfr-index
+  .col-md-12
+    = link_to "Print to PDF".html_safe, dv_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
+.row.rfr-index
   .col-md-12.header
     p.text-center
       b Republic of the Philippines
@@ -149,6 +152,10 @@ hr
     		td.text-left width='25%' rowspan=2 Date: #{!@rfrs.dv_date.nil? ? @rfrs.dv_date.strftime("%d-%b-%Y") : '' }
     	tr
     		td.text-left colspan=4 Official Receipt / Other Documents
+.row.rfr-index
+  .col-md-12
+    = link_to "Print to PDF".html_safe, dv_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
+      
 css:      
   .form-group > .col-md-3{
     text-align: right;

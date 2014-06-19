@@ -40,7 +40,7 @@
       .col-md-5
         ' Request Date
       .col-md-7.bold
-        = @rfrs.request_date
+        = @rfrs.request_date.strftime('%d-%b-%Y')
   .col-md-2
     ' Title
   .col-md-10.bold
