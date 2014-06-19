@@ -147,13 +147,14 @@ hr
           td.text-right
             - @amount_surplus_per_mncpl_other_per = (@amount_surplus_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
             = @amount_surplus_per_mncpl_other_per.round(2) 
-          
+  
+  .col-md-12 style="padding-bottom:7px;"
+      button data-toggle='modal' id='assigned_fund_source' class="btn btn-primary"
+        = icon_text(nil, 'Assign Fund Sources')
+      | &nbsp
+      button data-toggle='modal' data-target='#view_cash_program' class=" btn btn-primary "
+        = icon_text(nil, 'View Cash Program')
   .col-md-12
-    
-    button data-toggle='modal' data-target='#assigned_fund_source'
-      = icon_text(nil, 'Assign Fund Sources')
-    button data-toggle='modal' data-target='#view_cash_program'
-      = icon_text(nil, 'View Cash Program')
     table.table.table-hover.table-striped.table-bordered
       thead
         tr
@@ -191,16 +192,22 @@ hr
 = render 'assigned_fund_source'
 
 javascript:
-  $(".fund_source").change(function(){
-    item_val = $(this).val();
-    selected = $(this).find('option:selected').text(); 
-    sp_id = $(this).attr("id");
-    $.ajax({
-      url: "/update_fund_source",
+  $("#assigned_fund_source").click(function(){
+
+   $(".fund_source").each(function(){
+      sp_id = $(this).attr("id");
+      $.ajax({
+      url: "/assigned_fund_source",
       data: {
-        fund_source_id : item_val,
         subproject_id : sp_id
       },
         dataType: "script"
       });
+    });    
+  });
+  $(".fund_source").change(function(){
+    item_val = $(this).val();
+    selected = $(this).find('option:selected').text(); 
+    sp_id = $(this).attr("id");
+    update_fund_source(item_val, sp_id);
   });

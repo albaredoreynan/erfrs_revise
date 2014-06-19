@@ -21,6 +21,17 @@
     return a;
   }
 
+  function update_fund_source(item_val, sp_id){
+    $.ajax({
+      url: "/update_fund_source",
+      data: {
+        fund_source_id : item_val,
+        subproject_id : sp_id
+      },
+        dataType: "script"
+      });
+  }
+
 
   function compute_tranch(){
     var total_grant = 0.0

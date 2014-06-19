@@ -11,12 +11,14 @@ br
         tr
           th Code
           th Status
+          th Fund Source
           th Actions
       tbody
         - @groups.each do |grp|
           tr
             td= grp.code
             td= grp.status
+            td= grp.fund_source.try(:name)
             td
               = link_to  "<i class='fa fa-edit'></i>".html_safe, [:edit, grp], class: 'btn btn-xs btn-warning'
               | &nbsp
