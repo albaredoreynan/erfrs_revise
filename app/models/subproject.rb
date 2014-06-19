@@ -52,6 +52,12 @@ class Subproject < ActiveRecord::Base
   ####################### END ###########################
 
   ################# CUSTOM VALIDATION #####################
+  def cannot_finalize_status
+    if self.status == "Final" 
+      #put important fields
+    end
+  end
+
   def mbif_date
     if self.date_of_mbif.present?
       errors.add(:error, 'Wrong MBIF Date Input' ) unless self.date_of_mbif.is_a?(Date)
