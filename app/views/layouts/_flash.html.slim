@@ -2,5 +2,5 @@
   .col-md-4.col-md-offset-4
     - flash.each do |key, value|
       - unless value =~ /Signed in successfully/
-        div class = "#{flash_class(key)}"
+        div style="z-index: 1003; position: absolute;" class = "#{flash_class(key)}"
           = value
