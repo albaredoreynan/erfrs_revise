@@ -16,11 +16,10 @@ class CgdpsController < ApplicationController
   	@cgdp = Cgdp.new permitted_params
   	if @cgdp.save 
       flash[:success] = 'Cgdp for this municipality created successfully.'
-      redirect_to "#{municipality_path(permitted_params[:cgdp][:municipality_id])}?with_year=#{permitted_params[:cgdp][:year]}"
-
+      redirect_to cgdps_path
     else
       flash[:error] = 'An error occured while creating cgdp'
-      render 'new'
+      redirect_to cgdps_path
     end
   end
 
