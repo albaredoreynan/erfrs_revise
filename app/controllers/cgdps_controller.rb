@@ -7,4 +7,8 @@ class CgdpsController < ApplicationController
     @subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
   end
 
+  def create
+
+  end
+  
 end
