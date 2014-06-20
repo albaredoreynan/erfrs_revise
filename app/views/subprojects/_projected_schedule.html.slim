@@ -1,9 +1,11 @@
 .row.sp-table
-  h4 Project Schedule of Grant Fund Releases
+  h4 Schedule of Grant Fund Releases
   hr
   .col-md-12
     = image_tag('tip.png')
-    ' TIP: If the exact date cannot be projected, enter either the start of the month or week.
+    b
+      ' TIP:
+    'If the exact date cannot be projected, enter either the start of the month or week.
     table.table.table-bordered
       thead
         tr
@@ -21,9 +23,9 @@
           - else
             - first_amount = @subproject.first_tranch_revised_amount
 
-          th First
-          td = number_to_percentage 100*(first_amount/@total), precision: 2
-          td
+          th.text-center 1
+          td.text-right = number_to_percentage 100*(first_amount/@total), precision: 1
+          td.text-center
             - @date = @subproject.first_tranch_date_required.to_s
             = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
           td.text-right = number_to_currency @subproject.first_tranch_amount
@@ -39,9 +41,9 @@
             - if @subproject.first_tranch_amount_release != 0
               - second_amount = (@subproject.first_tranch_amount + @subproject.second_tranch_amount) - @subproject.first_tranch_revised_amount
 
-          th Second 
-          td = number_to_percentage 100*(second_amount/@total), precision: 2
-          td
+          th.text-center 2 
+          td.text-right = number_to_percentage 100*(second_amount/@total), precision: 1
+          td.text-center
             - @date = @subproject.second_tranch_date_required.to_s
             = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
           td.text-right = number_to_currency @subproject.second_tranch_amount
@@ -55,9 +57,9 @@
             - if @subproject.first_tranch_amount_release != 0
               - third_amount = (@total - first_amount) - second_amount
 
-          th Third 
-          td = number_to_percentage 100*(third_amount/@total), precision: 2
-          td
+          th.text-center 3 
+          td.text-right = number_to_percentage 100*(third_amount/@total), precision: 1
+          td.text-center
             - @date = @subproject.third_tranch_date_required.to_s
             = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
           td.text-right = number_to_currency @subproject.third_tranch_amount
