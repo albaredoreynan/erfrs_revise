@@ -60,6 +60,19 @@ class MunicipalitiesController < InheritedResources::Base
 
   end
 
+  def edit_cgdp
+    @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
+    @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
+    
+    @identifier = Cgdp.where(municipality_id: params[:id])
+    if @identifier.empty?
+      @cgdp = Cgdp.new
+    else
+      @cgdp = @identifier
+    end
+     
+  end
+
   protected
     def permitted_params
       params.permit(municipality: %i[province_id name group_id])
