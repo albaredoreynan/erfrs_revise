@@ -1,6 +1,8 @@
-h4 News and Information
-hr
-= link_to 'Add News', new_news_information_path, class: 'btn btn-primary pull-right'
+.col-sm-12.title-header
+  .col-sm-6
+    h4 News and Information
+  .col-sm-6
+    = link_to 'Create News', new_news_information_path, class: 'btn btn-primary pull-right'
 br
 br
 
@@ -20,6 +22,6 @@ br
             td= news_info.publish_start.strftime("%b %d, %Y")
             td= news_info.publish_end.strftime("%b %d, %Y")
             td
-              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, news_info], class: 'btn btn-xs btn-warning'
+              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, news_info], class: 'btn btn-xs btn-warning',"data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Edit"
               '&nbsp
-              = link_to "<i class='fa fa-trash-o'></i>".html_safe, news_info, method: :delete, 'data-confirm' => 'Are you sure you want to delete this news and information entry ?', class: 'btn btn-xs btn-danger'
+              = link_to "<i class='fa fa-trash-o'></i>".html_safe, news_info, method: :delete, 'data-confirm' => 'Are you sure you want to delete this news and information entry ?', class: 'btn btn-xs btn-danger'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Delete"

@@ -1,8 +1,11 @@
-h4 Municipalities
-hr
-= link_to 'Add Municipality', new_municipality_path, class: 'btn btn-primary pull-right'
+.col-sm-12.title-header
+  .col-sm-6
+    h4 Municipalities
+  .col-sm-6
+    = link_to 'Create Municipality', new_municipality_path, class: 'btn btn-primary pull-right'
 br
 br
+
 .col-sm-12 
   .row.sp-table
     = render 'municipality_filter'
@@ -22,10 +25,8 @@ br
             td= municipality.name
             td= municipality.group.try(:code)
             td
-              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, municipality], class: 'btn btn-xs btn-warning'
+              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, municipality], class: 'btn btn-xs btn-warning'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Edit"
               '&nbsp
               /= link_to "<i class='fa fa-trash-o'></i>".html_safe, municipality, method: :delete, 'data-confirm' => 'Are you sure you want to delete this municipality?', class: 'btn btn-xs btn-danger'
-
-
   .flickr_pagination
     = will_paginate @municipalities

@@ -10,9 +10,9 @@
 -subtotal_indirect = @subproject.grant_amount_indirect_cost + @subproject.plgu_others_indirect_cost + @subproject.mlgu_indirect_cost  + @subproject.community_indirect_cost + @subproject.lcc_blgu_indirect_cost  
 -subtotal_contingency = @subproject.grant_amount_contingency_cost + @subproject.plgu_others_contingency_cost + @subproject.mlgu_contingency_cost + @subproject.community_contingency_cost + @subproject.lcc_blgu_contingency_cost
 
--total_direct = subtotal_direct + @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_in_kind_direct_cost
--total_indirect = subtotal_indirect + @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_in_kind_indirect_cost
--total_contingency = subtotal_contingency + @subproject.total_lcc_cash_contingency_cost + @subproject.total_lcc_in_kind_contingency_cost
+-total_direct = @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_in_kind_direct_cost
+-total_indirect = @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_in_kind_indirect_cost
+-total_contingency = @subproject.total_lcc_cash_contingency_cost + @subproject.total_lcc_in_kind_contingency_cost
 -total_total =  total_direct + total_indirect + total_contingency
 .row.sp-table
   .col-md-12
@@ -26,8 +26,8 @@
           th Direct Cost
           th Indirect Cost
           th Contingency
-          th Total
-          th %Total
+          th Sub-Total
+          th % Total
       tbody#finance
         tr#grant-amount
           td GRANT Amount
@@ -65,12 +65,12 @@
           td#total_plgu.gray =number_to_currency total_plgu
           td#percent_plgu.gray #{(total_plgu/total_total*100).round(2)}%
         tr#subtotal.gray
-          td.bold Total
+          td.bold TOTAL
           td#subtotal_direct= number_to_currency subtotal_direct
           td#subtotal_indirect= number_to_currency subtotal_indirect
           td#subtotal_contingency= number_to_currency subtotal_contingency
           td#subtotal_total.bold = number_to_currency (subtotal_direct + subtotal_indirect + subtotal_contingency)
-          td#subtotal_total_percent
+          td#subtotal_total_percent 100%
         tr
           td Total LCC Cash
           td.total_lcc_cash= number_to_currency @subproject.total_lcc_cash_direct_cost

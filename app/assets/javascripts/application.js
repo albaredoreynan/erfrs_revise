@@ -15,6 +15,8 @@
 //= require cocoon
 //= require chosen.jquery
 //= require_tree .
+
+
   function parseNaN(num) {
     a = $(num).children().first().val();
     if (isNaN(a)) a = 0;
