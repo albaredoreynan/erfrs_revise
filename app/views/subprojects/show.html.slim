@@ -7,19 +7,6 @@ br
     = link_to 'Edit', edit_subproject_path(@subproject), class: 'btn btn-primary pull-right'
 
 = form_for @subproject, html: { class: 'form-horizontal' } do |f|
-  .row
-    .col-md-6
-      .form-group
-        .col-md-4
-          = f.label :id, 'Sub-Project ID'
-        .col-md-8
-          = @subproject.id
-    .col-md-6
-      .form-group
-        .col-md-4
-          = f.label :status
-        .col-md-6
-          = @subproject.status
   .col-md-12
     = render 'general_information'
     = render 'financial_information'

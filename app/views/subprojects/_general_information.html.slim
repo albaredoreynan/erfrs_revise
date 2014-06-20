@@ -1,64 +1,69 @@
 .row.sp-show
-  h4 General Information
-  hr
-  .col-md-2
-    = label_tag :title
-  .col-md-10
-    = @subproject.title
-
   .col-md-12 style="margin-top: 10px;"
     .row
       .col-md-6
         .form-group
-          .col-md-4
+          .col-md-4.text-right
+            = label_tag :id, 'Sub-Project ID'
+          .col-md-8
+            = trail_id(6, @subproject.id)
+        .form-group
+          .col-md-4.text-right
+            =label_tag :title
+          .col-md-8
+            =@subproject.title
+        .form-group
+          .col-md-4.text-right
             = label_tag :region
           .col-md-8
             = @subproject.region.try(:name)
         .form-group
-          .col-md-4
+          .col-md-4.text-right
             = label_tag :province
           .col-md-8
             = @subproject.province.try(:name)
         .form-group
-          .col-md-4
+          .col-md-4.text-right
             = label_tag :municipality
           .col-md-8
             = @subproject.municipality.try(:name)
         .form-group
-          .col-md-4
+          .col-md-4.text-right
             = label_tag :barangay
           .col-md-8
             = @subproject.barangay.try(:name)
-
+        .form-group
+          .col-md-4.text-right
+            = label_tag :group 
+          .col-md-8
+            = @subproject.municipality.group.try(:code)
       .col-md-6
         .form-group
-          .col-md-5
+          .col-md-5.text-right
+            = label_tag :status
+          .col-md-7
+            = @subproject.status
+        .form-group
+          .col-md-5.text-right
             = label_tag :date_of_mbif, "Date of MBIF"
           .col-md-7
-            
             - @date = @subproject.date_of_mbif
             = @date.blank? ? '' : @date.strftime('%d-%b-%Y')
         .form-group
-          .col-md-5
+          .col-md-5.text-right
             = label_tag :date_encoded, 'Date Encoded'
           .col-md-7
-            = @subproject.date_encoded
+            = @subproject.date_encoded.strftime('%d-%b-%Y')
         .form-group
-          .col-md-5
+          .col-md-5.text-right
             = label_tag :cycle
           .col-md-7
             = @subproject.cycle
         .form-group
-          .col-md-5
+          .col-md-5.text-right
             = label_tag :fund_source, "Fund Source"
           .col-md-7
             = @subproject.fund_source.try(:name)
-
-  .col-md-2
-    = label_tag :description
-  .col-md-10
-    = text_area_tag :description, @subproject.description, disabled: :true
-  
   / .col-md-2 style="margin-top: 10px;"
   /   = label_tag :source
   / .col-md-10 style="margin-top: 10px;"

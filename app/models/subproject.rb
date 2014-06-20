@@ -13,6 +13,7 @@ class Subproject < ActiveRecord::Base
   accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
 
   before_save :check_for_group
+  before_create :add_date_encoded
 
   STATUSES = %w{Draft Final}
   CATEGORIES = %w{Category1 Category2}
@@ -56,6 +57,11 @@ class Subproject < ActiveRecord::Base
     if self.status == "Final" 
       #put important fields
     end
+  end
+
+  def add_date_encoded
+    self.date_encoded = DateTime.now.to_date
+
   end
 
   def mbif_date
