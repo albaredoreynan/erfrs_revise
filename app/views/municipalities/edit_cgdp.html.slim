@@ -1,10 +1,16 @@
 = form_for @cgdp, html: { class: 'form-horizontal', role: 'form' } do |f|
-  h4 Community Grants Disbursement Plans
+  .col-sm-12.title-header
+    .col-sm-6
+      h4 Community Grants Disbursement Plans
+    .col-sm-6
+      = f.submit 'Update', class: 'btn pull-right btn-primary'
+      = f.hidden_field :municipality_id, value: params[:id]
+      = f.hidden_field :year, value: params[:with_year].to_i
+      - @muni_info =  Municipality.find(params[:id])
   hr
-    = f.submit 'Save', class: 'btn pull-right btn-primary'
-    = f.hidden_field :municipality_id, value: params[:id]
-    = f.hidden_field :year, value: params[:with_year].to_i
-    - @muni_info =  Municipality.find(params[:id])
+  br
+  br
+  br
   .row.sp-show
     .col-md-6.parent
       .form-group
@@ -17,7 +23,7 @@
         .col-md-4.text-right
           'Status:
         .col-md-6.bold
-          = f.select :status, options_for_select(Cgdp::STATUS), {}
+          = f.select :status, options_for_select(Cgdp::STATUS, selected: @cgdp.status.titleize), {}
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
@@ -270,7 +276,7 @@
         .col-md-5.text-right
           'SAA Date :
         .col-md-6
-          =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY'
+          =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY', value: @cgdp.saa_date.strftime('%d-%b-%Y')
 
 = render 'view_cash_program'
 = render 'assigned_fund_source'

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   resources :provinces
   resources :municipalities do
     get :edit_cgdp, on: :collection
+    get :create_cgdp, on: :collection
   end
   resources :barangays
   resources :groups

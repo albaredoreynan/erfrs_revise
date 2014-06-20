@@ -1,65 +1,103 @@
-h4 Community Grants Disbursement Plans
-hr
-  - @muni_info =  Municipality.find(params[:id])
+= form_for @cgdp, html: { class: 'form-horizontal', role: 'form' } do |f|
+  .col-sm-12.title-header
+    .col-sm-6
+      h4 Community Grants Disbursement Plans
+    .col-sm-6
+      = f.submit 'Save', class: 'btn pull-right btn-primary'
+      = f.hidden_field :municipality_id, value: params[:id]
+      = f.hidden_field :year, value: params[:with_year].to_i
+      - @muni_info =  Municipality.find(params[:id])
+  hr
+  br
+  br
+  br
   .row.sp-show
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
-          'Region
+          'Region:
         .col-md-6.bold
           = @muni_info.province.region.name
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
-          'Status
+          'Status:
         .col-md-6.bold
-          = !@cgdp.nil? ? @cgdp.status.upcase : ''
+          = f.select :status, options_for_select(Cgdp::STATUS), {}
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
-          'Province
+          'Province:
         .col-md-6.bold
           = @muni_info.province.name
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
-          'Year
+          'Year:
         .col-md-6.bold
-          = !@cgdp.nil? ? @cgdp.year : ''
+          = params[:with_year]
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
           'Municipality:
         .col-md-6.bold
           = @muni_info.name
+    /   .form-group
+    /     .col-md-4.bold
+    /       'Designation:
+    /     .col-md-6
+    /       = f.text_field :designation_first, readonly: true
+    /   .form-group
+    /     .col-md-4.bold
+    /       'Date:
+    /     .col-md-6
+    /       =f.text_field :date_first, placeholder: 'DD-MMM-YYYY'
+    / .col-md-6.parent
+    /   .form-group
+    /     .col-md-5.bold
+    /       'Requested By:
+    /     .col-md-6.bold
+    /       = f.select :requested_by_second, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
+    /   .form-group
+    /     .col-md-5.bold
+    /       'Designation:
+    /     .col-md-6
+    /       =f.text_field :designation_second, readonly: true
+    /   .form-group
+    /     .col-md-5.bold
+    /       'Date:
+    /     .col-md-6
+    /       =f.text_field :date_second, placeholder: 'DD-MMM-YYYY'
+
   .row.sp-index
     .col-md-12
       table.table.table-hover.table-striped.table-bordered
         thead
           tr
-            th.text-center width="10%" Fund Allocation
-            th.text-center colspan="4" Entire Fund
-            th.text-center colspan="4" This Municipal Only
+            td Funds Allocation
+            td.text-center colspan="4" Entire Fund
+            td.text-center colspan="4" This Municipal Only
           tr
-            th
-            th.text-center ADB
-            th.text-center %
-            th.text-center WB
-            th.text-center %
-            th.text-center ADB
-            th.text-center %
-            th.text-center WB
-            th.text-center %
+            td
+            td.text-right ADB
+            td.text-center %
+            td.text-right WB
+            td.text-center %
+            td.text-right ADB
+            td.text-center %
+            td.text-right WB
+            td.text-center %
+        tbody
           tr
-            td.text-left style="padding-right: 60px;" Allocation
+            td Allocation
             td.text-right 
               - @fund_allocation = budget_allocation('ADB', params[:with_year]).to_f
               = number_to_currency(@fund_allocation.to_f)
-            td.text-right 100.00
+            td.text-right 100
             td.text-right
               - @fund_allocation_other = budget_allocation('WB', params[:with_year]).to_f
               = number_to_currency(@fund_allocation_other.to_f)
-            td.text-right 100.00
+            td.text-right 100
             td.text-center colspan="4"
               / = number_to_currency @subprojects.sum("grant_amount_direct_cost + grant_amount_indirect_cost + grant_amount_contingency_cost")
               - @fund_allocation_per_mun = budget_allocation_per_mun('ADB', params[:with_year], params[:id]).to_f
@@ -72,7 +110,7 @@ hr
               /= number_to_currency(@fund_allocation_per_mun_other.to_f)
 
           tr
-            td style="padding-right: 90px;" MIBF
+            td.text-right MIBF
             td.text-right 
               - @mibf = total_grant_amount_per_year(params[:with_year], 'ADB')
               = number_to_currency(@mibf.to_f)
@@ -98,7 +136,7 @@ hr
               - @mibf_this_mncpl_other_per = ( @mibf_this_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
               = @mibf_this_mncpl_other_per.round(2)
           tr
-            td style="padding-left: 30px;" Released
+            td Released
             td.text-right 
               - @release = total_amount_release(params[:with_year], 'ADB').to_f
               = number_to_currency(@release.to_f)
@@ -125,7 +163,7 @@ hr
               - @release_per_mncpl_other_percent = (@release_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
               = @release_per_mncpl_other_percent.round(2)
           tr
-            td style="padding-left: 20px;" Excess
+            td Excess
             td.text-right 
               - @excess = @mibf.to_f - @release.to_f
 
@@ -152,7 +190,7 @@ hr
               - @excess_per_mncpl_other_per = (@excess_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f) * 100
               = @excess_per_mncpl_other_per.round(2)
           tr
-            td style="padding-right: 70px;" Surplus
+            td Surplus
             td.text-right 
               - @amount_surplus = @fund_allocation.to_f - @mibf.to_f
               = number_to_currency(@amount_surplus.to_f)
@@ -183,21 +221,21 @@ hr
         button data-toggle='modal' data-target='#view_cash_program' class=" btn btn-primary "
           = icon_text(nil, 'View Cash Program')
         | &nbsp  
-        / button data-toggle='modal' id='assigned_fund_source' class="btn btn-primary"
-          / = icon_text(nil, 'Assign Fund Sources')
+        button data-toggle='modal' id='assigned_fund_source' class="btn btn-primary"
+          = icon_text(nil, 'Assign Fund Sources')
     .col-md-12
       table.table.table-hover.table-striped.table-bordered
         thead
           tr
-            th.text-center SP ID
-            th.text-center Barangay
-            th.text-center Title
-            th.text-center Grant Amount
-            th.text-center Tranche 1
-            th.text-center Tranche 2
-            th.text-center Tranche 3
-            th.text-center Status
-            th.text-center Fund Source
+            th SP ID
+            th Barangay
+            th Title
+            th.text-right Grant Amount
+            th.text-right Tranche 1
+            th.text-right Tranche 2
+            th.text-right Tranche 3
+            th Status
+            th Fund Source
         tbody
           - @grant_total = Array.new
           - @subprojects.each do |sp|
@@ -219,30 +257,29 @@ hr
                 -else
                   td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
           tr
-           td colspan="3" COUNT: #{@subprojects.count}
-           td.text-left colspan="6" TOTAL: #{number_to_currency(@grant_total.inject(:+).to_f)}
+           td colspan="3" Count: #{@subprojects.count}
+           td.text-left colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}
   .row.sp-table
     .col-md-12
-      h4 Sub-Allotment Advice Information
+      h4 Sub Allotment Advice Information
       hr
     br
     br
   .row.sp-show
     .col-md-8.parent
       .form-group
-        .col-md-6.text-right
-          'SAA Number
-        .col-md-6.bold
-          = !@cgdp.nil? ? @cgdp.saa_number : ''
-    .col-md-8.parent
+        .col-md-5.text-right
+          'SAA Number :
+        .col-md-6
+          = f.text_field :saa_number
       .form-group
-        .col-md-6.text-right
-          'SAA Date
-        .col-md-6.bold
-          = !@cgdp.nil? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
+        .col-md-5.text-right
+          'SAA Date :
+        .col-md-6
+          =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY'
 
 = render 'view_cash_program'
-/ = render 'assigned_fund_source'
+= render 'assigned_fund_source'
 
 javascript:
   $("#assigned_fund_source").click(function(){

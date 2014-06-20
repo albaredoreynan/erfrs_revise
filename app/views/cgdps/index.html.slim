@@ -56,7 +56,7 @@ hr
           th Province
           th Municipality
           th Status
-          th style="width: 10%;" Action
+          th style="width: 12%;" Action
       tbody
         - @subprojects.each do |m, spss|
           tr
@@ -64,6 +64,7 @@ hr
             tr
               td colspan="6"
             -sps.uniq_by{|a|a.created_at.year}.each do |sp|
+              - cgdp = Cgdp.where('municipality_id =? ', sp.municipality_id).last
               tr
                 td= sp.created_at.year
                 td= sp.region.try(:name)
@@ -73,7 +74,9 @@ hr
                 td
                   = link_to "<i class='fa fa-eye'></i>".html_safe, "#{municipality_path(sp.municipality_id)}?with_year=#{sp.created_at.year}", class: 'btn btn-xs btn-primary'
                   '&nbsp
-                  = link_to "<i class='fa fa-edit'></i>".html_safe, "#{edit_cgdp_municipalities_path()}?id=#{sp.municipality_id}&with_year=#{sp.created_at.year}", class: 'btn btn-xs btn-warning'
+                  - if cgdp.nil? 
+                    = link_to "<i class='fa fa-edit'></i>".html_safe, "#{create_cgdp_municipalities_path()}?id=#{sp.municipality_id}&with_year=#{sp.created_at.year}", class: 'btn btn-xs btn-success'
+                  -else
+                    = link_to "<i class='fa fa-edit'></i>".html_safe, "#{edit_cgdp_municipalities_path()}?id=#{sp.municipality_id}&with_year=#{sp.created_at.year}&cgdp_id=#{cgdp.id}", class: 'btn btn-xs btn-success'
                   '&nbsp
-
                   = link_to "<i class='fa fa-trash-o'></i>".html_safe, "#", method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-xs btn-danger'

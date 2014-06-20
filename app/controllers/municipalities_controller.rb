@@ -12,7 +12,7 @@ class MunicipalitiesController < InheritedResources::Base
     #@subprojects = apply_scopes(@municipality.subprojects)
     @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
     @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
-    @cgdp = Cgdp.new
+    @cgdp = Cgdp.where('municipality_id =?', params[:id]).last
   end
 
   def update
@@ -63,14 +63,13 @@ class MunicipalitiesController < InheritedResources::Base
   def edit_cgdp
     @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
     @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
-    
-    @identifier = Cgdp.where(municipality_id: params[:id])
-    if @identifier.empty?
-      @cgdp = Cgdp.new
-    else
-      @cgdp = @identifier
-    end
-     
+    @cgdp = Cgdp.find(params[:cgdp_id]) 
+  end
+
+  def create_cgdp
+    @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
+    @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
+    @cgdp = Cgdp.new 
   end
 
   protected
