@@ -26,8 +26,26 @@ class Subproject < ActiveRecord::Base
   validate :equal_financial_information, :on => :create
   validate :first_tranch_validation, :on => :create
   validates :region_id, :municipality_id, :province_id, :barangay_id, 
-            :title, presence: true
+            :title, :date_of_mibf, :cycle, :date_encoded, presence: true
+
+  validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
+            :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
+            :community_indirect_cost, :community_contingency_cost, :mlgu_direct_cost, :mlgu_indirect_cost, :mlgu_contingency_cost,
+            :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
+            :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
+            :first_tranch_amount, :second_tranch_amount, :third_tranch_amount, numericality:{ greater_than_or_equal_to: 0, :message => "Enter Right Amount" } 
+
+  validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
+            :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
+            :community_indirect_cost, :community_contingency_cost, :mlgu_direct_cost, :mlgu_indirect_cost, :mlgu_contingency_cost,
+            :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
+            :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
+            :first_tranch_amount, :first_tranch_date_required, :second_tranch_amount, :second_tranch_date_required, :third_tranch_amount,
+            :third_tranch_date_required, presence: {:message => 'You have blank Fields'}, :if => ->{ self.status == 'Final' }  
+
   validate :mbif_date
+
+  # validates :team_members, associated: {:message => "Team Members Missing"}, :if => -> {self.status == "Final"}
   ####################### SCOPES ###########################
   scope :with_user,   -> username { fetch_all_created_by username }
   scope :with_id,     -> id { where id: id }
@@ -35,9 +53,9 @@ class Subproject < ActiveRecord::Base
   scope :fund_source, -> fs { where fund_source_id: fs}
 
   if ENV['ERFRS_USES_POSTGRESQL']
-    scope :year, -> year { where 'EXTRACT(YEAR FROM date_of_mbif) = ?', year }
+    scope :year, -> year { where 'EXTRACT(YEAR FROM date_of_mibf) = ?', year }
   else
-    scope :year, -> year { where 'YEAR(date_of_mbif) = ?', year  }
+    scope :year, -> year { where 'YEAR(date_of_mibf) = ?', year  }
   end
 
   if ENV['ERFRS_USES_POSTGRESQL']
@@ -53,20 +71,14 @@ class Subproject < ActiveRecord::Base
   ####################### END ###########################
 
   ################# CUSTOM VALIDATION #####################
-  def cannot_finalize_status
-    if self.status == "Final" 
-      #put important fields
-    end
-  end
 
   def add_date_encoded
     self.date_encoded = DateTime.now.to_date
-
   end
-
+  
   def mbif_date
-    if self.date_of_mbif.present?
-      errors.add(:error, 'Wrong MBIF Date Input' ) unless self.date_of_mbif.is_a?(Date)
+    if self.date_of_mibf.present?
+      errors.add(:error, 'Wrong MBIF Date Input' ) unless self.date_of_mibf.is_a?(Date)
     end
   end
 

@@ -94,7 +94,7 @@ class SubprojectsController < ApplicationController
       :description,
       :fund_source_id,
       :cycle,
-      :date_of_mbif,
+      :date_of_mibf,
       :date_encoded,
       # financial information
       :grant_amount_direct_cost,

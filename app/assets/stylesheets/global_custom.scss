@@ -256,6 +256,7 @@ th {
   thead {
     display: table-header-group;
   }
+
   tr,
   img {
     page-break-inside: avoid;
@@ -1452,6 +1453,9 @@ th {
   width: 100%;
   margin-bottom: 20px;
 }
+th > .fix_action{
+  width: 100px !important;
+}
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,
@@ -1463,9 +1467,11 @@ th {
   vertical-align: top;
   border-top: 1px solid #dddddd;
 }
+
 .table > thead > tr > th {
   vertical-align: bottom;
   border-bottom: 2px solid #dddddd;
+  text-align: center;
 }
 .table > caption + thead > tr:first-child > th,
 .table > colgroup + thead > tr:first-child > th,

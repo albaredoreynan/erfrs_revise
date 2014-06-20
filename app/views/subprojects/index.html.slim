@@ -66,7 +66,7 @@ br
 
   br
   
-  .col-md-12
+  .col-md-12.scrollable
     table.table.table-hover
       thead
         tr
@@ -78,7 +78,7 @@ br
           th Barangay
           th Title
           th Status
-          th style="width: 10%;" Action
+          th.fix_action Action
       tbody
         - @subprojects.each do |sp|
           tr
@@ -91,11 +91,12 @@ br
             td= sp.title
             td= sp.status
             td
-              = link_to "<i class='fa fa-eye'></i>".html_safe, sp, class: 'btn btn-xs btn-primary'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "View"
-              '&nbsp
-              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, sp], class: 'btn btn-xs btn-warning',"data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Edit"
-              '&nbsp
-              = link_to "<i class='fa fa-trash-o'></i>".html_safe, sp, method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-xs btn-danger'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Delete"
+              div.text-center style="width: 100px !important;"
+                = link_to "<i class='fa fa-eye'></i>".html_safe, sp, class: 'btn btn-xs btn-primary'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "View"
+                '&nbsp
+                = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, sp], class: 'btn btn-xs btn-warning',"data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Edit"
+                '&nbsp
+                = link_to "<i class='fa fa-trash-o'></i>".html_safe, sp, method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-xs btn-danger'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Delete"
 
 javascript:
   $("#search_form :button").click(function() {

@@ -45,15 +45,15 @@
             = @subproject.status
         .form-group
           .col-md-5.text-right
-            = label_tag :date_of_mbif, "Date of MBIF"
+            = label_tag :date_of_mibf, "Date of MBIF"
           .col-md-7
-            - @date = @subproject.date_of_mbif
+            - @date = @subproject.date_of_mibf
             = @date.blank? ? '' : @date.strftime('%d-%b-%Y')
         .form-group
           .col-md-5.text-right
             = label_tag :date_encoded, 'Date Encoded'
           .col-md-7
-            = @subproject.date_encoded.strftime('%d-%b-%Y')
+            = @subproject.date_encoded.strftime('%d-%b-%Y') if @subproject.date_encoded.present?
         .form-group
           .col-md-5.text-right
             = label_tag :cycle
