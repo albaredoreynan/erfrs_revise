@@ -53,7 +53,11 @@ module ApplicationHelper
   def budget_allocation_per_mun(code, year, municipality_id)
     @fund_source = FundSource.where(code: code).last  
     @budget = MuniFundAllocation.select('amount').where( municipality_id: municipality_id, year: year).last
-    @budget.amount
+    if @budget.nil?
+      @budget = 0
+    else  
+      @budget.amount
+    end  
   end
 
   def total_grant_amount_per_mncpl(municipality_id, year, fund_source)

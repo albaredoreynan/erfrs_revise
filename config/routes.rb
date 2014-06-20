@@ -18,11 +18,14 @@ Rails.application.routes.draw do
   resources :cgdps, only: :index
   resources :regional_officers
 
-  resources :cgdps, path: 'community_grants_disburesment_plans'
+  # resources :cgdps, path: 'community_grants_disburesment_plans'
+  resources :cgdps
   
   resources :regions
   resources :provinces
-  resources :municipalities
+  resources :municipalities do
+    get :edit_cgdp, on: :collection
+  end
   resources :barangays
   resources :groups
   resources :fund_sources
