@@ -105,6 +105,11 @@ table.financial_form > tbody > tr > td:first-child{
   text-align: left;
 }
 
+.title-header{
+  padding-bottom: 5px;
+    border-bottom: 1px solid #eeeeee;
+}
+
 
 
 /************ Pagination **************/
