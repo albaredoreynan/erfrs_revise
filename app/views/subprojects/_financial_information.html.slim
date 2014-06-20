@@ -13,6 +13,7 @@
 -total_direct = @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_in_kind_direct_cost
 -total_indirect = @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_in_kind_indirect_cost
 -total_contingency = @subproject.total_lcc_cash_contingency_cost + @subproject.total_lcc_in_kind_contingency_cost
+-sub_total_total = subtotal_direct + subtotal_indirect + subtotal_contingency
 -total_total =  total_direct + total_indirect + total_contingency
 .row.sp-table
   .col-md-12
@@ -35,62 +36,62 @@
           td.grant.sic= number_to_currency @subproject.grant_amount_indirect_cost
           td.grant.scc= number_to_currency @subproject.grant_amount_contingency_cost
           td#total_grant.gray = number_to_currency total_grant
-          td#percent_grant.gray #{(total_grant / total_total * 100).round(2)}%
+          td#percent_grant.gray #{(total_grant / sub_total_total * 100).round(1)}%
         tr#lcc-blgu
           td LCC: BLGU
           td.lcc.sdc= number_to_currency @subproject.lcc_blgu_direct_cost
           td.lcc.sic= number_to_currency @subproject.lcc_blgu_indirect_cost
           td.lcc.scc= number_to_currency @subproject.lcc_blgu_contingency_cost
           td#total_lcc.gray= number_to_currency total_lcc
-          td#percent_lcc.gray #{(total_lcc/total_total*100).round(2)}%
+          td#percent_lcc.gray #{(total_lcc/sub_total_total*100).round(1)}%
         tr#community
           td Community
           td.community.sdc= number_to_currency @subproject.community_direct_cost
           td.community.sic= number_to_currency @subproject.community_indirect_cost
           td.community.scc= number_to_currency @subproject.community_contingency_cost
           td#total_community.gray = number_to_currency total_community
-          td#percent_community.gray #{(total_community/total_total*100).round(2)}%
+          td#percent_community.gray #{(total_community/sub_total_total*100).round(1)}%
         tr#mlgu
           td MLGU
           td.mlgu.sdc= number_to_currency @subproject.mlgu_direct_cost
           td.mlgu.sic= number_to_currency @subproject.mlgu_indirect_cost
           td.mlgu.scc= number_to_currency @subproject.mlgu_contingency_cost
           td#total_mlgu.gray = number_to_currency total_mlgu
-          td#percent_mlgu.gray #{(total_mlgu/total_total*100).round(2)}%
+          td#percent_mlgu.gray #{(total_mlgu/sub_total_total*100).round(1)}%
         tr#plgu-others
           td PLGU/Others
           td.plgu.sdc= number_to_currency @subproject.plgu_others_direct_cost
           td.plgu.sic= number_to_currency @subproject.plgu_others_indirect_cost
           td.plgu.scc= number_to_currency @subproject.plgu_others_contingency_cost
           td#total_plgu.gray =number_to_currency total_plgu
-          td#percent_plgu.gray #{(total_plgu/total_total*100).round(2)}%
+          td#percent_plgu.gray #{(total_plgu/sub_total_total*100).round(1)}%
         tr#subtotal.gray
           td.bold TOTAL
           td#subtotal_direct= number_to_currency subtotal_direct
           td#subtotal_indirect= number_to_currency subtotal_indirect
           td#subtotal_contingency= number_to_currency subtotal_contingency
           td#subtotal_total.bold = number_to_currency (subtotal_direct + subtotal_indirect + subtotal_contingency)
-          td#subtotal_total_percent 100%
+          td#subtotal_total_percent 100.0%
         tr
           td Total LCC Cash
           td.total_lcc_cash= number_to_currency @subproject.total_lcc_cash_direct_cost
           td.total_lcc_cash= number_to_currency @subproject.total_lcc_cash_indirect_cost
           td.total_lcc_cash= number_to_currency @subproject.total_lcc_cash_contingency_cost
           td#total_lcc_cash.gray= number_to_currency total_lcc_cash
-          td#percent_lcc_percent.gray #{(total_lcc_cash/total_total*100).round(2)}%
+          td#percent_lcc_percent.gray #{(total_lcc_cash/total_total*100).round(1)}%
         tr
           td Total LCC in Kind
           td.total_lcc_in_kind= number_to_currency @subproject.total_lcc_in_kind_direct_cost
           td.total_lcc_in_kind= number_to_currency @subproject.total_lcc_in_kind_indirect_cost
           td.total_lcc_in_kind= number_to_currency @subproject.total_lcc_in_kind_contingency_cost
           td#total_lcc_in_kind.gray = number_to_currency total_lcc_kind
-          td#percent_lcc_in_kind.gray #{(total_lcc_kind/total_total*100).round(2)}%
+          td#percent_lcc_in_kind.gray #{(total_lcc_kind/total_total*100).round(1)}%
         tr#total.gray
           td.bold  TOTAL LCC
           td#total_direct= number_to_currency total_direct
           td#total_indirect= number_to_currency total_indirect
           td#total_contingency= number_to_currency total_contingency
           td#total_total.bold #{number_to_currency total_total}
-          td#total_percent 100%
+          td#total_percent 100.0%
 
   
