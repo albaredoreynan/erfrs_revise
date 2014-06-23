@@ -25,12 +25,19 @@
                 th ADB
                 th WB
                 th Total
-              - %i(jan feb mar apr may jun jul aug sep oct nov dec).each_with_index do |breakdown, idx|  
+              - @earliest_month = earliest_month(params[:with_year], params[:id]).to_date
+              - @monthlist = []  
+              - 12.times do 
+                - @monthlist << @earliest_month.strftime("%b-%Y")
+                - @earliest_month = @earliest_month + 1.month
+
+              - @monthlist.each_with_index do |breakdown, idx|  
+                - @num = Date.parse(breakdown).strftime("%-m").to_i
                 tr
                   td = id = idx + 1
-                  td = breakdown.to_s+"-"+params[:with_year]
-                  td = number_to_currency(@cfa_adb = cfa_amounts(id, params[:with_year], params[:id], 'ADB'))
-                  td = number_to_currency(@cfa_wb = cfa_amounts(id, params[:with_year], params[:id], 'WB'))
+                  td = breakdown
+                  td = number_to_currency(@cfa_adb = cfa_amounts(@num, params[:with_year], params[:id], 1))
+                  td = number_to_currency(@cfa_wb = cfa_amounts(@num, params[:with_year], params[:id], 2))
                   td = number_to_currency(total_cfa_amounts = @cfa_adb + @cfa_wb)
               tr
                 td
