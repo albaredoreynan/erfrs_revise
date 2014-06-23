@@ -83,7 +83,7 @@ br
         - @subprojects.each do |sp|
           tr
             td= trail_id(6, sp.id)
-            td= sp.created_at.year
+            td= sp.try(:date_of_mibf).try(:year)
             td= sp.region.try(:name)
             td= sp.province.try(:name)
             td= sp.municipality.try(:name)

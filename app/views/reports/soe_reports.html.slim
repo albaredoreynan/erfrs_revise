@@ -37,16 +37,16 @@ hr
           th 16
         tr
           th Item No.
-          th style="min-width:298px " Name of Contractor / Supplier / Consultant
+          th style="min-width:298px" Name of Contractor / Supplier / Consultant
           th Contract Number
-          th Contract Date
+          th style="min-width:100px" Contract Date
           th Contract Prior Reviewed
           th Control Number
           th Contract Amount (In PHP)
           th Invoice Amount (In PHP)
-          th Invoice Date
+          th style="min-width:108px"  Invoice Date
           th Check Number
-          th Check Date
+          th style="min-width:108px" Check Date
           th Percent Eligibility
           th Amount Eligible for Financing (In PHP)
           th Amount Charged to Designated Account (In USD)
@@ -60,16 +60,17 @@ hr
   	        td= trail_id(6, soe.subproject_id)
   	        td= soe.subproject.date_of_mibf
             td
-  	        td= number_to_currency soe.subproject.total_grant_amount
-  	        td= number_to_currency soe.amount_approve
-  	        td= soe.rpmo_date
+            td
+  	        td.text-right = number_to_currency soe.subproject.total_grant_amount
+  	        td.text-right = number_to_currency soe.amount_approve
+  	        td.text-center= soe.dv_date.to_date.strftime("%d-%b-%Y") if soe.dv_date.present?
   	        td= soe.check_number
-  	        td= soe.try(:dv_date).try(:to_date)
+  	        td.text-center= soe.dv_date.try(:to_date).strftime("%d-%b-%Y") if soe.dv_date.present?
   	        td 100%
-  	        td.dv_amount= number_to_currency soe.subproject.total_dv_amount
-  	        td.exchange 
-  	        td= text_field_tag :exchange_rate, [], id:"#{soe.id}", class:'exchange_rate'
-  	        td= soe.remarks
+  	        td.text-right.dv_amount= number_to_currency soe.subproject.total_dv_amount
+  	        td.text-right.exchange 
+  	        td= text_field_tag :exchange_rate, [], id:"#{soe.id}", class: 'exchange_rate'
+  	        td= text_field_tag :report_remarks, [], id:"test#{soe.id}", class: 'soe_remark'
 css:
   .scrollable {
     width: 100%;

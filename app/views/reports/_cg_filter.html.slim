@@ -29,9 +29,15 @@
           .col-md-6
             .form-group
               .col-md-4.text-right
-                = label_tag :year, 'Year'
+                = label_tag :start_date, 'Start Date'
               .col-md-6
-                = text_field_tag :year, [],class: 'form-control'
+                = text_field_tag :start_date, [],class: 'form-control', placeholder:"dd-mmm-yyyy"
+            .form-group
+              .col-md-4.text-right
+                = label_tag :end_date, 'End Date'
+              .col-md-6
+                = text_field_tag :end_date, [],class: 'form-control', placeholder:"dd-mmm-yyyy"
+
             .form-group
               .col-md-4
               .col-md-8
