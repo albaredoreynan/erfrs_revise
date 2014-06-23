@@ -214,7 +214,7 @@ hr
               -if sp.fund_source.present? && sp.status == "Final"
                 td= sp.fund_source.code
               -else
-                -if sp.fund_source_id != '' 
+                -if sp.fund_source_id.present? 
                   td= sp.fund_source.code
                 -else
                   td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
