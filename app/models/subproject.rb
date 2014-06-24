@@ -30,7 +30,7 @@ class Subproject < ActiveRecord::Base
 
 
 
-  validates
+
 
   validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
             :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
