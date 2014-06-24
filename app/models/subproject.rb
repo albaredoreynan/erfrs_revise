@@ -54,29 +54,29 @@ class Subproject < ActiveRecord::Base
   scope :fund_source, -> fs { where fund_source_id: fs}
 
 
-  if ENV['ERFRS_USES_POSTGRESQL']
-    scope :year, -> year { where 'EXTRACT(YEAR FROM date_of_mibf) = ?', year }
-  else
-    scope :year, -> year { where 'YEAR(date_of_mibf) = ?', year  }
-  end
+  # if ENV['ERFRS_USES_POSTGRESQL']
+  scope :year, -> year { where 'EXTRACT(YEAR FROM date_of_mibf) = ?', year }
+  # else
+  #   scope :year, -> year { where 'YEAR(date_of_mibf) = ?', year  }
+  # end
 
-  if ENV['ERFRS_USES_POSTGRESQL']
-    scope :with_year, -> year { where 'EXTRACT(YEAR FROM created_at) = ?', year }
-  else
-    scope :with_year, -> year { where 'YEAR(created_at) = ?', year  }
-  end
+  # if ENV['ERFRS_USES_POSTGRESQL']
+  scope :with_year, -> year { where 'EXTRACT(YEAR FROM date_of_mibf) = ?', year }
+  # else
+  #   scope :with_year, -> year { where 'YEAR(created_at) = ?', year  }
+  # end
 
-  if ENV['ERFRS_USES_POSTGRESQL']
-    scope :start_date, -> date { where 'date_of_mibf >= ?', date.to_date }
-  else
-    scope :start_date, -> date { where 'DATE(date_of_mibf) >= ?', date  }
-  end
+  # if ENV['ERFRS_USES_POSTGRESQL']
+  scope :start_date, -> date { where 'date_of_mibf >= ?', date.to_date }
+  # else
+  #   scope :start_date, -> date { where 'DATE(date_of_mibf) >= ?', date  }
+  # end
 
-  if ENV['ERFRS_USES_POSTGRESQL']
-    scope :end_date, -> date { where ' date_of_mibf <= ?', date.to_date }
-  else
-    scope :end_date, -> date { where 'DATE(date_of_mibf) <= ?', date.to_date    }
-  end
+  # if ENV['ERFRS_USES_POSTGRESQL']
+  scope :end_date, -> date { where ' date_of_mibf <= ?', date.to_date }
+  # else
+  #   scope :end_date, -> date { where 'DATE(date_of_mibf) <= ?', date.to_date    }
+  # end
 
   %w{region province municipality barangay}.each do |place|
     scope "subproject_#{place}_id".intern, -> place_id { where "#{place}_id" => place_id }

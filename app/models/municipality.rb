@@ -14,10 +14,10 @@ class Municipality < ActiveRecord::Base
 
   # scope :region_id, -> id {joins(:province).where('province.region' == id)}
 
-  if ENV['ERFRS_USES_POSTGRESQL']
-    scope :with_year, -> year { where 'EXTRACT(YEAR FROM created_at) = ?', year }
-  else
-    scope :with_year, -> year { where 'YEAR(created_at) = ?', year  }
-  end
+  # if ENV['ERFRS_USES_POSTGRESQL']
+  scope :with_year, -> year { where 'EXTRACT(YEAR FROM created_at) = ?', year }
+  # else
+  #   scope :with_year, -> year { where 'YEAR(created_at) = ?', year  }
+  # end
 
 end
