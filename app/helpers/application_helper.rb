@@ -122,8 +122,6 @@ module ApplicationHelper
     else  
       @month.first_tranch_date_required
     end
-    raise
-
   end
 
   def total_amount_release(year, fund_source)
