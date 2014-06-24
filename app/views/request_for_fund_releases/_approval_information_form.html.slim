@@ -160,14 +160,14 @@ css:
 javascript:
   $("#request_for_fund_release_requested_by_first").change(function(){
     item_val = $(this).val();
-    alert();
     $.ajax({
       url: "/display_designation",
       data: {
         designation_first : item_val
       },
         dataType: "script"
-      });
+    });
+  });
 
   $(".designation").change(function(){
     item_val = $(this).val();
