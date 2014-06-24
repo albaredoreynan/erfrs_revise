@@ -404,3 +404,9 @@ body.rtl .formError .formErrorArrow {
 
 
 /*****************jquery form validations*******************/
+
+.alert-msg{
+  min-width: 330px;
+  position: absolute;
+  z-index: 999;
+}

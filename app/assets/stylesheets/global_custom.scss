@@ -4480,7 +4480,9 @@ a.thumbnail.active {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
+  opacity: 1;
 }
+
 .alert h4 {
   margin-top: 0;
   color: inherit;
@@ -4538,9 +4540,10 @@ a.thumbnail.active {
   color: #a47e3c;
 }
 .alert-danger {
-  background-color: #f2dede;
-  border-color: #eed3d7;
-  color: #b94a48;
+  border-color: #953b39;
+  color: #fff;
+  background: #c26565;
+  text-shadow: none;
 }
 .alert-danger hr {
   border-top-color: #e6c1c7;

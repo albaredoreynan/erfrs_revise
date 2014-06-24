@@ -3,26 +3,26 @@
   .col-md-4.signin-form
     .form-group
       = f.label :email
-      = f.email_field :email, :autofocus => true, class: 'form-control validate[required,custom[email]]'
+      = f.email_field :email, :autofocus => true, class: 'form-control validate[custom[email]]'
     .form-group
       = f.label :username, 'User Name'
-      = f.text_field :username, class: 'form-control validate[required,maxSize[15],minSize[5]]'
+      = f.text_field :username, class: 'form-control validate[maxSize[15],minSize[5]]'
     .form-group
       = f.label :password
       = f.password_field :password, class: 'form-control'
     .form-group
       = f.label :password_confirmation, 'Password Confirmation'
-      = f.password_field :password_confirmation, class: 'form-control validate[required]'
+      = f.password_field :password_confirmation, class: 'form-control '
   .col-md-4.signin-form
     .form-group
       = f.label :first_name, 'First Name'
-      = f.text_field :first_name, class: 'form-control validate[required]'
+      = f.text_field :first_name, class: 'form-control '
     .form-group
       = f.label :last_name, 'Last Name'
-      = f.text_field :last_name, class: 'form-control validate[required]'
+      = f.text_field :last_name, class: 'form-control '
     .form-group
       = f.label 'Role'
-      = f.select :role_id, Role.all.map{ |e| [e.name, e.id] }, {include_blank: true }, class: 'form-control validate[required]'
+      = f.select :role_id, Role.all.map{ |e| [e.name, e.id] }, {include_blank: true }, class: 'form-control '
     .form-group
       = f.label 'Status'
       br
