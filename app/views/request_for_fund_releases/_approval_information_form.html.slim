@@ -20,7 +20,7 @@
       .col-md-4.bold
         'Date:
       .col-md-6
-        =f.text_field :date_first, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :date_first, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
   .col-md-6.parent
     .form-group
       .col-md-5.bold
@@ -36,7 +36,7 @@
       .col-md-5.bold
         'Date:
       .col-md-6
-        =f.text_field :date_second, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :date_second, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
 
     
   .col-md-12 
@@ -45,7 +45,7 @@
       .col-md-2.bold.text-right
         'Date Received:
       .col-md-3
-        =f.text_field :date_received, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :date_received, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
 
   .col-md-6.parent
     .form-group
@@ -62,7 +62,7 @@
       .col-md-4.bold
         'Date:
       .col-md-6
-        =f.text_field :rev_date_first, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :rev_date_first, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
 
   .col-md-6.parent
     .form-group
@@ -79,7 +79,7 @@
       .col-md-5.bold
         'Date:
       .col-md-6
-        =f.text_field :rev_date_second, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :rev_date_second, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
               
 .row.sp-table
   .col-md-12
@@ -90,7 +90,7 @@
       .col-md-2.bold.text-right
         'Date Received:
       .col-md-3
-        =f.text_field :srpmo_date_received, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :srpmo_date_received, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
         =f.hidden_field :subproject_id, value: params[:sp_id] 
   .col-md-6.parent
     .form-group
@@ -107,7 +107,7 @@
       .col-md-4.bold
         'Date:
       .col-md-6
-        =f.text_field :srpmo_date, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :srpmo_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
   .col-md-6.parent
     .form-group
       .col-md-5.bold
@@ -123,7 +123,7 @@
       .col-md-5.bold
         'Date:
       .col-md-6
-        =f.text_field :srpmo_rec_date, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :srpmo_rec_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
 
 .row.sp-table
   .col-md-12
@@ -134,7 +134,7 @@
       .col-md-2.bold.text-right
         'Date Received:
       .col-md-3
-        =f.text_field :rpmo_date_received, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :rpmo_date_received, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
   .col-md-12.parent
     .form-group
       .col-md-2.bold.text-right
@@ -150,7 +150,7 @@
       .col-md-2.bold.text-right
         'Date:
       .col-md-3
-        =f.text_field :rpmo_date, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :rpmo_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
       
 css:
   .sp-show{
