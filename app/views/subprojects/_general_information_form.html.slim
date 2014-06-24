@@ -42,17 +42,18 @@ br
             = f.label :barangay_id
           .col-md-8
             = f.select :barangay_id, @subproject.barangay.present? ? [[@subproject.barangay.name, @subproject.barangay.id]] : [], { disabled: 'disabled' }, { :class => 'form-control validate[required]'}
-        .form-group
-          .col-md-4
-            = f.label :group
-          .col-md-8
-            = text_field_tag :group, '', class: 'form-control validate[required]', disabled:'true'
+        - if !params[:id].present?
+          .form-group
+            .col-md-4
+              = f.label :group
+            .col-md-8
+              = text_field_tag :group, '', class: 'form-control validate[required]', disabled:'true'
       .col-md-6
         .form-group
           .col-md-5
             = f.label :date_of_mibf, "Date of MIBF"
           .col-md-7
-            = f.text_field :date_of_mibf, class: 'form-control validate[required, custom[dateFormat]]', placeholder: "dd-mmm-yyyy"
+            = f.text_field :date_of_mibf, class: 'form-control validate[required, custom[dateFormat]]', placeholder: "dd-mmm-yyyy",  value: params[:id].present? ? @subproject.date_of_mibf.strftime("%d-%b-%Y") : ''
         .form-group
           .col-md-5
             = f.label :date_encoded, "Date Encoded"

@@ -17,8 +17,8 @@ class RequestForFundReleasesController < ApplicationController
 
   def new
     subproject = Subproject.find(params[:sp_id])
-    flash[:error] = 'You cannot create Request For Fund Release' if subproject.status != "Final" || subproject.fund_source.nil?
-    redirect_to subproject_path(params[:sp_id]) if subproject.status != "Final" || subproject.fund_source.nil?
+    flash[:error] = 'You cannot create Request For Fund Release' if subproject.status != "Final"
+    redirect_to subproject_path(params[:sp_id]) if subproject.status != "Final"
     @team_member = subproject.team_members
     if !@team_member.present? 
       @team_member = TeamMember.all
