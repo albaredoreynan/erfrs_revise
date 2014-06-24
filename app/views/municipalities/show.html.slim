@@ -53,24 +53,17 @@ hr
           tr
             td.text-left style="padding-right: 60px;" Allocation
             td.text-right 
-              - @fund_allocation = budget_allocation('ADB', params[:with_year]).to_f
+              - @fund_allocation = budget_allocation('ADB', params[:with_year])
               = number_to_currency(@fund_allocation.to_f)
             td.text-right 100.00
             td.text-right
-              - @fund_allocation_other = budget_allocation('WB', params[:with_year]).to_f
+              - @fund_allocation_other = budget_allocation('WB', params[:with_year])
               = number_to_currency(@fund_allocation_other.to_f)
             td.text-right 100.00
             td.text-center colspan="4"
-              / = number_to_currency @subprojects.sum("grant_amount_direct_cost + grant_amount_indirect_cost + grant_amount_contingency_cost")
-              - @fund_allocation_per_mun = budget_allocation_per_mun('ADB', params[:with_year], params[:id]).to_f
-              - @fund_allocation_per_mun_other = budget_allocation_per_mun('WB', params[:with_year], params[:id]).to_f
+              - @fund_allocation_per_mun = budget_allocation_per_mun('ADB', params[:with_year], params[:id])
+              - @fund_allocation_per_mun_other = budget_allocation_per_mun('WB', params[:with_year], params[:id])
               = number_to_currency(@fund_allocation_per_mun.to_f)
-            /td.text-right 
-              /= number_to_currency(@fund_allocation_per_mun.to_f)
-            /td.text-right 100
-            /td.text-right
-              /= number_to_currency(@fund_allocation_per_mun_other.to_f)
-
           tr
             td style="padding-right: 90px;" MIBF
             td.text-right 
@@ -160,7 +153,7 @@ hr
               - @amount_surplus_per = (@amount_surplus.to_f / @fund_allocation.to_f ) * 100
               = @amount_surplus_per.round(2)
             td.text-right
-              - @amount_surplus_other = @fund_allocation_other - @mibf_other
+              - @amount_surplus_other = @fund_allocation_other.to_f - @mibf_other.to_f
               = number_to_currency(@amount_surplus_other.to_f)
             td.text-right
               - @amount_surplus_other_per = (@amount_surplus_other.to_f / @fund_allocation_other.to_f ) * 100
@@ -206,10 +199,10 @@ hr
               td= sp.id
               td= sp.barangay.try(:name)
               td= sp.title
-              td.text-right= number_to_currency(sp.grant_amount_direct_cost)
-              td.text-right= number_to_currency(sp.first_tranch_amount)
-              td.text-right= number_to_currency(sp.second_tranch_amount)
-              td.text-right= number_to_currency(sp.third_tranch_amount)
+              td.text-right= number_to_currency(sp.grant_amount_direct_cost.to_f)
+              td.text-right= number_to_currency(sp.first_tranch_amount.to_f)
+              td.text-right= number_to_currency(sp.second_tranch_amount.to_f)
+              td.text-right= number_to_currency(sp.third_tranch_amount.to_f)
               td= sp.status
               -if sp.fund_source.present? && sp.status == "Final"
                 td= sp.fund_source.code
