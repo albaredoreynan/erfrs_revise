@@ -42,7 +42,7 @@ class Subproject < ActiveRecord::Base
             :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
             :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
             :first_tranch_amount, :first_tranch_date_required, :second_tranch_amount, :second_tranch_date_required, :third_tranch_amount, :third_tranch_date_required, 
-            presence: {:message => 'You have blank Fields'}, :if => ->{ self.status == 'Final' }  
+            presence: {:message => 'because you are changing the status to Final'}, :if => ->{ self.status == 'Final' }  
 
   validate :mbif_date
 

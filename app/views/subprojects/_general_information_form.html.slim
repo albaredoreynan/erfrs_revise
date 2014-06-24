@@ -1,4 +1,4 @@
-/, class: "validate[required]" 
+/, class: " " 
 br
 .row.sp-show
   .col-md-6
@@ -12,11 +12,11 @@ br
       .col-md-5
         = f.label :status
       .col-md-7
-        = f.select :status, options_for_select(Subproject::STATUSES), {}, { class: 'form-control validate[required]'}
+        = f.select :status, options_for_select(Subproject::STATUSES), {}, { class: 'form-control '}
   .col-md-2
     = f.label :title
   .col-md-10
-    = f.text_field :title, class: 'form-control validate[required]'
+    = f.text_field :title, class: 'form-control v'
 
   .col-md-12 style="margin-top: 10px;"
     .row
@@ -25,35 +25,35 @@ br
           .col-md-4
             = f.label :region_id
           .col-md-8
-            = f.select :region_id, Region.values_for_select, { include_blank: true }, { :class => 'form-control validate[required]'}
+            = f.select :region_id, Region.values_for_select, { include_blank: true }, { :class => 'form-control  '}
         .form-group
           .col-md-4
             = f.label :province_id
           .col-md-8
 
-            = f.select :province_id, @subproject.province.present? ? [[@subproject.province.name, @subproject.province.id]] : [], { disabled: 'disabled' }, { :class => 'form-control validate[required]'}
+            = f.select :province_id, @subproject.province.present? ? [[@subproject.province.name, @subproject.province.id]] : [], { disabled: 'disabled' }, { :class => 'form-control  '}
         .form-group
           .col-md-4
             = f.label :municipality_id
           .col-md-8
-            = f.select :municipality_id, @subproject.municipality.present? ? [[@subproject.municipality.name, @subproject.municipality.id]] : [], { disabled: 'disabled' }, { :class => 'form-control validate[required]'}
+            = f.select :municipality_id, @subproject.municipality.present? ? [[@subproject.municipality.name, @subproject.municipality.id]] : [], { disabled: 'disabled' }, { :class => 'form-control  '}
         .form-group
           .col-md-4
             = f.label :barangay_id
           .col-md-8
-            = f.select :barangay_id, @subproject.barangay.present? ? [[@subproject.barangay.name, @subproject.barangay.id]] : [], { disabled: 'disabled' }, { :class => 'form-control validate[required]'}
+            = f.select :barangay_id, @subproject.barangay.present? ? [[@subproject.barangay.name, @subproject.barangay.id]] : [], { disabled: 'disabled' }, { :class => 'form-control  '}
         - if !params[:id].present?
           .form-group
             .col-md-4
               = f.label :group
             .col-md-8
-              = text_field_tag :group, '', class: 'form-control validate[required]', disabled:'true'
+              = text_field_tag :group, '', class: 'form-control  ', disabled:'true'
       .col-md-6
         .form-group
           .col-md-5
             = f.label :date_of_mibf, "Date of MIBF"
           .col-md-7
-            = f.text_field :date_of_mibf, class: 'form-control validate[required, custom[dateFormat]]', placeholder: "dd-mmm-yyyy",  value: params[:id].present? ? @subproject.date_of_mibf.strftime("%d-%b-%Y") : ''
+            = f.text_field :date_of_mibf, class: 'form-control validate[custom[dateFormat]]', placeholder: "dd-mmm-yyyy",  value: params[:id].present? ? @subproject.date_of_mibf.strftime("%d-%b-%Y") : ''
         .form-group
           .col-md-5
             = f.label :date_encoded, "Date Encoded"
@@ -63,7 +63,7 @@ br
           .col-md-5
             = f.label :cycle
           .col-md-7
-            = f.select :cycle, Subproject::CYCLE, { prompt: ' ' }, { class: 'form-control validate[required]' }
+            = f.select :cycle, Subproject::CYCLE, { prompt: ' ' }, { class: 'form-control  ' }
         / - if @subproject.fund_source.present?  
         .form-group
           .col-md-5

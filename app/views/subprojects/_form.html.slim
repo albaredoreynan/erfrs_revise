@@ -3,12 +3,13 @@
 br  
 = form_for @subproject, html: { class: 'form-horizontal' } do |f|
   - if @subproject.errors.any?
-    .row.flash-msg
-      .col-md-4.col-md-offset-4
-        - @subproject.errors.full_messages.each do |message|
-          .alert.alert-danger style="z-index: 1003;"
+    .row.alert-msg
+      .col-sm-12
+        .alert.alert-danger.fade-in style="z-index: 1003;"
+          - @subproject.errors.full_messages.each do |message|
             =message
-            .close
+            br
+          .close style=" position: absolute; top: 6px; right: 20px;"
               'X
 
   .row
