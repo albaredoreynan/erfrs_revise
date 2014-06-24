@@ -14,8 +14,13 @@
 //= require jquery_ujs
 //= require cocoon
 //= require chosen.jquery
+//= require jquery-1.11.1.min.js
+//= require jquery.validationEngine.js
+//= require jquery.validationEngine-en.js
 //= require_tree .
-
+$( document ).ready(function() {
+  $('form').validationEngine();
+});
 
   function parseNaN(num) {
     a = $(num).children().first().val();

@@ -97,7 +97,7 @@ class Subproject < ActiveRecord::Base
 
   def first_tranch_validation
     if self.first_tranch_amount < ((self.grant_amount_direct_cost + self.grant_amount_indirect_cost + self.grant_amount_contingency_cost) * 0.50)
-      errors.add(:error, 'Errors in First Tranch')
+      errors.add(:message, 'First Tranch must be atleast 50%')
     end
   end
 
@@ -119,7 +119,7 @@ class Subproject < ActiveRecord::Base
       total_lcc_contingency += eval("self.#{cash}_contingency_cost")
     end
     if total_direct != total_lcc_direct || total_contingency != total_lcc_contingency || total_lcc_indirect != total_indirect
-      errors.add(:alert, 'Financial Information')
+      errors.add(:message, 'Wrong Inputs in Financial Information')
     end
   end
   ###################### END ############################

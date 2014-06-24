@@ -2,6 +2,13 @@
 
 br  
 = form_for @subproject, html: { class: 'form-horizontal' } do |f|
+  - if @subproject.errors.any?
+    .row.flash-msg
+      .col-md-4.col-md-offset-4
+        - @subproject.errors.full_messages.each do |message|
+          .alert.alert-danger style="z-index: 1003;"
+            =message
+
   .row
     br
     .page-details-main-buttons

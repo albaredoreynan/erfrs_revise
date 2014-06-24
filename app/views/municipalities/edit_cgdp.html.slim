@@ -271,12 +271,12 @@
         .col-md-5.text-right
           'SAA Number :
         .col-md-6
-          = f.text_field :saa_number
+          = f.text_field :saa_number, class: "validate[required]"
       .form-group
         .col-md-5.text-right
           'SAA Date :
         .col-md-6
-          =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY', value: @cgdp.saa_date.strftime('%d-%b-%Y')
+          =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY', value: @cgdp.saa_date.strftime('%d-%b-%Y'), class: "validate[required]"
 
 = render 'view_cash_program'
 = render 'assigned_fund_source'
