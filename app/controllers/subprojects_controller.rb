@@ -3,7 +3,7 @@ class SubprojectsController < ApplicationController
 
   %w[id user year status].each{ |e| has_scope "with_#{e}".intern }
   %w[region province municipality barangay].each{ |e| has_scope "subproject_#{e}_id".intern }
-  has_scope :year
+
   before_action :define_total, only: %i[show edit new]
 
   def define_total
