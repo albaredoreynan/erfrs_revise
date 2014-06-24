@@ -11,7 +11,7 @@ hr
       |(No Records Required for Submission)
   .col-md-12
     p 
-      | PAYMENTS MADE DURING THE REPORTING PERIOD FROM #{DateTime.now.beginning_of_year.strftime("%d-%b-%Y").upcase} - #{DateTime.now.end_of_year.strftime("%d-%b-%Y").upcase}
+      | PAYMENTS MADE DURING THE REPORTING PERIOD FROM #{params[:start_date].present? ? params[:start_date].upcase : DateTime.now.beginning_of_year.strftime("%d-%b-%Y").upcase} - #{params[:end_date].present? ? params[:end_date].upcase : DateTime.now.end_of_year.strftime("%d-%b-%Y").upcase}
       br
       | FOR EXPENDITURES UNDER CATEGORY 1   : BARANGAY GRANTS
 .panel.panel-primary

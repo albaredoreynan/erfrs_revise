@@ -31,12 +31,12 @@
               .col-md-4.text-right 
                 =label_tag :start, "DV Range Start"
               .col-md-6
-                = text_field_tag :start_date, [], class: 'form-control', placeholder:"dd-mmm-yyyy"
+                = text_field_tag :start_date, [], class: 'form-control validate[custom[dateFormat]]', placeholder:"dd-mmm-yyyy"
             .form-group
               .col-md-4.text-right 
                 =label_tag :end, "DV Range End"
               .col-md-6
-                = text_field_tag :end_date, [], class: 'form-control', placeholder:"dd-mmm-yyyy"
+                = text_field_tag :end_date, [], class: 'form-control validate[custom[dateFormat]]', placeholder:"dd-mmm-yyyy"
             .form-group
               .col-md-4
               .col-md-8

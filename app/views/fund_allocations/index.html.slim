@@ -19,11 +19,11 @@ br
         - @fund_allocations.each do |fund_allocation|
           tr
             td= fund_allocation.fund_source.name
-            td= number_to_currency(fund_allocation.amount)
-            td= fund_allocation.year
+            td.text-right= number_to_currency(fund_allocation.amount)
+            td.text-center= fund_allocation.year
             / td= fund_allocation.start_date.strftime("%b %d, %Y")
             / td= fund_allocation.end_date.strftime("%b %d, %Y")
-            td
+            td.text-center
               = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, fund_allocation], class: 'btn btn-xs btn-warning'
               '&nbsp
               = link_to "<i class='fa fa-trash-o'></i>".html_safe, fund_allocation, method: :delete, 'data-confirm' => 'Are you sure you want to delete this fund allocation ?', class: 'btn btn-xs btn-danger'
