@@ -96,16 +96,30 @@ module ApplicationHelper
     @tranch1 = Array.new
     @tranch2 = Array.new
     @tranch3 = Array.new
-    @val = Subproject.select('first_tranch_amount, second_tranch_amount, third_tranch_amount').where('EXTRACT( MONTH from created_at) = ? AND EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', month, year, municipality_id, fund_source(code) )
-    @val.each do |amount|
+
+    @val1 = Subproject.select('first_tranch_amount').where('EXTRACT( MONTH from first_tranch_date_required) = ? AND EXTRACT( YEAR from first_tranch_date_required) = ? AND municipality_id = ? AND fund_source_id = ?', month, year, municipality_id, code)
+    @val1.each do |amount|
       @tranch1 << amount.first_tranch_amount.to_f
+    end
+
+    @val2 = Subproject.select('second_tranch_amount').where('EXTRACT( MONTH from second_tranch_date_required) = ? AND EXTRACT( YEAR from second_tranch_date_required) = ? AND municipality_id = ? AND fund_source_id = ?', month, year, municipality_id, code)
+    @val2.each do |amount|
       @tranch2 << amount.second_tranch_amount.to_f
+    end
+
+    @val3 = Subproject.select('third_tranch_amount').where('EXTRACT( MONTH from third_tranch_date_required) = ? AND EXTRACT( YEAR from third_tranch_date_required) = ? AND municipality_id = ? AND fund_source_id = ?', month, year, municipality_id, code)
+    @val3.each do |amount|
       @tranch3 << amount.third_tranch_amount.to_f
     end
+
     @total = @tranch1.inject(:+).to_f + @tranch2.inject(:+).to_f + @tranch3.inject(:+).to_f
   end
   
-  
+  def earliest_month(year, municipality_id)
+    @month = Subproject.select('first_tranch_date_required').where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ? AND fund_source_id = ? OR fund_source_id = ?', year, municipality_id, 1, 2).order("first_tranch_date_required").first
+    @month.first_tranch_date_required
+  end
+
   def total_amount_release(year, fund_source)
     @amount_approve = Array.new
     Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source(fund_source)).each do |sp_id|

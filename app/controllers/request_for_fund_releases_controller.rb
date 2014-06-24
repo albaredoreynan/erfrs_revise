@@ -82,6 +82,14 @@ class RequestForFundReleasesController < ApplicationController
     end
   end
 
+  def destroy
+    @rfrs = RequestForFundRelease.find params[:id]
+
+    @rfrs.destroy!
+    flash[:success] = 'Request has been deleted.'
+    redirect_to subproject_path(params[:sp_id])
+  end
+
   def display_designation
     @team_member = TeamMember.find(params[:team_member]) 
     @designation_name = @team_member.designation.name
