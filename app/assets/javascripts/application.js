@@ -20,6 +20,11 @@
 //= require_tree .
 $( document ).ready(function() {
   $('form').validationEngine();
+
+  $('.close').click(function(){
+    $(this).parent().remove()
+  })
+
 });
 
   function parseNaN(num) {
