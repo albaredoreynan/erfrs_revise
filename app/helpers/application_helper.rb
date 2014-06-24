@@ -117,7 +117,13 @@ module ApplicationHelper
   
   def earliest_month(year, municipality_id)
     @month = Subproject.select('first_tranch_date_required').where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ? AND fund_source_id = ? OR fund_source_id = ?', year, municipality_id, 1, 2).order("first_tranch_date_required").first
-    @month.first_tranch_date_required
+    if @month.nil?
+      DateTime.now.beginning_of_year
+    else  
+      @month.first_tranch_date_required
+    end
+    raise
+
   end
 
   def total_amount_release(year, fund_source)
