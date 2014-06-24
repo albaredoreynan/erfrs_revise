@@ -204,6 +204,15 @@ module ApplicationHelper
     data_f
   end
 
+  def team_member_name(id)
+    if id.nil?
+      @tm = ''
+    else
+      @tm = TeamMember.find(id)
+      @tm.name
+    end
+  end
+
 ############################## Encryptor ################################
 
   def cipher

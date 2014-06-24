@@ -9,13 +9,13 @@
       .col-md-4
         'Requested By
       .col-md-6.bold
-        = @rfrs.requested_by_first
+        = team_member_name(@rfrs.requested_by_first)
   .col-md-6  
     .form-group
       .col-md-5
         'Requested By
       .col-md-7.bold
-        = @rfrs.requested_by_second
+        = team_member_name(@rfrs.requested_by_second)
   .col-md-6 
     .form-group
       .col-md-4
@@ -55,13 +55,13 @@
       .col-md-4
         'Reviewed By
       .col-md-6.bold
-        = @rfrs.reviewed_by_first
+        = team_member_name(@rfrs.reviewed_by_first)
   .col-md-6
     .form-group
       .col-md-5
         'Reviewed By
       .col-md-7.bold
-        = @rfrs.reviewed_by_second
+        = team_member_name(@rfrs.reviewed_by_second)
   .col-md-6
     .form-group
       .col-md-4
@@ -102,13 +102,13 @@
       .col-md-4
         'Reviewed By
       .col-md-6.bold
-        = @rfrs.srpmo_reviewed_by
+        = team_member_name(@rfrs.srpmo_reviewed_by)
   .col-md-6
     .form-group
       .col-md-5
         'Recommended By
       .col-md-6.bold
-        = @rfrs.srpmo_recommend_by
+        = team_member_name(@rfrs.srpmo_recommend_by)
   .col-md-6  
     .form-group
       .col-md-4
@@ -149,7 +149,7 @@
       .col-md-2.text-right
         'Approved By
       .col-md-3.bold
-        = @rfrs.rpmo_approved_by
+        = team_member_name(@rfrs.rpmo_approved_by)
   .col-md-12
     .form-group
       .col-md-2.text-right

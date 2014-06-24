@@ -103,7 +103,7 @@
       .col-md-4.text-right
         'DV Date:
       .col-md-6.bold
-        = @rfrs.dv_date.strftime('%d-%b-%Y')
+        = @rfrs.dv_date.strftime('%d-%b-%Y') if @rfrs.dv_date.present?
 
   .col-md-12
     .form-group
@@ -117,4 +117,4 @@
       .col-md-8.text-right
         'Check Date:
       .col-md-3.bold
-        = Date.parse(@rfrs.check_date).strftime('%d-%b-%Y')
+        = Date.parse(@rfrs.check_date).strftime('%d-%b-%Y') if @rfrs.check_date.present?
