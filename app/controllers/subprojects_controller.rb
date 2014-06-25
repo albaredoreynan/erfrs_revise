@@ -36,6 +36,7 @@ class SubprojectsController < ApplicationController
 
   def create
     @subproject = Subproject.new subproject_params
+    @subproject.user_id = current_user.id
     @subproject.date_encoded = DateTime.now.strftime("%d/%b/%Y")
     if @subproject.save
       flash[:success] = 'Subproject created successfully.'

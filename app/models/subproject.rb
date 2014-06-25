@@ -6,6 +6,7 @@ class Subproject < ActiveRecord::Base
   belongs_to :fund_source
   belongs_to :user
   belongs_to :group
+  belongs_to :user
   has_many :request_for_fund_releases
   has_many :team_members
   has_many :rfrs, foreign_key: 'request_for_fund_releases_id' ,class_name: "RequestForFundReleases"
@@ -26,7 +27,8 @@ class Subproject < ActiveRecord::Base
   validate :equal_financial_information, :on => :create
   validate :first_tranch_validation, :on => :create
   validates :region_id, :municipality_id, :province_id, :barangay_id, 
-            :title, :date_of_mibf, :cycle, :date_encoded, presence: true
+            :title, :date_of_mibf, :cycle, :date_encoded, :user_id,
+            presence: true
 
 
   validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
@@ -43,6 +45,7 @@ class Subproject < ActiveRecord::Base
             :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
             :first_tranch_amount, :first_tranch_date_required, :second_tranch_amount, :second_tranch_date_required, :third_tranch_amount, :third_tranch_date_required, 
             presence: {:message => 'because you are changing the status to Final'}, :if => ->{ self.status == 'Final' }  
+  
   validates :first_tranch_amount, :second_tranch_amount, :third_tranch_amount, numericality: {greater_than_or_equal_to: 0, message: "error: enter proper amount"}
   validates :first_tranch_date_required, presence: true, :if => -> {self.first_tranch_amount.present?}
   validates :second_tranch_date_required, presence: true, :if => -> {self.second_tranch_amount.present?}
