@@ -33,6 +33,12 @@ $( document ).ready(function() {
     return a;
   }
 
+  function parseTranch(num){
+    a = num
+    if (isNaN(a)) a = 0;
+    return a;
+  }
+
   function update_fund_source(item_val, sp_id){
     $.ajax({
       url: "/update_fund_source",
@@ -44,6 +50,22 @@ $( document ).ready(function() {
       });
   }
 
+  function compute_amount(){
+    var total_grant = 0.0
+    var subproject_first_tranch_amount = 0.0
+    var subproject_two_tranch_amount = 0.0
+    var subproject_three_tranch_amount = 0.0
+    
+    total_grant = parseFloat($('#total_grant').html());
+
+    subproject_first_tranch_amount = (parseFloat($('#subproject_first_tranch_amount').val()))
+    subproject_second_tranch_amount = (parseFloat($('#subproject_second_tranch_amount').val()))
+    subproject_third_tranch_amount = (parseFloat($('#subproject_third_tranch_amount').val()))
+    
+    $('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100 ).toFixed(2))
+    $('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2))
+    $('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2))
+  }
 
   function compute_tranch(){
     var total_grant = 0.0
@@ -59,9 +81,9 @@ $( document ).ready(function() {
     subproject_two_tranch_amount = (parseFloat($('#tranch_two_percentage').val()))/Math.pow(10, 2);
     subproject_three_tranch_amount = (parseFloat($('#tranch_three_percentage').val()))/Math.pow(10, 2);
 
-    $('#subproject_first_tranch_amount').val(total_grant * subproject_first_tranch_amount);
-    $('#subproject_second_tranch_amount').val(total_grant * subproject_two_tranch_amount);
-    $('#subproject_third_tranch_amount').val(total_grant * subproject_three_tranch_amount);
+    $('#subproject_first_tranch_amount').val((parseTranch(total_grant * subproject_first_tranch_amount)).toFixed(2));
+    $('#subproject_second_tranch_amount').val((parseTranch(total_grant * subproject_two_tranch_amount)).toFixed(2));
+    $('#subproject_third_tranch_amount').val((parseTranch(total_grant * subproject_three_tranch_amount)).toFixed(2));
 
   }
 

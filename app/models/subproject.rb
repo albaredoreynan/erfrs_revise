@@ -13,7 +13,7 @@ class Subproject < ActiveRecord::Base
   accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
 
   before_save :check_for_group
-  before_create :add_date_encoded
+  before_validation :add_date_encoded
 
   STATUSES = %w{Draft Final}
   CATEGORIES = %w{Category1 Category2}
@@ -34,7 +34,7 @@ class Subproject < ActiveRecord::Base
             :community_indirect_cost, :community_contingency_cost, :mlgu_direct_cost, :mlgu_indirect_cost, :mlgu_contingency_cost,
             :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
             :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
-            numericality:{ greater_than_or_equal_to: 0, :message => "Enter Right Amount" } 
+            numericality:{ greater_than_or_equal_to: 0, :message => "error: enter proper amount" } 
 
   validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
             :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
@@ -43,6 +43,7 @@ class Subproject < ActiveRecord::Base
             :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
             :first_tranch_amount, :first_tranch_date_required, :second_tranch_amount, :second_tranch_date_required, :third_tranch_amount, :third_tranch_date_required, 
             presence: {:message => 'because you are changing the status to Final'}, :if => ->{ self.status == 'Final' }  
+  validates :first_tranch_amount, :second_tranch_amount, :third_tranch_amount, numericality: {greater_than_or_equal_to: 0, message: "error: enter proper amount"}
   validates :first_tranch_date_required, presence: true, :if => -> {self.first_tranch_amount.present?}
   validates :second_tranch_date_required, presence: true, :if => -> {self.second_tranch_amount.present?}
   validates :third_tranch_date_required, presence: true, :if => -> {self.third_tranch_amount.present?}
@@ -101,7 +102,7 @@ class Subproject < ActiveRecord::Base
 
   def first_tranch_validation
     if self.first_tranch_amount < ((self.grant_amount_direct_cost + self.grant_amount_indirect_cost + self.grant_amount_contingency_cost) * 0.50)
-      errors.add(:message, 'First Tranch must be atleast 50%')
+      errors.add(:first, ' Tranch must be atleast 50%')
     end
   end
 

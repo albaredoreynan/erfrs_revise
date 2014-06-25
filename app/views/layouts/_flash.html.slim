@@ -1,6 +1,10 @@
-.row.flash-msg
-  /.col-md-4.col-md-offset-4
-    - flash.each do |key, value|
-      - unless value =~ /Signed in successfully/
-        div style="z-index: 1003; position: absolute;" class = "#{flash_class(key)}"
-          = value
+- flash.each do |key, value|
+  - unless value =~ /Signed in successfully/
+    .row.flash-msg
+      .col-md-12.col-md-offset-4
+      - if value != 'An error occured while creating project' && value != 'An error occured while updating project'
+        div style="z-index: 1003; position: absolute; min-width: 365px;" class = "#{flash_class(key)}"
+          .col-md-11
+            = value
+          .col-md-1.close style=" position: absolute; top: 6px; right: 20px;"
+            'X

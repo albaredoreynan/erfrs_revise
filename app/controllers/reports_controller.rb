@@ -17,7 +17,7 @@ class ReportsController < ApplicationController
 	end
 
 	def mga_reports
-		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
+		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
 		respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }
@@ -25,7 +25,7 @@ class ReportsController < ApplicationController
 	end
 
 	def cg_reports
-		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
+		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
 		respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }
@@ -33,7 +33,7 @@ class ReportsController < ApplicationController
 	end
 
 	def cash_program_reports
-		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
+		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
 	end
 
 	def download_file

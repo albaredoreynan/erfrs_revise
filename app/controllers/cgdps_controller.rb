@@ -4,7 +4,7 @@ class CgdpsController < ApplicationController
   %w[region province municipality].each{ |e| has_scope "subproject_#{e}_id".intern }
 
   def index
-    @subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).group_by(&:municipality)
+    @subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
     @cgdp = Cgdp.where('municipality_id =?', params[:id]).last
   end
 

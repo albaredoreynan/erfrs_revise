@@ -84,7 +84,7 @@ br
           tr
             td= trail_id(6, sp.id)
             td= sp.try(:date_of_mibf).try(:year)
-            td= sp.region.try(:name)
+            td= sp.region.try(:code)
             td= sp.province.try(:name)
             td= sp.municipality.try(:name)
             td= sp.barangay.try(:name)

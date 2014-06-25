@@ -39,7 +39,7 @@ class SubprojectsController < ApplicationController
     @subproject.date_encoded = DateTime.now.strftime("%d/%b/%Y")
     if @subproject.save
       flash[:success] = 'Subproject created successfully.'
-      redirect_to subprojects_path
+      redirect_to edit_subproject_path(@subproject.id)
     else
       flash[:error] = 'An error occured while creating project'
       render 'new'

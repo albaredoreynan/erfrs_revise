@@ -53,7 +53,7 @@ br
           .col-md-5
             = f.label :date_of_mibf, "Date of MIBF"
           .col-md-7
-            = f.text_field :date_of_mibf, class: 'form-control validate[custom[dateFormat]]', placeholder: "dd-mmm-yyyy",  value: params[:id].present? ? @subproject.date_of_mibf.strftime("%d-%b-%Y") : ''
+            = f.text_field :date_of_mibf, class: 'form-control validate[custom[dateFormat]]', placeholder: "dd-mmm-yyyy",  value: @subproject.date_of_mibf.present? ? @subproject.date_of_mibf.strftime("%d-%b-%Y") : ''
         .form-group
           .col-md-5
             = f.label :date_encoded, "Date Encoded"
