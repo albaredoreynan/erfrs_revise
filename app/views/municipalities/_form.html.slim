@@ -3,11 +3,11 @@
     .form-group
       = label_tag :subproject_region_id, 'Region', class: 'control-label col-sm-2'
       .col-sm-10
-        = select_tag :subproject_region_id, options_for_select(Region.values_for_select), include_blank: true, class: 'form-control'
+        = select_tag :subproject_region_id, options_for_select(Region.values_for_select, (@municipality.province.present? ? @municipality.province.region_id : '')), include_blank: true, class: 'form-control'
     .form-group
       = f.label :subproject_province_id, 'Province', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.select :province_id, [], {}, class: 'form-control', id: 'subproject_province_id'
+        = f.select :province_id, @municipality.province.present? ? options_for_select(Province.find([params[:subproject_province_id]]).map{|a|[a.name, a.id]}) : [],  ? options_for_select([Province.find(@municipality.province_id)].map{|a|[a.name, a.id]}) : [], {}, class: 'form-control', id: 'subproject_province_id'
     -if params[:action] == "edit"
       .form-group
         =f.label :group_id, "Group", class: "control-label col-sm-2"
