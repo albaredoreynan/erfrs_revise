@@ -77,8 +77,7 @@ $( document ).ready(function() {
     var subproject_three_tranch_amount = 0.0
 
 
-    total_grant = parseFloat($('#total_grant').html());
-
+    total_grant = parseFloat($('#subproject_grant_amount_direct_cost').val()) + parseFloat($('#subproject_grant_amount_indirect_cost').val());
 
     subproject_first_tranch_amount = (parseFloat($('#tranch_one_percentage').val()))/Math.pow(10, 2);
     subproject_two_tranch_amount = (parseFloat($('#tranch_two_percentage').val()))/Math.pow(10, 2);
@@ -198,7 +197,7 @@ $( document ).ready(function() {
     $('#total_indirect').html(total_indirect.toFixed(2));
     $('#total_contingency').html(total_contingency.toFixed(2));
     $('#total_total').html(total_total.toFixed(2))
-
+    $('#subtotal_total_percent').html('100.00%')
     if (total_total != ""){
         $('#percent_grant').html(percent_total_grant.toFixed(2) + "%");
         $('#percent_lcc').html(percent_total_lcc.toFixed(2) + "%" );
