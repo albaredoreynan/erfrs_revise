@@ -7,9 +7,9 @@ class Subproject < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
   belongs_to :user
-  has_many :request_for_fund_releases
-  has_many :team_members
-  has_many :rfrs, foreign_key: 'request_for_fund_releases_id' ,class_name: "RequestForFundReleases"
+  has_many :request_for_fund_releases, dependent: :destroy
+  has_many :team_members, dependent: :destroy
+  has_many :rfrs, foreign_key: 'request_for_fund_releases_id' ,class_name: "RequestForFundReleases", dependent: :destroy
 
   accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
 
@@ -36,7 +36,24 @@ class Subproject < ActiveRecord::Base
             :community_indirect_cost, :community_contingency_cost, :mlgu_direct_cost, :mlgu_indirect_cost, :mlgu_contingency_cost,
             :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
             :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
-            numericality:{ greater_than_or_equal_to: 0, :message => "error: enter proper amount" } 
+            numericality:{ greater_than_or_equal_to: 0, :message => "should be a positive number" } 
+  #GRANT AMOUNT VALIDATION
+  # validates :grant_amount_direct_cost, numericality:{ greater_than_or_equal_to: 0, :message => "GRANT Amount - Direct Cost should be a positive number" } 
+  # validates :grant_amount_indirect_cost, numericality:{ greater_than_or_equal_to: 0, :message => "GRANT Amount - Indirect Cost should be a positive number" } 
+  # validates :grant_amount_contingency_cost, numericality:{ greater_than_or_equal_to: 0, :message => "GRANT Amount - Contingency Cost should be a positive number" } 
+  # #LCC BLGU VALIDATION
+  # validates :lcc_blgu_direct_cost,  numericality:{ greater_than_or_equal_to: 0, :message => "LCC BLGU - Direct Cost should be a positive number" } 
+  # validates :lcc_blgu_indirect_cost, numericality:{ greater_than_or_equal_to: 0, :message => "LCC BLGU - Indirect Cost should be a positive number" } 
+  # validates :lcc_blgu_contingency_cost, numericality:{ greater_than_or_equal_to: 0, :message => "LCC BLGU - Contingency Cost should be a positive number" } 
+  # #COMMUNITY VALIDATION
+  # validates :community_direct_cost,  numericality:{ greater_than_or_equal_to: 0, :message => "COMMUNITY - Direct Cost should be a positive number" } 
+  # validates :community_indirect_cost, numericality:{ greater_than_or_equal_to: 0, :message => "COMMUNITY - Indirect Cost should be a positive number" } 
+  # validates :community_contingency_cost, numericality:{ greater_than_or_equal_to: 0, :message => "COMMUNITY- Contingency Cost should be a positive number" } 
+  # #MLGU VALIDATION
+  # validates :mlgu_direct_cost,  numericality:{ greater_than_or_equal_to: 0,      :message => "MLGU - Direct Cost should be a positive number" } 
+  # validates :mlgu_indirect_cost, numericality:{ greater_than_or_equal_to: 0,     :message => "MLGU - Indirect Cost should be a positive number" } 
+  # validates :mlgu_contingency_cost, numericality:{ greater_than_or_equal_to: 0,  :message => "MLGU - Contingency Cost should be a positive number" } 
+  # #
 
   validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
             :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
@@ -44,7 +61,7 @@ class Subproject < ActiveRecord::Base
             :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
             :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
             :first_tranch_amount, :first_tranch_date_required, :second_tranch_amount, :second_tranch_date_required, :third_tranch_amount, :third_tranch_date_required, 
-            presence: {:message => 'because you are changing the status to Final'}, :if => ->{ self.status == 'Final' }  
+            presence: {:message => 'should be filled'}, :if => ->{ self.status == 'Final' }  
   
   validates :first_tranch_amount, :second_tranch_amount, :third_tranch_amount, numericality: {greater_than_or_equal_to: 0, message: "error: enter proper amount"}
   validates :first_tranch_date_required, presence: true, :if => -> {self.first_tranch_amount.present?}
@@ -52,6 +69,7 @@ class Subproject < ActiveRecord::Base
   validates :third_tranch_date_required, presence: true, :if => -> {self.third_tranch_amount.present?}
 
   validate :mbif_date
+  validate :tranch_must_not_overflow
 
   # validates :team_members, associated: {:message => "Team Members Missing"}, :if => -> {self.status == "Final"}
   ####################### SCOPES ###########################
@@ -99,6 +117,14 @@ class Subproject < ActiveRecord::Base
   def add_date_encoded
     self.date_encoded = DateTime.now.to_date
   end
+
+  def tranch_must_not_overflow
+    grant = self.grant_amount_direct_cost.to_f + self.grant_amount_indirect_cost.to_f
+    tranch = self.first_tranch_amount.to_f + self.second_tranch_amount.to_f + self.third_tranch_amount.to_f
+    if grant < tranch
+      errors.add(:tranch, "should be less than total grant")
+    end
+  end
   
   def mbif_date
     if self.date_of_mibf.present?
@@ -108,7 +134,7 @@ class Subproject < ActiveRecord::Base
 
   def first_tranch_validation
     if self.first_tranch_amount < ((self.grant_amount_direct_cost + self.grant_amount_indirect_cost + self.grant_amount_contingency_cost) * 0.50)
-      errors.add(:first, ' Tranch must be atleast 50%')
+      errors.add(:first, ' Tranch should be atleast 50%')
     end
   end
 
