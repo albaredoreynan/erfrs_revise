@@ -9,10 +9,12 @@
   <body class= <%= @hide_nav ? "body-page-details" : "" %> >
     <%= render "layouts/header" %>
     <%= render "layouts/subheader" %>
-    <%= render "layouts/navbar" %>
-    <%= render "layouts/flash" %>
 
-    <div class="container <%= devise_layout(params[:controller]) %>" style= <%= @hide_nav ? 'padding-top:2%;' : '' %> >
+
+    <div class="container <%= devise_layout(params[:controller]) %>" style= <%= @hide_nav ? 'border:0px;' : 'border:0px;' %> >
+      <%= render "layouts/navbar" %>
+      <%= render "layouts/flash" %>
+      <br>
       <%= yield %>
     </div>
 

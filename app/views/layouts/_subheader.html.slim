@@ -17,11 +17,233 @@
       a href="#"  Request for Fund Releases
     li.active New RFRs 
 
+
+-elsif @hide_nav && params[:controller] == "regions"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Region
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/regions" Regions
+      li.active = @region.name
+
+
+-elsif @hide_nav && params[:controller] == "provinces"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Provinces
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/provinces" Provinces
+      li.active = @province.name
+
+-elsif @hide_nav && params[:controller] == "municipalities"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Municipalities
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/municipalities" Municipalities
+      li.active = @municipality.name
+
+-elsif @hide_nav && params[:controller] == "barangays"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Barangays
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/barangays" Barangays
+      li.active = @barangay.name
+
+-elsif @hide_nav && params[:controller] == "users"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Users
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/users" Users
+      li.active #{@user.first_name if @user.first_name.present?} #{@user.last_name if @user.last_name.present?} 
+  -elsif params[:action] == "new"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li
+        a href="/users" Users
+      li.active New User
+
+-elsif @hide_nav && params[:controller] == "designations"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Designations
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/designations" Designations
+      li.active = @designation.name
+  -elsif params[:action] == "new"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li
+        a href="/designations" Designations
+      li.active New Designation
+
+
+-elsif @hide_nav && params[:controller] == "regional_officers"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Regional Officers
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/regional_officers" Regional Officers
+      li.active = @regional_officer.name
+  -elsif params[:action] == "new"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li
+        a href="/regional_officers" Regional Officers
+      li.active New Regional Officer
+
 -elsif @hide_nav && params[:controller] == "news_informations"
-  ul.breadcrumb
-    li
-      a href="/" Dashboard
-    li.active = @news_information.title.titleize
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active News and Informations
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/news_informations" News and Informations
+      li.active = @news_information.title
+  -elsif params[:action] == "new"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li
+        a href="/news_informations" News and Informations
+      li.active New News
+
+-elsif @hide_nav && params[:controller] == "fund_sources"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Fund Sources
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/fund_sources" Fund Sources
+      li.active = @fund_source.name
+  -elsif params[:action] == "new"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li
+        a href="/fund_sources" Fund Sources
+      li.active New Fund Source
+
+-elsif @hide_nav && params[:controller] == "fund_allocations"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Fund Allocations
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/fund_allocations" Fund Allocations
+      li.active #{@fund_allocation.fund_source.name} - #{@fund_allocation.year}
+  -elsif params[:action] == "new"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li
+        a href="/fund_allocations" Fund Allocations
+      li.active New Fund Allocation
+
+-elsif @hide_nav && params[:controller] == "muni_fund_allocations"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Fund Allocation (Municipalities)
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/muni_fund_allocations" Fund Allocation (Municipalities)
+  -elsif params[:action] == "new"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li
+        a href="/muni_fund_allocations" Fund Allocation (Municipalities)
+      li.active New Fund Source
+
+-elsif @hide_nav && params[:controller] == "groups"
+  -if params[:action] == "index"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li.active Municipal Groups
+  -elsif params[:action] == "edit"
+    ul.breadcrumb
+      li
+        a href="/admin/index" Administrator
+      li
+        a href="/groups" Municipal Groups
+      li.active = @group.code
+  -elsif params[:action] == "new"
+    ul.breadcrumb
+      li 
+        a href="/admin/index" Administrator
+      li
+        a href="/groups" Municipal Groups
+      li.active New Municipal Group
+
+
 
 css:
   ul.breadcrumb{

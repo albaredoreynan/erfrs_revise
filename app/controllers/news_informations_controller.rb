@@ -1,6 +1,6 @@
 class NewsInformationsController < InheritedResources::Base
 	actions :all
-  
+  before_filter :subheader, except: :show
   respond_to :html, :json
 
   def show
@@ -9,6 +9,10 @@ class NewsInformationsController < InheritedResources::Base
 
   end
 
+  def subheader
+    @hide_nav = true
+  end
+  
   protected
 
     def permitted_params
