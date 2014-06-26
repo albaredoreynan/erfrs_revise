@@ -1,13 +1,14 @@
 - @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost + @subproject.grant_amount_contingency_cost
 - @total_release = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release
 - @total_grant_less_con = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
-- if params[:tranch] == 'first'
+
+- if params[:tranch] == 'first' || @rfrs.tranch_for == 1
   - @amount_requested = @subproject.first_tranch_amount
   - @previous_released = 0
   - @cumulative_amount = @subproject.first_tranch_amount
   - @tranch = 1
   - @contingency = @subproject.grant_amount_contingency_cost
-- elsif params[:tranch] == 'second'
+- elsif params[:tranch] == 'second' || @rfrs.tranch_for == 2
   - @amount_requested = @subproject.second_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
