@@ -14,10 +14,13 @@
 //= require jquery_ujs
 //= require cocoon
 //= require chosen.jquery
+//= require custom-hooks
 //= require jquery-1.11.1.min.js
 //= require jquery.validationEngine.js
 //= require jquery.validationEngine-en.js
+//= require bootstrap.min.js
 //= require_tree .
+
 $( document ).ready(function() {
   $('form').validationEngine();
 
@@ -207,5 +210,3 @@ $( document ).ready(function() {
         $('#total_percent').html("100%");
     }
   }
-
-

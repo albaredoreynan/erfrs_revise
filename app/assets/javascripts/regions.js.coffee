@@ -12,7 +12,7 @@ $ ->
   fetch_province = (region_id)->
     url = "/provinces.json?region_id=" + region_id
     $.get url, (data)->
-      provinces.empty().attr('disabled', false)
+      provinces.empty().attr('disabled', false).removeAttr('readonly')
       municipalities.empty().attr('disabled','disabled')
       barangays.empty().attr('disabled', 'disabled')
       provinces.append('<option value></option>')
@@ -22,7 +22,7 @@ $ ->
   fetch_municipalities = (province_id)->
     url = "/municipalities.json?province_id=" + province_id
     $.get url, (data)->
-      municipalities.empty().attr('disabled', false)
+      municipalities.empty().attr('disabled', false).removeAttr('readonly')
       barangays.empty().attr('disabled', 'disabled')
       municipalities.append('<option value></option>')
       $.each data, ->
@@ -31,7 +31,7 @@ $ ->
   fetch_barangays = (municipality_id)->
     url = "/barangays.json?municipality_id=" + municipality_id
     $.get url, (data)->
-      barangays.empty().attr('disabled', false)
+      barangays.empty().attr('disabled', false).removeAttr('readonly')
       barangays.append('<option value></option>')
       $.each data, ->
         barangays.append($('<option></option>').attr('value', this.id).text(this.name))
