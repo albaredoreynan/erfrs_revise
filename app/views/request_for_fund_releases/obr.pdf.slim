@@ -45,8 +45,8 @@ table.table.table-responsive border=1 width=500
         p Sub-Project Name: &nbsp; #{@subproject.title}
         p Tranche: &nbsp; #{@rfrs.tranch_for}
         p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
-        P
-          h5 Attachment
+        p.bold Attachment
+        p style="padding-left: 30px;" #{@rfrs.remarks}
     td.text-center width='12%' 
     td.text-center width='8%' 
     td.text-center width='10%'
@@ -79,33 +79,40 @@ table.table.table-responsive border=1 width=500
       td colspan=2 style='padding-left: 50px;'
         .form-group Allotment available and obligated for the purpose as indicated above      
 table.table.table-responsive border=1 width=500
-  tr    
-    td.text-center width='10%' Signature
-    td.text-left width='40%'
-    td.text-center width='10%' Signature
-    td.text-left width='40%'
-  tr    
-    td.text-center width='10%' Printed Name
-    td.text-left width='40%'
-    td.text-center width='10%' Printed Name
-    td.text-left width='40%'
-  tr    
-    td.text-center width='10%' Position
-    td.text-left width='40%'
-    td.text-center width='10%' Position
-    td.text-left width='40%'
-  tr    
-    td.text-center width='10%' Date
-    td.text-left width='40%'
-    td.text-center width='10%' Date
-    td.text-left width='40%'
-
+  tr
+    td.text-center width='10%'
+      p Signature
+      p Printed Name
+      p Position
+    td.text-center width='40%'
+      br
+      - @positions = regional_officer(@subproject.region_id, "A", "OR")
+      - @positions.each do |position|
+        #{position.name}
+        '-------------------------------------------------------
+        #{position.designation}
+        br
+    td.text-center width='10%'
+      p Signature
+      p Printed Name
+      p Position
+    td.text-center width='40%'
+      br
+      - @positions_b = regional_officer(@subproject.region_id, "B", "OR")
+      - @positions_b.each do |position_b|
+        #{position_b.name}
+        '-------------------------------------------------------
+        #{position_b.designation}
+        br
 css:      
   .form-group > .col-md-3{
     text-align: right;
   }	
-  td {
-  	font-size: 11px;
+  td{
+    font-size: 10px;
+  }
+  .sm_font {
+    font-size: 9px;
   }
   table {
   	margin-top: -15px;

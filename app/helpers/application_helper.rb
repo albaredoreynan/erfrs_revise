@@ -217,6 +217,10 @@ module ApplicationHelper
     end
   end
 
+  def regional_officer(region_id, box, ro_type)
+    @position = RegionalOfficer.select("designation, name").where("region_id = ? AND box = ? AND ro_type = ?", region_id, box, ro_type)
+  end
+
 ############################## Encryptor ################################
 
   def cipher

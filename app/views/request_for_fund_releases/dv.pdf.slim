@@ -60,8 +60,8 @@ table.table.table-responsive border=1 width=500
 			  p Sub-Project Name: &nbsp; #{@subproject.title}
 			  p Tranche: &nbsp; #{@rfrs.tranch_for}
 			  p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
-			  P
-			    h5 Attachment
+			  p.bold Attachment
+			  p style="padding-left: 30px;" #{@rfrs.remarks}
   	td.text-right height=100 width='20%'
 			.col-md-12
 			  p #{number_to_currency @subproject.second_tranch_amount_release} 
@@ -97,26 +97,31 @@ table.table.table-responsive border=1 width=500
       .form-group
 
 table.table.table-responsive border=1 width=500
-  tr    
-    td.text-center width='10%' Signature
-    td.text-left width='40%'
-    td.text-center width='10%' Signature
-    td.text-left width='40%'
-  tr    
-    td.text-center width='10%' Printed Name
-    td.text-left width='40%'
-    td.text-center width='10%' Printed Name
-    td.text-left width='40%'
-  tr    
-    td.text-center width='10%' Position
-    td.text-left width='40%'
-    td.text-center width='10%' Position
-    td.text-left width='40%'
-  tr    
-    td.text-center width='10%' Date
-    td.text-left width='40%'
-    td.text-center width='10%' Date
-    td.text-left width='40%'
+  tr
+    td.text-center width='15%'
+      p Signature
+      p Printed Name
+      p Position
+    td.sm_font.text-center width='35%'
+      br
+      - @positions = regional_officer(@subproject.region_id, "A", "DV")
+      - @positions.each do |position|
+        #{position.name}
+        '-------------------------------------------------------
+        #{position.designation}
+        br
+    td.text-center width='15%'
+      p Signature
+      p Printed Name
+      p Position
+    td.sm_font.text-center width='35%'
+      br
+      - @positions_b = regional_officer(@subproject.region_id, "B", "DV")
+      - @positions_b.each do |position_b|
+        #{position_b.name}
+        '-------------------------------------------------------
+        #{position_b.designation}
+        br
 
 table.table.table-responsive border=1 width=500
   tr
@@ -145,9 +150,11 @@ css:
   .form-group > .col-md-3{
     text-align: right;
   }
-  td {
-  	font-size: 11px;
-
+  td{
+  	font-size: 10px;
+  }
+  .sm_font {
+    font-size: 9px;
   }
   table {
   	margin-top: -15px;

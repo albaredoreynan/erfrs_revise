@@ -112,7 +112,7 @@
       .col-md-4.bold.text-right
         'DV Date:
       .col-md-6
-        =f.text_field :dv_date, placeholder: 'DD-MMM-YYYY'
+        =f.text_field :dv_date, placeholder: 'DD-MMM-YYYY', value: @rfrs.dv_date.present? ? @rfrs.dv_date.strftime("%d-%b-%Y") : ''
   .col-md-12
     .form-group
       .col-md-8.bold.text-right
