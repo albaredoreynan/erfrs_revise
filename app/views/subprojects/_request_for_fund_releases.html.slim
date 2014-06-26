@@ -11,14 +11,17 @@
   h4 Request For Fund Releases
   hr
   .col-md-12
-    = image_tag('tip.png')
-    ' TIP: You are only allowed to create an RFR if the Sub-Project has been approved.
-    - if tranch != 'other'
+    = image_tag('tip.png', class: 'tooltip-check')
+    b
+      ' TIP: 
+    'You are only allowed to create an RFR if the Sub-Project is already tagged with a Fund Source.
+    - if tranch != 'other' and @subproject.status == 'Final' 
       p
         = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => tranch), class: 'btn btn-small btn-primary'
+
     - else
       p
-        = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => tranch), disabled: 'disabled', class: 'btn btn-small btn-primary'
+        = link_to "Create RFR".html_safe, {}, disabled: 'disabled', class: 'btn btn-small btn-primary'
     table.table.table-hover.table-striped
       thead
         tr

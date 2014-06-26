@@ -32,7 +32,7 @@
           td = f.text_field :third_tranch_date_required, value: @subproject.third_tranch_date_required.present? ? Date.parse(@subproject.third_tranch_date_required).strftime("%d-%b-%Y") : '', placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
     
   .col-md-4
-    = image_tag('tip.png')
+    = image_tag('tip.png', class: 'tooltip-check')
     ' TIP: If the exact date cannot be projected, enter either the start of the month or week.
 
 javascript:

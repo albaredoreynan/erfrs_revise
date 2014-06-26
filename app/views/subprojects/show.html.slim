@@ -1,9 +1,8 @@
 - @hide_nav = true
-br  
-br
-  .col-md-10
-
-  .col-md-2
+.col-sm-12.title-header
+  .col-sm-6.pull-left
+    h4 Sub-Projects
+  .col-sm-6
     = link_to 'Edit', edit_subproject_path(@subproject), class: 'btn btn-primary pull-right'
 
 = form_for @subproject, html: { class: 'form-horizontal' } do |f|

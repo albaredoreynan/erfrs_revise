@@ -69,8 +69,12 @@ class RequestForFundReleasesController < ApplicationController
   end
 
   def create
+
     @rfrs = RequestForFundRelease.new rfrs_params
     @subproj = Subproject.find rfrs_params[:subproject_id]
+    flash[:error] = 'You cannot create Request For Fund Release' if @subproj.status != "Final"
+    redirect_to subproject_path(params[:sp_id]) if @subproj.status != "Final"
+    #For safety purpose
     if @rfrs.save 
       if rfrs_params[:tranch_for] == '1'
         @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve], first_tranch_revised_amount: rfrs_params[:amount_approve])

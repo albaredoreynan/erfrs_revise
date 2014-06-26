@@ -2,14 +2,14 @@
   h4 Schedule of Grant Fund Releases
   hr
   .col-md-12
-    = image_tag('tip.png')
+    = image_tag('tip.png', class: 'tooltip-check')
     b
       ' TIP:
     'If the exact date cannot be projected, enter either the start of the month or week.
     table.table.table-bordered
       thead
         tr
-          th Tranches
+          th Tranch
           th % TOTAL
           th Date Required
           th Original Amount
@@ -68,7 +68,7 @@
           td.text-right = number_to_currency @subproject.third_tranch_amount_release.to_f
         tr
           th colspan=3 TOTAL
-          td.text-right = number_to_currency (@subproject.first_tranch_amount.to_f + @subproject.second_tranch_amount.to_f + @subproject.third_tranch_amount.to_f)
-          td.text-right = number_to_currency (first_amount.to_f + second_amount.to_f + third_amount.to_f)
-          td.text-right = number_to_currency (@subproject.first_tranch_amount_release.to_f + @subproject.second_tranch_amount_release.to_f + @subproject.third_tranch_amount_release.to_f)
+          td.text-right.bold = number_to_currency (@subproject.first_tranch_amount.to_f + @subproject.second_tranch_amount.to_f + @subproject.third_tranch_amount.to_f)
+          td.text-right.bold = number_to_currency (first_amount.to_f + second_amount.to_f + third_amount.to_f)
+          td.text-right.bold = number_to_currency (@subproject.first_tranch_amount_release.to_f + @subproject.second_tranch_amount_release.to_f + @subproject.third_tranch_amount_release.to_f)
           

@@ -133,6 +133,13 @@ sub {
 img {
   border: 0;
 }
+
+.tooltip-check{
+  width: 18px;
+  height: 18px;
+  margin-right: 7px;
+  margin-bottom: 3px;
+}
 svg:not(:root) {
   overflow: hidden;
 }
@@ -5229,6 +5236,7 @@ button.close {
 .modal-body {
   position: relative;
   padding: 20px;
+  text-align: center;
 }
 .modal-footer {
   margin-top: 15px;
