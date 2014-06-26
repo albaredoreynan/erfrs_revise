@@ -1,8 +1,11 @@
 class DesignationsController < InheritedResources::Base
 	actions :all, except: :show
-  
+  before_filter :subheader, except: :show
   respond_to :html, :json
 
+  def subheader
+    @hide_nav = true
+  end
   protected
 
     def permitted_params

@@ -2,14 +2,19 @@ class UsersController < ApplicationController
   respond_to :html  
 
   def index
+    @hide_nav = true
+    
     @users = User.all
   end
 
   def new
+  
+    @hide_nav = true
     @user = User.new
   end
 
   def edit
+    @hide_nav = true
     @user = User.find(params[:id])
   end
 

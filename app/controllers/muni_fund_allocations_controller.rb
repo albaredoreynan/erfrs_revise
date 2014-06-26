@@ -1,6 +1,6 @@
 class MuniFundAllocationsController < ApplicationController
 	respond_to :html, :json
-
+  before_filter :subheader
 	#has_scope :region_id
   has_scope :municipality_id
 	
@@ -42,6 +42,7 @@ class MuniFundAllocationsController < ApplicationController
     end
 	end
 
+
 	def delete
 		@muni_fund_allocation = MuniFundAllocation.find(params[:id])
     @muni_fund_allocation.destroy!
@@ -49,6 +50,10 @@ class MuniFundAllocationsController < ApplicationController
     redirect_to muni_fund_allocations_path
 	end
 
+  def subheader
+    @hide_nav = true
+  end
+  
 	private
 		def muni_fund_allocation_params
 		  params.require(:muni_fund_allocation).permit(:year, :amount, :municipality_id)

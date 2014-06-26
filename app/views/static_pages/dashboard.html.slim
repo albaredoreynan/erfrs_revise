@@ -1,11 +1,11 @@
 .row
   .col-md-9
-    h4 News And Information
+    h4 News and Information
     hr
       - NewsInformation.all.each do |news|
         .well.well-sm
           h5
-            = link_to news.title.titleize, news_information_path(news)
+            = link_to news.title, news_information_path(news)
           = truncate(news.content, length: 250)
           | &nbsp;
           br

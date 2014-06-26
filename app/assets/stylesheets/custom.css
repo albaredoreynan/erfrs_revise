@@ -402,6 +402,14 @@ body.rtl .formError .formErrorArrow {
   background: #ddd;
 }
 
+.title-header{
+  padding-left: 0px !important;
+}
+
+.title-header > .col-sm-6{
+  padding-left: 0px;
+}
+
 
 /*****************jquery form validations*******************/
 

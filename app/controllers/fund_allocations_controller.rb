@@ -2,7 +2,12 @@ class FundAllocationsController < InheritedResources::Base
 	actions :all, except: :show
   
   respond_to :html, :json
+  before_filter :subheader
 
+  def subheader
+    @hide_nav = true
+  end
+  
   protected
 
     def permitted_params

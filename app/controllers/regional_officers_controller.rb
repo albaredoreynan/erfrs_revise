@@ -2,6 +2,7 @@ class RegionalOfficersController < ApplicationController
 	respond_to :html, :json
   
   has_scope :region_id
+  before_filter :subheader
   #has_scope :ro_type
 
   def index
@@ -43,6 +44,10 @@ class RegionalOfficersController < ApplicationController
     @regional_officer.destroy!
     flash[:success] = 'Regional Officer has been remove.' 
     redirect_to regional_officers_path
+  end
+
+  def subheader
+    @hide_nav = true
   end
 	
 	private
