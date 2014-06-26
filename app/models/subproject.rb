@@ -55,7 +55,10 @@ class Subproject < ActiveRecord::Base
 
   # validates :team_members, associated: {:message => "Team Members Missing"}, :if => -> {self.status == "Final"}
   ####################### SCOPES ###########################
-  scope :with_user,   -> username { fetch_all_created_by username }
+  scope :with_user, -> username {
+
+    includes(:user).where('users.username' => username) 
+  }
   scope :with_id,     -> id { where id: id }
   scope :with_status, -> status { where status: status }
   scope :fund_source, -> fs { where fund_source_id: fs}
