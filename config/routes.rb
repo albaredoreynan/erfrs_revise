@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-  authenticated :super_user do
-    root to: 'static_pages#dashboard', as: 'authenticated_root'
-  end
+  #authenticated :super_user do
+  #  root to: 'static_pages#dashboard', as: 'authenticated_root'
+  #end
 
-  root to: 'static_pages#dashboard'
+  root to: 'static_pages#landing_page'
 
-  # get '/dashboard' => 'static_pages#dashboard'
+  get '/landing_page' => 'static_pages#landing_page'
+  get '/dashboard' => 'static_pages#dashboard'
 
   resources :subproject_implementation_plans
   resources :subprojects
