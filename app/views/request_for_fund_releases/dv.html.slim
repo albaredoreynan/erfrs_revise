@@ -69,13 +69,13 @@ hr
       		b Amount
       tr
       	td.text-left height=300 width='80%' colspan=3
-					.col-md-12
-					  p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
-					  p Sub-Project Name: &nbsp; #{@subproject.title}
-					  p Tranche: &nbsp; #{@rfrs.tranch_for}
-					  p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
-					  P
-					    h5 Attachment
+          .col-md-12
+            p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
+            p Sub-Project Name: &nbsp; #{@subproject.title}
+            p Tranche: &nbsp; #{@rfrs.tranch_for}
+            p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
+            p.bold Attachment
+            p style="padding-left: 30px;" #{@rfrs.remarks}
       	td.text-right height=300 width='20%'
 					.col-md-12
 					  p #{number_to_currency @subproject.second_tranch_amount_release} 
@@ -110,26 +110,31 @@ hr
           td colspan=2 style='padding-left: 50px;'
             .form-group 
     table.table.table-bordered
-      tr    
-        td.text-center width='10%' Signature
-        td.text-left width='40%'
-        td.text-center width='10%' Signature
-        td.text-left width='40%'
-      tr    
-        td.text-center width='10%' Printed Name
-        td.text-left width='40%'
-        td.text-center width='10%' Printed Name
-        td.text-left width='40%'
-      tr    
-        td.text-center width='10%' Position
-        td.text-left width='40%'
-        td.text-center width='10%' Position
-        td.text-left width='40%'
-      tr    
-        td.text-center width='10%' Date
-        td.text-left width='40%'
-        td.text-center width='10%' Date
-        td.text-left width='40%'
+      tr
+        td.text-center width='10%'
+          p Signature
+          p Printed Name
+          p Position
+        td.text-center width='40%'
+          br
+          - @positions = regional_officer(@subproject.region_id, "A", "DV")
+          - @positions.each do |position|
+            #{position.name}
+            '-------------------------------------------------------
+            #{position.designation}
+            br
+        td.text-center width='10%'
+          p Signature
+          p Printed Name
+          p Position
+        td.text-center width='40%'
+          br
+          - @positions_b = regional_officer(@subproject.region_id, "B", "DV")
+          - @positions_b.each do |position_b|
+            #{position_b.name}
+            '-------------------------------------------------------
+            #{position_b.designation}
+            br
     table.table.table-bordered
       tr
         td.text-left width='2%'
