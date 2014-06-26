@@ -61,7 +61,7 @@ class RequestForFundReleasesController < ApplicationController
         @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve], third_tranch_revised_amount: rfrs_params[:amount_approve])
       end 
       flash[:success] = 'Request for release updated successfully.'
-      redirect_to subprojects_path
+      redirect_to edit_request_for_fund_release_path(@rfrs)
     else
       flash[:error] = 'An error occured while updating project'
       render 'edit'
