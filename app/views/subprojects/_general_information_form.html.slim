@@ -47,7 +47,8 @@ br
             .col-md-4
               = f.label :group
             .col-md-8
-              = text_field_tag :group, '', class: 'form-control  ', disabled:'true'
+              .div.group
+              = hidden_field_tag :group, '', class: 'form-control  ', disabled:'true'
       .col-md-6
         .form-group
           .col-md-5
