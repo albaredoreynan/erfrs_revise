@@ -31,8 +31,8 @@ namespace :muni_group_id do
   end
 
   def update_municipality_group(row)
-    name = cell(row, MUNI_COLUMN[:name]).upcase
-    @municipality = Municipality.find_by(name: name)
+    name = cell(row, MUNI_COLUMN[:name])
+    @municipality = Municipality.where("name ILIKE ?", name).first
 
     unless @municipality.present?
       NOT_MIGRATED << "row #{row} - #{cell(row, MUNI_COLUMN[:name])}"
