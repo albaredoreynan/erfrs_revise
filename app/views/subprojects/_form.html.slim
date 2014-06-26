@@ -4,8 +4,9 @@
     .row.alert-msg
       .col-sm-12
         .alert.alert-danger.fade-in style="z-index: 1003;"
-          - @subproject.errors.full_messages.each do |message|
-            =message
+          - @subproject.errors.each do |attr, message|
+            raise
+            ' #{attr.to_s.titleize.gsub(/(?=\bDirect\b)| (?=\bIndirect\b)| (?=\bContingency\b)/, '- \\0')} #{message}
             br
           .close style=" position: absolute; top: 6px; right: 20px;"
             'X
@@ -43,4 +44,12 @@
       = f.submit 'Save', class: 'btn btn-primary'
       '&nbsp;
       = link_to 'Cancel', subprojects_path, class: 'btn btn-primary'
+javascript:
+
+  $('.field_with_errors').children().unwrap()
+  compute();
+  $('#finance > tr > td > input').blur(function(){
+    if ($(this).val()=='') $(this).val("0.0")
+    compute();
+  });
 
