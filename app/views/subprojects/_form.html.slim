@@ -1,6 +1,4 @@
 - @hide_nav = true
-
-br  
 = form_for @subproject, html: { class: 'form-horizontal' } do |f|
   - if @subproject.errors.any?
     .row.alert-msg
@@ -11,23 +9,38 @@ br
             br
           .close style=" position: absolute; top: 6px; right: 20px;"
             'X
+  - if params[:id].present? 
+    .col-sm-12.title-header
+      .col-sm-6.pull-left
+        h3 Edit Sub-Project
+      .col-sm-6
+        .page-details-main-buttons
+          = f.submit 'Save', class: 'btn btn-primary'
+          '&nbsp;
+          = link_to 'Cancel', subprojects_path, class: 'btn btn-primary'
+  - else
+    .col-sm-12.title-header
+      .col-sm-6.pull-left
+        h3 Create Sub-Projects
+      .col-sm-6
+        .page-details-main-buttons
+          = f.submit 'Save', class: 'btn btn-primary'
+          '&nbsp;
+          = link_to 'Cancel', subprojects_path, class: 'btn btn-primary'
+
+  hr
+  br
+  br
+  br
+  .row
+    = render 'general_information_form', f: f
+    = render 'financial_information_form', f: f
+    = render 'projected_schedule_form', f: f
+    = render 'team_information_form', f: f
 
   .row
-    br
     .page-details-main-buttons
       = f.submit 'Save', class: 'btn btn-primary'
-      '&nbsp
-      = link_to 'Cancel', subprojects_path, class: 'btn btn-default'
-
-  
-  = render 'general_information_form', f: f
-  = render 'financial_information_form', f: f
-  = render 'projected_schedule_form', f: f
-  = render 'team_information_form', f: f
-
-  .row
-    br
-    .col-md-2.col-md-offset-10
-      = f.submit 'Save', class: 'btn btn-primary pull-right'
-
+      '&nbsp;
+      = link_to 'Cancel', subprojects_path, class: 'btn btn-primary'
 

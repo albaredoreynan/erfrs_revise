@@ -29,8 +29,8 @@
                 tr
                   td = id = idx + 1
                   td = breakdown.to_s+"-"+params[:with_year]
-                  td = number_to_currency(@cfa_adb = cfa_amounts(id, params[:with_year], params[:id], 'ADB'))
-                  td = number_to_currency(@cfa_wb = cfa_amounts(id, params[:with_year], params[:id], 'WB'))
+                  td = number_to_currency(@cfa_adb = cfa_amounts(id, params[:with_year], params[:id], 1))
+                  td = number_to_currency(@cfa_wb = cfa_amounts(id, params[:with_year], params[:id], 2))
                   td = number_to_currency(total_cfa_amounts = @cfa_adb + @cfa_wb)
               tr
                 td

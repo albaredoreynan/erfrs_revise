@@ -1,4 +1,4 @@
-# run "rake group_id:import"
+# run "rake muni_group_id:import"
 
 namespace :muni_group_id do
 

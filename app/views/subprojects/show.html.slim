@@ -3,7 +3,13 @@
   .col-sm-6.pull-left
     h4 Sub-Projects
   .col-sm-6
+    = link_to 'Cancel', subprojects_path, class: 'btn btn-primary pull-right'
+    span.pull-right
+      '&nbsp;
     = link_to 'Edit', edit_subproject_path(@subproject), class: 'btn btn-primary pull-right'
+hr
+br
+br
 
 = form_for @subproject, html: { class: 'form-horizontal' } do |f|
   .col-md-12
