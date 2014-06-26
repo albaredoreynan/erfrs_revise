@@ -27,7 +27,7 @@ class Subproject < ActiveRecord::Base
   validate :equal_financial_information, :on => :create
   validate :first_tranch_validation, :on => :create
   validates :region_id, :municipality_id, :province_id, :barangay_id, 
-            :title, :date_of_mibf, :cycle, :date_encoded, :user_id,
+            :title, :date_of_mibf, :cycle, :date_encoded,
             presence: true
 
 

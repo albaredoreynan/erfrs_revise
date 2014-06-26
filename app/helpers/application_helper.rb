@@ -39,19 +39,21 @@ module ApplicationHelper
   end
 
   # CGDPS computation per year and per municipality
-  def fund_source(code)
-    @fund_source = FundSource.where(code: code).last
-    @fund_source.id
-  end  
+  # def fund_source(code)
+  #   @fund_source = FundSource.where(code: code).last
+  #   @fund_source.id
+  # end  
 
   def budget_allocation(code, year)
-    @fund_source = FundSource.where(code: code).last  
-    @budget = FundAllocation.select('amount').where( fund_source_id: @fund_source.id, year: year).last
-    @budget.amount
+    @budget = FundAllocation.select('amount').where( fund_source_id: code, year: year).last
+    if @budget.nil?
+      @budget = 0
+    else  
+      @budget.amount
+    end
   end
 
   def budget_allocation_per_mun(code, year, municipality_id)
-    @fund_source = FundSource.where(code: code).last  
     @budget = MuniFundAllocation.select('amount').where( municipality_id: municipality_id, year: year).last
     if @budget.nil?
       @budget = 0
@@ -62,7 +64,7 @@ module ApplicationHelper
 
   def total_grant_amount_per_mncpl(municipality_id, year, fund_source)
     @total = Array.new
-    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source(fund_source))
+    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source)
     @val.each do |amount|
       @total << amount.grant_amount_direct_cost.to_f
     end
@@ -71,7 +73,7 @@ module ApplicationHelper
 
   def total_grant_amount_per_year(year, fund_source)
     @total = Array.new
-    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source(fund_source))
+    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source)
     @val.each do |amount|
       @total << amount.grant_amount_direct_cost.to_f
     end
@@ -126,7 +128,7 @@ module ApplicationHelper
 
   def total_amount_release(year, fund_source)
     @amount_approve = Array.new
-    Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source(fund_source)).each do |sp_id|
+    Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source).each do |sp_id|
       RequestForFundRelease.select("amount_approve").where(subproject_id: sp_id.id).each do |rfrs|
         @amount_approve << rfrs.amount_approve.to_f
       end
@@ -136,7 +138,7 @@ module ApplicationHelper
 
   def total_amount_release_per_mncpl(municipality_id, year, fund_source)
     @amount_approve = Array.new
-    Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source(fund_source)).each do |sp_id|
+    Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source).each do |sp_id|
       RequestForFundRelease.select("amount_approve").where(subproject_id: sp_id.id).each do |rfrs|
         @amount_approve << rfrs.amount_approve.to_f
       end

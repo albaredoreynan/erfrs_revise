@@ -53,39 +53,39 @@ hr
           tr
             td.text-left style="padding-right: 60px;" Allocation
             td.text-right 
-              - @fund_allocation = budget_allocation('ADB', params[:with_year])
+              - @fund_allocation = budget_allocation(1, params[:with_year])
               = number_to_currency(@fund_allocation.to_f)
             td.text-right 100.00
             td.text-right
-              - @fund_allocation_other = budget_allocation('WB', params[:with_year])
+              - @fund_allocation_other = budget_allocation(2, params[:with_year])
               = number_to_currency(@fund_allocation_other.to_f)
             td.text-right 100.00
             td.text-center colspan="4"
-              - @fund_allocation_per_mun = budget_allocation_per_mun('ADB', params[:with_year], params[:id])
-              - @fund_allocation_per_mun_other = budget_allocation_per_mun('WB', params[:with_year], params[:id])
+              - @fund_allocation_per_mun = budget_allocation_per_mun(1, params[:with_year], params[:id])
+              - @fund_allocation_per_mun_other = budget_allocation_per_mun(2, params[:with_year], params[:id])
               = number_to_currency(@fund_allocation_per_mun.to_f)
           tr
             td style="padding-right: 90px;" MIBF
             td.text-right 
-              - @mibf = total_grant_amount_per_year(params[:with_year], 'ADB')
+              - @mibf = total_grant_amount_per_year(params[:with_year], 1)
               = number_to_currency(@mibf.to_f)
             td.text-right
               - @mibf_per = (@mibf.to_f / @fund_allocation.to_f) * 100
               = @mibf_per.round(2)
             td.text-right  
-              - @mibf_other = total_grant_amount_per_year(params[:with_year], 'WB')
+              - @mibf_other = total_grant_amount_per_year(params[:with_year], 2)
               = number_to_currency(@mibf_other.to_f)
             td.text-right 
               - @mibf_per_other = (@mibf_other.to_f / @fund_allocation.to_f ) * 100
               = @mibf_per_other.round(2)
             td.text-right
-              - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 'ADB') 
+              - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 1) 
               = number_to_currency(@mibf_this_mncpl.to_f)
             td.text-right 
               - @mibf_this_mncpl_per = ( @mibf_this_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
               = @mibf_this_mncpl_per.round(2)
             td.text-right 
-              - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 'WB')
+              - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 2)
               = number_to_currency(@mibf_this_mncpl_other.to_f)
             td.text-right 
               - @mibf_this_mncpl_other_per = ( @mibf_this_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
@@ -93,26 +93,26 @@ hr
           tr
             td style="padding-left: 30px;" Released
             td.text-right 
-              - @release = total_amount_release(params[:with_year], 'ADB').to_f
+              - @release = total_amount_release(params[:with_year], 1).to_f
               = number_to_currency(@release.to_f)
             td.text-right 
               - @release_per = ( @release.to_f / @fund_allocation.to_f) * 100
               = @release_per.round(2)
             td.text-right 
-              - @release_other = total_amount_release(params[:with_year], 'WB').to_f
+              - @release_other = total_amount_release(params[:with_year], 2).to_f
               = number_to_currency(@release_other.to_f)
             td.text-right 
               - @release_other_per = ( @release_other.to_f / @fund_allocation.to_f ) * 100
               = @release_other_per.round(2)
             td.text-right 
-              - @release_per_mncpl = total_amount_release_per_mncpl(params[:id], params[:with_year], 'ADB')
+              - @release_per_mncpl = total_amount_release_per_mncpl(params[:id], params[:with_year], 1)
               = number_to_currency(@release_per_mncpl.to_f)
 
             td.text-right
               - @release_per_mncpl_percent = ( @release_per_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
               = @release_per_mncpl_percent.round(2)
             td.text-right
-              - @release_per_mncpl_other = total_amount_release_per_mncpl(params[:id], params[:with_year], 'WB')
+              - @release_per_mncpl_other = total_amount_release_per_mncpl(params[:id], params[:with_year], 2)
               = number_to_currency(@release_per_mncpl_other.to_f)
             td.text-right
               - @release_per_mncpl_other_percent = (@release_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
