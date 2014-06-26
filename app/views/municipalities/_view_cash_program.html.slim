@@ -1,49 +1,48 @@
 .modal.fade#view_cash_program data-backdrop='static'
-  .modal-dialog
-    .modal-content
-        .modal-header
-          button.close type='button' data-dismiss='modal' aria-hidden=true &times;
-          h4.modal-title View Cash Program
-        .modal-body
-          table.table
-            tr
-              td Year  
-              td.bold = params[:with_year]
-              td Province
-              td.bold = @subproject.province.try(:name)
-            tr
-              td Municipality
-              td.bold = @subproject.municipality.try(:name)
-              td Region
-              td.bold = @subproject.region.try(:name)
+  .modal-content
+      .modal-header
+        button.close type='button' data-dismiss='modal' aria-hidden=true &times;
+        h4.modal-title View Cash Program
+      .modal-body
+        table.table
+          tr
+            td Year  
+            td.bold = params[:with_year]
+            td Province
+            td.bold = @subproject.province.try(:name)
+          tr
+            td Municipality
+            td.bold = @subproject.municipality.try(:name)
+            td Region
+            td.bold = @subproject.region.try(:name)
 
-          table.table.table-hover.table-striped.table-bordered
-            thead
-              tr
-                th 
-                th Month
-                th ADB
-                th WB
-                th Total
-              - @earliest_month = earliest_month(params[:with_year], params[:id]).to_date
-              - @monthlist = []  
-              - 12.times do 
-                - @monthlist << @earliest_month.strftime("%b-%Y")
-                - @earliest_month = @earliest_month + 1.month
+        table.table.table-hover.table-striped.table-bordered
+          thead
+            tr
+              th 
+              th Month
+              th ADB
+              th WB
+              th Total
+            - @earliest_month = earliest_month(params[:with_year], params[:id]).to_date
+            - @monthlist = []  
+            - 12.times do 
+              - @monthlist << @earliest_month.strftime("%b-%Y")
+              - @earliest_month = @earliest_month + 1.month
 
-              - @monthlist.each_with_index do |breakdown, idx|  
-                - @num = Date.parse(breakdown).strftime("%-m").to_i
-                tr
-                  td = id = idx + 1
-                  td = breakdown
-                  td = number_to_currency(@cfa_adb = cfa_amounts(@num, params[:with_year], params[:id], 1))
-                  td = number_to_currency(@cfa_wb = cfa_amounts(@num, params[:with_year], params[:id], 2))
-                  td = number_to_currency(total_cfa_amounts = @cfa_adb + @cfa_wb)
+            - @monthlist.each_with_index do |breakdown, idx|  
+              - @num = Date.parse(breakdown).strftime("%-m").to_i
               tr
-                td
-                td
-                td 
-                td
-                td     
-        .modal-footer
-          button.btn data-dismiss="modal" aria-hidden="true" Close
+                td = id = idx + 1
+                td = breakdown
+                td = number_to_currency(@cfa_adb = cfa_amounts(@num, params[:with_year], params[:id], 1))
+                td = number_to_currency(@cfa_wb = cfa_amounts(@num, params[:with_year], params[:id], 2))
+                td = number_to_currency(total_cfa_amounts = @cfa_adb + @cfa_wb)
+            tr
+              td
+              td
+              td 
+              td
+              td     
+      .modal-footer
+        button.btn data-dismiss="modal" aria-hidden="true" Close
