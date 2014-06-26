@@ -7,7 +7,7 @@ class Municipality < ActiveRecord::Base
   belongs_to :province
 
   scope :region_id, -> region_id {
-    joins(:province).where('provinces.region_id' => region_id) 
+    includes(:province).where('provinces.region_id' => region_id) 
   }
   scope :province_id, -> id { where(province_id: id).order(:name) }
   scope :with_id,     -> id { where id: id }
