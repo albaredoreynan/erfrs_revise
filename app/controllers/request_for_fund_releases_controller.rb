@@ -2,7 +2,10 @@ class RequestForFundReleasesController < ApplicationController
 
   %w[id user year status].each{ |e| has_scope "with_#{e}".intern }
   %w[region province municipality barangay].each{ |e| has_scope "#{e}_id".intern }
-  
+  has_scope :rfr_id
+  has_scope :sp_id
+  has_scope :username
+  has_scope :with_status
   respond_to :js, only: :new
 
   def index

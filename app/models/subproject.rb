@@ -69,7 +69,7 @@ class Subproject < ActiveRecord::Base
   validates :third_tranch_date_required, presence: true, :if => -> {self.third_tranch_amount.present?}
 
   validate :mbif_date
-  validate :tranch_must_not_overflow
+
 
   # validates :team_members, associated: {:message => "Team Members Missing"}, :if => -> {self.status == "Final"}
   ####################### SCOPES ###########################

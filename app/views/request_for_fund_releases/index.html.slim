@@ -13,8 +13,8 @@ br
         h4 Search
       .panel-body
         .row
-          .col-md-6
-            form.form-horizontal
+          form.form-horizontal
+            .col-md-6
               .form-group
                 .col-md-3
                   = label_tag :rfr_id, 'RFR ID' 
@@ -27,42 +27,42 @@ br
                   = text_field_tag :sp_id, '', class: 'form-control'
               .form-group
                 .col-md-3
-                  = label_tag :user_name, 'User Name'
+                  = label_tag :username, 'Username'
                 .col-md-6
-                  = text_field_tag :user_name, '', class: 'form-control'
+                  = text_field_tag :username, '', class: 'form-control'
               .form-group
                 .col-md-3
                   = label_tag :status
                 .col-md-6
-                  = select_tag :status, '', class: 'form-control'
-          .col-md-6
-            .form-horizontal
-              .form-group
-                .col-md-3
-                  = label_tag :subproject_region_id, 'Region'
-                .col-md-6
-                  = select_tag :subproject_region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control'
-              .form-group
-                .col-md-3
-                  = label_tag :subproject_province_id, 'Province'
-                .col-md-6
-                  = select_tag :subproject_province_id, [], class: 'form-control'
-              .form-group
-                .col-md-3
-                  = label_tag :subproject_municipality_id, 'Municipality'
-                .col-md-6
-                  = select_tag :subproject_municipality_id, [], class: 'form-control'
-              .form-group
-                .col-md-3
-                  = label_tag :subproject_barangay_id, 'Barangay'
-                .col-md-6
-                  = select_tag :subproject_barangay_id, [], class: 'form-control'
-              .form-group
-                .col-md-3
-                .col-md-9
-                  = submit_tag 'Search', class: 'btn btn-primary'
-                  | &nbsp;
-                  = link_to "Clear", request_for_fund_releases_path, class: 'btn btn-primary clear'
+                  = select_tag :with_status, options_for_select(Subproject::STATUSES, selected: params[:with_status]), class: 'form-control', include_blank: true
+            .col-md-6
+              .form-horizontal
+                .form-group
+                  .col-md-3
+                    = label_tag :subproject_region_id, 'Region'
+                  .col-md-6
+                    = select_tag :region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control'
+                .form-group
+                  .col-md-3
+                    = label_tag :subproject_province_id, 'Province'
+                  .col-md-6
+                    = select_tag :province_id, [], class: 'form-control'
+                .form-group
+                  .col-md-3
+                    = label_tag :subproject_municipality_id, 'Municipality'
+                  .col-md-6
+                    = select_tag :municipality_id, [], class: 'form-control'
+                .form-group
+                  .col-md-3
+                    = label_tag :subproject_barangay_id, 'Barangay'
+                  .col-md-6
+                    = select_tag :barangay_id, [], class: 'form-control'
+                .form-group
+                  .col-md-3
+                  .col-md-9
+                    = submit_tag 'Search', class: 'btn btn-primary'
+                    | &nbsp;
+                    = link_to "Clear", request_for_fund_releases_path, class: 'btn btn-primary clear'
 .row.sp-table
   .col-md-12
     table.table.table-hover.table-striped

@@ -9,7 +9,7 @@ class RequestForFundRelease < ActiveRecord::Base
 
 
   %w{region province municipality barangay}.each do |place|
-    scope "#{place}_id".intern, -> place_id { joins(:subproject).where "subprojects.#{place}_id" => place_id }
+    scope "#{place}_id".intern, -> place_id { includes(:subproject).where "subprojects.#{place}_id" => place_id }
   end
 
   # scope :start_year, -> year {where("dv_date >= ?", Date.new(year.to_i).beginning_of_year)}
@@ -17,8 +17,10 @@ class RequestForFundRelease < ActiveRecord::Base
   
   scope :start_date, -> year {where("dv_date >= ?", Date.parse(year))}
   scope :end_date, -> year {where("dv_date <= ?", Date.parse(year))}
-
-
+  scope :rfr_id, -> id {where(id: id)}
+  scope :sp_id, -> sp {where(subproject_id: sp)}
+  scope :username, -> username {includes(subproject: :user).where("users.username" => username)}
+  scope :with_status, -> status {where(status: status)}
 
   # scope :upcoming, lambda {
   # where("start_date between ? and ?", Date.today, Date.today.next_month.beginning_of_month) }
