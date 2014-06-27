@@ -13,7 +13,7 @@ hr
         .col-md-4.text-right
           'Status
         .col-md-6.bold
-          = @cgdp.present? ? @cgdp.status.upcase : ''
+          = @cgdp.present? ? @cgdp.try(:status).try(:upcase) : ''
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
@@ -25,19 +25,19 @@ hr
         .col-md-4.text-right
           'Year
         .col-md-6.bold
-          = @cgdp.present? ? @cgdp.year : ''
+          = @cgdp.present? ? @cgdp.try(:year) : ''
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
           'Municipality:
         .col-md-6.bold
-          = @muni_info.name
+          = @muni_info.try(:name)
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
           'Group:
         .col-md-6.bold
-          = @muni_info.group_id.nil? ? '' : @muni_info.group.code
+          = @muni_info.group_id.nil? ? '' : @muni_info.try(:group).try(:code)
   .row.sp-index
     .col-md-12
       table.table.table-hover.table-striped.table-bordered
