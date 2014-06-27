@@ -298,7 +298,7 @@
         .col-md-5.text-right
           'SAA Date :
         .col-md-6
-          =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY', value: @cgdp.saa_date.strftime('%d-%b-%Y'), class: "validate[required]"
+          =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY', value: @cgdp.saa_date.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : '' , class: "validate[required]"
 
 = render 'view_cash_program'
 = render 'assigned_fund_source'
