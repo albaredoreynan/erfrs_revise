@@ -1,0 +1,44 @@
+= wicked_pdf_stylesheet_link_tag "application"
+.row.rfr-index.mga-reports
+  .col-md-12.header
+    p.text-center 
+      b
+        | Department of Social Welfare and Development
+      br
+      ' NCDDP MUNICIPAL GRANTS ALLOCATION
+      br
+
+.row.sp-table
+  .col-md-12
+    table.table.table-bordered
+      thead
+        tr
+          th.text-center rowspan=2 Region 
+          th.text-center rowspan=2 Province
+          th.text-center rowspan=2 Municipality
+          th.text-center rowspan=2 Allocation
+          th.text-center colspan=3 MIBF
+          th.text-center rowspan=2 SURPLUS
+        tr
+          th.text-center Release
+          th.text-center Excess
+          th.text-center Total  
+      tbody
+        -@subprojects.each do |m, sps|
+          - allocation = 0
+          - release = 0
+          - excess = 0
+
+          - allocation += m.muni_fund_allocations.where(year: DateTime.now.year).last.try(:amount).to_i
+          - release += sps.map{|c|c.first_tranch_amount_release + c.second_tranch_amount_release + c.third_tranch_amount_release}.first
+          - excess += allocation - release
+          - total_m = release + excess
+          tr
+            td = m.province.region.code
+            td = m.province.name
+            td = m.name
+            td = number_to_currency allocation
+            td = number_to_currency release
+            td = number_to_currency excess
+            td = number_to_currency total_m
+            td = number_to_currency allocation - total_m
