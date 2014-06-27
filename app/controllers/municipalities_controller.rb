@@ -60,6 +60,10 @@ class MunicipalitiesController < InheritedResources::Base
 
   end
 
+  def edit
+    @municipality = Municipality.find(params[:id])
+  end
+
   def edit_cgdp
     @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
     @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last

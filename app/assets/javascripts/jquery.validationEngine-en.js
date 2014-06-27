@@ -184,7 +184,7 @@
                 },
                 "dateFormat":{
 
-                    "regex": /^(([0-9])|([0-2][0-9])|([3][0-1]))\-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\-\d{4}$/,
+                    "regex": /^(([0-9])|([0-2][0-9])|([3][0-1]))\-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\-\d{4}$/i,
                     "alertText": "* Invalid Date format Must be DD-MMM-YYYY"
                 },
                 //tls warning:homegrown not fielded 

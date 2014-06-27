@@ -66,7 +66,7 @@ $( document ).ready(function() {
     subproject_third_tranch_amount = (parseFloat($('#subproject_third_tranch_amount').val()))
     
     $('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100 ).toFixed(2))
-    $('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2))
+    $('#tranch_two_percentage').val((subproject_total_lcc_cash_direct_costcond_tranch_amount / total_grant * 100).toFixed(2))
     $('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2))
   }
 
@@ -171,11 +171,11 @@ $( document ).ready(function() {
 
 
     // Percent Formula
-    percent_total_grant = (total_grant / total_total) * 100
-    percent_total_lcc = (total_lcc / total_total) * 100
-    percent_total_plgu =(total_plgu / total_total) * 100
-    percent_total_mlgu = (total_mlgu / total_total) * 100
-    percent_total_community = (total_community / total_total) * 100
+    percent_total_grant = (total_grant / subtotal_total) * 100
+    percent_total_lcc = (total_lcc / subtotal_total) * 100
+    percent_total_plgu =(total_plgu / subtotal_total) * 100
+    percent_total_mlgu = (total_mlgu / subtotal_total) * 100
+    percent_total_community = (total_community / subtotal_total) * 100
     percent_total_lcc_cash_val = (total_lcc_cash_val / total_total) * 100
     percent_total_lcc_in_kind = (total_lcc_in_kind / total_total) * 100
 
