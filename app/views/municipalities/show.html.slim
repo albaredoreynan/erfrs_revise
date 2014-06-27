@@ -32,6 +32,12 @@ hr
           'Municipality:
         .col-md-6.bold
           = @muni_info.name
+    .col-md-6.parent
+      .form-group
+        .col-md-4.text-right
+          'Group:
+        .col-md-6.bold
+          = @muni_info.group.code
   .row.sp-index
     .col-md-12
       table.table.table-hover.table-striped.table-bordered
@@ -255,5 +261,12 @@ javascript:
     item_val = $(this).val();
     selected = $(this).find('option:selected').text(); 
     sp_id = $(this).attr("id");
-    update_fund_source(item_val, sp_id);
+    $.ajax({
+      url: "/update_fund_source",
+      data: {
+        fund_source_id : item_val,
+        subproject_id : sp_id
+      },
+        dataType: "script"
+      });
   });
