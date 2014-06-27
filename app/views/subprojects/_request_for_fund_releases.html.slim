@@ -15,7 +15,7 @@
     b
       ' TIP: 
     'You are only allowed to create an RFR if the Sub-Project is already tagged with a Fund Source.
-    - if tranch != 'other' and @subproject.status == 'Final' 
+    - if @subproject.status == 'Final' 
       p
         = link_to "Create RFR".html_safe, new_request_for_fund_release_path(:sp_id => params[:id], :tranch => tranch), class: 'btn btn-small btn-primary'
 
