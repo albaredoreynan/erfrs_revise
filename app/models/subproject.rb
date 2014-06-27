@@ -27,9 +27,9 @@ class Subproject < ActiveRecord::Base
   validate :equal_financial_information, :on => :create
   validate :first_tranch_validation, :on => :create
   validates :region_id, :municipality_id, :province_id, :barangay_id, 
-            :title, :date_of_mibf, :cycle, :date_encoded,
+            :title, :cycle, :date_encoded,
             presence: true
-
+  validates :date_of_mibf, presence: {message: "Date of MIBF can't be blank"}
 
   validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
             :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
@@ -122,19 +122,19 @@ class Subproject < ActiveRecord::Base
     grant = self.grant_amount_direct_cost.to_f + self.grant_amount_indirect_cost.to_f
     tranch = self.first_tranch_amount.to_f + self.second_tranch_amount.to_f + self.third_tranch_amount.to_f
     if grant < tranch
-      errors.add(:tranch, "should be less than total grant")
+      errors.add(:percent, "Total of Tranches should not exceed 100%")
     end
   end
   
   def mbif_date
     if self.date_of_mibf.present?
-      errors.add(:error, 'Wrong MBIF Date Input' ) unless self.date_of_mibf.is_a?(Date)
+      errors.add(:date, 'of MIBF is an invalid date (dd-mmm-yyyy)' ) unless self.date_of_mibf.is_a?(Date)
     end
   end
 
   def first_tranch_validation
     if self.first_tranch_amount < ((self.grant_amount_direct_cost + self.grant_amount_indirect_cost) * 0.50)
-      errors.add(:first, ' Tranche should be atleast 50%')
+      errors.add(:%, 'TOTAL of Tranche 1 should be atleast 50%')
     end
   end
 
@@ -156,7 +156,7 @@ class Subproject < ActiveRecord::Base
       total_lcc_contingency += eval("self.#{cash}_contingency_cost")
     end
     if total_direct != total_lcc_direct || total_contingency != total_lcc_contingency || total_lcc_indirect != total_indirect
-      errors.add(:message, 'Wrong Inputs in Financial Information')
+      errors.add(:Total, 'of LCC: BLGU, Community, MLGU and PLGU/Others should be equal to the Total of Total LCC Cash and Total LCC in Kind')
     end
   end
   ###################### END ############################

@@ -5,8 +5,10 @@
       .col-sm-12
         .alert.alert-danger.fade-in style="z-index: 1003;"
           - @subproject.errors.each do |attr, message|
-            raise
-            ' #{attr.to_s.titleize.gsub(/(?=\bDirect\b)| (?=\bIndirect\b)| (?=\bContingency\b)/, '- \\0')} #{message}
+            -if attr.to_s.titleize == "Date Of Mibf"
+              'Date of MIBF can't be blank
+            -else
+              ' #{attr.to_s.titleize.gsub(/(?=\bDirect\b)| (?=\bIndirect\b)| (?=\bContingency\b)/, '- \\0')} #{message}
             br
           .close style=" position: absolute; top: 6px; right: 20px;"
             'X

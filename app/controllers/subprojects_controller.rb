@@ -39,7 +39,7 @@ class SubprojectsController < ApplicationController
     @subproject.user_id = current_user.id
     @subproject.date_encoded = DateTime.now.strftime("%d/%b/%Y")
     if @subproject.save
-      flash[:success] = 'Subproject created successfully.'
+      flash[:success] = 'Sub-Project created successfully.'
       redirect_to edit_subproject_path(@subproject.id)
     else
       flash[:error] = 'An error occured while creating project'
@@ -50,7 +50,7 @@ class SubprojectsController < ApplicationController
   def update
     @subproject = Subproject.find params[:id]
     if @subproject.update_attributes subproject_params
-      flash[:success] = 'Subproject updated successfully.'
+      flash[:success] = 'Sub-Project updated successfully.'
       redirect_to edit_subproject_path(@subproject)
     else
       flash[:error] = 'An error occured while updating project'
@@ -64,9 +64,9 @@ class SubprojectsController < ApplicationController
 
     if @subproject.status != "Final"
       @subproject.destroy
-      flash[:success] = 'Subproject was deleted successfully.'
+      flash[:success] = 'Sub-Project was deleted successfully.'
     else
-      flash[:alert] = "Subproject Cannot be deleted"
+      flash[:alert] = "Sub-Project Cannot be deleted"
     end
 
     redirect_to subprojects_path

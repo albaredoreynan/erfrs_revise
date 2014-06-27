@@ -28,10 +28,9 @@ class MunicipalitiesController < InheritedResources::Base
   
   def update_fund_source
     @sp = Subproject.find(params[:subproject_id])
-
     @fs = FundSource.find(params[:fund_source_id])
 
-    if @sp.status != "Final"
+    if @sp.status == "Final"
       @sp.update(fund_source_id: @fs.id)
     end     
   end
@@ -58,6 +57,10 @@ class MunicipalitiesController < InheritedResources::Base
       end
     end
 
+  end
+
+  def edit
+    @municipality = Municipality.find(params[:id])
   end
 
   def edit_cgdp
