@@ -77,7 +77,7 @@ br
           .col-md-4
             = f.label :group
           .col-md-8
-            = @subproject.group.code
+            = @subproject.try(:group).try(:code)
       .col-md-6
         .form-group
           .col-md-5

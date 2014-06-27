@@ -38,7 +38,11 @@ class RequestForFundReleasesController < ApplicationController
 
   def edit
     @rfrs = RequestForFundRelease.find params[:id]
-    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+    if params[:sp_id].present?
+      @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+    else
+      @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(@rfrs.subproject_id)
+    end
     @team_member = @subproject.team_members
     if !@team_member.present? 
       @team_member = TeamMember.all
