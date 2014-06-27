@@ -45,4 +45,4 @@
                 = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
                 | &nbsp;
                 = link_to "Excel", mga_reports_reports_path(params.merge(:format => :xls)) , class: "btn btn-success"  
-                = link_to "PDF", mga_reports_reports_path(format: :pdf) , class: "btn btn-success", style: "margin-left: 3px;"
+                = link_to "PDF", mga_reports_reports_path(params.merge(format: :pdf)) , class: "btn btn-success", style: "margin-left: 3px;"
