@@ -12,7 +12,7 @@ br
       .col-md-5
         = f.label :status
       .col-md-7
-        = f.select :status, options_for_select(Subproject::STATUSES), {}, { class: 'form-control '}
+        = f.select :status, options_for_select(Subproject::STATUSES, @subproject.status.present? ? @subproject.status : ''), {}, { class: 'form-control '} 
   .col-md-2
     = f.label :title
   .col-md-10
@@ -42,13 +42,13 @@ br
             = f.label :barangay_id
           .col-md-8
             = f.select :barangay_id, @subproject.barangay.present? ? [[@subproject.barangay.name, @subproject.barangay.id]] : [], { disabled: 'disabled' }, { :class => 'form-control  '}
-        - if !params[:id].present?
-          .form-group
-            .col-md-4
-              = f.label :group
-            .col-md-8
-              .div.group
-              = hidden_field_tag :group, '', class: 'form-control  ', disabled:'true'
+        .form-group
+          .col-md-4
+            = f.label :group
+          .col-md-8
+            .div.group
+              = @subproject.group_id.present? ? @subproject.group.code : ''
+            = hidden_field_tag :group, '', class: 'form-control  ', disabled:'true'
       .col-md-6
         .form-group
           .col-md-5

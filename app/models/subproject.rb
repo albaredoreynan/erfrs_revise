@@ -133,7 +133,7 @@ class Subproject < ActiveRecord::Base
   end
 
   def first_tranch_validation
-    if self.first_tranch_amount < ((self.grant_amount_direct_cost + self.grant_amount_indirect_cost + self.grant_amount_contingency_cost) * 0.50)
+    if self.first_tranch_amount < ((self.grant_amount_direct_cost + self.grant_amount_indirect_cost) * 0.50)
       errors.add(:first, ' Tranch should be atleast 50%')
     end
   end
