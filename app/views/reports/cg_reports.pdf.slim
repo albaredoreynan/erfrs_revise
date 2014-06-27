@@ -1,0 +1,77 @@
+= wicked_pdf_stylesheet_link_tag "application"
+h4 Status of Community Grants Report
+hr
+.row.rfr-index
+  .col-md-12.header
+    p.text-center
+      b Department of Social Welfare and Development
+      br
+      ' STATUS OF COMMUNITY GRANTS
+      br
+      ' As of #{params[:end_date].present? ? params[:end_date] : DateTime.now.strftime("%d/%b/%Y") }
+  .col-md-12
+    
+.row.sp-table
+  table.table.table-bordered
+    thead
+      tr
+        th.text-center rowspan=2 Region 
+        th.text-center rowspan=2 Province
+        th.text-center rowspan=2 Municipality
+        th.text-center colspan=3 Approved
+        th.text-center colspan=3 Released
+        th.text-center colspan=3 Balance
+      tr
+        th.text-center ADB
+        th.text-center WB
+        th.text-center Total
+        th.text-center ADB
+        th.text-center WB
+        th.text-center Total
+        th.text-center ADB
+        th.text-center WB
+        th.text-center Total  
+    tbody
+      - @subprojects.each do |m, sps|
+        -approve_adb = 0
+        -approve_wb = 0
+        -approve_total = 0
+        -released_adb = 0
+        -released_wb =0
+        -released_total = 0
+        -balance_adb = 0
+        -balance_wb = 0
+        -balance_total = 0
+        -sps.each do|sp|
+          / /-if sp.fund_source_id == 2
+          /   -approve_adb += sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost
+          /   / -if sp.first_tranch_revised_amount + sp.second_tranch_revised_amount + sp.third_tranch_revised_amount != 0
+          /   -released_adb += (sp.first_tranch_revised_amount == 0 ? sp.first_tranch_amount : sp.first_tranch_revised_amount) + (sp.second_tranch_revised_amount == 0 ? sp.second_tranch_amount : sp.second_tranch_revised_amount) + (sp.third_tranch_revised_amount == 0 ? sp.third_tranch_amount : sp.third_tranch_revised_amount)
+          /   -balance_adb += 
+          / /-elsif sp.fund_source_id == 1
+          /   -approve_wb += sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost
+          /   -released_wb += (sp.first_tranch_revised_amount == 0 ? sp.first_tranch_amount : sp.first_tranch_revised_amount) + (sp.second_tranch_revised_amount == 0 ? sp.second_tranch_amount : sp.second_tranch_revised_amount) + (sp.third_tranch_revised_amount == 0 ? sp.third_tranch_amount : sp.third_tranch_revised_amount)
+          /   -balance_wb += approve_wb - released_wb
+          -if sp.fund_source.present? 
+            -if sp.fund_source.code == 'ADB'
+              -approve_adb += sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost
+              / -if sp.first_tranch_revised_amount + sp.second_tranch_revised_amount + sp.third_tranch_revised_amount != 0
+              -released_adb += sp.first_tranch_amount_release + sp.second_tranch_amount_release + sp.third_tranch_amount_release
+              -balance_adb += approve_adb - released_adb
+            -elsif sp.fund_source.code == 'WB'
+              -approve_wb += sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost
+              -released_wb += sp.first_tranch_amount_release + sp.second_tranch_amount_release + sp.third_tranch_amount_release
+              -balance_wb += approve_adb - released_adb
+        tr
+          td = m.province.region
+          td = m.province.name
+          td = m.name
+          td = number_to_currency approve_adb
+          td = number_to_currency approve_wb
+          td = number_to_currency approve_adb + approve_wb
+          td = number_to_currency released_adb
+          td = number_to_currency released_wb
+          td = number_to_currency released_adb + released_wb
+          td = number_to_currency balance_adb
+          td = number_to_currency balance_wb
+          td = number_to_currency balance_adb + balance_wb  

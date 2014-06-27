@@ -33,6 +33,10 @@ class ReportsController < ApplicationController
 		respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }
+      format.pdf do
+        render :pdf => "cg_reports",
+               :orientation => "Landscape"
+      end
   	end
 	end
 
