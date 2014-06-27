@@ -47,7 +47,7 @@ table.table.table-responsive border=1 width=500
       = @subproject.province.name
     td.text-left width='20%' Date (mm/dd/yy)
     td.text-left width='30%'
-      = @rfrs.request_date.strftime("%m/%d/%y")
+      = @rfrs.request_date.present? ? @rfrs.request_date.strftime("%m/%d/%y") : ''
   tr
     td.text-left width='20%' Province
     td.text-left width='30%'
@@ -73,16 +73,114 @@ table.table.table-responsive border=1 width=500
     td.text-left width='20%' Sub-project Title
     td.text-left width='80%' colspan=3
       = @subproject.title
+br
+table.table.table-responsive border=0 width=500 
+  tr
+    td.bold To: The National Project Director DSWD National Office
+    td.bold LBP Batasan Branch Manager
+p.sm_font May we request the transfer of funds for the implementation of the Kalahi Cidss/Pamana approved sub-project stated above
+br
+table.table.table-responsive border=1 width=500
+  tr
+    td.text-left width='20%' LBP Branch
+    td.text-left width='80%' 
+      = @rfrs.branch
+  tr
+    td.text-left width='20%' Address
+    td.text-left width='80%'
+      = @rfrs.address
+br
+table.table.table-responsive border=1 width=500
+  tr
+    td.text-center width='15%' Account Name
+    td.text-center width='15%' Bank Account Number
+    td.text-center width='20%' Amount of this Request
+    td.text-center width='25%' Previous Amount Released
+    td.text-center width='25%' Cumulative Total including this Request
+  tr
+    td.text-left
+      = @rfrs.account_name
+    td.text-left
+      = @rfrs.bank_account_number
+    td.text-right
+      = number_to_currency @amount_requested
+    td.text-right
+      = number_to_currency @previous_released 
+    td.text-right
+      = number_to_currency @cumulative_amount
+br
+table.table.table-responsive border=1 width=500
+  tr 
+    td.bold colspan=4 Requested by:
+  tr
+    td.text-center width='50%' colspan=2
+      br
+      #{team_member_name(@rfrs.requested_by_first)}
+      '------------------------------------------------------- 
+      #{@rfrs.designation_first}  
+    td.text-center width='50%' colspan=2
+      br
+      #{team_member_name(@rfrs.requested_by_second)}
+      '------------------------------------------------------- 
+      #{@rfrs.designation_second}
+  tr 
+    td.bold colspan=4 Review as to completeness  of requirements by:
+  tr
+    td.text-center width='50%' colspan=2    
+      br
+      #{team_member_name(@rfrs.reviewed_by_first)}
+      '------------------------------------------------------- 
+      #{@rfrs.rev_designation_first}  
+    td.text-center width='50%' colspan=2
+      br
+      #{team_member_name(@rfrs.reviewed_by_second)}
+      '------------------------------------------------------- 
+      #{@rfrs.rev_designation_second}
+  tr
+    td.text-left.bold width='10%' Date:
+    td.text-center width='40%'
+      = @rfrs.rev_date_first.nil? ? "" : @rfrs.rev_date_first.strftime('%d-%b-%Y')
+    td.text-left.bold width='10%' Date:
+    td.text-center width='40%'
+      = @rfrs.rev_date_first.nil? ? "" : @rfrs.rev_date_second.strftime('%d-%b-%Y')
+  tr
+    td.bold width='50%' colspan=2 
+      'Regional Project Management Office
+      
+    td.bold width='50%' colspan=2 
+      'National Project Management Office
+      
+  tr
+    td width='50%' colspan=2
+      p.bold Reviewed by:
+      .col-md-7.text-center
+        #{team_member_name(@rfrs.srpmo_reviewed_by)}
+        '------------------------------------------------------- 
+        #{@rfrs.srpmo_designation}  
+      p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')}
+      p.bold Recommended by:
+      .col-md-7.text-center
+        #{team_member_name(@rfrs.srpmo_reviewed_by)}
+        '------------------------------------------------------- 
+        #{@rfrs.srpmo_designation}
+      p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_rec_date.strftime('%d-%b-%Y')}
+    td width='50%' colspan=2
+      p.bold Approved by:
+      .col-md-7.text-center
+        #{team_member_name(@rfrs.rpmo_approved_by)}
+        '------------------------------------------------------- 
+        #{@rfrs.rpmo_designation}  
+      p.bold Date: #{@rfrs.rpmo_date.nil? ? "" : @rfrs.rpmo_date.strftime('%d-%b-%Y')}
 
-css:      
+css:    
   .form-group > .col-md-3{
     text-align: right;
   }
   td{
-  	font-size: 10px;
+  	font-size: 9px;
   }
   .sm_font {
-    font-size: 10px;
+    font-size: 9px;
   }
   table {
   	margin-top: -15px;
