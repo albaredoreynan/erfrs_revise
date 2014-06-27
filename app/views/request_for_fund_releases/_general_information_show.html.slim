@@ -72,7 +72,7 @@
           .col-md-4
             'Group
           .col-md-8.bold
-            = @subproject.group.code
+            = @subproject.group.present? ? @subproject.group.code : ''
       .col-md-6
         .form-group
           .col-md-5
