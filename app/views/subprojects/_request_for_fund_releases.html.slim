@@ -46,7 +46,7 @@
               = link_to "<i class='fa fa-eye'></i>".html_safe, request_for_fund_release_path(rfrs, :sp_id => params[:id]), class: 'btn btn-xs btn-primary'
               '&nbsp
               = link_to "<i class='fa fa-edit'></i>".html_safe, edit_request_for_fund_release_path(rfrs, :sp_id => params[:id]), class: 'btn btn-xs btn-warning'
-              '&nbsp
-              = link_to "<i class='fa fa-trash-o'></i>".html_safe, request_for_fund_release_path(rfrs, :sp_id => params[:id]), method: :delete, confirm: 'Are you sure you want to delete this request ?', class: 'btn btn-xs btn-danger'
-              '&nbsp
+              / '&nbsp
+              / = link_to "<i class='fa fa-trash-o'></i>".html_safe, request_for_fund_release_path(rfrs, :sp_id => params[:id]), method: :delete, confirm: 'Are you sure you want to delete this request ?', class: 'btn btn-xs btn-danger'
+              / '&nbsp
               / = link_to "<i class='fa fa-file'></i>".html_safe, rfrs, class: 'btn btn-xs btn-success'
