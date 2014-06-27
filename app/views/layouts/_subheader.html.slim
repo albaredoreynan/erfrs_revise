@@ -22,12 +22,12 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Region
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/regions" Regions
       li.active = @region.name
@@ -37,12 +37,12 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Provinces
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/provinces" Provinces
       li.active = @province.name
@@ -51,12 +51,12 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Municipalities
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/municipalities" Municipalities
       li.active = @municipality.name
@@ -65,12 +65,12 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Barangays
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/barangays" Barangays
       li.active = @barangay.name
@@ -79,19 +79,19 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Users
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/users" Users
       li.active #{@user.first_name if @user.first_name.present?} #{@user.last_name if @user.last_name.present?} 
   -elsif params[:action] == "new"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/users" Users
       li.active New User
@@ -100,19 +100,19 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Designations
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/designations" Designations
       li.active = @designation.name
   -elsif params[:action] == "new"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/designations" Designations
       li.active New Designation
@@ -122,19 +122,19 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Regional Officers
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/regional_officers" Regional Officers
       li.active = @regional_officer.name
   -elsif params[:action] == "new"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/regional_officers" Regional Officers
       li.active New Regional Officer
@@ -143,19 +143,19 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active News and Informations
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/news_informations" News and Informations
       li.active = @news_information.title
   -elsif params[:action] == "new"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/news_informations" News and Informations
       li.active New News
@@ -164,19 +164,19 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Fund Sources
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/fund_sources" Fund Sources
       li.active = @fund_source.name
   -elsif params[:action] == "new"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/fund_sources" Fund Sources
       li.active New Fund Source
@@ -185,19 +185,19 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Fund Allocations
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/fund_allocations" Fund Allocations
       li.active #{@fund_allocation.fund_source.name} - #{@fund_allocation.year}
   -elsif params[:action] == "new"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/fund_allocations" Fund Allocations
       li.active New Fund Allocation
@@ -206,18 +206,18 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Fund Allocation (Municipalities)
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/muni_fund_allocations" Fund Allocation (Municipalities)
   -elsif params[:action] == "new"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/muni_fund_allocations" Fund Allocation (Municipalities)
       li.active New Fund Source
@@ -226,19 +226,19 @@
   -if params[:action] == "index"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li.active Municipal Groups
   -elsif params[:action] == "edit"
     ul.breadcrumb
       li
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/groups" Municipal Groups
       li.active = @group.code
   -elsif params[:action] == "new"
     ul.breadcrumb
       li 
-        a href="/admin/index" Administrator
+        a href="/admin/index" Administration
       li
         a href="/groups" Municipal Groups
       li.active New Municipal Group
