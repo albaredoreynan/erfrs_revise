@@ -66,7 +66,7 @@ $( document ).ready(function() {
     subproject_third_tranch_amount = (parseFloat($('#subproject_third_tranch_amount').val()))
     
     $('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100 ).toFixed(2))
-    $('#tranch_two_percentage').val((subproject_total_lcc_cash_direct_costcond_tranch_amount / total_grant * 100).toFixed(2))
+    $('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2))
     $('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2))
   }
 
