@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620065348) do
+ActiveRecord::Schema.define(version: 20140627051457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 20140620065348) do
     t.boolean  "approved_as_requested"
     t.integer  "tranch_for"
     t.integer  "exchange_rate"
+    t.string   "excel_remark"
   end
 
   create_table "roles", force: true do |t|

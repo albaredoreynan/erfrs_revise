@@ -64,6 +64,14 @@ class ReportsController < ApplicationController
     puts 'success line 2'
   end
 
+  def update_remark
+    puts 'success enter'
+    rfr= RequestForFundRelease.find(params[:rfrs_id].to_i)
+    puts 'succes line 1'
+    rfr.update(excel_remark: params[:remark])
+    puts 'success line 2'
+  end
+
   protected
     def soe_report_params
       params.permit(request_for_fund_release: %i[exchange_rate])
