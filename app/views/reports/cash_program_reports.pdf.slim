@@ -1,0 +1,60 @@
+= wicked_pdf_stylesheet_link_tag "application"
+
+.row.rfr-index
+  /=render "cg_filter"
+  .col-md-12.header style="margin-left: 100px;"
+    p.text-center 
+      b
+        'Department of Social Welfare and Development
+      br
+      ' COMMUNITY GRANTS DISBURSEMENT PLAN
+      br
+      'As of #{params[:end_date].present? ? params[:end_date] : DateTime.now.strftime("%d/%b/%Y") }
+  .col-md-12
+    
+
+table.table.table-bordered
+  thead
+    tr
+      th.text-center rowspan=2 Region 
+      th.text-center rowspan=2 Province
+      th.text-center rowspan=2 Municipality
+      th.text-center colspan=12 Projected / Actual / Percent Difference
+    tr
+      th.text-center Jan
+      th.text-center Feb
+      th.text-center Mar
+      th.text-center Apr
+      th.text-center May
+      th.text-center Jun
+      th.text-center Jul
+      th.text-center Aug
+      th.text-center Sep
+      th.text-center Oct
+      th.text-center Nov
+      th.text-center Dec
+  tbody
+    - @subprojects.each do |m, sps|
+      tr
+        td rowspan=3 = m.province.region.code
+        td rowspan=3 = m.province.name
+        td rowspan=3 = m.name
+        -if params[:year].present?
+          -data_f = initial_tranch_per_month(sps, params[:year].to_i)
+          -data_s = revised_tranch_per_month(sps, params[:year].to_i)
+        -else
+          -data_f = initial_tranch_per_month(sps, DateTime.now.year)
+          -data_s = revised_tranch_per_month(sps, DateTime.now.year)
+
+        -12.times do |index|
+          td = number_to_currency data_f[index].sum
+      tr
+        -12.times do |index|
+          td = number_to_currency data_s[index].sum
+      tr
+        -12.times do |index|
+          td 
+            - if data_s[index].sum != 0 && data_f[index].sum != 0
+              = number_to_currency(((data_s[index].sum - data_f[index].sum) / data_f[index].sum) * 100).to_s + "%"
+            - else
+              ' 0.00%
