@@ -1,19 +1,17 @@
-h4 Municipal Grants Allocation Report
-hr
-.row.rfr-index
-  =render "mga_filter"
-  .col-md-12.header
-    p.text-center 
-      b
-        | Department of Social Welfare and Development
-      br
-      ' NCDDP MUNICIPAL GRANTS ALLOCATION
-      br
-
-.row.sp-table.mga-reports
-  .col-md-12
-    .table-responsive
-      table.table.table-bordered
+= wicked_pdf_stylesheet_link_tag "application"
+.pdf-wrapper style="margin-top: -80px"
+  .row.rfr-index.mga-reports
+    .col-md-12.header
+      p.text-center 
+        b
+          | Department of Social Welfare and Development
+        br
+        ' NCDDP MUNICIPAL GRANTS ALLOCATION
+        br
+  
+  .row.sp-table.mga-reports
+    .col-md-12
+      table.table.table-bordered style="font-size: 12px;"
         thead
           tr
             th.text-center rowspan=2 Region 
@@ -31,7 +29,7 @@ hr
             - allocation = 0
             - release = 0
             - excess = 0
-
+  
             - allocation += m.muni_fund_allocations.where(year: DateTime.now.year).last.try(:amount).to_i
             - release += sps.map{|c|c.first_tranch_amount_release + c.second_tranch_amount_release + c.third_tranch_amount_release}.first
             - excess += allocation - release
