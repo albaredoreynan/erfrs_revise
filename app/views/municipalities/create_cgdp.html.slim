@@ -47,19 +47,19 @@
       table.table.table-hover.table-striped.table-bordered
         thead
           tr
-            td Funds Allocation
-            td.text-center colspan="4" Entire Fund
-            td.text-center colspan="4" This Municipal Only
+            th.text-center width="10%" Fund Allocation
+            th.text-center colspan="4" Entire Fund
+            th.text-center colspan="4" This Municipal Only
           tr
-            td
-            td.text-right ADB
-            td.text-center %
-            td.text-right WB
-            td.text-center %
-            td.text-right ADB
-            td.text-center %
-            td.text-right WB
-            td.text-center %
+            th
+            th.text-center ADB
+            th.text-center %
+            th.text-center WB
+            th.text-center %
+            th.text-center ADB
+            th.text-center %
+            th.text-center WB
+            th.text-center %
         tbody
           tr
             td Allocation
@@ -218,8 +218,11 @@
               -if sp.fund_source.present? && sp.status == "Final"
                 td= sp.fund_source.code
               -else
-                -if sp.fund_source_id != '' 
-                  td= sp.fund_source.code
+                -if sp.fund_source.present?
+                  -if sp.fund_source_id != '' 
+                    td= sp.fund_source.code
+                  -else
+                    td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
                 -else
                   td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
           tr
