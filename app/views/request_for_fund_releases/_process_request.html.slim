@@ -4,8 +4,8 @@ br
   .row
     br
     .page-details-main-buttons
-      button.btn.btn-primary Print
-      '&nbsp      
+      / button.btn.btn-primary Print
+      /'&nbsp      
       = f.submit 'Save', class: 'btn btn-primary'
       '&nbsp
       = link_to 'Cancel', request_for_fund_releases_path, class: 'btn btn-default'
@@ -20,8 +20,8 @@ br
       = render 'approval_information_form', f:f
       = render 'fund_information_form', f:f      
     .page-details-main-buttons
-      button.btn.btn-primary Print
-      '&nbsp      
+      / button.btn.btn-primary Print
+      / '&nbsp      
       = f.submit 'Save', class: 'btn btn-primary'
       '&nbsp
       = link_to 'Cancel', request_for_fund_releases_path, class: 'btn btn-default'
