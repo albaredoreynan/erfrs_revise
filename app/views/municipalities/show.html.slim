@@ -37,7 +37,7 @@ hr
         .col-md-4.text-right
           'Group:
         .col-md-6.bold
-          = @muni_info.group.code
+          = @muni_info.group_id.nil? ? '' : @muni_info.group.code
   .row.sp-index
     .col-md-12
       table.table.table-hover.table-striped.table-bordered
