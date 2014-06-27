@@ -42,6 +42,12 @@
           'Municipality:
         .col-md-6.bold
           = @muni_info.name
+    .col-md-6.parent
+      .form-group
+        .col-md-4.text-right
+          'Group:
+        .col-md-6.bold
+          = @muni_info.group_id.nil? ? '' : @muni_info.group.code
   .row.sp-index
     .col-md-12
       table.table.table-hover.table-striped.table-bordered
@@ -215,16 +221,26 @@
               td.text-right= number_to_currency(sp.second_tranch_amount)
               td.text-right= number_to_currency(sp.third_tranch_amount)
               td= sp.status
-              -if sp.fund_source.present? && sp.status == "Final"
-                td= sp.fund_source.code
-              -else
+              -if @cgdp.status == 'Final'
                 -if sp.fund_source.present?
-                  -if sp.fund_source_id != '' 
-                    td= sp.fund_source.code
-                  -else
-                    td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+                  td= sp.fund_source.code  
                 -else
                   td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+              -else
+                -if sp.fund_source.present?
+                  td= sp.fund_source.code  
+                -else
+                  td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+              / -if sp.fund_source.present? && sp.status == "Final"
+              /   td= sp.fund_source.code
+              / -else
+              /   -if sp.fund_source.present?
+              /     -if sp.fund_source_id != '' 
+              /       td= sp.fund_source.code
+              /     -else
+              /       td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+              /   -else
+              /     td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
           tr
            td colspan="3" Count: #{@subprojects.count}
            td.text-left colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}

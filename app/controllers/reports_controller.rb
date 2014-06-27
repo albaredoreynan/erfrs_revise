@@ -38,6 +38,14 @@ class ReportsController < ApplicationController
 
 	def cash_program_reports
 		@subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf         => "Community Grants Disbursement Plan Report",
+              :orientation  => 'Landscape',
+              :page_width   => '13in'
+      end
+    end
 	end
 
 	def download_file
