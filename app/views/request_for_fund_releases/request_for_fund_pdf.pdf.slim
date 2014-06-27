@@ -1,0 +1,90 @@
+= wicked_pdf_stylesheet_link_tag "application"
+- @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
+- @total_release = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release
+- @total_grant_less_con = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
+- if params[:tranch] == 'first'
+  - @amount_requested = @subproject.first_tranch_amount
+  - @previous_released = 0
+  - @cumulative_amount = @subproject.first_tranch_amount
+  - @tranch = 1
+  - @contingency = @subproject.grant_amount_contingency_cost
+- elsif params[:tranch] == 'second'
+  - @amount_requested = @subproject.second_tranch_amount
+  - @previous_released = @subproject.first_tranch_amount_release
+  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
+  - @tranch = 2
+  - @contingency = @subproject.grant_amount_contingency_cost
+- else
+  - @amount_requested = @subproject.third_tranch_amount
+  - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
+  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
+  - @tranch = 3
+  - if @total_release > @total_grant_less_con 
+    - @contingency = @subproject.grant_amount_contingency_cost - (@total_release - @total_grant_less_con)
+  - else
+    - @contingency = @subproject.grant_amount_contingency_cost
+
+- @balance_amount = @total_grant - @cumulative_amount
+
+p.bold.text-center REQUEST FOR FUND RELEASE
+br
+
+form.form-horizontal.sm_font
+  = check_box_tag :a, disabled: true
+  |&nbsp; Initial Tranche &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  = check_box_tag :b, disabled: true
+  |&nbsp; Second Tranche &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  = check_box_tag :c, disabled: true
+  |&nbsp; Third Tranche &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  = check_box_tag :d, disabled: true
+  |&nbsp; Others, Specify: Technical Assistance Fund (TAF) 
+br
+table.table.table-responsive border=1 width=500 
+  tr
+    td.text-left width='20%' Region
+    td.text-left width='30%'
+      = @subproject.region.code
+      = @subproject.province.name
+    td.text-left width='20%' Date (mm/dd/yy)
+    td.text-left width='30%'
+      = @rfrs.request_date.strftime("%m/%d/%y")
+  tr
+    td.text-left width='20%' Province
+    td.text-left width='30%'
+      = @subproject.province.name
+    td.text-left width='20%' Sub-project ID No.
+    td.text-left width='30%'
+      = trail_id(6, @subproject.id) 
+  tr
+    td.text-left width='20%' Municipality
+    td.text-left width='30%'
+      = @subproject.municipality.name
+    td.text-left width='20%' Total KC/PAMANA Grant
+    td.text-left width='30%'
+      = number_to_currency @total_grant
+  tr
+    td.text-left width='20%' Barangay
+    td.text-left width='30%'
+      = @subproject.barangay.name
+    td.text-left width='20%' Total Project Cost
+    td.text-left width='30%'
+      = number_to_currency @rfrs.amount_approve 
+  tr
+    td.text-left width='20%' Sub-project Title
+    td.text-left width='80%' colspan=3
+      = @subproject.title
+
+css:      
+  .form-group > .col-md-3{
+    text-align: right;
+  }
+  td{
+  	font-size: 10px;
+  }
+  .sm_font {
+    font-size: 10px;
+  }
+  table {
+  	margin-top: -15px;
+  }
+

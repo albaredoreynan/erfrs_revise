@@ -132,6 +132,20 @@ class RequestForFundReleasesController < ApplicationController
     end
   end
 
+
+  def request_for_fund_pdf
+    @rfrs = RequestForFundRelease.find params[:rfrs_id]
+    @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf         => "Request_for_Fund_Release",
+              :orientation  => 'Portrait',
+              :page_width   => '13in'
+      end
+    end
+  end
+
   protected
 
     def permitted_params
