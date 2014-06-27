@@ -66,7 +66,7 @@ class SubprojectsController < ApplicationController
       @subproject.destroy
       flash[:success] = 'Subproject was deleted successfully.'
     else
-      flash[:alert] = "Subproject is in Final status"
+      flash[:alert] = "Subproject Cannot be deleted"
     end
 
     redirect_to subprojects_path

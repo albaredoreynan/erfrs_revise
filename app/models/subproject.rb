@@ -9,7 +9,7 @@ class Subproject < ActiveRecord::Base
   belongs_to :user
   has_many :request_for_fund_releases, dependent: :destroy
   has_many :team_members, dependent: :destroy
-  has_many :rfrs, foreign_key: 'request_for_fund_releases_id' ,class_name: "RequestForFundReleases", dependent: :destroy
+  has_many :rfrs, foreign_key: 'request_for_fund_releases_id' ,class_name: "RequestForFundReleases"
 
   accepts_nested_attributes_for :team_members, reject_if: :reject_team_members
 
