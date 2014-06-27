@@ -60,6 +60,8 @@ Rails.application.routes.draw do
   
   get '/update_exchange_rate', to: 'reports#update_exchange_rate', as:'update_exchange_rate'
 
+  get '/update_remark', to: 'reports#update_remark', as:'update_remark'
+
   get '/update_fund_source', to: 'municipalities#update_fund_source', as:'update_fund_source'
   
   get '/display_designation', to: 'request_for_fund_releases#display_designation', as:'display_designation'

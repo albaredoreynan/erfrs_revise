@@ -70,7 +70,7 @@ hr
   	        td.text-right.dv_amount= number_to_currency soe.subproject.total_dv_amount
   	        td.text-right.exchange 
   	        td= text_field_tag :exchange_rate, [], id:"#{soe.id}", class: 'exchange_rate'
-  	        td= text_field_tag :report_remarks, [], id:"test#{soe.id}", class: 'soe_remark'
+  	        td= text_field_tag :report_remarks, [], id:"#{soe.id}", class: 'soe_remark'
 css:
   .scrollable {
     width: 100%;
@@ -91,4 +91,18 @@ javascript:
       });
     $(this).parent().siblings('.exchange').html( item_val * val)
   });
+
+  $(".soe_remark").blur(function(){
+    remark_val = $(this).val();
+    sp_id = $(this).attr("id");
+    $.ajax({  
+      url: "/update_remark",
+      data: {
+        remark: remark_val,
+        rfrs_id : sp_id
+      },
+        dataType: "script"
+      });
+  });
+
             
