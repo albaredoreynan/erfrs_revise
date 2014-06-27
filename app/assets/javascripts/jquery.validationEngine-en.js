@@ -49,6 +49,14 @@
                     "regex": "none",
                     "alertText": "* Maximum value is "
                 },
+                "minYear": {
+                    "regex": "none",
+                    "alertText": "* Minimum Year Value is "
+                },
+                "maxYear": {
+                    "regex": "none",
+                    "alertText": "* Maximum Year Value is "
+                },
                 "past": {
                     "regex": "none",
                     "alertText": "* Date prior to "

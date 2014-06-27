@@ -13,7 +13,7 @@ hr
                 .col-md-3
                   = label_tag :with_year, 'Year'
                 .col-md-6
-                  = text_field_tag :with_year, params[:with_year], class: 'form-control'
+                  = text_field_tag :with_year, params[:with_year], class: 'form-control validate[custom[year]]'
               .form-group
                 .col-md-3
                   = label_tag :with_user, 'User Name'
