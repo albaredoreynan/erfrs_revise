@@ -13,7 +13,7 @@ hr
         .col-md-4.text-right
           'Status
         .col-md-6.bold
-          = @cgdp.status.present? ? @cgdp.status.upcase : ''
+          = @cgdp.present? ? @cgdp.status.upcase : ''
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
@@ -25,7 +25,7 @@ hr
         .col-md-4.text-right
           'Year
         .col-md-6.bold
-          = @cgdp.year.present? ? @cgdp.year : ''
+          = @cgdp.present? ? @cgdp.year : ''
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
@@ -232,13 +232,13 @@ hr
         .col-md-6.text-right
           'SAA Number
         .col-md-6.bold
-          = @cgdp.saa_number.present? ? @cgdp.saa_number : ''
+          = @cgdp.present? ? @cgdp.saa_number : ''
     .col-md-8.parent
       .form-group
         .col-md-6.text-right
           'SAA Date
         .col-md-6.bold
-          = @cgdp.saa_date.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
+          = @cgdp.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
 
 = render 'view_cash_program'
 / = render 'assigned_fund_source'
