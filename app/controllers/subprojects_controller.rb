@@ -51,7 +51,7 @@ class SubprojectsController < ApplicationController
     @subproject = Subproject.find params[:id]
     if @subproject.update_attributes subproject_params
       flash[:success] = 'Subproject updated successfully.'
-      redirect_to subprojects_path
+      redirect_to edit_subproject_path(@subproject)
     else
       flash[:error] = 'An error occured while updating project'
       render 'edit'
