@@ -1,6 +1,9 @@
 = wicked_pdf_stylesheet_link_tag "application"
 - @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
 - @total_release = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release
+- total_lcc = @subproject.lcc_blgu_direct_cost       + @subproject.lcc_blgu_indirect_cost        + @subproject.lcc_blgu_contingency_cost
+- total_lcc_cash = @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_cash_contingency_cost
+- total_lcc_kind = @subproject.total_lcc_in_kind_direct_cost + @subproject.total_lcc_in_kind_indirect_cost +  @subproject.total_lcc_in_kind_contingency_cost
 - @total_grant_less_con = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
 - if params[:tranch] == 'first'
   - @amount_requested = @subproject.first_tranch_amount
@@ -45,7 +48,7 @@ table.table.table-responsive border=1 width=500
     td.text-left width='30%'
       = @subproject.region.code
       = @subproject.province.name
-    td.text-left width='20%' Date (mm/dd/yy)
+    td.text-left width='20%' Date
     td.text-left width='30%'
       = @rfrs.request_date.present? ? @rfrs.request_date.strftime("%m/%d/%y") : ''
   tr
@@ -59,25 +62,28 @@ table.table.table-responsive border=1 width=500
     td.text-left width='20%' Municipality
     td.text-left width='30%'
       = @subproject.municipality.name
-    td.text-left width='20%' Total KC/PAMANA Grant
+    td.text-left width='20%' Total KC-NCDDP Grant
     td.text-left width='30%'
       = number_to_currency @total_grant
   tr
     td.text-left width='20%' Barangay
     td.text-left width='30%'
       = @subproject.barangay.name
+    td.text-left width='20%' Total LCC
+    td.text-left width='30%'
+      = number_to_currency total_lcc 
+  tr
+    td.text-left width='20%' Sub-project Title
+    td.text-left width='30%'
+      = @subproject.title
     td.text-left width='20%' Total Project Cost
     td.text-left width='30%'
       = number_to_currency @rfrs.amount_approve 
-  tr
-    td.text-left width='20%' Sub-project Title
-    td.text-left width='80%' colspan=3
-      = @subproject.title
 br
-table.table.table-responsive border=0 width=500 
+table.table.table-responsive border=0 width="100%"
   tr
-    td.bold To: The National Project Director DSWD National Office
-    td.bold LBP Batasan Branch Manager
+    td.bold width="40%" To the Regional Project Director - DSWD Regional Office
+    td.bold width="60%" ________________________________________________
 p.sm_font May we request the transfer of funds for the implementation of the Kalahi Cidss/Pamana approved sub-project stated above
 br
 table.table.table-responsive border=1 width=500
@@ -144,27 +150,27 @@ table.table.table-responsive border=1 width=500
     td.text-center width='40%'
       = @rfrs.rev_date_first.nil? ? "" : @rfrs.rev_date_second.strftime('%d-%b-%Y')
   tr
-    td.bold width='50%' colspan=2 
+    td.bold width='100%' colspan=4 
       'Regional Project Management Office
       
-    td.bold width='50%' colspan=2 
-      'National Project Management Office
+    / td.bold width='50%' colspan=2 
+    /   'National Project Management Office
       
   tr
-    td width='50%' colspan=2
-      p.bold Reviewed by:
-      .col-md-7.text-center
-        #{team_member_name(@rfrs.srpmo_reviewed_by)}
-        '------------------------------------------------------- 
-        #{@rfrs.srpmo_designation}  
-      p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')}
-      p.bold Recommended by:
-      .col-md-7.text-center
-        #{team_member_name(@rfrs.srpmo_reviewed_by)}
-        '------------------------------------------------------- 
-        #{@rfrs.srpmo_designation}
-      p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_rec_date.strftime('%d-%b-%Y')}
-    td width='50%' colspan=2
+    / td width='50%' colspan=2
+    /   p.bold Reviewed by:
+    /   .col-md-7.text-center
+    /     #{team_member_name(@rfrs.srpmo_reviewed_by)}
+    /     '------------------------------------------------------- 
+    /     #{@rfrs.srpmo_designation}  
+    /   p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')}
+    /   p.bold Recommended by:
+    /   .col-md-7.text-center
+    /     #{team_member_name(@rfrs.srpmo_reviewed_by)}
+    /     '------------------------------------------------------- 
+    /     #{@rfrs.srpmo_designation}
+    /   p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_rec_date.strftime('%d-%b-%Y')}
+    td width='100%' colspan=4
       p.bold Approved by:
       .col-md-7.text-center
         #{team_member_name(@rfrs.rpmo_approved_by)}

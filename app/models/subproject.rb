@@ -31,12 +31,13 @@ class Subproject < ActiveRecord::Base
             presence: true
   validates :date_of_mibf, presence: {message: "Date of MIBF can't be blank"}
 
-  validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
-            :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
-            :community_indirect_cost, :community_contingency_cost, :mlgu_direct_cost, :mlgu_indirect_cost, :mlgu_contingency_cost,
-            :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
-            :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
-            numericality:{ greater_than_or_equal_to: 0, :message => "should be a positive number" } 
+  # validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
+  #           :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
+  #           :community_indirect_cost, :community_contingency_cost, :mlgu_direct_cost, :mlgu_indirect_cost, :mlgu_contingency_cost,
+  #           :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
+  #           :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
+  #           numericality:{ greater_than_or_equal_to: 0, :message => "should be a positive number" } 
+  
   #GRANT AMOUNT VALIDATION
   # validates :grant_amount_direct_cost, numericality:{ greater_than_or_equal_to: 0, :message => "GRANT Amount - Direct Cost should be a positive number" } 
   # validates :grant_amount_indirect_cost, numericality:{ greater_than_or_equal_to: 0, :message => "GRANT Amount - Indirect Cost should be a positive number" } 
