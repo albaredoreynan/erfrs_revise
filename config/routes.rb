@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   
   resources :reports do
     get :soe_reports, on: :collection
+    get :soe_adb_reports, on: :collection
     get :mga_reports, on: :collection
     get :cg_reports, on: :collection
     get :cash_program_reports, on: :collection

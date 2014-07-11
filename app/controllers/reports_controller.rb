@@ -52,6 +52,16 @@ class ReportsController < ApplicationController
     end
 	end
 
+  def soe_adb_reports
+    @soe = apply_scopes(RequestForFundRelease).includes(subproject:[:region, :province, :municipality, :barangay])
+    respond_to do |format|
+      format.html
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+    end
+    
+  end
+
+
 	def download_file
 		send_file 'public/sample_file.pdf', type: 'image/pdf', disposition: 'inline'	
 	end	

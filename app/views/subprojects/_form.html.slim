@@ -55,3 +55,9 @@ javascript:
     compute();
   });
 
+   $('#finance > tr > td > input').focus(function(){
+      if ($(this).val()=='0.0') $(this).val("")
+      compute();
+    });
+
+

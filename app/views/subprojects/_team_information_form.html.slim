@@ -15,3 +15,39 @@
         = f.fields_for :team_members do |team_member|
           = render 'team_member_fields', f: team_member
 
+javascript:
+
+  var attr_id = 0
+  $('.select_member').each(function(){
+    ++attr_id
+    $(this).attr('id', 'select_designation' + attr_id)
+  })
+
+  var boxes, i, disableOthers;
+
+  boxes = document.getElementsByClassName('select_member');
+
+  disableOthers = function () {
+      'use strict';
+      var i, j, k, selectedValues = [],
+          options;
+
+      for (i = 0; i < boxes.length; i += 1) {
+          selectedValues.push(boxes[i].value);
+
+          for (j = 0; j < boxes.length; j += 1) {
+              if (boxes[j] !== boxes[i]) {
+                  options = boxes[j].querySelectorAll('option');
+                  for (k = 0; k < options.length; k += 1) {
+                      options[k].disabled = (selectedValues.indexOf(options[k].value) > -1);
+                  }
+              }
+          }
+      }
+  };
+
+  for (i = 0; i < boxes.length; i += 1) {
+      boxes[i].addEventListener('change', function () {
+          disableOthers();
+      }, false);
+  }
