@@ -1,5 +1,6 @@
 class RegionalOfficer < ActiveRecord::Base
   belongs_to :region
+  has_many :rfr_signatories
 
   validates :name, :ro_type, :designation, :region_id, presence: true
 

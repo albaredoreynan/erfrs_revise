@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get :obr, on: :collection
     get :dv, on: :collection
     get :request_for_fund_pdf, on: :collection
+    post :rfr_signatory, on: :collection
   end
 
   resources :cgdps, only: :index

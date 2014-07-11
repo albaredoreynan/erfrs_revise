@@ -90,7 +90,12 @@ hr
               = check_box_tag :a, disabled: true
               |&nbsp; Supporting documents valid, proper and legal
           td colspan=2 style='padding-left: 50px;'
-            .form-group Allotment available and obligated for the purpose as indicated above      
+            .form-group Allotment available and obligated for the purpose as indicated above
+    table.table.table-bordered
+      tr
+        td
+          button data-toggle='modal' data-target='#obr_signatories' class=" btn btn-primary "
+            = icon_text(nil, 'Add Signatory')
     table.table.table-bordered
       tr
         td.text-center width='10%'
@@ -99,16 +104,18 @@ hr
           p Position
         td.text-center width='40%'
           br
-          - @positions = regional_officer(@subproject.region_id, "A", "OR")
+          - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "OR")
           - @positions.each do |position|
-            #{position.name}
+            #{position.regional_officer.name}
             '-------------------------------------------------------
-            #{position.designation}
+            #{position.regional_officer.designation}
             br
         td.text-center width='10%'
           p Signature
           p Printed Name
           p Position
+          
+          
         td.text-center width='40%'
           br
           - @positions_b = regional_officer(@subproject.region_id, "B", "OR")
@@ -140,7 +147,7 @@ hr
 .row.rfr-index
   .col-md-12
     = link_to "Print to PDF".html_safe, obr_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
-
+= render 'obr_signatories'
 css:      
   .form-group > .col-md-3{
     text-align: right;

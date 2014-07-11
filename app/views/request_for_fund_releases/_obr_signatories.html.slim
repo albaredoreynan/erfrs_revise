@@ -1,0 +1,42 @@
+.modal.fade#obr_signatories data-backdrop='static' style="width: 420px; height: 300px; left:20%;"
+  .modal-content
+    = form_for @rfr_signatory, :url => {:action => 'rfr_signatory'}, html: { class: 'form-horizontal' } do |f|
+      .modal-header
+        button.close type='button' data-dismiss='modal' aria-hidden=true &times;
+        h4.modal-title OBR Signatories
+      .modal-body
+        = hidden_field_tag :sp_id, params[:sp_id]
+        = hidden_field_tag :came_from, 'obr'
+        - @positions = regional_officer(@subproject.region_id, "A", "OR")
+        - @positions.each do |blah|
+          = f.hidden_field :request_for_fund_release_id, value: params[:rfrs_id]
+          = f.hidden_field :group, value: 'A'
+          = f.hidden_field :sign_type, value: 'OR'
+          / = f.check_box("rfr_signatory[regional_officer_id][]", blah.id, blah.id)
+          .form-group
+            .col-sm-10.text-left
+              = check_box_tag('rfr_signatory[regional_officer_id][]', blah.id)
+              |&nbsp;
+              label = blah.name 
+              |&nbsp;( #{blah.designation} )
+          / = hidden_field_tag :test, value: blah.id
+        /   = f.check_box :regional_officer_id, blah.id, html: { name: 'regional_officer_id[]' }
+        /   / = f.hidden_field :request_for_fund_release_id, params[:id] 
+        / / = f.collection_check_boxes(:regional_officer_id, @positions, :id, :name, html: { name: 'regional_officer_id[]' })
+      .modal-footer
+        = f.submit 'Save', class: 'btn btn-primary'
+          '&nbsp;
+        button.btn data-dismiss="modal" aria-hidden="true" Close
+
+
+/ <%= form_for(@kennel) do |form| %>
+/     ...
+/     <div class="field">
+/         <div class="field_head">Handlers</div>
+/         <%= hidden_field_tag("kennel[handler_ids][]", nil) %>
+/         <% Handler.order(:name).each do |handler| %>
+/             <label><%= check_box_tag("kennel[handler_ids][]", id, id.in?(@kennel.handlers.collect(&:id)) %> <%= handler.name %></label>
+/         <% end %>
+/     </div>
+/     ...
+/ <% end %>

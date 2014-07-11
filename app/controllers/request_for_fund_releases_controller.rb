@@ -116,6 +116,7 @@ class RequestForFundReleasesController < ApplicationController
   def obr
     @rfrs = RequestForFundRelease.find params[:rfrs_id]
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+    @rfr_signatory = RfrSignatory.new
     respond_to do |format|
       format.html
       format.pdf do
@@ -129,6 +130,7 @@ class RequestForFundReleasesController < ApplicationController
   def dv
     @rfrs = RequestForFundRelease.find params[:rfrs_id]
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
+    @rfr_signatory = RfrSignatory.new
     respond_to do |format|
       format.html
       format.pdf do
@@ -153,6 +155,20 @@ class RequestForFundReleasesController < ApplicationController
     end
   end
 
+  def rfr_signatory
+    # @rfr_signatory = RfrSignatory.new rfr_signatory_params
+    @rfrs_signatories = rfr_signatory_params[:rfr_signatory]
+    @ids = params[:rfr_signatory][:regional_officer_id]
+    @ids.each do |rsid|
+      RfrSignatory.create!(@rfrs_signatories.merge(regional_officer_id: rsid))
+    end
+    if params[:came_from] == 'obr' 
+      redirect_to obr_request_for_fund_releases_path(:rfrs_id => params[:rfr_signatory][:request_for_fund_release_id], :sp_id => params[:sp_id])
+    else
+      redirect_to dv_request_for_fund_releases_path(:rfrs_id => params[:rfr_signatory][:request_for_fund_release_id], :sp_id => params[:sp_id])
+    end
+  end 
+
   protected
 
     def permitted_params
@@ -171,5 +187,10 @@ class RequestForFundReleasesController < ApplicationController
         :srpmo_date_received, :srpmo_reviewed_by, :srpmo_recommend_by, :srpmo_rec_designation, :srpmo_rec_date, :rpmo_designation,
         :rpmo_date, :rpmo_date_received, :rpmo_approved_by, :approved_as_requested, :tranch_for ]
       params.require(:request_for_fund_release).permit(attrs)
+    end
+
+    def rfr_signatory_params
+      # params.require(:rfr_signatory).permit( {:regional_officer_id, :request_for_fund_release_id)
+      params.permit(rfr_signatory: [:request_for_fund_release_id, :regional_officer_id, :group, :sign_type ])  
     end
 end
