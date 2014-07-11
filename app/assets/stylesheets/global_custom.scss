@@ -540,7 +540,7 @@ cite {
   font-style: normal;
 }
 .text-left {
-  text-align: left;
+  text-align: left !important;
 }
 .text-right {
   text-align: right;
@@ -6008,6 +6008,10 @@ button.close {
     float: left;
   }
 
+}
+
+.mini-top{
+  font-size: 10px;
 }
 //.rfrs{
 //  margin-top: 10px;

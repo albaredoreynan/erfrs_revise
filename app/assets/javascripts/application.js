@@ -58,8 +58,8 @@ $( document ).ready(function() {
     var subproject_first_tranch_amount = 0.0
     var subproject_two_tranch_amount = 0.0
     var subproject_three_tranch_amount = 0.0
-    
-    total_grant = parseFloat($('#subproject_grant_amount_direct_cost').val()) + parseFloat($('#subproject_grant_amount_indirect_cost').val());
+    // 
+    total_grant = parseFloat($('#subproject_grant_amount_direct_cost').val()) + parseFloat($('#subproject_grant_amount_indirect_cost').val()); + parseFloat($('#subproject_grant_amount_contingency_cost').val());
     
     subproject_first_tranch_amount = (parseFloat($('#subproject_first_tranch_amount').val()))
     subproject_second_tranch_amount = (parseFloat($('#subproject_second_tranch_amount').val()))

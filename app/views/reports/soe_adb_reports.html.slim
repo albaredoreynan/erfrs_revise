@@ -1,0 +1,92 @@
+h4 Statement of Expenditures Report (ADB)
+hr
+.row.rfr-index
+  =render 'soe_filter'
+  .col-md-12.header
+    p.text-center 
+      b KCNCDDP ASIAN DEVELOPMENT BANK
+      br
+      b STATEMENT OF EXPENDITURES (SOE) FOR PAYMENTS NOT EXCEEDING
+      br
+      b APPROVED SOE CEILING: US$ 100,000.00
+      br
+      -if params[:start_date].present? and params[:end_date].present? 
+        b FOR THE PERIOD #{params[:start_date].upcase} TO #{params[:end_date].upcase}
+
+.panel.panel-primary
+  .table-responsive.scrollable
+    table.table.table-hover.sortable
+      thead
+        tr.mini-top
+          th.text-left colspan='2' SOE Sheet No.:
+          th.text-left colspan='3' ADB Loan No.:
+          th.text-left colspan='3' Category/ Sub-Category:
+          th.text-left colspan='4' Application No.:
+          th.text-left Date:
+        tr
+          th Item No.
+          th style="min-width:158px" Description of Goods and Services
+          th style="min-width:158px"  
+            | Contract/PO No. for EA's Record
+          th style="min-width:100px" PCCS No.
+          th style="min-width:160px" Name and Address of Supplier
+          th style="min-width:158px" Total Amount of Bill Paid/Payable
+          th style="min-width:158px" ADB Disbursement%
+          th style="min-width:158px" Amount Requested for Withdrawal
+          th style="min-width:108px"  Payment/ Check No.
+          th style="min-width:200px" Currency and Amount Charged to Imprest Account
+          th style="min-width:108px" Exchange Rate
+          th US Dollar Equivalent
+          th style="min-width:200px" Remarks
+      tbody
+        - @soe.each_with_index do |soe, index|
+          tr
+            td= index + 1
+            td= soe.subproject.title
+            td
+            td
+            td 
+            td =number_to_currency soe.subproject.total_grant_amount
+            td 
+            td.dv_amount= number_to_currency soe.amount_approve
+            td 
+            td 
+            td = text_field_tag :exchange_rate, [], id:"#{soe.id}", class: 'exchange_rate'
+            td.text-right.exchange
+            td = text_field_tag :report_remarks, [], id:"#{soe.id}", class: 'soe_remark'
+css:
+  .scrollable {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+javascript:
+  $(".exchange_rate").blur(function(){
+    item_val = parseFloat($(this).val());
+    sp_id = $(this).attr("id");
+    val = parseFloat($(this).parent().siblings('.dv_amount').html());
+    $.ajax({  
+      url: "/update_exchange_rate",
+      data: {
+        exchange_rate: item_val,
+        rfrs_id : sp_id
+      },
+        dataType: "script"
+      });
+    $(this).parent().siblings('.exchange').html( item_val * val)
+  });
+
+  $(".soe_remark").blur(function(){
+    remark_val = $(this).val();
+    sp_id = $(this).attr("id");
+    $.ajax({  
+      url: "/update_remark",
+      data: {
+        remark: remark_val,
+        rfrs_id : sp_id
+      },
+        dataType: "script"
+      });
+  });
+
+            
