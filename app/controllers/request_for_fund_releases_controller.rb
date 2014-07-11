@@ -28,7 +28,6 @@ class RequestForFundReleasesController < ApplicationController
     else
       @team_member = @team_member
     end
-
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
     @rfrs = RequestForFundRelease.new
   rescue ActiveRecord::RecordNotFound
@@ -68,7 +67,7 @@ class RequestForFundReleasesController < ApplicationController
         @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve], third_tranch_revised_amount: rfrs_params[:amount_approve])
       end 
       flash[:success] = 'Request for release updated successfully.'
-      redirect_to edit_request_for_fund_release_path(@rfrs)
+      redirect_to edit_request_for_fund_release_path(@rfrs, :sp_id => @subproj.id)
     else
       flash[:error] = 'An error occured while updating project'
       render 'edit'
@@ -95,7 +94,7 @@ class RequestForFundReleasesController < ApplicationController
       redirect_to subproject_path(@subproj)
     else
       flash[:error] = 'An error occured while creating request'
-      render 'new'
+      redirect_to new_request_for_fund_release_path(:sp_id => @subproj.id, :tranch => tranch(@subproj))
     end
   end
 
@@ -169,6 +168,19 @@ class RequestForFundReleasesController < ApplicationController
     end
   end 
 
+  private
+    def tranch(subproject)
+      if subproject.first_tranch_amount_release == 0
+        tranch = 'first'
+      elsif subproject.first_tranch_amount_release != 0 && subproject.second_tranch_amount_release == 0
+        tranch = 'second'
+      elsif subproject.first_tranch_amount_release != 0 && subproject.second_tranch_amount_release != 0 && subproject.third_tranch_amount_release == 0
+        tranch = 'third'
+      else
+        tranch = 'other'      
+      end
+      return tranch
+    end
   protected
 
     def permitted_params
