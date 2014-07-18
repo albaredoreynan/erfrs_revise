@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ss:Styles>
+    <ss:Style ss:ID="1">
+        <ss:Font ss:Bold="1" />
+        <ss:Alignment ss:Horizontal="Center"/>
+    </ss:Style>
+  </ss:Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Column ss:Width="50"/>
+      <Column ss:Width="300"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+
+      <Row>
+        <Cell ss:MergeAcross="16" ss:StyleID="1"> 
+          <Data ss:Type="String"> DEPARTMENT OF SOCIAL WELFARE AND DEVELOPMENT </Data>
+        </Cell> 
+      </Row>
+      <Row>
+        <Cell ss:MergeAcross="16" ss:StyleID="1"> 
+          <Data ss:Type="String"> <B> Statement of Expenditures </B> </Data> 
+        </Cell> 
+      </Row>
+      <Row> 
+        <Cell ss:MergeAcross="16" ss:StyleID="1"> 
+          <Data ss:Type="String"> (No Records Required for Submission) </Data>
+        </Cell> 
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Item No.</Data></Cell>
+        <Cell><Data ss:Type="String">Name of Contractor / Supplier / Consultant</Data></Cell>
+        <Cell><Data ss:Type="String">Contract Number</Data></Cell>
+        <Cell><Data ss:Type="String">Contract Date</Data></Cell>
+        <Cell><Data ss:Type="String">Contract Prior Reviewed</Data></Cell>
+        <Cell><Data ss:Type="String">Control Number</Data></Cell>
+        <Cell><Data ss:Type="String">Contract Amount (In PHP)</Data></Cell>
+        <Cell><Data ss:Type="String">Invoice Amount (In PHP)</Data></Cell>
+        <Cell><Data ss:Type="String">Invoice Date</Data></Cell>
+        <Cell><Data ss:Type="String">Check Number</Data></Cell>
+        <Cell><Data ss:Type="String">Check Date</Data></Cell>
+        <Cell><Data ss:Type="String">Percent Eligibility</Data></Cell>
+        <Cell><Data ss:Type="String">Amount Eligible for Financing (In PHP)</Data></Cell>
+        <Cell><Data ss:Type="String">Amount Charged to Designated Account (In USD)</Data></Cell>
+        <Cell><Data ss:Type="String">Exchange Rate</Data></Cell>
+        <Cell><Data ss:Type="String">Remarks</Data></Cell>
+      </Row>
+      <% @soe.each_with_index do |soe, index| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= index + 1 %> </Data></Cell>
+        <Cell><Data ss:Type="String"><%= "#{soe.subproject.barangay.name}, #{soe.subproject.municipality.name.titleize}" %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= trail_id(6, soe.subproject_id) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= soe.subproject.date_of_mibf%></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell/>
+        <Cell><Data ss:Type="Number"><%= number_to_currency soe.subproject.total_grant_amount%></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= number_to_currency soe.amount_approve %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= soe.rpmo_date %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= soe.check_number %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= soe.dv_date.to_date %></Data></Cell>
+        <Cell><Data ss:Type="String"> 100% </Data></Cell>
+        <Cell><Data ss:Type="Number"><%= number_to_currency soe.subproject.total_dv_amount %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= soe.exchange_rate.present? ? number_to_currency(soe.subproject.total_dv_amount * soe.exchange_rate) : ''%></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= soe.exchange_rate.present? ? number_to_currency(soe.exchange_rate) : '' %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= soe.excel_remark%></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
