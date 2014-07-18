@@ -1,17 +1,17 @@
-.modal.fade#dv_signatories data-backdrop='static' style="width: 420px; height: 300px; left:20%;"
+.modal.fade#obr_b_signatories data-backdrop='static' style="width: 420px; height: 300px; left:20%;"
   .modal-content
     = form_for @rfr_signatory, :url => {:action => 'rfr_signatory'}, html: { class: 'form-horizontal' } do |f|
       .modal-header
         button.close type='button' data-dismiss='modal' aria-hidden=true &times;
-        h4.modal-title DV Signatories
+        h4.modal-title OBR Signatories
       .modal-body
         = hidden_field_tag :sp_id, params[:sp_id]
-        = hidden_field_tag :came_from, 'dv'
-        - @positions = regional_officer(@subproject.region_id, "A", "DV")
+        = hidden_field_tag :came_from, 'obr'
+        - @positions = regional_officer(@subproject.region_id, "B", "OR")
         - @positions.each do |blah|
           = f.hidden_field :request_for_fund_release_id, value: params[:rfrs_id]
-          = f.hidden_field :group, value: 'A'
-          = f.hidden_field :sign_type, value: 'DV'
+          = f.hidden_field :group, value: 'B'
+          = f.hidden_field :sign_type, value: 'OR'
           / = f.check_box("rfr_signatory[regional_officer_id][]", blah.id, blah.id)
           .form-group
             .col-sm-10.text-left
@@ -29,3 +29,14 @@
         button.btn data-dismiss="modal" aria-hidden="true" Close
 
 
+/ <%= form_for(@kennel) do |form| %>
+/     ...
+/     <div class="field">
+/         <div class="field_head">Handlers</div>
+/         <%= hidden_field_tag("kennel[handler_ids][]", nil) %>
+/         <% Handler.order(:name).each do |handler| %>
+/             <label><%= check_box_tag("kennel[handler_ids][]", id, id.in?(@kennel.handlers.collect(&:id)) %> <%= handler.name %></label>
+/         <% end %>
+/     </div>
+/     ...
+/ <% end %>

@@ -111,8 +111,11 @@ hr
             .form-group 
     table.table.table-bordered
       tr
-        td
+        td.text-left width='50%'
           button data-toggle='modal' data-target='#dv_signatories' class=" btn btn-primary "
+            = icon_text(nil, 'Add Signatory')
+        td.text-left width='50%'
+          button data-toggle='modal' data-target='#dv_b_signatories' class=" btn btn-primary "
             = icon_text(nil, 'Add Signatory')
     table.table.table-bordered
       tr
@@ -122,24 +125,38 @@ hr
           p Position
         td.text-center width='40%'
           br
-          - @positions = regional_officer(@subproject.region_id, "A", "DV")
+          - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "DV")
           - @positions.each do |position|
-            #{position.name}
+            #{position.regional_officer.name}
             '-------------------------------------------------------
-            #{position.designation}
+            #{position.regional_officer.designation}
             br
+          / br
+          / - @positions = regional_officer(@subproject.region_id, "A", "DV")
+          / - @positions.each do |position|
+          /   #{position.name}
+          /   '-------------------------------------------------------
+          /   #{position.designation}
+          /   br
         td.text-center width='10%'
           p Signature
           p Printed Name
           p Position
         td.text-center width='40%'
           br
-          - @positions_b = regional_officer(@subproject.region_id, "B", "DV")
-          - @positions_b.each do |position_b|
-            #{position_b.name}
+          - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "DV")
+          - @positions.each do |position|
+            #{position.regional_officer.name}
             '-------------------------------------------------------
-            #{position_b.designation}
+            #{position.regional_officer.designation}
             br
+          / br
+          / - @positions_b = regional_officer(@subproject.region_id, "B", "DV")
+          / - @positions_b.each do |position_b|
+          /   #{position_b.name}
+          /   '-------------------------------------------------------
+          /   #{position_b.designation}
+          /   br
     table.table.table-bordered
       tr
         td.text-left width='2%'
@@ -165,7 +182,8 @@ hr
 .row.rfr-index
   .col-md-12
     = link_to "Print to PDF".html_safe, dv_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
-= render 'dv_signatories'      
+= render 'dv_signatories'
+= render 'dv_b_signatories'      
 css:      
   .form-group > .col-md-3{
     text-align: right;

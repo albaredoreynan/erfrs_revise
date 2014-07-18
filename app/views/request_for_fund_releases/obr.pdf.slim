@@ -86,11 +86,11 @@ table.table.table-responsive border=1 width=500
       p Position
     td.text-center width='40%'
       br
-      - @positions = regional_officer(@subproject.region_id, "A", "OR")
+      - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "OR")
       - @positions.each do |position|
-        #{position.name}
+        #{position.regional_officer.name}
         '-------------------------------------------------------
-        #{position.designation}
+        #{position.regional_officer.designation}
         br
     td.text-center width='10%'
       p Signature
@@ -98,11 +98,11 @@ table.table.table-responsive border=1 width=500
       p Position
     td.text-center width='40%'
       br
-      - @positions_b = regional_officer(@subproject.region_id, "B", "OR")
-      - @positions_b.each do |position_b|
-        #{position_b.name}
+      - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "OR")
+      - @positions.each do |position|
+        #{position.regional_officer.name}
         '-------------------------------------------------------
-        #{position_b.designation}
+        #{position.regional_officer.designation}
         br
 css:      
   .form-group > .col-md-3{

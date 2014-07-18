@@ -1,4 +1,4 @@
-.modal.fade#dv_signatories data-backdrop='static' style="width: 420px; height: 300px; left:20%;"
+.modal.fade#dv_b_signatories data-backdrop='static' style="width: 420px; height: 300px; left:20%;"
   .modal-content
     = form_for @rfr_signatory, :url => {:action => 'rfr_signatory'}, html: { class: 'form-horizontal' } do |f|
       .modal-header
@@ -7,10 +7,10 @@
       .modal-body
         = hidden_field_tag :sp_id, params[:sp_id]
         = hidden_field_tag :came_from, 'dv'
-        - @positions = regional_officer(@subproject.region_id, "A", "DV")
+        - @positions = regional_officer(@subproject.region_id, "B", "DV")
         - @positions.each do |blah|
           = f.hidden_field :request_for_fund_release_id, value: params[:rfrs_id]
-          = f.hidden_field :group, value: 'A'
+          = f.hidden_field :group, value: 'B'
           = f.hidden_field :sign_type, value: 'DV'
           / = f.check_box("rfr_signatory[regional_officer_id][]", blah.id, blah.id)
           .form-group

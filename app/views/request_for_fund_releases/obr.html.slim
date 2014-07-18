@@ -93,8 +93,11 @@ hr
             .form-group Allotment available and obligated for the purpose as indicated above
     table.table.table-bordered
       tr
-        td
+        td.text-left width='50%'
           button data-toggle='modal' data-target='#obr_signatories' class=" btn btn-primary "
+            = icon_text(nil, 'Add Signatory')
+        td.text-left width='50%'
+          button data-toggle='modal' data-target='#obr_b_signatories' class=" btn btn-primary "
             = icon_text(nil, 'Add Signatory')
     table.table.table-bordered
       tr
@@ -117,12 +120,11 @@ hr
           
           
         td.text-center width='40%'
-          br
-          - @positions_b = regional_officer(@subproject.region_id, "B", "OR")
-          - @positions_b.each do |position_b|
-            #{position_b.name}
+          - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "OR")
+          - @positions.each do |position|
+            #{position.regional_officer.name}
             '-------------------------------------------------------
-            #{position_b.designation}
+            #{position.regional_officer.designation}
             br
       / tr    
       /   td.text-center width='10%' Signature
@@ -148,6 +150,7 @@ hr
   .col-md-12
     = link_to "Print to PDF".html_safe, obr_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
 = render 'obr_signatories'
+= render 'obr_b_signatories'
 css:      
   .form-group > .col-md-3{
     text-align: right;
