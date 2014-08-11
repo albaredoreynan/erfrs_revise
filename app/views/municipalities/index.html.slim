@@ -1,10 +1,13 @@
 - @hide_nav = true
 .col-sm-12.title-header
+  br
   .col-sm-6
     h4 Municipalities
+  .col-sm-6
+    = link_to 'Create Municipalities', new_municipality_path, class: 'btn btn-primary pull-right'
 br
 br
-br
+
 .col-sm-12 
   .row.sp-table
     = render 'municipality_filter'

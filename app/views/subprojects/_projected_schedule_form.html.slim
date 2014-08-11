@@ -26,23 +26,23 @@
           th.text-center 1
           td = text_field_tag :tranch_one_percentage, "" , class: "tranch_input"
           td = f.text_field :first_tranch_date_required, value: @subproject.first_tranch_date_required.present? ? Date.parse(@subproject.first_tranch_date_required).strftime("%d-%b-%Y") : '', placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
-          td = f.text_field :first_tranch_amount, class: "tranch_amount", readonly: true
-          td = f.text_field :first_tranch_revised_amount, value: @subproject.first_tranch_revised_amount.nil? ? 0 : @subproject.first_tranch_revised_amount
-          td = f.text_field :first_tranch_amount_release, value: @subproject.first_tranch_amount_release.nil? ? 0 : @subproject.first_tranch_amount_release
+          td = f.text_field :first_tranch_amount, class: "tranch_amount", readonly: true, class: "monetary_field"
+          td = f.text_field :first_tranch_revised_amount, value: @subproject.first_tranch_revised_amount.nil? ? 0 : @subproject.first_tranch_revised_amount, class: "monetary_field"
+          td = f.text_field :first_tranch_amount_release, value: @subproject.first_tranch_amount_release.nil? ? 0 : @subproject.first_tranch_amount_release, class: "monetary_field"
         tr
           th.text-center 2
           td = text_field_tag :tranch_two_percentage, "" , class: "tranch_input"
           td = f.text_field :second_tranch_date_required, value: @subproject.second_tranch_date_required.present? ? Date.parse(@subproject.second_tranch_date_required).strftime("%d-%b-%Y") : '', placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
-          td = f.text_field :second_tranch_amount, class: "tranch_amount", readonly: true
-          td = f.text_field :second_tranch_revised_amount, value: @subproject.second_tranch_revised_amount.nil? ? 0 : @subproject.second_tranch_revised_amount
-          td = f.text_field :second_tranch_amount_release, value: @subproject.second_tranch_amount_release.nil? ? 0 : @subproject.second_tranch_amount_release
+          td = f.text_field :second_tranch_amount, class: "tranch_amount", readonly: true, class: "monetary_field"
+          td = f.text_field :second_tranch_revised_amount, value: @subproject.second_tranch_revised_amount.nil? ? 0 : @subproject.second_tranch_revised_amount, class: "monetary_field"
+          td = f.text_field :second_tranch_amount_release, value: @subproject.second_tranch_amount_release.nil? ? 0 : @subproject.second_tranch_amount_release, class: "monetary_field"
         tr
           th.text-center 3
           td = text_field_tag :tranch_three_percentage, "" , class: "tranch_input"
           td = f.text_field :third_tranch_date_required, value: @subproject.third_tranch_date_required.present? ? Date.parse(@subproject.third_tranch_date_required).strftime("%d-%b-%Y") : '', placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]"
-          td = f.text_field :third_tranch_amount, class: "tranch_amount", readonly: true
-          td = f.text_field :third_tranch_revised_amount, value: @subproject.third_tranch_revised_amount.nil? ? 0 : @subproject.third_tranch_revised_amount
-          td = f.text_field :third_tranch_amount_release, value: @subproject.third_tranch_amount_release.nil? ? 0 : @subproject.third_tranch_amount_release
+          td = f.text_field :third_tranch_amount, class: "tranch_amount", readonly: true, class: "monetary_field"
+          td = f.text_field :third_tranch_revised_amount, value: @subproject.third_tranch_revised_amount.nil? ? 0 : @subproject.third_tranch_revised_amount, class: "monetary_field"
+          td = f.text_field :third_tranch_amount_release, value: @subproject.third_tranch_amount_release.nil? ? 0 : @subproject.third_tranch_amount_release, class: "monetary_field"
     
   
 

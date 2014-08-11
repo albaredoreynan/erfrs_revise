@@ -15,37 +15,37 @@
       tbody#finance
         tr#grant-amount
           td GRANT Amount
-          td.grant.sdc= f.text_field :grant_amount_direct_cost
-          td.grant.sic= f.text_field :grant_amount_indirect_cost
-          td.grant.scc= f.text_field :grant_amount_contingency_cost
+          td.grant.sdc= f.text_field :grant_amount_direct_cost, class: "monetary_field"
+          td.grant.sic= f.text_field :grant_amount_indirect_cost, class: "monetary_field"
+          td.grant.scc= f.text_field :grant_amount_contingency_cost, class: "monetary_field"
           td#total_grant.gray
           td#percent_grant.gray
         tr#lcc-blgu
           td LCC: BLGU
-          td.lcc.sdc= f.text_field :lcc_blgu_direct_cost
-          td.lcc.sic= f.text_field :lcc_blgu_indirect_cost
-          td.lcc.scc= f.text_field :lcc_blgu_contingency_cost
+          td.lcc.sdc= f.text_field :lcc_blgu_direct_cost, class: "monetary_field"
+          td.lcc.sic= f.text_field :lcc_blgu_indirect_cost, class: "monetary_field"
+          td.lcc.scc= f.text_field :lcc_blgu_contingency_cost, class: "monetary_field"
           td#total_lcc.gray
           td#percent_lcc.gray
         tr#community
           td Community
-          td.community.sdc= f.text_field :community_direct_cost
-          td.community.sic= f.text_field :community_indirect_cost
-          td.community.scc= f.text_field :community_contingency_cost
+          td.community.sdc= f.text_field :community_direct_cost, class: "monetary_field"
+          td.community.sic= f.text_field :community_indirect_cost, class: "monetary_field"
+          td.community.scc= f.text_field :community_contingency_cost, class: "monetary_field"
           td#total_community.gray
           td#percent_community.gray
         tr#mlgu
           td MLGU
-          td.mlgu.sdc= f.text_field :mlgu_direct_cost
-          td.mlgu.sic= f.text_field :mlgu_indirect_cost
-          td.mlgu.scc= f.text_field :mlgu_contingency_cost
+          td.mlgu.sdc= f.text_field :mlgu_direct_cost, class: "monetary_field"
+          td.mlgu.sic= f.text_field :mlgu_indirect_cost, class: "monetary_field"
+          td.mlgu.scc= f.text_field :mlgu_contingency_cost, class: "monetary_field"
           td#total_mlgu.gray
           td#percent_mlgu.gray
         tr#plgu-others
           td PLGU/Others
-          td.plgu.sdc= f.text_field :plgu_others_direct_cost
-          td.plgu.sic= f.text_field :plgu_others_indirect_cost
-          td.plgu.scc= f.text_field :plgu_others_contingency_cost
+          td.plgu.sdc= f.text_field :plgu_others_direct_cost, class: "monetary_field"
+          td.plgu.sic= f.text_field :plgu_others_indirect_cost, class: "monetary_field"
+          td.plgu.scc= f.text_field :plgu_others_contingency_cost, class: "monetary_field"
           td#total_plgu.gray
           td#percent_plgu.gray
         tr#subtotal.gray
@@ -57,16 +57,16 @@
           td#subtotal_total_percent
         tr
           td Total LCC Cash
-          td.total_lcc_cash= f.text_field :total_lcc_cash_direct_cost
-          td.total_lcc_cash= f.text_field :total_lcc_cash_indirect_cost
-          td.total_lcc_cash= f.text_field :total_lcc_cash_contingency_cost
+          td.total_lcc_cash= f.text_field :total_lcc_cash_direct_cost, class: "monetary_field"
+          td.total_lcc_cash= f.text_field :total_lcc_cash_indirect_cost, class: "monetary_field"
+          td.total_lcc_cash= f.text_field :total_lcc_cash_contingency_cost, class: "monetary_field"
           td#total_lcc_cash.gray
           td#percent_lcc_percent.gray
         tr
           td Total LCC in Kind
-          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_direct_cost
-          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_indirect_cost
-          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_contingency_cost
+          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_direct_cost, class: "monetary_field"
+          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_indirect_cost, class: "monetary_field"
+          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_contingency_cost, class: "monetary_field"
           td#total_lcc_in_kind.gray
           td#percent_lcc_in_kind.gray
         tr#total.gray

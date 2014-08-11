@@ -19,6 +19,7 @@
 //= require jquery.validationEngine.js
 //= require jquery.validationEngine-en.js
 //= require bootstrap.min.js
+//= require number_format.js
 //= require_tree .
 
 $( document ).ready(function() {
@@ -26,9 +27,12 @@ $( document ).ready(function() {
 
   $('.close').click(function(){
     $(this).parent().remove()
-  })
+  });
 
+  $(".monetary_field").number(true, 2);
 });
+
+
 
   function parseNaN(num) {
     a = $(num).children().first().val();
@@ -65,9 +69,14 @@ $( document ).ready(function() {
     subproject_second_tranch_amount = (parseFloat($('#subproject_second_tranch_amount').val()))
     subproject_third_tranch_amount = (parseFloat($('#subproject_third_tranch_amount').val()))
     
-    $('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100 ).toFixed(2))
-    $('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2))
-    $('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2))
+
+    (isNaN($('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100 ).toFixed(2));
+    (isNaN($('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2));
+    (isNaN($('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2));
+    // original value
+    // $('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100).toFixed(2))
+    // $('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2))
+    // $('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2))
   }
 
   function compute_tranch(){
@@ -179,24 +188,24 @@ $( document ).ready(function() {
     percent_total_lcc_cash_val = (total_lcc_cash_val / total_total) * 100
     percent_total_lcc_in_kind = (total_lcc_in_kind / total_total) * 100
 
-    $('#total_grant').html(total_grant.toFixed(2));
-    $('#total_plgu').html(total_plgu.toFixed(2));
-    $('#total_mlgu').html(total_mlgu.toFixed(2));
-    $('#total_community').html(total_community.toFixed(2));
-    $('#total_lcc').html(total_lcc.toFixed(2));
+    $('#total_grant').html(total_grant.toFixed(2)).number(true, 2);
+    $('#total_plgu').html(total_plgu.toFixed(2)).number(true, 2);
+    $('#total_mlgu').html(total_mlgu.toFixed(2)).number(true, 2);
+    $('#total_community').html(total_community.toFixed(2)).number(true, 2);
+    $('#total_lcc').html(total_lcc.toFixed(2)).number(true, 2);
     
-    $('#subtotal_direct').html(subtotal_direct.toFixed(2));
-    $('#subtotal_indirect').html(subtotal_indirect.toFixed(2));
-    $('#subtotal_contingency').html(subtotal_contingency.toFixed(2));
-    $('#subtotal_total').html(subtotal_total.toFixed(2));
+    $('#subtotal_direct').html(subtotal_direct.toFixed(2)).number(true, 2);
+    $('#subtotal_indirect').html(subtotal_indirect.toFixed(2)).number(true, 2);
+    $('#subtotal_contingency').html(subtotal_contingency.toFixed(2)).number(true, 2);
+    $('#subtotal_total').html(subtotal_total.toFixed(2)).number(true, 2);
 
-    $('#total_lcc_cash').html(total_lcc_cash_val.toFixed(2))
-    $('#total_lcc_in_kind').html(total_lcc_in_kind.toFixed(2));
+    $('#total_lcc_cash').html(total_lcc_cash_val.toFixed(2)).number(true, 2)
+    $('#total_lcc_in_kind').html(total_lcc_in_kind.toFixed(2)).number(true, 2);
 
-    $('#total_direct').html(total_direct.toFixed(2));
-    $('#total_indirect').html(total_indirect.toFixed(2));
-    $('#total_contingency').html(total_contingency.toFixed(2));
-    $('#total_total').html(total_total.toFixed(2))
+    $('#total_direct').html(total_direct.toFixed(2)).number(true, 2);
+    $('#total_indirect').html(total_indirect.toFixed(2)).number(true, 2);
+    $('#total_contingency').html(total_contingency.toFixed(2)).number(true, 2);
+    $('#total_total').html(total_total.toFixed(2)).number(true, 2)
     $('#subtotal_total_percent').html('100.00%')
     if (total_total != ""){
         $('#percent_grant').html(percent_total_grant.toFixed(2) + "%");
