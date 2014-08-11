@@ -2,7 +2,7 @@
 .row
   br
   .page-details-main-buttons
-    = link_to "Print to PDF".html_safe, request_for_fund_pdf_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
+    = link_to "Print to PDF".html_safe, request_for_fund_pdf_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:id], :tranch => @rfrs.tranch_for, :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
   .col-md-12
     = render 'general_information_show'
     = render 'bank_account_information_show'

@@ -81,49 +81,49 @@
       .col-md-6
         =f.text_field :rev_date_second, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.rev_date_second.present? ? @rfrs.rev_date_second.strftime("%d-%b-%Y") : ''
               
-/ .row.sp-table
-/   .col-md-12
-/     h5 Sub-Region Project Management Office (SRPMO):
-/ .row.sp-show
-/   .col-md-12
-/     .form-group
-/       .col-md-2.bold.text-right
-/         'Date Received:
-/       .col-md-3
-/         =f.text_field :srpmo_date_received, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_date_received.present? ? @rfrs.srpmo_date_received.strftime("%d-%b-%Y") : ''
-/         =f.hidden_field :subproject_id, value: params[:sp_id] 
-/   .col-md-6.parent
-/     .form-group
-/       .col-md-4.bold
-/         'Reviewed By:
-/       .col-md-6
-/         =f.select :srpmo_reviewed_by, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
-/     .form-group
-/       .col-md-4.bold
-/         'Designation:
-/       .col-md-6
-/         =f.text_field :srpmo_designation, readonly: true
-/     .form-group
-/       .col-md-4.bold
-/         'Date:
-/       .col-md-6
-/         =f.text_field :srpmo_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_date.present? ? @rfrs.srpmo_date.strftime("%d-%b-%Y") : ''
-/   .col-md-6.parent
-/     .form-group
-/       .col-md-5.bold
-/         'Recommended By:
-/       .col-md-6
-/         =f.select :srpmo_recommend_by, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
-/     .form-group
-/       .col-md-5.bold
-/         'Designation:
-/       .col-md-6
-/         =f.text_field :srpmo_rec_designation, readonly: true
-/     .form-group
-/       .col-md-5.bold
-/         'Date:
-/       .col-md-6
-/         =f.text_field :srpmo_rec_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_rec_date.present? ? @rfrs.srpmo_rec_date.strftime("%d-%b-%Y") : ''
+/.row.sp-table
+  /.col-md-12
+    /h5 Sub-Region Project Management Office (SRPMO):
+/.row.sp-show
+  /.col-md-12
+    /.form-group
+      /.col-md-2.bold.text-right
+        /'Date Received:
+      /.col-md-3
+        /=f.text_field :srpmo_date_received, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_date_received.present? ? @rfrs.srpmo_date_received.strftime("%d-%b-%Y") : ''
+        /=f.hidden_field :subproject_id, value: params[:sp_id] 
+  /.col-md-6.parent
+    /.form-group
+      /.col-md-4.bold
+        /'Reviewed By:
+      /.col-md-6
+        /=f.select :srpmo_reviewed_by, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
+    /.form-group
+      /.col-md-4.bold
+        /'Designation:
+      /.col-md-6
+        /=f.text_field :srpmo_designation, readonly: true
+    /.form-group
+      /.col-md-4.bold
+        /'Date:
+      /.col-md-6
+        /=f.text_field :srpmo_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_date.present? ? @rfrs.srpmo_date.strftime("%d-%b-%Y") : ''
+  /.col-md-6.parent
+    /.form-group
+      /.col-md-5.bold
+        /'Recommended By:
+      /.col-md-6
+        /=f.select :srpmo_recommend_by, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
+    /.form-group
+      /.col-md-5.bold
+        /'Designation:
+      /.col-md-6
+        /=f.text_field :srpmo_rec_designation, readonly: true
+    /.form-group
+      /.col-md-5.bold
+        /'Date:
+      /.col-md-6
+        /=f.text_field :srpmo_rec_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_rec_date.present? ? @rfrs.srpmo_rec_date.strftime("%d-%b-%Y") : ''
 
 .row.sp-table
   .col-md-12
@@ -152,7 +152,39 @@
         'Date:
       .col-md-3
         =f.text_field :rpmo_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.rpmo_date.present? ? @rfrs.rpmo_date.strftime("%d-%b-%Y") : ''
-      
+        
+  .col-md-6.parent
+    .form-group
+      .col-md-4.bold
+        'Reviewed By:
+      .col-md-6
+        =f.select :srpmo_reviewed_by, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
+    .form-group
+      .col-md-4.bold
+        'Designation:
+      .col-md-6
+        =f.text_field :srpmo_designation, readonly: true
+    .form-group
+      .col-md-4.bold
+        'Date:
+      .col-md-6
+        =f.text_field :srpmo_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_date.present? ? @rfrs.srpmo_date.strftime("%d-%b-%Y") : ''
+  .col-md-6.parent
+    .form-group
+      .col-md-5.bold
+        'Recommended By:
+      .col-md-6
+        =f.select :srpmo_recommend_by, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
+    .form-group
+      .col-md-5.bold
+        'Designation:
+      .col-md-6
+        =f.text_field :srpmo_rec_designation, readonly: true
+    .form-group
+      .col-md-5.bold
+        'Date:
+      .col-md-6
+        =f.text_field :srpmo_rec_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_rec_date.present? ? @rfrs.srpmo_rec_date.strftime("%d-%b-%Y") : ''   
 css:
   .sp-show{
     padding-right: 0px;

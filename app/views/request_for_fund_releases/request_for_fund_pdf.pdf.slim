@@ -5,13 +5,13 @@
 - total_lcc_cash = @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_cash_contingency_cost
 - total_lcc_kind = @subproject.total_lcc_in_kind_direct_cost + @subproject.total_lcc_in_kind_indirect_cost +  @subproject.total_lcc_in_kind_contingency_cost
 - @total_grant_less_con = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
-- if params[:tranch] == 'first'
+- if params[:tranch] == '1'
   - @amount_requested = @subproject.first_tranch_amount
   - @previous_released = 0
   - @cumulative_amount = @subproject.first_tranch_amount
   - @tranch = 1
   - @contingency = @subproject.grant_amount_contingency_cost
-- elsif params[:tranch] == 'second'
+- elsif params[:tranch] == '2'
   - @amount_requested = @subproject.second_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
@@ -31,15 +31,26 @@
 
 p.bold.text-center REQUEST FOR FUND RELEASE
 br
-
+- if params[:tranch] == '1' 
+  - @value = true 
+- else
+  - @value = false
+- if params[:tranch] == '2' 
+  - @value2 = true 
+- else
+  - @value2 = false
+- if params[:tranch] == '3' 
+  - @value3 = true 
+- else
+  - @value3 = false
 form.form-horizontal.sm_font
-  = check_box_tag :a, disabled: true
+  = check_box_tag :a, 1, @value
   |&nbsp; Initial Tranche &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  = check_box_tag :b, disabled: true
+  = check_box_tag :b, 1, @value2
   |&nbsp; Second Tranche &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  = check_box_tag :c, disabled: true
+  = check_box_tag :c, 1, @value3
   |&nbsp; Third Tranche &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  = check_box_tag :d, disabled: true
+  = check_box_tag :d, 1, false
   |&nbsp; Others, Specify: Technical Assistance Fund (TAF) 
 br
 table.table.table-responsive border=1 width=500 

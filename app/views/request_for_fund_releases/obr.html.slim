@@ -64,11 +64,18 @@ hr
         td.text-center width='8%' 
         td.text-center width='10%'
           .col-md-12
-            p #{number_to_currency @subproject.second_tranch_amount_release}
+            - if @rfrs.tranch_for == 1 
+              - @amount_requested = @subproject.first_tranch_amount
+            - elsif @rfrs.tranch_for == 2
+              - @amount_requested = @subproject.second_tranch_amount
+            - else
+              - @amount_requested = @subproject.third_tranch_amount
+            
+            p #{number_to_currency @amount_requested }
       tr
         td.text-right colspan=4 Total
         td.text-center
-          = number_to_currency @subproject.second_tranch_amount_release
+          = number_to_currency @amount_requested
     table.table.table-bordered
       form.form-horizontal
         tr
