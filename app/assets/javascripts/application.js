@@ -20,6 +20,7 @@
 //= require jquery.validationEngine-en.js
 //= require bootstrap.min.js
 //= require number_format.js
+//= require subprojects.js
 //= require_tree .
 
 $( document ).ready(function() {
