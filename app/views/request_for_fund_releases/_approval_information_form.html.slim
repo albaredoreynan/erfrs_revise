@@ -4,7 +4,10 @@
     hr
   br
 / Take note the format must not be change
+  
 .row.sp-show
+  .col-md-12
+    h5 Barangay Office:
   .col-md-6.parent
     .form-group
       .col-md-4.bold
@@ -39,8 +42,8 @@
         =f.text_field :date_second, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.date_second.present? ? @rfrs.date_second.strftime("%d-%b-%Y") : ''
 
     
-  .col-md-12 
-    hr
+  .col-md-12
+    h5 Municipality Office:
     .form-group
       .col-md-2.bold.text-right
         'Date Received:
