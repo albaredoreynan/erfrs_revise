@@ -64,7 +64,7 @@ $( document ).ready(function() {
     var subproject_two_tranch_amount = 0.0
     var subproject_three_tranch_amount = 0.0
     // 
-    total_grant = parseFloat($('#subproject_grant_amount_direct_cost').val()) + parseFloat($('#subproject_grant_amount_indirect_cost').val()); + parseFloat($('#subproject_grant_amount_contingency_cost').val());
+    total_grant = parseFloat($('#subproject_grant_amount_direct_cost').val()) + parseFloat($('#subproject_grant_amount_indirect_cost').val()) + parseFloat($('#subproject_grant_amount_contingency_cost').val());
     
     subproject_first_tranch_amount = (parseFloat($('#subproject_first_tranch_amount').val()))
     subproject_second_tranch_amount = (parseFloat($('#subproject_second_tranch_amount').val()))
@@ -87,12 +87,12 @@ $( document ).ready(function() {
     var subproject_three_tranch_amount = 0.0
 
 
-    total_grant = parseFloat($('#subproject_grant_amount_direct_cost').val()) + parseFloat($('#subproject_grant_amount_indirect_cost').val());
+    total_grant = parseFloat($('#subproject_grant_amount_direct_cost').val()) + parseFloat($('#subproject_grant_amount_indirect_cost').val()) + parseFloat($('#subproject_grant_amount_contingency_cost').val());
 
     subproject_first_tranch_amount = (parseFloat($('#tranch_one_percentage').val()))/Math.pow(10, 2);
     subproject_two_tranch_amount = (parseFloat($('#tranch_two_percentage').val()))/Math.pow(10, 2);
     subproject_three_tranch_amount = (parseFloat($('#tranch_three_percentage').val()))/Math.pow(10, 2);
-
+    
     $('#subproject_first_tranch_amount').val((parseTranch(total_grant * subproject_first_tranch_amount)).toFixed(2));
     $('#subproject_second_tranch_amount').val((parseTranch(total_grant * subproject_two_tranch_amount)).toFixed(2));
     $('#subproject_third_tranch_amount').val((parseTranch(total_grant * subproject_three_tranch_amount)).toFixed(2));
@@ -173,10 +173,20 @@ $( document ).ready(function() {
     });
 
     subtotal_total = subtotal_direct + subtotal_indirect + subtotal_contingency;
+    
+    total_lcc_cash_direct_cost = $('#subproject_total_lcc_cash_direct_cost').val(parseFloat($('#subproject_lcc_blgu_direct_cost').val()) + parseFloat($('#subproject_mlgu_direct_cost').val()));
+    total_lcc_cash_indirect_cost = $('#subproject_total_lcc_cash_indirect_cost').val(parseFloat($('#subproject_lcc_blgu_indirect_cost').val()) + parseFloat($('#subproject_mlgu_indirect_cost').val()));
+    total_lcc_cash_contingency_cost = $('#subproject_total_lcc_cash_contingency_cost').val(parseFloat($('#subproject_lcc_blgu_contingency_cost').val()) + parseFloat($('#subproject_mlgu_contingency_cost').val()));
+    
+    total_lcc_in_kind_direct_cost = $('#subproject_total_lcc_in_kind_direct_cost').val(parseFloat($('#subproject_community_direct_cost').val()) + parseFloat($('#subproject_plgu_others_direct_cost').val()));
+    total_lcc_in_kind_indirect_cost = $('#subproject_total_lcc_in_kind_indirect_cost').val(parseFloat($('#subproject_community_indirect_cost').val()) + parseFloat($('#subproject_plgu_others_indirect_cost').val()));
+    total_lcc_in_kind_contingency_cost = $('#subproject_total_lcc_in_kind_contingency_cost').val(parseFloat($('#subproject_community_contingency_cost').val()) + parseFloat($('#subproject_plgu_others_contingency_cost').val()));
+    
 
     total_direct = parseFloat($('#subproject_total_lcc_cash_direct_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_direct_cost').val());
     total_indirect = parseFloat($('#subproject_total_lcc_cash_indirect_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_indirect_cost').val());
     total_contingency = parseFloat($('#subproject_total_lcc_cash_contingency_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_contingency_cost').val());
+    
     total_total =  total_direct + total_indirect + total_contingency 
 
 
