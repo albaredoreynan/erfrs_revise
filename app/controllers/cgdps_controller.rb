@@ -4,7 +4,18 @@ class CgdpsController < ApplicationController
   %w[region province municipality].each{ |e| has_scope "subproject_#{e}_id".intern }
 
   def index
-    @subprojects = apply_scopes(Subproject).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
+    usercode = current_user.role.code
+    if usercode == 20
+      subpro = Subproject.where(region_id: current_user.region_id)
+    elsif usercode == 40
+      subpro = Subproject.where(municipality_id: current_user.municipality_id)    
+    elsif usercode == 50
+      subpro = Subproject.where(barangay_id: current_user.barangay_id)
+    else
+      subpro = Subproject.all
+    end
+    
+    @subprojects = apply_scopes(subpro).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
     @cgdp = Cgdp.where('municipality_id =?', params[:id]).last
   end
 

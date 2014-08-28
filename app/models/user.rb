@@ -15,7 +15,4 @@ class User < ActiveRecord::Base
       type == role.name
     end
   end
-  
-  
-
 end

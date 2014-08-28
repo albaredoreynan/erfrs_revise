@@ -11,7 +11,18 @@ class SubprojectsController < ApplicationController
   end
 
   def index
-    @subprojects = apply_scopes(Subproject).includes(
+    usercode = current_user.role.code
+    if usercode == 20
+      subpro = Subproject.where(region_id: current_user.region_id)
+    elsif usercode == 40
+      subpro = Subproject.where(municipality_id: current_user.municipality_id)    
+    elsif usercode == 50
+      subpro = Subproject.where(barangay_id: current_user.barangay_id)
+    else
+      subpro = Subproject.all
+    end
+
+    @subprojects = apply_scopes(subpro).includes(
       :region, :province, :municipality, :barangay).order(created_at: :asc)
                                                    .sort!{ |a,b| a.barangay.name.downcase <=>  b.barangay.name.downcase }
                                                    .sort!{ |a,b| a.municipality.name.downcase <=>  b.municipality.name.downcase }

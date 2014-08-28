@@ -9,7 +9,23 @@ class RequestForFundReleasesController < ApplicationController
   respond_to :js, only: :new
 
   def index
-    @rfrs = apply_scopes(RequestForFundRelease).includes(subproject:[:region, :province, :municipality, :barangay])
+    usercode = current_user.role.code
+    if usercode == 20
+      rfrs = Subproject.where(region_id: current_user.region_id)
+      subproject_id = rfrs.pluck(:id)
+    elsif usercode == 40
+      rfrs = Subproject.where(municipality_id: current_user.municipality_id)    
+      subproject_id = rfrs.pluck(:id)
+    elsif usercode == 50
+      rfrs = Subproject.where(barangay_id: current_user.barangay_id)
+      subproject_id = rfrs.pluck(:id)
+    else
+      rfrs = Subproject.all
+      subproject_id = rfrs.pluck(:id)
+    end
+    
+    rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id) 
+    @rfrs = apply_scopes(rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay])
     #@rfrs = RequestForFundRelease.all
   end
 
