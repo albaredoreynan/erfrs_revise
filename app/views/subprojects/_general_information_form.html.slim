@@ -26,6 +26,7 @@ br
             = f.label :region_id
           .col-md-8
             = f.select :region_id, Region.values_for_select, { include_blank: true }, { :class => 'form-control  '}
+            / = f.select :region_id, current_user.region_id.present? ? Region.values_for_select, { include_blank: true }, { :class => 'form-control  '}
         .form-group
           .col-md-4
             = f.label :province_id

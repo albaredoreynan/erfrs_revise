@@ -88,6 +88,34 @@ class SubprojectsController < ApplicationController
 
   def update
     @subproject = Subproject.find params[:id]
+    params[:subproject][:grant_amount_direct_cost] = subproject_params[:grant_amount_direct_cost].gsub(/,/, '').to_f
+    params[:subproject][:grant_amount_indirect_cost] = subproject_params[:grant_amount_indirect_cost].gsub(/,/, '').to_f
+    params[:subproject][:grant_amount_contingency_cost] = subproject_params[:grant_amount_contingency_cost].gsub(/,/, '').to_f
+    params[:subproject][:lcc_blgu_direct_cost] = subproject_params[:lcc_blgu_direct_cost].gsub(/,/, '').to_f
+    params[:subproject][:lcc_blgu_indirect_cost] = subproject_params[:lcc_blgu_indirect_cost].gsub(/,/, '').to_f
+    params[:subproject][:lcc_blgu_contingency_cost] = subproject_params[:lcc_blgu_contingency_cost].gsub(/,/, '').to_f
+    params[:subproject][:community_direct_cost] = subproject_params[:community_direct_cost].gsub(/,/, '').to_f
+    params[:subproject][:community_indirect_cost] = subproject_params[:community_indirect_cost].gsub(/,/, '').to_f
+    params[:subproject][:community_contingency_cost] = subproject_params[:community_contingency_cost].gsub(/,/, '').to_f
+    params[:subproject][:mlgu_direct_cost] = subproject_params[:mlgu_direct_cost].gsub(/,/, '').to_f
+    params[:subproject][:mlgu_indirect_cost] = subproject_params[:mlgu_indirect_cost].gsub(/,/, '').to_f
+    params[:subproject][:mlgu_contingency_cost] = subproject_params[:mlgu_contingency_cost].gsub(/,/, '').to_f
+    params[:subproject][:plgu_others_direct_cost] = subproject_params[:plgu_others_direct_cost].gsub(/,/, '').to_f
+    params[:subproject][:plgu_others_indirect_cost] = subproject_params[:plgu_others_indirect_cost].gsub(/,/, '').to_f
+    params[:subproject][:plgu_others_contingency_cost] = subproject_params[:plgu_others_contingency_cost].gsub(/,/, '').to_f
+    params[:subproject][:total_lcc_cash_direct_cost] = subproject_params[:total_lcc_cash_direct_cost].gsub(/,/, '').to_f
+    params[:subproject][:total_lcc_cash_indirect_cost] = subproject_params[:total_lcc_cash_indirect_cost].gsub(/,/, '').to_f
+    params[:subproject][:total_lcc_cash_contingency_cost] = subproject_params[:total_lcc_cash_contingency_cost].gsub(/,/, '').to_f
+    params[:subproject][:total_lcc_in_kind_direct_cost] = subproject_params[:total_lcc_in_kind_direct_cost].gsub(/,/, '').to_f
+    params[:subproject][:total_lcc_in_kind_indirect_cost] = subproject_params[:total_lcc_in_kind_indirect_cost].gsub(/,/, '').to_f
+    params[:subproject][:total_lcc_in_kind_contingency_cost] = subproject_params[:total_lcc_in_kind_contingency_cost].gsub(/,/, '').to_f
+    params[:subproject][:first_tranch_amount] = subproject_params[:first_tranch_amount].gsub(/,/, '').to_f
+    params[:subproject][:second_tranch_amount] = subproject_params[:second_tranch_amount].gsub(/,/, '').to_f
+    params[:subproject][:third_tranch_amount] = subproject_params[:third_tranch_amount].gsub(/,/, '').to_f
+    params[:subproject][:first_tranch_revised_amount] = subproject_params[:first_tranch_revised_amount].gsub(/,/, '').to_f
+    params[:subproject][:second_tranch_revised_amount] = subproject_params[:second_tranch_revised_amount].gsub(/,/, '').to_f
+    params[:subproject][:third_tranch_revised_amount] = subproject_params[:third_tranch_revised_amount].gsub(/,/, '').to_f
+    
     if @subproject.update_attributes subproject_params
       flash[:success] = 'Sub-Project updated successfully.'
       redirect_to edit_subproject_path(@subproject)
