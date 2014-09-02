@@ -34,7 +34,7 @@
   .col-md-4.signin-form
     .form-group
         = f.label :region_id
-        = f.select :region_id, Region.values_for_select, { include_blank: true }, { id:"subproject_region_id", :class => 'form-controle'}
+        = f.select :region_id, Region.values_for_select, { include_blank: true }, { id:"subproject_region_id", :class => 'form-control'}
     .form-group
         = f.label :province_id
         = f.select :province_id, [], { disabled: 'disabled' }, { id:"subproject_province_id", :class => 'form-control'}
@@ -44,6 +44,7 @@
     .form-group
         = f.label :barangay_id
         = f.select :barangay_id, [], { disabled: 'disabled' }, {id:"subproject_barangay_id", :class => 'form-control'}
+        = hidden_field_tag :signup_field, value: false
     div
       = f.submit "Save", class: 'pull-right btn btn-primary btn'
 css:
