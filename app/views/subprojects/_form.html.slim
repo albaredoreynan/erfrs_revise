@@ -25,15 +25,15 @@
           = link_to 'Cancel', subprojects_path, class: 'btn btn-primary'
   - else
     .col-sm-12.title-header
-      .col-sm-6.pull-left
+      .col-sm-6.pull-left.col-xs-12
         h3 Create Sub-Project
-      .col-sm-6
+      .col-sm-6.col-xs-12
         .page-details-main-buttons
           = f.submit 'Save', class: 'btn btn-primary'
           '&nbsp;
           = link_to 'Cancel', subprojects_path, class: 'btn btn-primary'
 
-  hr
+  hr.hidden-xs
   br
   br
   br

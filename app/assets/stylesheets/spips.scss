@@ -50,3 +50,14 @@
   }
 
 }
+@media(max-width:992px){
+  .sp-show{
+    padding-left: 60px;
+  }
+  .form-group > .col-md-5{
+    text-align: left !important;
+  }
+  .sp-show > .col-md-2, .form-group > .col-md-4 {
+    text-align: left !important;
+  }
+}
