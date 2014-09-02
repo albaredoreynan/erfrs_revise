@@ -4,4 +4,5 @@ $(function() {
 	  	alert("The date of First tranche is not later than the date of MIBF specified above");
 		}	
 	});
+	$(".monetary_field").focus(function(){ if ( $(this).val() == 0 ) {  $(this).val(''); }  });
 });
