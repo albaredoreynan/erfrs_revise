@@ -30,7 +30,7 @@ class Subproject < ActiveRecord::Base
             :title, :cycle, :date_encoded,
             presence: true
   validates :date_of_mibf, presence: {message: "Date of MIBF can't be blank"}
-
+  validate :tranch_must_not_overflow
   # validates :grant_amount_direct_cost, :grant_amount_indirect_cost, :grant_amount_contingency_cost,
   #           :lcc_blgu_direct_cost, :lcc_blgu_indirect_cost, :lcc_blgu_contingency_cost, :community_direct_cost,
   #           :community_indirect_cost, :community_contingency_cost, :mlgu_direct_cost, :mlgu_indirect_cost, :mlgu_contingency_cost,
@@ -120,7 +120,7 @@ class Subproject < ActiveRecord::Base
   end
 
   def tranch_must_not_overflow
-    grant = self.grant_amount_direct_cost.to_f + self.grant_amount_indirect_cost.to_f
+    grant = self.grant_amount_direct_cost.to_f + self.grant_amount_indirect_cost.to_f + self.grant_amount_contingency_cost
     tranch = self.first_tranch_amount.to_f + self.second_tranch_amount.to_f + self.third_tranch_amount.to_f
     if grant < tranch
       errors.add(:percent, "Total of Tranches should not exceed 100%")
