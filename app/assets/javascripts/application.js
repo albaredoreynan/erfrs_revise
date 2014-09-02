@@ -22,6 +22,7 @@
 //= require number_format.js
 //= require subprojects.js
 //= require_tree .
+//= require_self
 
 $( document ).ready(function() {
   $('form').validationEngine();
