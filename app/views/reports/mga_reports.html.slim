@@ -28,14 +28,22 @@ hr
             th.text-center Total  
         tbody
           -@subprojects.each do |m, sps|
+            / - allocation = 0
+            / - release = 0
+            / - excess = 0
+
+            / - allocation += m.muni_fund_allocations.where(year: DateTime.now.year).last.try(:amount).to_i
+            / - release += sps.map{|c|c.first_tranch_amount_release + c.second_tranch_amount_release + c.third_tranch_amount_release}.first
+            / - excess += allocation - release
+            / - total_m = release + excess
+
             - allocation = 0
             - release = 0
             - excess = 0
-
-            - allocation += m.muni_fund_allocations.where(year: DateTime.now.year).last.try(:amount).to_i
-            - release += sps.map{|c|c.first_tranch_amount_release + c.second_tranch_amount_release + c.third_tranch_amount_release}.first
-            - excess += allocation - release
-            - total_m = release + excess
+            - allocation += sps.map{|c|c.grant_amount_direct_cost + c.grant_amount_indirect_cost + c.grant_amount_contingency_cost}.first
+            - release += sps.map{|c|c.first_tranch_revised_amount + c.second_tranch_revised_amount + c.third_tranch_revised_amount}.first
+            - excess += sps.map{|c|c.first_tranch_amount + c.second_tranch_amount + c.third_tranch_amount}.first 
+            - total_m = release + excess 
             tr
               td = m.province.region.code
               td = m.province.name
@@ -44,4 +52,4 @@ hr
               td = number_to_currency release
               td = number_to_currency excess
               td = number_to_currency total_m
-              td = number_to_currency allocation - total_m
+              td = number_to_currency (allocation - total_m)
