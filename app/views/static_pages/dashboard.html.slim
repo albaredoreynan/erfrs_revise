@@ -2,7 +2,7 @@
   .col-md-9
     h4 News and Information
     hr
-      - NewsInformation.where("publish_end >= ? and publish_start <= ?", Date.today, Date.today ).each do |news|
+      - NewsInformation.where("publish_end >= ? and publish_start <= ?", Date.today, Date.today ).order("created_at DESC").each do |news|
         .well.well-sm
           h5
             = link_to news.title, news_information_path(news)
