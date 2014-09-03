@@ -11,8 +11,10 @@ hr
       br 
       b Department of Social Welfare and Development
       br
-      |
-      b Batasan Pambansa Complex, Constitution Hills, Quezon City
+      b
+        = @subproject.region.try(:address_region)
+      / b Batasan Pambansa Complex, Constitution Hills, Quezon City
+
 .panel.panel-primary
   
   .table-responsive

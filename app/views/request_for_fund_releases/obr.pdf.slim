@@ -3,7 +3,8 @@
 .row
   p.text-center Republic of the Philippines
   p.text-center Department of Social Welfare and Development
-  p.text-center Batasan Pambansa Complex, Constitution Hills, Quezon City
+  p.text-center
+    = @subproject.region.try(:address_region)
 br
 table.table.table-responsive border=1 width=500
   tr 

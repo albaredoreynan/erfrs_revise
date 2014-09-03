@@ -19,6 +19,6 @@ br
             td= fund_source.code
             td= fund_source.name
             td
-              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, fund_source], class: 'btn btn-xs btn-warning'
+              = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, fund_source], class: 'btn btn-xs btn-warning', title: "Edit"
               '&nbsp
-              = link_to "<i class='fa fa-trash-o'></i>".html_safe, fund_source, method: :delete, 'data-confirm' => 'Are you sure you want to delete this fund source?', class: 'btn btn-xs btn-danger'
+              = link_to "<i class='fa fa-trash-o'></i>".html_safe, fund_source, method: :delete, 'data-confirm' => 'Are you sure you want to delete this fund source?', class: 'btn btn-xs btn-danger', title: "Delete"

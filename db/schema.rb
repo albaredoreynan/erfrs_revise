@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710052848) do
+ActiveRecord::Schema.define(version: 20140903150032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "approval_informations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "barangays", force: true do |t|
     t.integer  "municipality_id"
@@ -54,6 +59,11 @@ ActiveRecord::Schema.define(version: 20140710052848) do
     t.integer  "year"
   end
 
+  create_table "fund_informations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fund_sources", force: true do |t|
     t.string   "code"
     t.string   "name"
@@ -83,6 +93,8 @@ ActiveRecord::Schema.define(version: 20140710052848) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+    t.decimal  "grant_allocation", precision: 15, scale: 2, default: 0.0, null: false
+    t.integer  "year"
   end
 
   add_index "municipalities", ["group_id"], name: "index_municipalities_on_group_id", using: :btree
@@ -129,6 +141,8 @@ ActiveRecord::Schema.define(version: 20140710052848) do
     t.string   "for_asst_regional_director_opt"
     t.string   "for_asst_regional_director_adm"
     t.string   "for_budget_officer"
+    t.integer  "equi_code"
+    t.text     "address_region"
   end
 
   create_table "request_for_fund_releases", force: true do |t|

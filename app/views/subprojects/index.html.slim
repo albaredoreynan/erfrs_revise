@@ -36,6 +36,11 @@ br
                   = label_tag :with_status, 'Status'
                 .col-md-6
                   = select_tag :with_status, options_for_select(Subproject::STATUSES, selected: params[:with_status]), class: 'form-control', include_blank: true
+              .form-group
+                .col-md-3
+                  = label_tag :fund_source_id, 'Fund Source'
+                .col-md-6
+                  = select_tag :fund_source_id, options_for_select(FundSource.all.map{ |x| [x.name, x.id] }, selected: params[:fund_source_id]), class: 'form-control', include_blank: true    
             .col-md-6
               .form-group
                 .col-md-3
@@ -77,6 +82,7 @@ br
           th Municipality
           th Barangay
           th Title
+          th Fund Source
           th Status
           th.fix_action Action
       tbody
@@ -89,6 +95,7 @@ br
             td= sp.municipality.try(:name)
             td= sp.barangay.try(:name)
             td= sp.title
+            td= sp.fund_source.try(:code)
             td= sp.status
             td
               div.text-center style="width: 100px !important;"

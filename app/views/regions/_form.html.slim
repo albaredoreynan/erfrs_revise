@@ -1,17 +1,19 @@
 - @hide_nav = true
 
 = form_for @region, html: {class: "form-horizontal"} do |f|
-  .col-md-6
+  .col-md-4
     .form-group
-      = f.label :code, class: "col-sm-12 col-md-2 control-label"
-      .col-sm-10
-        = f.text_field :code, class: 'form-control'
-  .col-md-6
+      = f.label :code
+      = f.text_field :code, class: 'form-control'
+  .col-md-2    
+  .col-md-4
     .form-group
-      = f.label :name, class: "col-sm-12 col-md-2 control-label"
-      .col-sm-10
-        = f.text_field :name, class: 'form-control'
-    
+      = f.label :name
+      = f.text_field :name, class: 'form-control'
+  .col-md-10                     
+    .form-group
+      = f.label :address_region, "Regional Address (OBR/DV)"
+      = f.text_area :address_region, class: 'form-control', rows: 5, style:"resize: none;"
   / .col-md-6
   /   .form-group
   /     = f.label :for_regional_director, 'Regional Director', class: "col-sm-6 control-label"
@@ -45,7 +47,7 @@
   /       = f.text_field :for_budget_officer, class: 'form-control'
   .col-md-12
     .form-group
-      .col-md-12
+      .col-md-10
         = f.submit 'Save', class: 'pull-right btn btn-primary'
 css:
   .container{

@@ -80,7 +80,8 @@ class Subproject < ActiveRecord::Base
   }
   scope :with_id,     -> id { where id: id }
   scope :with_status, -> status { where status: status }
-  scope :fund_source, -> fs { where fund_source_id: fs}
+  scope :fund_source_id, -> fs { where fund_source_id: fs}
+
 
 
   # if ENV['ERFRS_USES_POSTGRESQL']

@@ -110,13 +110,13 @@ class ReportsController < ApplicationController
 
     def subproject_control_data
       if current_user.role_id == 3 or current_user.role_id == 4
-        @subproject_data = Subproject.where(region_id: current_user.region_id)
+        @subproject_data = Subproject.where(region_id: current_user.region_id).order("region_id ASC")
       elsif current_user.role_id == 5
-        @subproject_data = Subproject.where(municipality_id: current_user.municipality_id)    
+        @subproject_data = Subproject.where(municipality_id: current_user.municipality_id).order("region_id ASC")    
       elsif current_user.role_id == 6
-        @subproject_data = Subproject.where(barangay_id: current_user.barangay_id)
+        @subproject_data = Subproject.where(barangay_id: current_user.barangay_id).order("region_id ASC")
       else
-        @subproject_data = Subproject.all
+        @subproject_data = Subproject.all.order("region_id ASC")
       end
     end
 
