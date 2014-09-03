@@ -46,7 +46,7 @@
                 = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
                 - if params[:action] == "cg_reports"
                   = link_to "PDF", cg_reports_reports_path(params.merge(format: :pdf)) , class: "btn btn-success", style: "margin-left: 3px;"
-                  = link_to "XLS", cg_reports_reports_path(params.merge(format: :xls)) , class: "btn btn-success", style: "margin-left: 3px;"                
+                  = link_to "Excel", cg_reports_reports_path(params.merge(format: :xls)) , class: "btn btn-success", style: "margin-left: 3px;"                
                 - else # cash_program_reports
                   = link_to "PDF", cash_program_reports_reports_path(params.merge(format: :pdf)) , class: "btn btn-success", style: "margin-left: 3px;"
-                  = link_to "XLS", cash_program_reports_reports_path(params.merge(format: :xls)) , class: "btn btn-success", style: "margin-left: 3px;"
+                  = link_to "Excel", cash_program_reports_reports_path(params.merge(format: :xls)) , class: "btn btn-success", style: "margin-left: 3px;"
