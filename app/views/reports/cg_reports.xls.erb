@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ss:Styles>
+    <ss:Style ss:ID="1">
+        <ss:Font ss:Bold="1" />
+        <ss:Alignment ss:Horizontal="Center"/>
+    </ss:Style>
+    <ss:Style ss:ID="2">
+      <ss:Alignment ss:Horizontal="Center"/>
+    </ss:Style>
+  </ss:Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Column ss:Width="50"/>
+      <Column ss:Width="300"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+
+      <Row>
+        <Cell ss:MergeAcross="7" ss:StyleID="1"> 
+          <Data ss:Type="String"> DEPARTMENT OF SOCIAL WELFARE AND DEVELOPMENT </Data>
+        </Cell> 
+      </Row>
+      <Row>
+        <Cell ss:MergeAcross="7" ss:StyleID="1"> 
+          <Data ss:Type="String"> <B> STATUS OF COMMUNITY GRANTS </B> </Data> 
+        </Cell> 
+      </Row>
+      <Row> 
+        <Cell ss:MergeAcross="7" ss:StyleID="1"> 
+          <Data ss:Type="String"> </Data>
+        </Cell> 
+      </Row>
+      <Row>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Region </Data> </Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Province </Data> </Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Municipality </Data> </Cell>
+        <Cell ss:MergeAcross="2" ss:StyleID="2"> <Data ss:Type="String"> Approved </Data> </Cell>
+        <Cell ss:MergeAcross="2" ss:StyleID="2"> <Data ss:Type="String"> Released </Data> </Cell>
+        <Cell ss:MergeAcross="2" ss:StyleID="2"> <Data ss:Type="String"> Balance </Data> </Cell>
+      </Row>
+      <Row>
+        <Cell ss:Index="4"><Data ss:Type="String"> ADB </Data></Cell>
+        <Cell ss:Index="5"><Data ss:Type="String"> WB </Data></Cell>
+        <Cell ss:Index="6"><Data ss:Type="String"> Total </Data></Cell>
+        <Cell ss:Index="7"><Data ss:Type="String"> ADB </Data></Cell>
+        <Cell ss:Index="8"><Data ss:Type="String"> WB </Data></Cell>
+        <Cell ss:Index="9"><Data ss:Type="String"> Total </Data></Cell>
+        <Cell ss:Index="10"><Data ss:Type="String"> ADB </Data></Cell>
+        <Cell ss:Index="11"><Data ss:Type="String"> WB </Data></Cell>
+        <Cell ss:Index="12"><Data ss:Type="String"> Total </Data></Cell>
+      </Row>
+      <% @subprojects.each do |m, sps|%>
+        <% approve_adb = 0%>
+        <% approve_wb = 0%>
+        <% approve_total = 0%>
+        <% released_adb = 0%>
+        <% released_wb =0%>
+        <% released_total = 0%>
+        <% balance_adb = 0%>
+        <% balance_wb = 0%>
+        <% balance_total = 0%>
+        <% sps.each do |sp| %>
+          <% if sp.fund_source.present? %>
+            <% if sp.fund_source.code == 'ADB'%>
+              <% approve_adb += sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost%>
+              <% released_adb += sp.first_tranch_amount_release + sp.second_tranch_amount_release + sp.third_tranch_amount_release %>
+              <%balance_adb += approve_adb - released_adb %>
+            <% elsif sp.fund_source.code == 'WB'%>
+              <% approve_wb += sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost %>
+              <% released_wb += sp.first_tranch_amount_release + sp.second_tranch_amount_release + sp.third_tranch_amount_release %>
+              <% balance_wb += approve_adb - released_adb %>
+            <% else %>
+
+            <% end %>
+          <% end %>
+        <% end %>
+        <Row>
+         <Cell><Data ss:Type="String"><%= m.province.region %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= m.province.name %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= m.name %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency approve_adb %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency approve_wb %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency approve_adb + approve_wb %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency released_adb %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency released_wb %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency released_adb + released_wb %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency balance_adb %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency balance_wb %> </Data></Cell>
+         <Cell><Data ss:Type="String"><%= number_to_currency balance_adb + balance_wb %> </Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

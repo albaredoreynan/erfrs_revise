@@ -1,5 +1,5 @@
 - @hide_nav = true
-= form_for @subproject, html: { class: 'form-horizontal' } do |f|
+= form_for @subproject, html: { class: 'form-horizontal', id:"subproject_form" } do |f|
   - if @subproject.errors.any?
     .row.alert-msg
       .col-sm-12
@@ -62,5 +62,9 @@ javascript:
       if ($(this).val()=='0.0') $(this).val("")
       compute();
     });
+    
+  $("#subproject_form").submit(function(){
+    $('option').removeAttr('disabled')
+  });
 
 

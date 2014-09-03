@@ -35,18 +35,4 @@ class RequestForFundRelease < ActiveRecord::Base
   	obr_number.nil?
   end  
 
-  def self.report_condition(user)
-    if user.role_id == 1 
-
-    elsif user.role_id == 3 or user.role_id == 4
-      self.includes(:subproject).where("subprojects.region_id" => user.region_id)
-
-    elsif user.role_id == 5
-      self.includes(:subproject).where("subprojects.municipality_id" => user.municipality_id)
-    elsif user.role_id == 6
-      self.includes(:subproject).where("subprojects.barnagay_id" => user.barangay_id)   
-    else
-
-    end
-  end
 end
