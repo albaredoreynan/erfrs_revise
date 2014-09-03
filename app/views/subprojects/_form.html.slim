@@ -45,8 +45,8 @@
 
   .row
     .page-details-main-buttons
-      -#if @subproject.status != 'Final'
-      = f.submit 'Save', class: 'btn btn-primary'
+      - if @subproject.status != 'Final'
+        = f.submit 'Save', class: 'btn btn-primary'
       '&nbsp;
       = link_to 'Cancel', subprojects_path, class: 'btn btn-primary'
 javascript:
