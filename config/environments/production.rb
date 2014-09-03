@@ -35,15 +35,19 @@ Erfrs::Application.configure do
   #previous configuration of email receiver and forwarder
   config.action_mailer.default_url_options = { :host => 'dswd-erfrs.cloudapp.net' }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    :enable_starttls_auto => true,
-    :address              => "smtp.office365.com",
-    :port                 => '587',
-    :domain               => 'restobot.com',
-    :authentication       => :login,
-    :user_name            => 'restobot@appsource.biz',
-    :password             => 'Dama6778'
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "dswd-erfrs.cloudapp.net",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "dswderfrs@gmail.com",
+    password: "appsource1401"
   }
+
   
   # Version of your assets, change this if you want to expire all your assets.
   config.assets.version = '1.0'
