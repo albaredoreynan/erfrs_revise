@@ -64,7 +64,7 @@ javascript:
   $(".exchange_rate").blur(function(){
     item_val = parseFloat($(this).val());
     sp_id = $(this).attr("id");
-    val = parseFloat($(this).parent().siblings('.dv_amount').html());
+    val = parseFloat($(this).parent().siblings('.dv_amount').html().replace(/\,/g,''));
     $.ajax({  
       url: "/update_exchange_rate",
       data: {
@@ -73,7 +73,7 @@ javascript:
       },
         dataType: "script"
       });
-    $(this).parent().siblings('.exchange').html( item_val * val)
+    $(this).parent().siblings('.exchange').html(val / item_val).number(true, 2)
   });
 
   $(".soe_remark").blur(function(){
