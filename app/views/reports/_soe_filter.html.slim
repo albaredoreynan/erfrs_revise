@@ -44,4 +44,4 @@
                 | &nbsp;
                 = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
                 | &nbsp;    
-                = link_to "Excel", soe_adb_reports_reports_path(params.merge(:format => :xls)) , class: "btn btn-success"          
+                = link_to "Excel", soe_adb_reports_reports_path(params.merge(:format => :xls)) , class: "btn btn-success", id: "excel_button"          

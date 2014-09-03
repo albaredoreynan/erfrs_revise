@@ -92,6 +92,25 @@ javascript:
     $(this).parent().siblings('.exchange').html( val / item_val).number(true, 2)
   });
 
+  $("#excel_button").click(function(){
+    $(".exchange_rate").each(function(){
+      if ($(this).val() == 0){
+        item_val = 0;
+        sp_id = $(this).attr("id");
+        val = parseFloat($(this).parent().siblings('.dv_amount').html().replace(/\,/g,''));
+        $.ajax({  
+          url: "/update_exchange_rate",
+          data: {
+            exchange_rate: item_val,
+            rfrs_id : sp_id
+          },
+            dataType: "script"
+          });
+      }
+    });
+  });
+  
+
   $(".soe_remark").blur(function(){
     remark_val = $(this).val();
     sp_id = $(this).attr("id");
