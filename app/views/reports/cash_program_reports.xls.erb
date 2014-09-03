@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <ss:Styles>
+    <ss:Style ss:ID="1">
+        <ss:Font ss:Bold="1" />
+        <ss:Alignment ss:Horizontal="Center"/>
+    </ss:Style>
+    <ss:Style ss:ID="2">
+      <ss:Alignment ss:Horizontal="Center"/>
+    </ss:Style>
+  </ss:Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Column ss:Width="50"/>
+      <Column ss:Width="300"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+      <Column ss:Width="100"/>
+
+      <Row>
+        <Cell ss:MergeAcross="14" ss:StyleID="1"> 
+          <Data ss:Type="String"> DEPARTMENT OF SOCIAL WELFARE AND DEVELOPMENT </Data>
+        </Cell> 
+      </Row>
+      <Row>
+        <Cell ss:MergeAcross="14" ss:StyleID="1"> 
+          <Data ss:Type="String"> <B> COMMUNITY GRANTS DISBURSEMENT PLAN </B> </Data> 
+        </Cell> 
+      </Row>
+      <Row> 
+        <Cell ss:MergeAcross="7" ss:StyleID="1"> 
+          <Data ss:Type="String"> As of <%= params[:end_date].present? ? params[:end_date] : DateTime.now.strftime("%d-%b-%Y") %></Data>
+        </Cell> 
+      </Row>
+      <Row>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Region </Data> </Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Province </Data> </Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String"> Municipality </Data> </Cell>
+        <Cell ss:MergeAcross="12" ss:StyleID="2"> <Data ss:Type="String"> Projected / Actual / Percent Difference </Data> </Cell>
+      </Row>
+      <Row>
+        <Cell ss:Index="4"><Data ss:Type="String"> Jan </Data></Cell>
+        <Cell ss:Index="5"><Data ss:Type="String"> Feb </Data></Cell>
+        <Cell ss:Index="6"><Data ss:Type="String"> Mar </Data></Cell>
+        <Cell ss:Index="7"><Data ss:Type="String"> Apr </Data></Cell>
+        <Cell ss:Index="8"><Data ss:Type="String"> May </Data></Cell>
+        <Cell ss:Index="9"><Data ss:Type="String"> Jun </Data></Cell>
+        <Cell ss:Index="10"><Data ss:Type="String"> Jul </Data></Cell>
+        <Cell ss:Index="11"><Data ss:Type="String"> Aug </Data></Cell>
+        <Cell ss:Index="12"><Data ss:Type="String"> Sep </Data></Cell>
+        <Cell ss:Index="13"><Data ss:Type="String"> Oct </Data></Cell>
+        <Cell ss:Index="14"><Data ss:Type="String"> Nov </Data></Cell>
+        <Cell ss:Index="15"><Data ss:Type="String"> Dec </Data></Cell>
+      </Row>
+      <% @subprojects.each do |m, sps|%>
+        <Row>
+          <Cell ss:MergeDown="2"><Data ss:Type="String"><%= m.province.region.code %> </Data></Cell>
+          <Cell ss:MergeDown="2"><Data ss:Type="String"><%= m.province.name %> </Data></Cell>
+          <Cell ss:MergeDown="2"><Data ss:Type="String"><%= m.name %> </Data></Cell>
+          <% if params[:year].present? %>
+            <% data_f = initial_tranch_per_month(sps, params[:year].to_i) %>
+            <% data_s = revised_tranch_per_month(sps, params[:year].to_i) %>
+          <% else %>
+            <% data_f = initial_tranch_per_month(sps, DateTime.now.year) %>
+            <% data_s = revised_tranch_per_month(sps, DateTime.now.year) %>
+          <% end %> 
+          <% 12.times do |index| %>
+            <Cell> <Data ss:Type="String"><%= number_to_currency data_f[index].sum %> </Data></Cell>
+          <% end %>
+        </Row>
+        <Row>
+          <% 12.times do |index| %>
+            <Cell ss:Index="<%= index + 4 %>"> <Data ss:Type="String"><%= number_to_currency data_s[index].sum %> </Data></Cell>
+          <% end %>
+        </Row>
+        <Row>
+          <% 12.times do |index| %>
+            <Cell ss:Index="<%= index + 4 %>"> <Data ss:Type="String"> <% if data_s[index].sum != 0 && data_f[index].sum != 0 %> <%= number_to_currency(((data_s[index].sum - data_f[index].sum) / data_f[index].sum) * 100).to_s + "%" %>  <% else %> 0.00% <% end %></Data></Cell>
+          <% end %>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

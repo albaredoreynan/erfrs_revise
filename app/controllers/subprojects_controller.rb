@@ -76,7 +76,7 @@ class SubprojectsController < ApplicationController
     @subproject.first_tranch_revised_amount = subproject_params[:first_tranch_revised_amount].gsub(/,/, '').to_f
     @subproject.second_tranch_revised_amount = subproject_params[:second_tranch_revised_amount].gsub(/,/, '').to_f
     @subproject.third_tranch_revised_amount = subproject_params[:third_tranch_revised_amount].gsub(/,/, '').to_f
-    
+
     if @subproject.save
       flash[:success] = 'Sub-Project created successfully.'
       redirect_to edit_subproject_path(@subproject.id)

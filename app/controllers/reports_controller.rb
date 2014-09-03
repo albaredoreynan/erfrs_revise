@@ -47,6 +47,7 @@ class ReportsController < ApplicationController
 		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
     respond_to do |format|
       format.html
+      format.xls
       format.pdf do
         render :pdf         => "Community Grants Disbursement Plan Report",
               :orientation  => 'Landscape',
