@@ -67,7 +67,7 @@ hr
   	        td= soe.check_number
   	        td.text-center= soe.dv_date.try(:to_date).strftime("%d-%b-%Y") if soe.dv_date.present?
   	        td 100%
-  	        td.text-right.dv_amount= number_to_currency soe.subproject.total_dv_amount
+  	        td.text-right.dv_amount value="#{soe.subproject.total_dv_amount}" = number_to_currency soe.subproject.total_dv_amount
   	        td.text-right.exchange 
   	        td= text_field_tag :exchange_rate, [], id:"#{soe.id}", class: 'exchange_rate'
   	        td= text_field_tag :report_remarks, [], id:"#{soe.id}", class: 'soe_remark'
@@ -80,7 +80,7 @@ javascript:
   $(".exchange_rate").blur(function(){
     item_val = parseFloat($(this).val());
     sp_id = $(this).attr("id");
-    val = parseFloat($(this).parent().siblings('.dv_amount').html());
+    val = parseFloat($(this).parent().siblings('.dv_amount').html().replace(/\,/g,''));
     $.ajax({  
       url: "/update_exchange_rate",
       data: {
@@ -89,7 +89,7 @@ javascript:
       },
         dataType: "script"
       });
-    $(this).parent().siblings('.exchange').html( item_val * val)
+    $(this).parent().siblings('.exchange').html( val / item_val).number(true, 2)
   });
 
   $(".soe_remark").blur(function(){
