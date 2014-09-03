@@ -7,16 +7,15 @@
     .col-md-4
       .form-group
         = f.label :publish_start, 'Publish Start'
-        = f.text_field :publish_start, class: 'form-control', placeholder:"dd-Mmm-yyyy"    
+        = f.text_field :publish_start, class: 'form-control', placeholder:"dd-Mmm-yyyy", value: @news_information.publish_start.present? ? @news_information.publish_start.strftime("%d-%b-%Y") : ''  
     .col-md-4                
       .form-group
         = f.label :publish_end, 'Publish End'
-        = f.text_field :publish_end, class: 'form-control', placeholder:"dd-Mmm-yyyy"   
+        = f.text_field :publish_end, class: 'form-control', placeholder:"dd-Mmm-yyyy", value: @news_information.publish_end.present? ? @news_information.publish_end.strftime("%d-%b-%Y") : ''   
     .col-md-12                      
       .form-group
         = f.label 'Content'
         = f.text_area :content, class: 'form-control', rows: 10, style:"resize: none;"                  
-
     .col-md-12
       = f.submit nil, class: 'pull-right btn btn-primary'
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},

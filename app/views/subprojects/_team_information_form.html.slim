@@ -3,7 +3,8 @@
   hr
   .col-md-12
     .col-md-12.add_member_placeholder
-      = link_to_add_association "<i class='fa fa-plus'></i> Add Member".html_safe, f, :team_members, class: 'btn btn-success', 'data-association-insertion-method' => 'append', 'data-association-insertion-node' => '#team-members-body'
+      - if @subproject.status != "Final"
+        = link_to_add_association "<i class='fa fa-plus'></i> Add Member".html_safe, f, :team_members, class: 'btn btn-success', 'data-association-insertion-method' => 'append', 'data-association-insertion-node' => '#team-members-body'
     table.table.table-bordered.table-hover
       thead
         tr

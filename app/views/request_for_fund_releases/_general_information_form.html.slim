@@ -32,7 +32,8 @@ br
       .col-md-5
         = f.label :status
       .col-md-7
-        = f.select :status, options_for_select(Subproject::STATUSES), {}, { class: 'form-control'}
+        = f.select :status, options_for_select(Subproject::STATUSES, params[:id].present? ? @rfrs.status : ""), {include_blank: true}, { class: 'form-control' }
+
   .col-md-6
     .form-group
       .col-md-4.bold

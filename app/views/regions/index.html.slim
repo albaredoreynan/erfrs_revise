@@ -12,14 +12,14 @@ br
         tr
           th Code
           th Name
-          th Regional Director
+          / th Regional Director
           th Actions
       tbody
         - @regions.order("id").each do |region|
           tr
             td= region.code
             td= region.name
-            td= region.for_regional_director
+            / td= region.for_regional_director
             td
               = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, region], class: 'btn btn-xs btn-warning'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Edit"
               '&nbsp
