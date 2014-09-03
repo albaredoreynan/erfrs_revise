@@ -1,0 +1,47 @@
+.col-md-12
+  .panel.panel-default
+    .panel-heading 
+      h4 Filter 
+    .panel-body
+      .row
+        form.form-horizontal  
+          .col-md-6
+            .form-group
+              .col-md-4.text-right
+                = label_tag :subproject_region_id, 'Region'
+              .col-md-6
+                = select_tag :region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control', id: "subproject_region_id"
+            .form-group
+              .col-md-4.text-right
+                = label_tag :subproject_province_id, 'Province'
+              .col-md-6
+                = select_tag :province_id, [], class: 'form-control', id: "subproject_province_id"
+            .form-group
+              .col-md-4.text-right
+                = label_tag :subproject_municipality_id, 'Municipality'
+              .col-md-6
+                = select_tag :municipality_id, [], class: 'form-control', id: "subproject_municipality_id"
+            .form-group
+              .col-md-4.text-right
+                = label_tag :subproject_barangay_id, 'Barangay'
+              .col-md-6
+                = select_tag :barangay_id, [], class: 'form-control', id: "subproject_barangay_id"
+          .col-md-6
+            .form-group
+              .col-md-4.text-right 
+                =label_tag :start, "DV Range Start"
+              .col-md-6
+                = text_field_tag :start_date, [], class: 'form-control validate[custom[dateFormat]]', placeholder:"dd-mmm-yyyy"
+            .form-group
+              .col-md-4.text-right 
+                =label_tag :end, "DV Range End"
+              .col-md-6
+                = text_field_tag :end_date, [], class: 'form-control validate[custom[dateFormat]]', placeholder:"dd-mmm-yyyy"
+            .form-group
+              .col-md-4
+              .col-md-8
+                = submit_tag 'Search', class: 'btn btn-primary'
+                | &nbsp;
+                = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
+                | &nbsp;    
+                = link_to "Excel", soe_reports_reports_path(params.merge(:format => :xls)) , class: "btn btn-success"          
