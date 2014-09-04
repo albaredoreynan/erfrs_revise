@@ -1,29 +1,33 @@
-- @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost + @subproject.third_tranch_amount_release
+/ - @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost + @subproject.third_tranch_amount_release
 - @total_release = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release
 - @total_grant_less_con = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
-- if params[:tranch] == 'first'
-  - @amount_requested = @subproject.first_tranch_amount
+- @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost + @subproject.grant_amount_contingency_cost
+
+- if params[:tranch] == '1'
+  - @amount_requested = @subproject.first_tranch_revised_amount
   - @previous_released = 0
   - @cumulative_amount = @subproject.first_tranch_amount
   - @tranch = 1
   - @contingency = @subproject.grant_amount_contingency_cost
-- elsif params[:tranch] == 'second'
-  - @amount_requested = @subproject.second_tranch_amount
+  - @balance_amount = @total_grant.to_f - @cumulative_amount.to_f
+- elsif params[:tranch] == '2'
+  - @amount_requested = @subproject.second_tranch_revised_amount
   - @previous_released = @subproject.first_tranch_amount_release
-  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
+  - @cumulative_amount = @subproject.first_tranch_revised_amount + @subproject.second_tranch_revised_amount
   - @tranch = 2
   - @contingency = @subproject.grant_amount_contingency_cost
+  - @balance_amount = @total_grant.to_f - @cumulative_amount.to_f
 - else
-  - @amount_requested = @subproject.third_tranch_amount
+  - @amount_requested = @subproject.third_tranch_revised_amount
   - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
-  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
+  - @cumulative_amount = @subproject.first_tranch_revised_amount + @subproject.second_tranch_revised_amount + @subproject.third_tranch_revised_amount
   - @tranch = 3
   - if @total_release > @total_grant_less_con 
     - @contingency = @subproject.grant_amount_contingency_cost - (@total_release - @total_grant_less_con)
   - else
     - @contingency = @subproject.grant_amount_contingency_cost
+  - @balance_amount = @total_grant.to_f - @cumulative_amount.to_f  
 
-- @balance_amount = @total_grant - @cumulative_amount
 .row.sp-table
   .col-md-12
     h4 Fund Information

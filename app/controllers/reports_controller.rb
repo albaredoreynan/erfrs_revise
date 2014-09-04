@@ -13,6 +13,7 @@ class ReportsController < ApplicationController
 
   def soe_reports
 		@soe = apply_scopes(@rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay])
+    raise
     respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }

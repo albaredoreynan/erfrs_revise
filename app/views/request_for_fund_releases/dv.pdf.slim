@@ -66,11 +66,11 @@ table.table.table-responsive border=1 width=500
   	td.text-right height=100 width='20%'
       .col-md-12
         - if @rfrs.tranch_for == 1
-          - @amount_requested = @subproject.first_tranch_amount
+          - @amount_requested = @subproject.first_tranch_revised_amount
         - elsif @rfrs.tranch_for == 2
-          - @amount_requested = @subproject.second_tranch_amount
+          - @amount_requested = @subproject.second_tranch_revised_amount
         - else
-          - @amount_requested = @subproject.third_tranch_amount
+          - @amount_requested = @subproject.third_tranch_revised_amount
         p #{number_to_currency @amount_requested } 
   tr
   	td.text-right	width='80%' colspan=3
@@ -141,7 +141,7 @@ table.table.table-responsive border=1 width=500
 	tr
 		td.text-left width='10%' BTF No.
 		td.text-left width='35%' #{@rfrs.check_number}
-		td.text-left width='15%' Date: #{ !@rfrs.check_date.nil? ? Date.parse(@rfrs.check_date).strftime("%d-%b-%Y") : '' }
+		td.text-left width='15%' Date: #{ @rfrs.check_date.present? ? Date.parse(@rfrs.check_date).strftime("%d-%b-%Y") : '' }
 		td.text-left width='20%' Bank Name
 		td.text-left width='25%' LandBank of the Philippines
 	tr
@@ -149,7 +149,7 @@ table.table.table-responsive border=1 width=500
 		td.text-left width='35%'
 		td.text-left width='15%' Date
 		td.text-left width='20%' Printed Name
-		td.text-left width='25%' rowspan=2 Date: #{!@rfrs.dv_date.nil? ? @rfrs.dv_date.strftime("%d-%b-%Y") : '' }
+		td.text-left width='25%' rowspan=2 Date: #{ @rfrs.dv_date.present? ? @rfrs.dv_date.strftime("%d-%b-%Y") : '' }
 	tr
 		td.text-left colspan=4 Official Receipt / Other Documents
 
