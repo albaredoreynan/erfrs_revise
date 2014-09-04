@@ -94,22 +94,22 @@ class ReportsController < ApplicationController
 
     def rfrs_control_data 
       if params[:action] == "soe_adb_reports"
-        group = Group.includes(:fund_source).where('fund_sources.code' => "ADB").last.id
+        fund_source = FundSource.where(code: "ADB").last.id
       else
-        group = Group.includes(:fund_source).where('fund_sources.code' => "WB").last.id
+        fund_source = FundSource.where(code: "WB").last.id
       end 
       
       if current_user.role_id == 3 or current_user.role_id == 4
-        rfrs = Subproject.where(region_id: current_user.region_id, status: "Final", group_id: group)
+        rfrs = Subproject.where(region_id: current_user.region_id, status: "Final", fund_source_id: fund_source)
         subproject_id = rfrs.pluck(:id)
       elsif current_user.role_id == 5
-        rfrs = Subproject.where(municipality_id: current_user.municipality_id, status: "Final", group_id: group)    
+        rfrs = Subproject.where(municipality_id: current_user.municipality_id, status: "Final", fund_source_id: fund_source)    
         subproject_id = rfrs.pluck(:id)
       elsif current_user.role_id == 6
-        rfrs = Subproject.where(barangay_id: current_user.barangay_id, status: "Final", group_id: group)
+        rfrs = Subproject.where(barangay_id: current_user.barangay_id, status: "Final", fund_source_id: fund_source)
         subproject_id = rfrs.pluck(:id)
       else
-        rfrs = Subproject.where(status: "Final", group_id: group)
+        rfrs = Subproject.where(status: "Final", fund_source_id: fund_source)
         subproject_id = rfrs.pluck(:id)
       end
       @rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id)
