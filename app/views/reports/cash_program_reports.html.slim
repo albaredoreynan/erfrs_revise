@@ -37,6 +37,7 @@ hr
           th.text-center Dec
       tbody
         - @subprojects.each do |m, sps|
+
           tr
   	       	td rowspan=3 = m.province.region.code
   	        td rowspan=3 = m.province.name
@@ -49,15 +50,45 @@ hr
               -data_s = revised_tranch_per_month(sps, DateTime.now.year)
 
             -12.times do |index|
-              td = number_to_currency data_f[index].sum
+              -df = 0
+              -year = nil
+              - data_f[index].each do |a|
+                -if a.kind_of?(Array)
+                  -df += a[0]
+                  -year = "(#{a[1]})"
+                -else
+                  -df += a
+              td= "#{number_to_currency df} #{year.present? ? year : ''}" 
+
           tr
             -12.times do |index|
-              td = number_to_currency data_s[index].sum
+              -ds = 0
+              -year = nil
+              - data_s[index].each do |a|
+                -if a.kind_of?(Array)
+                  -ds += a[0]
+                  -year = "(#{a[1]})"
+                -else
+                  -ds += a
+              td= "#{number_to_currency ds} #{year.present? ? year : ''}" 
           tr
             -12.times do |index|
+              -df = 0
+              - data_f[index].each do |a|
+                -if a.kind_of?(Array)
+                  -df += a[0]
+                -else
+                  -df += a
+
+              -ds = 0
+              - data_s[index].each do |a|
+                -if a.kind_of?(Array)
+                  -ds += a[0]
+                -else
+                  -ds += a
               td 
-                - if data_s[index].sum != 0 && data_f[index].sum != 0
-                  = number_to_currency(((data_s[index].sum - data_f[index].sum) / data_f[index].sum) * 100).to_s + "%"
+                - if ds != 0 && df != 0
+                  = number_to_currency(((ds - df) / df) * 100).to_s + "%"
                 - else
                   ' 0.00%
 

@@ -180,7 +180,7 @@ module ApplicationHelper
         else
           %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
             if a.second_tranch_date_required.to_time.strftime("%B") == month.to_s
-              data_f[index] << "#{number_to_currency a.second_tranch_amount}(#{a.second_tranch_date_required.to_time.strftime("%Y")})"      
+              data_f[index] << [a.second_tranch_amount, a.second_tranch_date_required.to_time.strftime("%Y")]      
             end
           end
         end
@@ -196,7 +196,7 @@ module ApplicationHelper
         else
           %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
             if a.third_tranch_date_required.to_time.strftime("%B") == month.to_s
-              data_f[index] << "#{number_to_currency a.third_tranch_amount}(#{a.third_tranch_date_required.to_time.strftime("%Y")})"    
+              data_f[index] << [a.third_tranch_amount, a.third_tranch_date_required.to_time.strftime("%Y")]    
             end
           end
         end 
