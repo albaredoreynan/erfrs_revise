@@ -239,7 +239,7 @@ hr
         .col-md-6.text-right
           'SAA Date
         .col-md-6.bold
-          = @cgdp.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
+          = @cgdp.saa_date.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
 
 = render 'view_cash_program'
 / = render 'assigned_fund_source'
