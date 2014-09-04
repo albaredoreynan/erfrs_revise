@@ -7,6 +7,18 @@ class MunicipalitiesController < InheritedResources::Base
   respond_to :html, :json
 
   has_scope :province_id, :with_year,:region_id, :with_id
+  def create
+    @municipality = Municipality.new(permitted_params[:municipality])
+    if @municipality.save 
+      flash[:success] = 'Updated Successfully.'
+      redirect_to municipalities_path
+    else
+      flash[:error] = 'Failed to Update: Please Contact Administrator'
+      redirect_to municipalities_path
+    end
+
+
+  end
 
   def show
     #@subprojects = apply_scopes(@municipality.subprojects)
