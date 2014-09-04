@@ -13,10 +13,11 @@
 -total_direct = subtotal_direct + @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_in_kind_direct_cost
 -total_indirect = subtotal_indirect + @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_in_kind_indirect_cost
 -total_contingency = subtotal_contingency + @subproject.total_lcc_cash_contingency_cost + @subproject.total_lcc_in_kind_contingency_cost
--total_total =  total_direct + total_indirect + total_contingency
+/ -total_total =  total_direct + total_indirect + total_contingency
 
 - grand_total_lcc = total_lcc + total_lcc_cash + total_lcc_kind
 - subtotal_lcc = total_plgu + total_mlgu + total_community + total_lcc
+- total_total = total_grant + subtotal_lcc
 .row.sp-show
   .col-md-6
     .form-group
