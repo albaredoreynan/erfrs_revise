@@ -16,11 +16,6 @@ ActiveRecord::Schema.define(version: 20140903150032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "approval_informations", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "barangays", force: true do |t|
     t.integer  "municipality_id"
     t.string   "name"
@@ -59,11 +54,6 @@ ActiveRecord::Schema.define(version: 20140903150032) do
     t.integer  "year"
   end
 
-  create_table "fund_informations", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "fund_sources", force: true do |t|
     t.string   "code"
     t.string   "name"
@@ -93,8 +83,6 @@ ActiveRecord::Schema.define(version: 20140903150032) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
-    t.decimal  "grant_allocation", precision: 15, scale: 2, default: 0.0, null: false
-    t.integer  "year"
   end
 
   add_index "municipalities", ["group_id"], name: "index_municipalities_on_group_id", using: :btree
