@@ -94,7 +94,7 @@ class MunicipalitiesController < InheritedResources::Base
 
     def collection
       @municipalities = apply_scopes(Municipality)
-      @municipalities = @municipalities.paginate(page: params[:page], :per_page => 100) unless request.url =~ /json$/
+      @municipalities = @municipalities.paginate(page: params[:page], :per_page => 90) unless request.url =~ /json$/
     end
 
     def update_params
