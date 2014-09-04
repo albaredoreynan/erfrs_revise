@@ -170,24 +170,43 @@ module ApplicationHelper
         end 
       end
 
-      if a.second_tranch_date_required.present? and a.second_tranch_date_required.to_time.strftime("%Y") == year.to_s
-        %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
-          if a.second_tranch_date_required.to_time.strftime("%B") == month.to_s
-            data_f[index] << a.second_tranch_amount      
+      if a.second_tranch_date_required.present?
+        if a.second_tranch_date_required.to_time.strftime("%Y") == year.to_s 
+          %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
+            if a.second_tranch_date_required.to_time.strftime("%B") == month.to_s
+              data_f[index] << a.second_tranch_amount      
+            end
           end
-        end 
+        else
+          %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
+            if a.second_tranch_date_required.to_time.strftime("%B") == month.to_s
+              data_f[index] << [a.second_tranch_amount, a.second_tranch_date_required.to_time.strftime("%Y")]      
+            end
+          end
+        end
       end
 
-      if a.third_tranch_date_required.present? and a.third_tranch_date_required.to_time.strftime("%Y") == year.to_s
-        %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
-          if a.third_tranch_date_required.to_time.strftime("%B") == month.to_s
-            data_f[index] << a.third_tranch_amount      
+      if a.third_tranch_date_required.present?
+        if a.third_tranch_date_required.to_time.strftime("%Y") == year.to_s
+          %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
+            if a.third_tranch_date_required.to_time.strftime("%B") == month.to_s
+              data_f[index] << a.third_tranch_amount      
+            end
+          end
+        else
+          %i(January Febuary March April May June July August September October November December).each_with_index do |month, index|
+            if a.third_tranch_date_required.to_time.strftime("%B") == month.to_s
+              data_f[index] << [a.third_tranch_amount, a.third_tranch_date_required.to_time.strftime("%Y")]    
+            end
           end
         end 
       end
     end
     data_f
   end
+
+
+
   def revised_tranch_per_month(sps, year)
 
     data_f = [[],[],[],[],[],[],[],[],[],[],[],[]]

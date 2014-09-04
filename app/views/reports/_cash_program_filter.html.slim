@@ -1,0 +1,46 @@
+.col-md-12
+  .panel.panel-default
+    .panel-heading 
+      h4 Filter 
+    .panel-body
+      .row
+        form.form-horizontal
+          .col-md-6
+            .form-group
+              .col-md-4.text-right
+                = label_tag :subproject_region_id, 'Region'
+              .col-md-6
+                = select_tag :subproject_region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control'
+            .form-group
+              .col-md-4.text-right
+                = label_tag :subproject_province_id, 'Province'
+              .col-md-6
+                = select_tag :subproject_province_id, params[:subproject_province_id].present? ? options_for_select(Province.find([params[:subproject_province_id]]).map{|a|[a.name, a.id]}) : [], class: 'form-control'
+            .form-group
+              .col-md-4.text-right
+                = label_tag :subproject_municipality_id, 'Municipality'
+              .col-md-6
+                = select_tag :subproject_municipality_id, params[:subproject_municipality_id].present? ? options_for_select(Municipality.find([params[:subproject_municipality_id]]).map{|a|[a.name, a.id]}) : [], class: 'form-control'
+            .form-group
+              .col-md-4.text-right
+                = label_tag :subproject_barangay_id, 'Barangay'
+              .col-md-6
+                = select_tag :subproject_barangay_id, params[:subproject_barangay_id].present? ? options_for_select(Barangay.find([params[:subproject_barangay_id]]).map{|a|[a.name, a.id]}) : [], class: 'form-control'
+          .col-md-6
+            .form-group
+              .col-md-4.text-right
+                = label_tag :Year, 'Year'
+              .col-md-6
+                = text_field_tag :year, [],class: 'form-control', placeholder:"yyyy"
+            .form-group
+              .col-md-4
+              .col-md-8
+                = submit_tag 'Search', class: 'btn btn-primary'
+                | &nbsp;
+                = submit_tag 'Clear', class: 'btn btn-primary clear', type: 'reset'
+                - if params[:action] == "cg_reports"
+                  = link_to "PDF", cg_reports_reports_path(params.merge(format: :pdf)) , class: "btn btn-success", style: "margin-left: 3px;"
+                  = link_to "Excel", cg_reports_reports_path(params.merge(format: :xls)) , class: "btn btn-success", style: "margin-left: 3px;"                
+                - else # cash_program_reports
+                  = link_to "PDF", cash_program_reports_reports_path(params.merge(format: :pdf)) , class: "btn btn-success", style: "margin-left: 3px;"
+                  = link_to "Excel", cash_program_reports_reports_path(params.merge(format: :xls)) , class: "btn btn-success", style: "margin-left: 3px;"

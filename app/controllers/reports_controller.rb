@@ -45,7 +45,7 @@ class ReportsController < ApplicationController
 	end
 
 	def cash_program_reports
-		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
+		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality).group_by(&:municipality)
     respond_to do |format|
       format.html
       format.xls
@@ -94,17 +94,23 @@ class ReportsController < ApplicationController
     end
 
     def rfrs_control_data 
+      if params[:action] == "soe_adb_reports"
+        fund_source = FundSource.where(code: "ADB").last.id
+      else
+        fund_source = FundSource.where(code: "WB").last.id
+      end 
+      
       if current_user.role_id == 3 or current_user.role_id == 4
-        rfrs = Subproject.where(region_id: current_user.region_id, status: "Final")
+        rfrs = Subproject.where(region_id: current_user.region_id, status: "Final", fund_source_id: fund_source)
         subproject_id = rfrs.pluck(:id)
       elsif current_user.role_id == 5
-        rfrs = Subproject.where(municipality_id: current_user.municipality_id, status: "Final")    
+        rfrs = Subproject.where(municipality_id: current_user.municipality_id, status: "Final", fund_source_id: fund_source)    
         subproject_id = rfrs.pluck(:id)
       elsif current_user.role_id == 6
-        rfrs = Subproject.where(barangay_id: current_user.barangay_id, status: "Final")
+        rfrs = Subproject.where(barangay_id: current_user.barangay_id, status: "Final", fund_source_id: fund_source)
         subproject_id = rfrs.pluck(:id)
       else
-        rfrs = Subproject.where(status: "Final")
+        rfrs = Subproject.where(status: "Final", fund_source_id: fund_source)
         subproject_id = rfrs.pluck(:id)
       end
       @rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id)

@@ -44,7 +44,7 @@
       </Row>
       <Row> 
         <Cell ss:MergeAcross="7" ss:StyleID="1"> 
-          <Data ss:Type="String"> As of <%= params[:end_date].present? ? params[:end_date] : DateTime.now.strftime("%d-%b-%Y") %></Data>
+          <Data ss:Type="String"> As of <%= params[:year].present? ? params[:year] : DateTime.now.strftime("%Y") %></Data>
         </Cell> 
       </Row>
       <Row>
@@ -80,17 +80,59 @@
             <% data_s = revised_tranch_per_month(sps, DateTime.now.year) %>
           <% end %> 
           <% 12.times do |index| %>
-            <Cell> <Data ss:Type="String"><%= number_to_currency data_f[index].sum %> </Data></Cell>
+            <%df = 0 %>
+            <%year = nil %>
+            <% data_f[index].each do |a| %>
+              <%if a.kind_of?(Array) %>
+                <%df += a[0]%>
+                <%year = "(#{a[1]})" %>
+              <%else %>
+                <%df += a %>
+              <%end%>
+            <% end %>
+
+            <Cell ss:Index="<%= index + 4 %>"> <Data ss:Type="String"><%= "#{number_to_currency df} #{year.present? ? year : ''}" %> </Data></Cell>
           <% end %>
         </Row>
         <Row>
           <% 12.times do |index| %>
-            <Cell ss:Index="<%= index + 4 %>"> <Data ss:Type="String"><%= number_to_currency data_s[index].sum %> </Data></Cell>
+            <%ds = 0 %>
+            <%year = nil %>
+            <% data_s[index].each do |a| %>
+              <%if a.kind_of?(Array) %>
+                <%ds += a[0]%>
+                <%year = "(#{a[1]})" %>
+               <%else %>
+                <%ds += a %>
+              <%end%>
+            <% end %>
+            <Cell ss:Index="<%= index + 4 %>"> <Data ss:Type="String"><%= "#{number_to_currency ds} #{year.present? ? year : ''}" %> </Data></Cell>
           <% end %>
         </Row>
         <Row>
           <% 12.times do |index| %>
-            <Cell ss:Index="<%= index + 4 %>"> <Data ss:Type="String"> <% if data_s[index].sum != 0 && data_f[index].sum != 0 %> <%= number_to_currency(((data_s[index].sum - data_f[index].sum) / data_f[index].sum) * 100).to_s + "%" %>  <% else %> 0.00% <% end %></Data></Cell>
+            <%ds = 0 %>
+            <%year = nil %>
+            <% data_s[index].each do |a| %>
+              <%if a.kind_of?(Array) %>
+                <%ds += a[0]%>
+                <%year = "(#{a[1]})" %>
+              <%else %>
+                <%ds += a %>
+               <%end%>
+            <% end %>
+
+            <%df = 0 %>
+            <%year = nil %>
+            <% data_f[index].each do |a| %>
+              <%if a.kind_of?(Array) %>
+                <%df += a[0]%>
+                <%year = "(#{a[1]})" %>
+              <%else %>
+                <%df += a %>
+               <%end%>
+            <% end %>
+            <Cell ss:Index="<%= index + 4 %>"> <Data ss:Type="String"> <% if ds != 0 && df != 0 %> <%= number_to_currency(((ds - df) / df) * 100).to_s + "%" %>  <% else %> 0.00% <% end %></Data></Cell>
           <% end %>
         </Row>
       <% end %>
