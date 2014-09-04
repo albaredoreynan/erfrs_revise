@@ -107,7 +107,7 @@
       .col-md-4.bold
         'ObR Date:
       .col-md-6
-        =f.text_field :obr_date, placeholder: 'DD-MMM-YYYY', value: params[:id].present? ? @rfrs.obr_date.strftime("%d-%b-%Y") : ''
+        =f.text_field :obr_date, placeholder: 'DD-MMM-YYYY', value: @rfrs.obr_date.present? ? @rfrs.obr_date.strftime("%d-%b-%Y") : ''
   .col-md-6
     .form-group
       .col-md-4.bold.text-right
