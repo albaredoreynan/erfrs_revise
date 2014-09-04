@@ -10,7 +10,7 @@ hr
       br
       ' COMMUNITY GRANTS DISBURSEMENT PLAN
       br
-      'As of #{params[:end_date].present? ? params[:end_date] : DateTime.now.strftime("%d-%b-%Y") }
+      'As of #{params[:year].present? ? params[:year] : DateTime.now.strftime("%Y") }
   .col-md-12
     
 .panel.panel-primary
