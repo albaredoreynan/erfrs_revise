@@ -1,10 +1,17 @@
 = wicked_pdf_stylesheet_link_tag "application"
 - @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
 - @total_release = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release
-- total_lcc = @subproject.lcc_blgu_direct_cost       + @subproject.lcc_blgu_indirect_cost        + @subproject.lcc_blgu_contingency_cost
+/ - total_lcc = @subproject.lcc_blgu_direct_cost       + @subproject.lcc_blgu_indirect_cost        + @subproject.lcc_blgu_contingency_cost
 - total_lcc_cash = @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_cash_contingency_cost
 - total_lcc_kind = @subproject.total_lcc_in_kind_direct_cost + @subproject.total_lcc_in_kind_indirect_cost +  @subproject.total_lcc_in_kind_contingency_cost
 - @total_grant_less_con = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
+
+-total_plgu = @subproject.plgu_others_direct_cost   + @subproject.plgu_others_indirect_cost     + @subproject.plgu_others_contingency_cost
+-total_mlgu = @subproject.mlgu_direct_cost          + @subproject.mlgu_indirect_cost            + @subproject.mlgu_contingency_cost
+-total_community= @subproject.community_direct_cost + @subproject.community_indirect_cost       + @subproject.community_contingency_cost
+-total_lcc = @subproject.lcc_blgu_direct_cost       + @subproject.lcc_blgu_indirect_cost        + @subproject.lcc_blgu_contingency_cost
+
+
 - if params[:tranch] == '1'
   - @amount_requested = @subproject.first_tranch_amount
   - @previous_released = 0
@@ -28,6 +35,7 @@
     - @contingency = @subproject.grant_amount_contingency_cost
 
 - @balance_amount = @total_grant - @cumulative_amount
+- @subtotal_lccs = total_plgu + total_mlgu + total_community + total_lcc
 
 p.bold.text-center REQUEST FOR FUND RELEASE
 br
@@ -82,7 +90,7 @@ table.table.table-responsive border=1 width=500
       = @subproject.barangay.name
     td.text-left width='20%' Total LCC
     td.text-left width='30%'
-      = number_to_currency total_lcc 
+      = number_to_currency @subtotal_lccs 
   tr
     td.text-left width='20%' Sub-project Title
     td.text-left width='30%'

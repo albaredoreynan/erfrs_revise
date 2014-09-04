@@ -16,6 +16,7 @@
 -total_total =  total_direct + total_indirect + total_contingency
 
 - grand_total_lcc = total_lcc + total_lcc_cash + total_lcc_kind
+- subtotal_lcc = total_plgu + total_mlgu + total_community + total_lcc
 .row.sp-show
   .col-md-6
     .form-group
@@ -93,7 +94,7 @@
           .col-md-5
             'LCC
           .col-md-7.bold
-            = number_to_currency grand_total_lcc
+            = number_to_currency subtotal_lcc
         .form-group
           .col-md-5
             'Fund Source
