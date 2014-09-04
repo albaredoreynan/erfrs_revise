@@ -109,6 +109,11 @@ $( document ).ready(function() {
     var subtotal_direct = 0.0
     var subtotal_indirect = 0.0;
     var subtotal_contingency = 0.0;
+
+    var subtotal_direct_lcc = 0.0
+    var subtotal_indirect_lcc = 0.0;
+    var subtotal_contingency_lcc = 0.0;
+
     var subtotal_total = 0.0;
     var total_lcc_in_kind = 0.0;
     var total_direct = 0.0;
@@ -175,9 +180,9 @@ $( document ).ready(function() {
 
     subtotal_total = subtotal_direct + subtotal_indirect + subtotal_contingency;
     
-    // total_lcc_cash_direct_cost = $('#subproject_total_lcc_cash_direct_cost').val(parseFloat($('#subproject_lcc_blgu_direct_cost').val()) + parseFloat($('#subproject_mlgu_direct_cost').val()));
-    // total_lcc_cash_indirect_cost = $('#subproject_total_lcc_cash_indirect_cost').val(parseFloat($('#subproject_lcc_blgu_indirect_cost').val()) + parseFloat($('#subproject_mlgu_indirect_cost').val()));
-    // total_lcc_cash_contingency_cost = $('#subproject_total_lcc_cash_contingency_cost').val(parseFloat($('#subproject_lcc_blgu_contingency_cost').val()) + parseFloat($('#subproject_mlgu_contingency_cost').val()));
+    subtotal_direct_lcc = parseFloat($('#subproject_lcc_blgu_direct_cost').val()) + parseFloat($('#subproject_mlgu_direct_cost').val()) + parseFloat($('#subproject_community_direct_cost').val()) + parseFloat($('#subproject_plgu_others_direct_cost').val());
+    subtotal_indirect_lcc = parseFloat($('#subproject_lcc_blgu_indirect_cost').val()) + parseFloat($('#subproject_mlgu_indirect_cost').val()) + parseFloat($('#subproject_community_indirect_cost').val()) + parseFloat($('#subproject_plgu_others_indirect_cost').val());
+    subtotal_contingency_lcc = parseFloat($('#subproject_lcc_blgu_contingency_cost').val()) + parseFloat($('#subproject_mlgu_contingency_cost').val()) + parseFloat($('#subproject_community_contingency_cost').val()) + parseFloat($('#subproject_plgu_others_contingency_cost').val());
     
     // total_lcc_in_kind_direct_cost = $('#subproject_total_lcc_in_kind_direct_cost').val(parseFloat($('#subproject_community_direct_cost').val()) + parseFloat($('#subproject_plgu_others_direct_cost').val()));
     // total_lcc_in_kind_indirect_cost = $('#subproject_total_lcc_in_kind_indirect_cost').val(parseFloat($('#subproject_community_indirect_cost').val()) + parseFloat($('#subproject_plgu_others_indirect_cost').val()));
@@ -210,6 +215,10 @@ $( document ).ready(function() {
     $('#subtotal_indirect').html(subtotal_indirect.toFixed(2)).number(true, 2);
     $('#subtotal_contingency').html(subtotal_contingency.toFixed(2)).number(true, 2);
     $('#subtotal_total').html(subtotal_total.toFixed(2)).number(true, 2);
+
+    $('#subtotal_direct_lcc').html(subtotal_direct_lcc.toFixed(2)).number(true, 2);
+    $('#subtotal_indirect_lcc').html(subtotal_indirect_lcc.toFixed(2)).number(true, 2);
+    $('#subtotal_contingency_lcc').html(subtotal_contingency_lcc.toFixed(2)).number(true, 2);
 
     $('#total_lcc_cash').html(total_lcc_cash_val.toFixed(2)).number(true, 2)
     $('#total_lcc_in_kind').html(total_lcc_in_kind.toFixed(2)).number(true, 2);

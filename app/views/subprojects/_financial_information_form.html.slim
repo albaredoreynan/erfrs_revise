@@ -48,6 +48,14 @@
           td.plgu.scc= f.text_field :plgu_others_contingency_cost, class: "monetary_field"
           td#total_plgu.gray
           td#percent_plgu.gray
+        
+        tr#subtotal.gray
+          td.bold SUB-TOTAL LCC
+          td#subtotal_direct_lcc
+          td#subtotal_indirect_lcc
+          td#subtotal_contingency_lcc
+          td colspan=2
+        
         tr#subtotal.gray
           td.bold TOTAL
           td#subtotal_direct
@@ -55,6 +63,7 @@
           td#subtotal_contingency
           td#subtotal_total
           td#subtotal_total_percent
+        
         tr
           td Total LCC Cash
           td.total_lcc_cash= f.text_field :total_lcc_cash_direct_cost, class: "monetary_field"
