@@ -75,9 +75,9 @@ class SubprojectsController < ApplicationController
     @subproject.first_tranch_amount = subproject_params[:first_tranch_amount].gsub(/,/, '').to_f
     @subproject.second_tranch_amount = subproject_params[:second_tranch_amount].gsub(/,/, '').to_f
     @subproject.third_tranch_amount = subproject_params[:third_tranch_amount].gsub(/,/, '').to_f
-    @subproject.first_tranch_revised_amount = subproject_params[:first_tranch_revised_amount].gsub(/,/, '').to_f
-    @subproject.second_tranch_revised_amount = subproject_params[:second_tranch_revised_amount].gsub(/,/, '').to_f
-    @subproject.third_tranch_revised_amount = subproject_params[:third_tranch_revised_amount].gsub(/,/, '').to_f
+    @subproject.first_tranch_revised_amount = subproject_params[:first_tranch_revised_amount].gsub(/,/, '').to_f if subproject_params[:first_tranch_revised_amount].present?
+    @subproject.second_tranch_revised_amount = subproject_params[:second_tranch_revised_amount].gsub(/,/, '').to_f if subproject_params[:second_tranch_revised_amount].present?
+    @subproject.third_tranch_revised_amount = subproject_params[:third_tranch_revised_amount].gsub(/,/, '').to_f if subproject_params[:third_tranch_revised_amount].present?
 
     if @subproject.save
       flash[:success] = 'Sub-Project created successfully.'
