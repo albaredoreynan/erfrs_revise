@@ -18,17 +18,20 @@
   - @cumulative_amount = @subproject.first_tranch_amount
   - @tranch = 1
   - @contingency = @subproject.grant_amount_contingency_cost
+  - @current_amount = @subproject.first_tranch_revised_amount
 - elsif params[:tranch] == '2'
   - @amount_requested = @subproject.second_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
   - @tranch = 2
   - @contingency = @subproject.grant_amount_contingency_cost
+  - @current_amount = @subproject.second_tranch_revised_amount
 - else
   - @amount_requested = @subproject.third_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
   - @tranch = 3
+  - @current_amount = @subproject.third_tranch_revised_amount
   - if @total_release > @total_grant_less_con 
     - @contingency = @subproject.grant_amount_contingency_cost - (@total_release - @total_grant_less_con)
   - else
@@ -129,7 +132,8 @@ table.table.table-responsive border=1 width=500
     td.text-left
       = @rfrs.bank_account_number
     td.text-right
-      = number_to_currency @amount_requested
+      / = number_to_currency @amount_requested
+      = number_to_currency @current_amount
     td.text-right
       = number_to_currency @previous_released 
     td.text-right

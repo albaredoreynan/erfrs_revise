@@ -46,8 +46,8 @@ table.table.table-responsive border=1 width=500
         p Sub-Project Name: &nbsp; #{@subproject.title}
         p Tranche: &nbsp; #{@rfrs.tranch_for}
         p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
-        p.bold Attachment
-        p style="padding-left: 30px;" #{@rfrs.remarks}
+        / p.bold Attachment
+        / p style="padding-left: 30px;" #{@rfrs.remarks}
     td.text-center width='12%' 
     td.text-center width='8%' 
     td.text-center width='10%'
