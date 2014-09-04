@@ -175,13 +175,13 @@ $( document ).ready(function() {
 
     subtotal_total = subtotal_direct + subtotal_indirect + subtotal_contingency;
     
-    total_lcc_cash_direct_cost = $('#subproject_total_lcc_cash_direct_cost').val(parseFloat($('#subproject_lcc_blgu_direct_cost').val()) + parseFloat($('#subproject_mlgu_direct_cost').val()));
-    total_lcc_cash_indirect_cost = $('#subproject_total_lcc_cash_indirect_cost').val(parseFloat($('#subproject_lcc_blgu_indirect_cost').val()) + parseFloat($('#subproject_mlgu_indirect_cost').val()));
-    total_lcc_cash_contingency_cost = $('#subproject_total_lcc_cash_contingency_cost').val(parseFloat($('#subproject_lcc_blgu_contingency_cost').val()) + parseFloat($('#subproject_mlgu_contingency_cost').val()));
+    // total_lcc_cash_direct_cost = $('#subproject_total_lcc_cash_direct_cost').val(parseFloat($('#subproject_lcc_blgu_direct_cost').val()) + parseFloat($('#subproject_mlgu_direct_cost').val()));
+    // total_lcc_cash_indirect_cost = $('#subproject_total_lcc_cash_indirect_cost').val(parseFloat($('#subproject_lcc_blgu_indirect_cost').val()) + parseFloat($('#subproject_mlgu_indirect_cost').val()));
+    // total_lcc_cash_contingency_cost = $('#subproject_total_lcc_cash_contingency_cost').val(parseFloat($('#subproject_lcc_blgu_contingency_cost').val()) + parseFloat($('#subproject_mlgu_contingency_cost').val()));
     
-    total_lcc_in_kind_direct_cost = $('#subproject_total_lcc_in_kind_direct_cost').val(parseFloat($('#subproject_community_direct_cost').val()) + parseFloat($('#subproject_plgu_others_direct_cost').val()));
-    total_lcc_in_kind_indirect_cost = $('#subproject_total_lcc_in_kind_indirect_cost').val(parseFloat($('#subproject_community_indirect_cost').val()) + parseFloat($('#subproject_plgu_others_indirect_cost').val()));
-    total_lcc_in_kind_contingency_cost = $('#subproject_total_lcc_in_kind_contingency_cost').val(parseFloat($('#subproject_community_contingency_cost').val()) + parseFloat($('#subproject_plgu_others_contingency_cost').val()));
+    // total_lcc_in_kind_direct_cost = $('#subproject_total_lcc_in_kind_direct_cost').val(parseFloat($('#subproject_community_direct_cost').val()) + parseFloat($('#subproject_plgu_others_direct_cost').val()));
+    // total_lcc_in_kind_indirect_cost = $('#subproject_total_lcc_in_kind_indirect_cost').val(parseFloat($('#subproject_community_indirect_cost').val()) + parseFloat($('#subproject_plgu_others_indirect_cost').val()));
+    // total_lcc_in_kind_contingency_cost = $('#subproject_total_lcc_in_kind_contingency_cost').val(parseFloat($('#subproject_community_contingency_cost').val()) + parseFloat($('#subproject_plgu_others_contingency_cost').val()));
     
 
     total_direct = parseFloat($('#subproject_total_lcc_cash_direct_cost').val()) +  parseFloat($('#subproject_total_lcc_in_kind_direct_cost').val());

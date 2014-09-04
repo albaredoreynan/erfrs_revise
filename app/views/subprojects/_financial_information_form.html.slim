@@ -57,16 +57,16 @@
           td#subtotal_total_percent
         tr
           td Total LCC Cash
-          td.total_lcc_cash= f.text_field :total_lcc_cash_direct_cost, class: "monetary_field", readonly: true
-          td.total_lcc_cash= f.text_field :total_lcc_cash_indirect_cost, class: "monetary_field", readonly: true
-          td.total_lcc_cash= f.text_field :total_lcc_cash_contingency_cost, class: "monetary_field", readonly: true
+          td.total_lcc_cash= f.text_field :total_lcc_cash_direct_cost, class: "monetary_field"
+          td.total_lcc_cash= f.text_field :total_lcc_cash_indirect_cost, class: "monetary_field"
+          td.total_lcc_cash= f.text_field :total_lcc_cash_contingency_cost, class: "monetary_field"
           td#total_lcc_cash.gray
           td#percent_lcc_percent.gray
         tr
           td Total LCC in Kind
-          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_direct_cost, class: "monetary_field", readonly: true
-          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_indirect_cost, class: "monetary_field", readonly: true
-          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_contingency_cost, class: "monetary_field", readonly: true
+          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_direct_cost, class: "monetary_field"
+          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_indirect_cost, class: "monetary_field"
+          td.total_lcc_in_kind= f.text_field :total_lcc_in_kind_contingency_cost, class: "monetary_field"
           td#total_lcc_in_kind.gray
           td#percent_lcc_in_kind.gray
         tr#total.gray
