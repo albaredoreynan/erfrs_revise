@@ -97,7 +97,8 @@ table.table.table-responsive border=1 width=500
       = @subproject.title
     td.text-left width='20%' Total Project Cost
     td.text-left width='30%'
-      = number_to_currency @rfrs.amount_approve 
+      - @total_proj_cost = @total_grant + @subtotal_lccs
+      = number_to_currency @total_proj_cost
 br
 table.table.table-responsive border=0 width="100%"
   tr
