@@ -20,7 +20,6 @@ class ReportsController < ApplicationController
 	end
 
 	def mga_reports
-
 		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
 		respond_to do |format|
     	format.html
@@ -95,16 +94,16 @@ class ReportsController < ApplicationController
 
     def rfrs_control_data 
       if current_user.role_id == 3 or current_user.role_id == 4
-        rfrs = Subproject.where(region_id: current_user.region_id, status:"Final")
+        rfrs = Subproject.where(region_id: current_user.region_id, status: "Final")
         subproject_id = rfrs.pluck(:id)
       elsif current_user.role_id == 5
-        rfrs = Subproject.where(municipality_id: current_user.municipality_id), status:"Final"    
+        rfrs = Subproject.where(municipality_id: current_user.municipality_id, status: "Final")    
         subproject_id = rfrs.pluck(:id)
       elsif current_user.role_id == 6
-        rfrs = Subproject.where(barangay_id: current_user.barangay_id, status:"Final")
+        rfrs = Subproject.where(barangay_id: current_user.barangay_id, status: "Final")
         subproject_id = rfrs.pluck(:id)
       else
-        rfrs = Subproject.all
+        rfrs = Subproject.where(status: "Final")
         subproject_id = rfrs.pluck(:id)
       end
       @rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id)
@@ -112,13 +111,13 @@ class ReportsController < ApplicationController
 
     def subproject_control_data
       if current_user.role_id == 3 or current_user.role_id == 4
-        @subproject_data = Subproject.where(region_id: current_user.region_id, status:"Final").order("region_id ASC")
+        @subproject_data = Subproject.where(region_id: current_user.region_id, status: "Final").order("region_id ASC")
       elsif current_user.role_id == 5
-        @subproject_data = Subproject.where(municipality_id: current_user.municipality_id, status:"Final").order("region_id ASC")    
+        @subproject_data = Subproject.where(municipality_id: current_user.municipality_id, status: "Final").order("region_id ASC")    
       elsif current_user.role_id == 6
-        @subproject_data = Subproject.where(barangay_id: current_user.barangay_id, status:"Final").order("region_id ASC")
+        @subproject_data = Subproject.where(barangay_id: current_user.barangay_id, status: "Final").order("region_id ASC")
       else
-        @subproject_data = Subproject.where(status:"Final").order("region_id ASC")
+        @subproject_data = Subproject.where(status: "Final").order("region_id ASC")
       end
     end
 
