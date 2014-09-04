@@ -97,7 +97,7 @@
       .col-md-4
         'ObR Date:
       .col-md-6.bold
-        = @rfrs.obr_date.strftime('%d-%b-%Y')
+        = @rfrs.obr_date.strftime('%d-%b-%Y') if @rfrs.obr_date.present?
   .col-md-6
     .form-group
       .col-md-4.text-right
