@@ -71,6 +71,8 @@ table.table.table-responsive border=1 width=500
           - @amount_requested = @subproject.second_tranch_revised_amount
         - else
           - @amount_requested = @subproject.third_tranch_revised_amount
+        p value
+        p #{@rfrs.tranch_for}
         p #{number_to_currency @amount_requested } 
   tr
   	td.text-right	width='80%' colspan=3
