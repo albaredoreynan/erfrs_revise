@@ -52,13 +52,15 @@
         <Cell ss:MergeDown="1"> <Data ss:Type="String"> Province </Data> </Cell>
         <Cell ss:MergeDown="1"> <Data ss:Type="String"> Municipality </Data> </Cell>
         <Cell ss:MergeDown="1"> <Data ss:Type="String">Allocation </Data></Cell>
+        <Cell ss:MergeDown="1"> <Data ss:Type="String">Approve </Data></Cell>
+
         <Cell ss:MergeAcross="2" ss:StyleID="2"> <Data ss:Type="String"> MIBF </Data> </Cell>
         <Cell ss:MergeDown="1"> <Data ss:Type="String"> Balance </Data> </Cell>
       </Row>
       <Row>
-        <Cell ss:Index="5"><Data ss:Type="String"> Release </Data></Cell>
-        <Cell ss:Index="6"><Data ss:Type="String"> Excess </Data></Cell>
-        <Cell ss:Index="7"><Data ss:Type="String"> Total </Data></Cell>
+        <Cell ss:Index="6"><Data ss:Type="String"> Release </Data></Cell>
+        <Cell ss:Index="7"><Data ss:Type="String"> Excess </Data></Cell>
+        <Cell ss:Index="8"><Data ss:Type="String"> Total </Data></Cell>
       </Row>
       <% @subprojects.each do |m, sps|%>
         <% allocation = 0 %>
@@ -81,6 +83,7 @@
           <Cell><Data ss:Type="String"><%=m.province.name %></Data></Cell>
           <Cell><Data ss:Type="String"><%=m.name %></Data></Cell>
           <Cell><Data ss:Type="String"><%=number_to_currency allocation %></Data></Cell>
+          <Cell><Data ss:Type="String"><%=number_to_currency approve_amount %></Data></Cell>
           <Cell><Data ss:Type="String"><%=number_to_currency release %></Data></Cell>
           <Cell><Data ss:Type="String"><%=number_to_currency excess %></Data></Cell>
           <Cell><Data ss:Type="String"><%=number_to_currency total_m %></Data></Cell>
