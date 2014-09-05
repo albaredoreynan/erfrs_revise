@@ -61,12 +61,20 @@
         <Cell ss:Index="7"><Data ss:Type="String"> Total </Data></Cell>
       </Row>
       <% @subprojects.each do |m, sps|%>
-        <%allocation = 0 %>
-        <%release = 0 %>
-        <%excess = 0 %>
-        <%allocation += sps.map{|c|c.grant_amount_direct_cost + c.grant_amount_indirect_cost + c.grant_amount_contingency_cost}.first %>
+        <% allocation = 0 %>
+        <% release = 0 %>
+        <% excess = 0 %>
+        <% year_allocated = sps.first.date_of_mibf.year %>
+        <% if (a = MuniFundAllocation.where(municipality_id:m.id, year: year_allocated)).present? %>
+          <% allocation = a.first.amount %>
+        <% else %>
+          <% allocation = 0%>
+        <% end %>
+        <%#allocation += sps.map{|c|c.grant_amount_direct_cost + c.grant_amount_indirect_cost + c.grant_amount_contingency_cost}.first %>
+        <% approve_amount = sps.map{|c| c.request_for_fund_releases.sum(&:amount_approve) }.pop %>
         <%release += sps.map{|c|c.first_tranch_revised_amount + c.second_tranch_revised_amount + c.third_tranch_revised_amount}.first %>
-        <%excess += sps.map{|c|c.first_tranch_amount + c.second_tranch_amount + c.third_tranch_amount}.first %>
+        <% excess += approve_amount - release %>
+        <%#excess += sps.map{|c|c.first_tranch_amount + c.second_tranch_amount + c.third_tranch_amount}.first %>
         <%total_m = release + excess %>
         <Row>
           <Cell><Data ss:Type="String"><%=m.province.region.code %> </Data></Cell>
