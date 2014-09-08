@@ -20,7 +20,7 @@ class NewsInformationsController < InheritedResources::Base
   protected
 
     def permitted_params
-      params.permit(news_information: %i[title content publish_start publish_end])
+      params.permit(news_information: %i[title content publish_start publish_end news_image])
     end
 
     def collection
