@@ -3,10 +3,14 @@ class NewsInformationsController < InheritedResources::Base
   before_filter :subheader, except: :show
   respond_to :html, :json
 
+  def index
+    # see news_information model for pagination display
+    @news_informations = NewsInformation.order(created_at: :desc).paginate(:page => params[:page])
+  end
+
   def show
    	@news_information = NewsInformation.find params[:id]
-    @news_list = NewsInformation.all.sort_by(&:created_at).reverse
-
+    @news_list = NewsInformation.where("publish_start <= ? and publish_end >= ?", Date.today, Date.today ).recent
   end
 
   def subheader

@@ -19,6 +19,7 @@ br
       .panel-body
         h2
           = @news_information.title
+        p style="color: #888" = @news_information.publish_start.strftime("%B %d, %Y")
         hr
         blockquote  
           p
