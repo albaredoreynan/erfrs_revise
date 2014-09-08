@@ -8,11 +8,18 @@ br
         h3.list-group-item-heading
           'Latest News
       -@news_list.each do |news|
-        =content_tag(:a, :href => news_information_path(news), class: "list-group-item") do
-          h5.list-group-item-heading
-            = truncate(news.title.titleize, length: 25)
-          p.list-group-item-text
-            = truncate(news.content, length: 50)
+        - if params[:id] == news.id.to_s
+          =content_tag(:a, :href => news_information_path(news), class: "list-group-item selected-news") do
+            h5.list-group-item-heading
+              = truncate(news.title.titleize, length: 25)
+            p.list-group-item-text
+              = truncate(news.content, length: 50)
+        - else
+          =content_tag(:a, :href => news_information_path(news), class: "list-group-item") do
+            h5.list-group-item-heading
+              = truncate(news.title.titleize, length: 25)
+            p.list-group-item-text
+              = truncate(news.content, length: 50)
 
   .col-md-8
     .panel.panel-default 
