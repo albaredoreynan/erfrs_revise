@@ -28,6 +28,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'cocoon'
 gem 'font-awesome-sass'
+gem 'paperclip', '~> 4.2' # make sure to install imagemagick in the server
 
 # utilities
 gem 'faker', require: false
