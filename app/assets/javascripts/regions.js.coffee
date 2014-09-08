@@ -8,7 +8,7 @@ $ ->
   provinces.attr('readonly', 'readonly')
   municipalities.attr('readonly', 'readonly')
   barangays.attr('readonly', 'readonly')
-
+  
   fetch_province = (region_id)->
     url = "/provinces.json?region_id=" + region_id
     $.get url, (data)->
@@ -38,22 +38,38 @@ $ ->
 
   regions.change ->
     rid = $(this).val()
-    fetch_province(rid)
+    if rid isnt ''
+      fetch_province(rid)
+    else
+      $("#subproject_province_id").empty()   
 
   provinces.change ->
     pid = $(this).val()
-    fetch_municipalities(pid)
+    if pid isnt ''
+      fetch_municipalities(pid)
+    else
+      $("#subproject_municipality_id").empty()   
 
   municipalities.change ->
     mid = $(this).val()
-    fetch_barangays(mid)
-
+    if mid isnt ''
+      fetch_barangays(mid)
+    else
+      $("#subproject_barangay_id").empty() 
+  
+  retrieve_region = (region_id) ->
+    $('#subproject_province_id').val(region_id) 
+ 
   retrieve_province = (region_id)->
     url = "/provinces.json?region_id=" + region_id
     $.get url, (data)->
       provinces.append('<option value></option>')
       $.each data, ->
         provinces.append($('<option></option>').attr('value', this.id).text(this.name))
+      spi = $.urlParam('subproject_province_id') || $.urlParam('province_id')
+      if spi isnt `undefined` and spi isnt ''
+        $('#subproject_province_id').val(spi) 
+        retrieve_municipalities(spi)
 
   retrieve_municipalities = (province_id)->
     url = "/municipalities.json?province_id=" + province_id
@@ -61,6 +77,10 @@ $ ->
       municipalities.append('<option value></option>')
       $.each data, ->
         municipalities.append($('<option></option>').attr('value', this.id).text(this.name))
+      smi = $.urlParam('subproject_municipality_id') || $.urlParam('municipality_id')
+      if smi isnt `undefined` and smi isnt '' 
+        $('#subproject_municipality_id').val(smi)
+        retrieve_barangays(smi)
 
   retrieve_barangays = (municipality_id)->
     url = "/barangays.json?municipality_id=" + municipality_id
@@ -68,6 +88,9 @@ $ ->
       barangays.append('<option value></option>')
       $.each data, ->
         barangays.append($('<option></option>').attr('value', this.id).text(this.name))
+      sbi = $.urlParam('subproject_barangay_id') || $.urlParam('barangay_id')   
+      if sbi isnt `undefined` and sbi isnt '' 
+        $('#subproject_barangay_id').val(sbi)
 
   regional_officers.on 'change', ->
     region_id = regional_officers.val()
@@ -86,4 +109,5 @@ $ ->
     if (municipalities.val() != '')
       mid = $(municipalities).val()
       retrieve_barangays(mid)
+  
 

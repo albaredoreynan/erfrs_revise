@@ -39,12 +39,12 @@ br
               .form-horizontal
                 .form-group
                   .col-md-3
-                    = label_tag :subproject_region_id, 'Region'
+                    = label_tag :region_id, 'Region'
                   .col-md-6
-                    = select_tag :region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control', id:"subproject_region_id"
+                    = select_tag :region_id, options_for_select(Region.values_for_select, selected: params[:region_id]), include_blank: true, class: 'form-control', id:"subproject_region_id"
                 .form-group
                   .col-md-3
-                    = label_tag :subproject_province_id, 'Province'
+                    = label_tag :province_id, 'Province'
                   .col-md-6
                     = select_tag :province_id, [], class: 'form-control', id: "subproject_province_id"
                 .form-group
