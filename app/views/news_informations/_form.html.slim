@@ -1,5 +1,5 @@
 .row.signup
-  = form_for @news_information do |f|
+  = form_for @news_information, html: { multipart: true } do |f|
     .col-md-4
       .form-group
         = f.label :news_header, 'News Header'
@@ -16,6 +16,10 @@
       .form-group
         = f.label 'Content'
         = f.text_area :content, class: 'form-control', rows: 10, style:"resize: none;"                  
+    .col-md-12                      
+      .form-group
+        = f.label 'Attach Photo'
+        = f.file_field :news_image
     .col-md-12
       = f.submit nil, class: 'pull-right btn btn-primary'
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},

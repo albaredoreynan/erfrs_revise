@@ -137,10 +137,13 @@ class RequestForFundReleasesController < ApplicationController
       format.pdf do
         render :pdf         => "ObR",
               :orientation  => 'Portrait',
-              :page_width   => '13in'
+              :page_width   => '13in',
+              :margin => {:top       => 0,
+                           :bottom   => 4}
       end
     end
   end
+
 
   def dv
     @rfrs = RequestForFundRelease.find params[:rfrs_id]
@@ -151,7 +154,9 @@ class RequestForFundReleasesController < ApplicationController
       format.pdf do
         render :pdf         => "DV",
               :orientation  => 'Portrait',
-              :page_width   => '13in'
+              :page_width   => '13in',
+              :margin => {:top       => 0,
+                           :bottom   => 4}
       end
     end
   end
@@ -165,7 +170,9 @@ class RequestForFundReleasesController < ApplicationController
       format.pdf do
         render :pdf         => "Request_for_Fund_Release",
               :orientation  => 'Portrait',
-              :page_width   => '13in'
+              :page_width   => '13in',
+              :margin => {:top       => 0,
+                           :bottom   => 4}
       end
     end
   end

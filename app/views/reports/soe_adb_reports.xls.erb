@@ -47,14 +47,13 @@
       </Row>
 
       <Row>
+        <Cell><Data ss:Type="String">Item No.</Data></Cell>
         <Cell><Data ss:Type="String">Description of Goods and Services </Data></Cell>
         <Cell><Data ss:Type="String">Contract/PO No. for EA's Record</Data></Cell>
         <Cell><Data ss:Type="String">PCCS No.</Data></Cell>
         <Cell><Data ss:Type="String">Name and Address of Supplier</Data></Cell>
         <Cell><Data ss:Type="String">Total Amount of Bill Paid/Payable</Data></Cell>
-
         <Cell><Data ss:Type="String">ADB Disbursement%</Data></Cell>
-        
         <Cell><Data ss:Type="String">Amount Requested for Withdrawal </Data></Cell>
         <Cell><Data ss:Type="String">Payment/ Check No.</Data></Cell>
         <Cell><Data ss:Type="String"> Currency and Amount Charged to Imprest Account </Data></Cell>
@@ -68,11 +67,12 @@
         <Cell><Data ss:Type="String"><%= soe.subproject.title %></Data></Cell>
         <Cell><Data ss:Type="String"><%= trail_id(6, soe.subproject_id) %></Data></Cell>
         <Cell><Data ss:Type="String"> </Data></Cell>
-        <Cell><Data ss:Type="String"> </Data></Cell>
-        <Cell><Data ss:Type="Number"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
         <Cell><Data ss:Type="Number"><%= number_to_currency soe.subproject.total_grant_amount%></Data></Cell>
         <Cell><Data ss:Type="String"></Data></Cell>
-        <Cell> </Cell>
+        <Cell><Data ss:Type="String"></Data><%= number_to_currency soe.amount_approve%></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
+        <Cell><Data ss:Type="String"></Data></Cell>
         <Cell><Data ss:Type="Number"><%= soe.exchange_rate.present? ? number_to_currency(soe.exchange_rate) : '' %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= soe.exchange_rate.present? ? number_to_currency(soe.subproject.total_dv_amount * soe.exchange_rate) : ''%></Data></Cell>
         <Cell><Data ss:Type="String"><%= soe.excel_remark%></Data></Cell>
