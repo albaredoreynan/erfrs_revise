@@ -36,25 +36,25 @@
       .col-md-4.bold
         'Amount Requested:
       .col-md-6.amt_requested
-        = @amount_requested
+        = number_to_currency(@amount_requested)
   .col-md-6
     .form-group
       .col-md-7.bold.text-right
         'Cumulative Total Including this Request:
       .col-md-3
-        = @cumulative_amount 
+        = number_to_currency(@cumulative_amount) 
   .col-md-6
     .form-group
       .col-md-4.bold
         'Previous Released:
       .col-md-6
-        = @previous_released
+        = number_to_currency(@previous_released)
   .col-md-6
     .form-group
       .col-md-7.bold.text-right
         'Balance After This Request:
       .col-md-3
-        = @balance_amount
+        = number_to_currency(@balance_amount)
   
   .col-md-6
     .form-group
@@ -80,7 +80,7 @@
       .col-md-2.bold.text-right
         'Amount Approved:
       .col-md-3
-        =f.text_field :amount_approve, class: 'amount_approved'
+        =f.text_field :amount_approve, class: 'amount_approved monetary_field'
   
   .col-md-12
     .form-group
