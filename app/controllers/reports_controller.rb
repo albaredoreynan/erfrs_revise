@@ -12,8 +12,8 @@ class ReportsController < ApplicationController
 	has_scope :fund_source
 
   def soe_reports
-		@soe = apply_scopes(@rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay])
-    raise
+		@soe = apply_scopes(@rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay, :fund_source]).where('fund_sources.code' => "WB")
+
     respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }
@@ -58,7 +58,7 @@ class ReportsController < ApplicationController
 	end
 
   def soe_adb_reports
-    @soe = apply_scopes(@rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay])
+    @soe = apply_scopes(@rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay, :fund_source]).where('fund_sources.code' => "ADB")
     respond_to do |format|
       format.html
       format.xls # { send_data @products.to_csv(col_sep: "\t") }

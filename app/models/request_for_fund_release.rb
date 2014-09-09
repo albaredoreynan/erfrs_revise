@@ -1,5 +1,6 @@
 class RequestForFundRelease < ActiveRecord::Base
   belongs_to :subproject
+  delegate :fund_source, to: :subproject, :allow_nil => true
   has_many :rfr_signatories
   # TODO fix relationship to disregard requested_by_first_designation
   # belongs_to :requested_by_first, class_name: 'TeamMember', foreign_key: "requested_by_first"
