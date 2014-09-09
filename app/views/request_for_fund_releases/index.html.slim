@@ -19,17 +19,17 @@ br
                 .col-md-3
                   = label_tag :rfr_id, 'RFR ID' 
                 .col-md-6
-                  = text_field_tag :rfr_id, '', class: 'form-control'
+                  = text_field_tag :rfr_id, params[:rfr_id], class: 'form-control'
               .form-group
                 .col-md-3
                   = label_tag :sp_id, 'SP ID'
                 .col-md-6
-                  = text_field_tag :sp_id, '', class: 'form-control'
+                  = text_field_tag :sp_id, params[:sp_id], class: 'form-control'
               .form-group
                 .col-md-3
                   = label_tag :username, 'Username'
                 .col-md-6
-                  = text_field_tag :username, '', class: 'form-control'
+                  = text_field_tag :username, params[:username], class: 'form-control'
               .form-group
                 .col-md-3
                   = label_tag :status
