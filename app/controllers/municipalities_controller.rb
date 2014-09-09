@@ -22,9 +22,10 @@ class MunicipalitiesController < InheritedResources::Base
 
   def show
     #@subprojects = apply_scopes(@municipality.subprojects)
-    @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
+    @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).order("date_of_mibf")
     @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
     @cgdp = Cgdp.where('municipality_id =?', params[:id]).last
+
   end
 
   def update
@@ -94,7 +95,8 @@ class MunicipalitiesController < InheritedResources::Base
 
     def collection
       @municipalities = apply_scopes(Municipality)
-      @municipalities = @municipalities.paginate(page: params[:page], :per_page => 90) unless request.url =~ /json$/
+      @municipalities = @municipalities.paginate(page: params[:page]) unless request.url =~ /json/
+      @municipalities
     end
 
     def update_params

@@ -128,8 +128,9 @@ module ApplicationHelper
     @total = @tranch1.inject(:+).to_f + @tranch2.inject(:+).to_f + @tranch3.inject(:+).to_f
   end
   
-  def earliest_month(year, municipality_id)
-    @month = Subproject.select('first_tranch_date_required').where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ? AND fund_source_id = ? OR fund_source_id = ?', year, municipality_id, 1, 2).order("first_tranch_date_required").first
+  def earliest_month(year, municipality_id, sp)
+    # @month = Subproject.select('first_tranch_date_required').where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ? AND fund_source_id = ? OR fund_source_id = ?', year, municipality_id, 1, 2).order("first_tranch_date_required")
+    @month = Subproject.find(sp)
     if @month.nil?
       DateTime.now.beginning_of_year
     else  

@@ -15,7 +15,7 @@ class BarangaysController < InheritedResources::Base
 
     def collection
       @barangays = apply_scopes(Barangay)
-      @barangays = @barangays.paginate(page: params[:page]) unless request.url =~ /json$/
+      @barangays = @barangays.paginate(page: params[:page]) unless request.url =~ /json/
       @barangays
     end
 
