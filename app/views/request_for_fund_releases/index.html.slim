@@ -19,17 +19,17 @@ br
                 .col-md-3
                   = label_tag :rfr_id, 'RFR ID' 
                 .col-md-6
-                  = text_field_tag :rfr_id, '', class: 'form-control'
+                  = text_field_tag :rfr_id, params[:rfr_id], class: 'form-control'
               .form-group
                 .col-md-3
                   = label_tag :sp_id, 'SP ID'
                 .col-md-6
-                  = text_field_tag :sp_id, '', class: 'form-control'
+                  = text_field_tag :sp_id, params[:sp_id], class: 'form-control'
               .form-group
                 .col-md-3
                   = label_tag :username, 'Username'
                 .col-md-6
-                  = text_field_tag :username, '', class: 'form-control'
+                  = text_field_tag :username, params[:username], class: 'form-control'
               .form-group
                 .col-md-3
                   = label_tag :status
@@ -39,12 +39,12 @@ br
               .form-horizontal
                 .form-group
                   .col-md-3
-                    = label_tag :subproject_region_id, 'Region'
+                    = label_tag :region_id, 'Region'
                   .col-md-6
-                    = select_tag :region_id, options_for_select(Region.values_for_select, selected: params[:subproject_region_id]), include_blank: true, class: 'form-control', id:"subproject_region_id"
+                    = select_tag :region_id, options_for_select(Region.values_for_select, selected: params[:region_id]), include_blank: true, class: 'form-control', id:"subproject_region_id"
                 .form-group
                   .col-md-3
-                    = label_tag :subproject_province_id, 'Province'
+                    = label_tag :province_id, 'Province'
                   .col-md-6
                     = select_tag :province_id, [], class: 'form-control', id: "subproject_province_id"
                 .form-group
@@ -77,24 +77,34 @@ br
           th Status
           th style="width: 10%;" Action
       tbody
-
-        - @rfrs.each do |rf|
-          tr 
-            td = trail_id(6, rf.id)
-            td = trail_id(6, rf.subproject_id)
-            td = rf.subproject.title
-            td = rf.request_date.strftime('%b %d, %Y')
-            td = number_to_currency(rf.subproject.first_tranch_amount)
-            td = number_to_currency(rf.amount_approve)
-            td = rf.status
+        - if @rfrs.empty?
+          tr
             td
-              / = link_to "<i class='fa fa-eye'></i>".html_safe, rf, class: 'btn btn-xs btn-primary'
-              / '&nbsp
-              = link_to "<i class='fa fa-eye'></i>".html_safe, request_for_fund_release_path(rf, :sp_id => rf.subproject_id), class: 'btn btn-xs btn-primary'
-              '&nbsp
-              / = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, rf], class: 'btn btn-xs btn-warning'
-              / '&nbsp
-              / = link_to "<i class='fa fa-trash-o'></i>".html_safe, rf, method: :delete, confirm: 'Are you sure you want to delete this request?', class: 'btn btn-xs btn-danger'
+            td
+            td
+            td
+            td No data found
+            td
+            td
+            td
+        - else
+          - @rfrs.each do |rf|
+            tr 
+              td = trail_id(6, rf.id)
+              td = trail_id(6, rf.subproject_id)
+              td = rf.subproject.title
+              td = rf.request_date.strftime('%b %d, %Y')
+              td = number_to_currency(rf.subproject.first_tranch_amount)
+              td = number_to_currency(rf.amount_approve)
+              td = rf.status
+              td
+                / = link_to "<i class='fa fa-eye'></i>".html_safe, rf, class: 'btn btn-xs btn-primary'
+                / '&nbsp
+                = link_to "<i class='fa fa-eye'></i>".html_safe, request_for_fund_release_path(rf, :sp_id => rf.subproject_id), class: 'btn btn-xs btn-primary'
+                '&nbsp
+                / = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, rf], class: 'btn btn-xs btn-warning'
+                / '&nbsp
+                / = link_to "<i class='fa fa-trash-o'></i>".html_safe, rf, method: :delete, confirm: 'Are you sure you want to delete this request?', class: 'btn btn-xs btn-danger'
 css:
   .form-group > .col-md-3{
     text-align: right;

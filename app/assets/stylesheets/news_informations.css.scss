@@ -1,3 +1,11 @@
 // Place all the styles related to the news_informations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.selected-news{
+  background: #eee;
+}
+
+.news-image{
+  max-height: 300px;
+}
