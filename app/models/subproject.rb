@@ -26,6 +26,7 @@ class Subproject < ActiveRecord::Base
   ####################### Validation ########################
   validate :equal_financial_information, :on => :create
   validate :first_tranch_validation, :on => :create
+  validate :total_tranch_must_equal_to_grant_amount
   validates :region_id, :municipality_id, :province_id, :barangay_id, 
             :title, :cycle, :date_encoded,
             presence: true
@@ -115,6 +116,15 @@ class Subproject < ActiveRecord::Base
   ####################### END ###########################
 
   ################# CUSTOM VALIDATION #####################
+
+  def total_tranch_must_equal_to_grant_amount
+    margin = 10 # for floating point margin of error
+    grant = grant_amount_direct_cost + grant_amount_indirect_cost + grant_amount_contingency_cost
+    tranch = first_tranch_amount + second_tranch_amount + third_tranch_amount
+    if (grant - tranch).abs > margin
+      errors.add(:total, "tranches must equal or closed to total grant amount.")
+    end
+  end
 
   def add_date_encoded
     self.date_encoded = DateTime.now.to_date
