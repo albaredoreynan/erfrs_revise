@@ -58,6 +58,8 @@ Rails.application.routes.draw do
 
 
   # ajax
+  get '/check_dup', to: 'static_pages#check_dup', as:'check_dup'
+
   get '/display_group', to: 'subprojects#display_group', as:'display_group'
   
   get '/update_exchange_rate', to: 'reports#update_exchange_rate', as:'update_exchange_rate'

@@ -16,7 +16,7 @@ br
   .col-md-2
     = f.label :title
   .col-md-10
-    = f.text_field :title, class: 'form-control v'
+    = f.text_field :title, class: 'form-control', id: "subproject_title"
 
   .col-md-12 style="margin-top: 10px;"
     .row
@@ -90,6 +90,8 @@ css:
   }
 
 javascript:
+  $("#subproject_title").check_dup("subproject", "title", "It Is Already a Duplicated Title, Are You Sure You Want To Continue?");
+
   $("#subproject_municipality_id").change(function(){
     item_val = $(this).val();
     $.ajax({
