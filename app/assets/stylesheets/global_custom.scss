@@ -5138,6 +5138,17 @@ a.list-group-item-danger.active:focus {
   opacity: 0.2;
   filter: alpha(opacity=20);
 }
+
+.close-modal {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+}
 .close:hover,
 .close:focus {
   color: #000000;
@@ -5214,7 +5225,7 @@ button.close {
   background-color: #000000;
 }
 .modal-backdrop.fade {
-  opacity: 0;
+  opacity: 0.3;
   filter: alpha(opacity=0);
 }
 

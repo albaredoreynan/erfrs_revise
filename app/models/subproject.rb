@@ -185,7 +185,12 @@ class Subproject < ActiveRecord::Base
     return self.request_for_fund_releases.sum(:amount_approve)
   end
 
-
+  def sum_of_tranches
+    first = self.first_tranch_amount_release.present? ? self.first_tranch_amount_release : self.first_tranch_revised_amount
+    second = self.second_tranch_amount_release.present? ? self.second_tranch_amount_release : self.second_tranch_revised_amount 
+    third = self.third_tranch_amount_release.present? ? self.third_tranch_amount_release : self.third_tranch_revised_amount
+    return first + second + third
+  end
   private
 
   def self.fetch_all_created_by(username)

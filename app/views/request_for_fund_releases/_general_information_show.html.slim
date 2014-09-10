@@ -29,9 +29,9 @@
   .col-md-6
     .form-group
       .col-md-5
-        ' Sub-Project Status
+        ' RFR Status
       .col-md-7.bold
-        = @subproject.status
+        = @rfrs.status      
   .col-md-6
     .form-group
       .col-md-4
@@ -41,13 +41,22 @@
   .col-md-6
     .form-group
       .col-md-5
+        ' Sub-Project Status
+      .col-md-7.bold
+        = @subproject.status        
+  .col-md-6
+    .form-group
+      .col-md-4
+        ' Title
+      .col-md-7.bold
+        = @subproject.title    
+  .col-md-6
+    .form-group
+      .col-md-5
         ' Request Date
       .col-md-7.bold
         = @rfrs.request_date.strftime('%d-%b-%Y')
-  .col-md-2
-    ' Title
-  .col-md-10.bold
-    = @subproject.title
+    
   .col-md-12 style="margin-top: 10px;"
     .row
       .col-md-6
