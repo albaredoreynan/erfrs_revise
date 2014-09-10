@@ -87,7 +87,7 @@
       .col-md-6.bold
         = @rfrs.obr_number
         | &nbsp;&nbsp;&nbsp;
-        = link_to "Print ObR".html_safe, obr_request_for_fund_releases_path(:rfrs_id => params[:id], :sp_id => params[:sp_id]), class: 'btn btn-xs btn-primary'
+        = link_to "View ObR".html_safe, obr_request_for_fund_releases_path(:rfrs_id => params[:id], :sp_id => params[:sp_id]), class: 'btn btn-xs btn-primary'
   .col-md-6
     .form-group
       .col-md-4.text-right
@@ -95,7 +95,7 @@
       .col-md-6.bold
         = @rfrs.dv_number
         | &nbsp;&nbsp;&nbsp;
-        = link_to "Print DV".html_safe, dv_request_for_fund_releases_path(:rfrs_id => params[:id], :sp_id => params[:sp_id]), class: 'btn btn-xs btn-primary'
+        = link_to "View DV".html_safe, dv_request_for_fund_releases_path(:rfrs_id => params[:id], :sp_id => params[:sp_id]), class: 'btn btn-xs btn-primary'
   .col-md-6
     .form-group
       .col-md-4

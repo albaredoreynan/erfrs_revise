@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get :select_subproject, on: :collection
     get :obr, on: :collection
     get :dv, on: :collection
+    get :remove_signatory, on: :collection
     get :request_for_fund_pdf, on: :collection
     post :rfr_signatory, on: :collection
   end

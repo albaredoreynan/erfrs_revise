@@ -93,24 +93,30 @@ table.table.table-responsive border=1 width=500
       p Position
     td.text-center width='40%'
       br
-      - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "OR")
-      - @positions.each do |position|
-        #{position.regional_officer.name}
-        '-------------------------------------------------------
-        #{position.regional_officer.designation}
-        br
+      - if @positions.count == 0
+        p No entry found!
+      - else
+        - @positions.each do |position|
+          table.table.table-condensed.borderless.vcenter
+            tr
+              td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+            tr
+              td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
     td.text-center width='10%'
       p Signature
       p Printed Name
       p Position
     td.text-center width='40%'
       br
-      - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "OR")
-      - @positions.each do |position|
-        #{position.regional_officer.name}
-        '-------------------------------------------------------
-        #{position.regional_officer.designation}
-        br
+      - if @positions2.count == 0
+        p No entry found!
+      - else
+        - @positions2.each do |position|
+          table.table.table-condensed.borderless.vcenter
+            tr
+              td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+            tr
+              td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
 css:      
   .form-group > .col-md-3{
     text-align: right;
@@ -121,7 +127,10 @@ css:
   .sm_font {
     font-size: 9px;
   }
-  table {
-  	margin-top: -15px;
+  .borderless tbody tr td, .borderless thead tr th {
+    border: none;
+  }
+  .vcenter td {
+    vertical-align: middle!important;
   }
       

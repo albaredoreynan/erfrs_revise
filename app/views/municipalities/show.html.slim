@@ -233,13 +233,13 @@ hr
         .col-md-6.text-right
           'SAA Number
         .col-md-6.bold
-          = @cgdp.present? ? @cgdp.saa_number : ''
+          = @cgdp.present? ? @cgdp.try(:saa_number) : ''
     .col-md-8.parent
       .form-group
         .col-md-6.text-right
           'SAA Date
         .col-md-6.bold
-          = @cgdp.saa_date.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
+          = @cgdp.present? ? @cgdp.try(:saa_date).strftime('%d-%b-%Y') : ''
 
 = render 'view_cash_program'
 / = render 'assigned_fund_source'
