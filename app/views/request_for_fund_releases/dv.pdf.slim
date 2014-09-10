@@ -113,24 +113,30 @@ table.table.table-responsive border=1 width=500
       p Position
     td.sm_font.text-center width='35%'
       br
-      - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "DV")
-      - @positions.each do |position|
-        #{position.regional_officer.name}
-        '-------------------------------------------------------
-        #{position.regional_officer.designation}
-        br
+      - if @positions.count == 0
+        p No entry found!
+      - else
+        - @positions.each do |position|
+          table.table.table-condensed.borderless.vcenter
+            tr
+              td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+            tr
+              td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
     td.text-center width='15%'
       p Signature
       p Printed Name
       p Position
     td.sm_font.text-center width='35%'
       br
-      - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "DV")
-      - @positions.each do |position|
-        #{position.regional_officer.name}
-        '-------------------------------------------------------
-        #{position.regional_officer.designation}
-        br
+      - if @positions2.count == 0
+        p No entry found!
+      - else
+        - @positions2.each do |position|
+          table.table.table-condensed.borderless.vcenter
+            tr
+              td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+            tr
+              td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
 
 table.table.table-responsive border=1 width=500
   tr

@@ -22,3 +22,6 @@ config/database.yml
 *.swo
 
 .ruby-version
+
+# Ignore paperclip saved images
+public/system/

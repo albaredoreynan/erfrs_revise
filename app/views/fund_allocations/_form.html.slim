@@ -15,7 +15,7 @@
     /   = f.text_field :end_date, :autofocus => true, class: 'form-control'
     .form-group
       = f.label :amount
-      = f.text_field :amount, :autofocus => true, class: 'form-control'                      
+      = f.text_field :amount, :autofocus => true, class: 'form-control monetary_field'                      
     div
       = f.submit "Save", class: 'btn btn-primary pull-right'
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},
