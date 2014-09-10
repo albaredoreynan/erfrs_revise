@@ -134,38 +134,34 @@ hr
           p Position
         td.text-center width='40%'
           br
-          - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "DV")
-          - @positions.each do |position|
-            #{position.regional_officer.name}
-            '-------------------------------------------------------
-            #{position.regional_officer.designation}
-            br
-          / br
-          / - @positions = regional_officer(@subproject.region_id, "A", "DV")
-          / - @positions.each do |position|
-          /   #{position.name}
-          /   '-------------------------------------------------------
-          /   #{position.designation}
-          /   br
+          - if @positions.count == 0
+            p No entry found!
+          - else
+            - @positions.each do |position|
+              table.table.table-condensed.borderless.vcenter
+                tr
+                  td width='70%' #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+                  td width='30%' rowspan=2
+                    = link_to "<i class='fa fa-trash-o'></i>".html_safe, remove_signatory_request_for_fund_releases_path(:id => position, :rfrs_id => params[:rfrs_id], :sp_id => params[:sp_id], type: 'dv'), title: 'Delete', class: 'btn btn-xs btn-danger'
+                tr
+                  td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
         td.text-center width='10%'
           p Signature
           p Printed Name
           p Position
         td.text-center width='40%'
           br
-          - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "DV")
-          - @positions.each do |position|
-            #{position.regional_officer.name}
-            '-------------------------------------------------------
-            #{position.regional_officer.designation}
-            br
-          / br
-          / - @positions_b = regional_officer(@subproject.region_id, "B", "DV")
-          / - @positions_b.each do |position_b|
-          /   #{position_b.name}
-          /   '-------------------------------------------------------
-          /   #{position_b.designation}
-          /   br
+          - if @positions2.count == 0
+            p No entry found!
+          - else  
+            - @positions2.each do |position|
+              table.table.table-condensed.borderless.vcenter
+                tr
+                  td width='70%' #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+                  td width='30%' rowspan=2
+                    = link_to "<i class='fa fa-trash-o'></i>".html_safe, remove_signatory_request_for_fund_releases_path(:id => position, :rfrs_id => params[:rfrs_id], :sp_id => params[:sp_id], type: 'dv'), title: 'Delete', class: 'btn btn-xs btn-danger'
+                tr
+                  td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
     table.table.table-bordered
       tr
         td.text-left width='2%'
@@ -196,6 +192,12 @@ hr
 css:      
   .form-group > .col-md-3{
     text-align: right;
+  }
+  .borderless tbody tr td, .borderless thead tr th {
+    border: none;
+  }
+  .vcenter td {
+    vertical-align: middle!important;
   }
 
         

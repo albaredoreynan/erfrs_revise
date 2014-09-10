@@ -22,6 +22,7 @@ class MuniFundAllocationsController < ApplicationController
 
 	def create
 		@muni_fund_allocation = MuniFundAllocation.new(muni_fund_allocation_params)
+		@muni_fund_allocation.amount = muni_fund_allocation_params[:amount].gsub(/,/, '').to_f
   	if @muni_fund_allocation.save
       flash[:success] = 'Fund Allocation for this municipality has been created.'
       redirect_to muni_fund_allocations_path
@@ -33,6 +34,7 @@ class MuniFundAllocationsController < ApplicationController
 
 	def update
 		@muni_fund_allocation = MuniFundAllocation.find params[:id]
+		params[:muni_fund_allocation][:amount] = muni_fund_allocation_params[:amount].gsub(/,/, '').to_f
     if @muni_fund_allocation.update_attributes muni_fund_allocation_params
       flash[:success] = 'Fund Allocation for this municipality has been updated.'
       redirect_to muni_fund_allocations_path

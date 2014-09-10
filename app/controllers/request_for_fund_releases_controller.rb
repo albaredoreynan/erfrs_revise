@@ -132,6 +132,8 @@ class RequestForFundReleasesController < ApplicationController
     @rfrs = RequestForFundRelease.find params[:rfrs_id]
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
     @rfr_signatory = RfrSignatory.new
+    @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "OR")
+    @positions2 = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "OR")
     respond_to do |format|
       format.html
       format.pdf do
@@ -149,6 +151,8 @@ class RequestForFundReleasesController < ApplicationController
     @rfrs = RequestForFundRelease.find params[:rfrs_id]
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
     @rfr_signatory = RfrSignatory.new
+    @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "DV")
+    @positions2 = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "DV")
     respond_to do |format|
       format.html
       format.pdf do
@@ -190,6 +194,16 @@ class RequestForFundReleasesController < ApplicationController
       redirect_to dv_request_for_fund_releases_path(:rfrs_id => params[:rfr_signatory][:request_for_fund_release_id], :sp_id => params[:sp_id])
     end
   end 
+
+  def remove_signatory
+    @rfr_signatory = RfrSignatory.find(params[:id])
+    @rfr_signatory.destroy!
+    if params[:type] == 'obr'
+      redirect_to obr_request_for_fund_releases_path(:rfrs_id => params[:rfrs_id], :sp_id => params[:sp_id])
+    else
+      redirect_to dv_request_for_fund_releases_path(:rfrs_id => params[:rfrs_id], :sp_id => params[:sp_id])
+    end
+  end
 
   private
     def tranch(subproject)

@@ -21,15 +21,15 @@ hr
       tr 
         td.text-center rowspan=2 colspan=4 width='80%'
           h4 OBLIGATION REQUEST
-        td.text-left No: #{@rfrs.obr_number}
+        td.text-left No: #{ @rfrs.obr_number.present? ? @rfrs.obr_number : '' }
       tr
         td.text-left Date: #{ !@rfrs.obr_date.nil? ? @rfrs.obr_date.strftime("%d-%b-%Y") : '' }
       tr
         td.text-center width='10%' Payee
         td colspan=4
-          = @rfrs.account_name.upcase
+          = @rfrs.account_name.present? ? @rfrs.account_name.upcase : ''
           | &nbsp;/&nbsp;
-          = @rfrs.bank_account_number
+          = @rfrs.bank_account_number.present? ? @rfrs.bank_account_number : ''
 
       tr
         td.text-center width='10%' Office
@@ -56,8 +56,8 @@ hr
         td.text-left width='50%'
           .col-md-12
             p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
-            p Sub-Project Name: &nbsp; #{@subproject.title}
-            p Tranche: &nbsp; #{@rfrs.tranch_for}
+            p Sub-Project Name: &nbsp; #{ @subproject.title.present? ? @subproject.title : '' }
+            p Tranche: &nbsp; #{@rfrs.tranch_for.present? ? @rfrs.tranch_for : '' }
             p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
             / p.bold Attachment
             / p style="padding-left: 30px;" #{@rfrs.remarks}         
@@ -115,12 +115,21 @@ hr
           p Position
         td.text-center width='40%'
           br
-          - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "A", sign_type: "OR")
-          - @positions.each do |position|
-            #{position.regional_officer.name}
-            '-------------------------------------------------------
-            #{position.regional_officer.designation}
-            br
+          - if @positions.count == 0
+            p No entry found!
+          - else
+            - @positions.each do |position|
+              table.table.table-condensed.borderless.vcenter
+                tr
+                  td width='70%' #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+                  td width='30%' rowspan=2
+                    = link_to "<i class='fa fa-trash-o'></i>".html_safe, remove_signatory_request_for_fund_releases_path(:id => position, :rfrs_id => params[:rfrs_id], :sp_id => params[:sp_id], type: 'obr'), title: 'Delete', class: 'btn btn-xs btn-danger'
+                tr
+                  td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
+              / p #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+              / p -------------------------------------------------------
+              / p #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
+              / br    
         td.text-center width='10%'
           p Signature
           p Printed Name
@@ -128,12 +137,18 @@ hr
           
           
         td.text-center width='40%'
-          - @positions = RfrSignatory.where(request_for_fund_release_id: params[:rfrs_id], group: "B", sign_type: "OR")
-          - @positions.each do |position|
-            #{position.regional_officer.name}
-            '-------------------------------------------------------
-            #{position.regional_officer.designation}
-            br
+          br
+          - if @positions2.count == 0
+            p No entry found!
+          - else  
+            - @positions2.each do |position|
+              table.table.table-condensed.borderless.vcenter
+                tr
+                  td width='70%' #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+                  td width='30%' rowspan=2
+                    = link_to "<i class='fa fa-trash-o'></i>".html_safe, remove_signatory_request_for_fund_releases_path(:id => position, :rfrs_id => params[:rfrs_id], :sp_id => params[:sp_id], type: 'obr'), title: 'Delete', class: 'btn btn-xs btn-danger'
+                tr
+                  td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
       / tr    
       /   td.text-center width='10%' Signature
       /   td.text-left width='40%'
@@ -162,6 +177,12 @@ hr
 css:      
   .form-group > .col-md-3{
     text-align: right;
+  }
+  .borderless tbody tr td, .borderless thead tr th {
+    border: none;
+  }
+  .vcenter td {
+    vertical-align: middle!important;
   }
 
         
