@@ -7,7 +7,8 @@ class NewsInformation < ActiveRecord::Base
     has_attached_file :news_image, :styles => { :medium => "220x220>" }
   else
     has_attached_file :news_image, :styles => { :medium => "220x220>" },
-    :path => "/home/azureuser/shared/public/system/:class/:attachment/:id/:style/:basename.:extension"
+    :path => "/home/azureuser/shared/public/system/:class/:attachment/:id/:style/:basename.:extension",
+    :url => "/home/azureuser/shared/public/system/:class/:attachment/:id/:style/:basename.:extension"
   end
   validates_attachment_content_type :news_image, :content_type => /\Aimage\/.*\Z/
   ####
