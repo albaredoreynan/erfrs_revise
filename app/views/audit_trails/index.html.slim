@@ -1,0 +1,22 @@
+- @hide_nav = true
+.col-sm-12.title-header
+  .col-sm-6
+    h4 Audit Trail
+br
+br
+br
+.col-sm-12
+  .row.sp-table
+    table.table.table-hover
+      thead
+        tr
+          th User
+          th Action
+          th Date
+      tbody
+        - @activities.each do |activity|
+          tr.text-center
+            td #{activity.owner.first_name} #{activity.owner.last_name}
+            -act = activity.key.split(".")
+            td #{act.shift.camelize} has been #{act.shift}d
+            td= activity.created_at.strftime("%d-%b-%Y") 

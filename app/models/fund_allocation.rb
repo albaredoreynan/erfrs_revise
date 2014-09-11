@@ -1,4 +1,7 @@
 class FundAllocation < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+  
 	belongs_to :fund_source
   # validates :start_date, :end_date, :fund_source_id, presence: true
   # validate :not_overlap, scope: :fund_source_id
