@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "audit_trails/index"
+  get "activities/index"
   #authenticated :super_user do
   #  root to: 'static_pages#dashboard', as: 'authenticated_root'
   #end
@@ -39,6 +41,12 @@ Rails.application.routes.draw do
   resources :designations
   resources :muni_fund_allocations
   
+  #trailgem
+  resources :activities
+  resources :audit_trails
+
+
+
   resources :reports do
     get :soe_reports, on: :collection
     get :soe_adb_reports, on: :collection

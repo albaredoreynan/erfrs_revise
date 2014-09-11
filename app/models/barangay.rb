@@ -1,4 +1,7 @@
-class Barangay < ActiveRecord::Base
+class Barangay < ActiveRecord::Base  
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+  
   belongs_to :municipality
   has_many :subprojects
   delegate :province, to: :municipality, :allow_nil => true
