@@ -79,5 +79,5 @@ Erfrs::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   #Paperclip path
-  config.paperclip_defaults = { :storage_fog => :fog, :fog_credentials => { :provider => "Local", :local_root => "/home/azureuser/shared/public" }, :fog_directory => "", :fog_host => "http://dswd-erfrs.cloudapp.net" }
+  
 end
