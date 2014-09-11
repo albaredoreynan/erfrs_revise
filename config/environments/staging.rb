@@ -77,4 +77,7 @@ Erfrs::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  #Paperclip path
+  config.paperclip_defaults = { :local_root => "/home/azureuser/shared/public" }
 end
