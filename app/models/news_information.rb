@@ -1,6 +1,6 @@
 class NewsInformation < ActiveRecord::Base
   #### paperclip
-  has_attached_file :news_image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  has_attached_file :news_image, :styles => { :medium => "220x220>" }
   validates_attachment_content_type :news_image, :content_type => /\Aimage\/.*\Z/
   ####
 
