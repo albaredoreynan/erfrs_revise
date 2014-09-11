@@ -66,12 +66,19 @@
           td#total_plgu.gray =number_to_currency total_plgu
           td#percent_plgu.gray #{number_with_precision((total_plgu/sub_total_total*100).round(2), precision: 2)}%
         tr#subtotal.gray
-          td.bold TOTAL
+          td.bold TOTAL SP COST
           td#subtotal_direct= number_to_currency subtotal_direct
           td#subtotal_indirect= number_to_currency subtotal_indirect
           td#subtotal_contingency= number_to_currency subtotal_contingency
           td#subtotal_total.bold = number_to_currency (subtotal_direct + subtotal_indirect + subtotal_contingency)
           td#subtotal_total_percent 100.00%
+        tr class='sep'
+          td
+          td
+          td
+          td
+          td
+          td
         tr
           td Total LCC Cash
           td.total_lcc_cash= number_to_currency @subproject.total_lcc_cash_direct_cost
@@ -94,4 +101,8 @@
           td#total_total.bold #{number_to_currency total_total}
           td#total_percent 100.00%
 
+css:
+  .sep{
+    height: 35px;
+  }
   

@@ -5,12 +5,13 @@
     - @news_informations.each do |news|
         .well.well-sm
           h5
-            = link_to news.title, news_information_path(news)
+            b = link_to news.title, news_information_path(news)
+          p style="color: #888" = news.publish_start.strftime("%B %d, %Y")  
           = truncate(news.content, length: 250)
           | &nbsp;
           br
           br
-          p style="color: #888" = news.publish_start.strftime("%B %d, %Y")
+
           = link_to "Read More...", news_information_path(news), class: "btn btn-primary btn-sm"
     = link_to 'View All News', news_informations_path, class: 'btn btn-primary btn-sm'
   .col-md-3
