@@ -3,16 +3,18 @@
     h4 News and Information
     hr
     - @news_informations.each do |news|
-        .well.well-sm
-          h5
-            = link_to news.title, news_information_path(news)
-          = truncate(news.content, length: 250)
+        .well.well-sm.clearfix
+          - if news.news_image?
+            = image_tag news.news_image.url(:medium), class: 'img-thumbnail pull-left image-news'
+          h3.news-header
+            b = link_to news.title, news_information_path(news)
+          p style="color: #888" = news.publish_start.strftime("%B %d, %Y")  
+          = truncate(news.content, length: 250, class: 'pull-right')
           | &nbsp;
           br
           br
-          p style="color: #888" = news.publish_start.strftime("%B %d, %Y")
-          = link_to "Read More...", news_information_path(news), class: "btn btn-primary btn-sm"
-    = link_to 'View All News', news_informations_path, class: 'btn btn-primary btn-sm'
+          = link_to "Read More...", news_information_path(news), class: "btn btn-primary btn-sm pull-right"
+    = link_to 'View All News', news_informations_path, class: 'pull-right'
   .col-md-3
     .panel.panel-default
       .panel-heading 
