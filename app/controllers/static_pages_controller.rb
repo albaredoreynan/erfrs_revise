@@ -11,5 +11,10 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def check_dup
+    @default_message = params[:message]
+    @check_dup = params[:model].camelize.constantize.where(params[:type].intern => "#{params[:content_var]}").present?
+  end
+
 
 end

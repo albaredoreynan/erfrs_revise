@@ -17,7 +17,7 @@
     .form-group
       = f.label :name, 'Municipality', class: 'control-label col-sm-2'
       .col-sm-10
-        = f.text_field :name, class: 'form-control'
+        = f.text_field :name, class: 'form-control check_dup'
     .form-group
       .col-sm-12
         = f.submit 'Save', class: 'btn pull-right btn-primary'
@@ -27,3 +27,35 @@ css:
   .container{
     min-height: 100%;
   }
+
+
+
+javascript:
+  $('#municipality_name').check_dup('municipality', 'name')
+  // $(".check_dup").blur(function(){
+  //     var text = $(this).val()
+  //     $.ajax({
+  //     url: "/check_dup",
+  //     data: {
+  //       model : "municipality",
+  //       type : "name",
+  //       content_var : text, 
+  //       message : "This Contains a Dup"
+  //     },
+  //     dataType: "script"
+  //     });
+  // });
+
+  // function check_dup(model_name, datatype, text, dup_message) {
+  //     $.ajax({
+  //     url: "/check_dup",
+  //     data: {
+  //       model : model_name,
+  //       type : datatype,
+  //       content_var : text,
+  //       message : dup_message
+  //     },
+  //     dataType: "script"
+  //     });
+
+  // }

@@ -247,3 +247,24 @@ $.urlParam = function(name){
         $('#total_percent').html("100%");
     }
   }
+
+
+$.fn.check_dup = function(model_name, datatype, dup_message) {
+  if(typeof dup_message === 'undefined'){
+    var dup_message = "It is already a duplicate, Are you sure you want to continue?"
+  };
+  return this.focusout(function(){
+    var text = $(this).val()
+    $.ajax({
+    url: "/check_dup",
+    data: {
+      model : model_name,
+      type : datatype,
+      content_var : text,
+      message : dup_message
+    },
+    dataType: "script"
+    });
+  });
+};
+

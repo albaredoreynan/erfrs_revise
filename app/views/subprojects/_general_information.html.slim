@@ -69,4 +69,16 @@
   / .col-md-10 style="margin-top: 10px;"
   /   strong Name of Development Financial Institution
 br
+
+javascript:
+  $(".fund_source").each(function(){
+    sp_id = $(this).attr("id");
+    $.ajax({
+    url: "/assigned_fund_source",
+    data: {
+      subproject_id : sp_id
+    },
+      dataType: "script"
+    });
+  });    
   
