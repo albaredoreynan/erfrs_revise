@@ -67,7 +67,7 @@ $ ->
       $.each data, ->
         provinces.append($('<option></option>').attr('value', this.id).text(this.name))
       spi = $.urlParam('subproject_province_id') || $.urlParam('province_id')
-      if spi isnt `undefined` and spi isnt ''
+      if spi isnt `undefined` and spi isnt '' and $("#edit_subproject").length == 0
         $('#subproject_province_id').val(spi) 
         retrieve_municipalities(spi)
 
@@ -78,7 +78,7 @@ $ ->
       $.each data, ->
         municipalities.append($('<option></option>').attr('value', this.id).text(this.name))
       smi = $.urlParam('subproject_municipality_id') || $.urlParam('municipality_id')
-      if smi isnt `undefined` and smi isnt '' 
+      if smi isnt `undefined` and smi isnt '' and $("#edit_subproject").length == 0 
         $('#subproject_municipality_id').val(smi)
         retrieve_barangays(smi)
 
@@ -89,7 +89,7 @@ $ ->
       $.each data, ->
         barangays.append($('<option></option>').attr('value', this.id).text(this.name))
       sbi = $.urlParam('subproject_barangay_id') || $.urlParam('barangay_id')   
-      if sbi isnt `undefined` and sbi isnt '' 
+      if sbi isnt `undefined` and sbi isnt '' and $("#edit_subproject").length == 0 
         $('#subproject_barangay_id').val(sbi)
 
   regional_officers.on 'change', ->
