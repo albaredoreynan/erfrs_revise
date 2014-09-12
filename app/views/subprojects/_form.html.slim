@@ -15,7 +15,8 @@
   - if params[:id].present? 
     .col-sm-12.title-header
       .col-sm-6.pull-left
-        h3 Edit Sub-Project
+        h3 id='edit_subproject'
+          | Edit Sub-Project
       .col-sm-6
         .page-details-main-buttons
           - if @subproject.status != 'Final'
@@ -26,7 +27,8 @@
   - else
     .col-sm-12.title-header
       .col-sm-6.pull-left.col-xs-12
-        h3 Create Sub-Project
+        h3 id='create_subproject'
+          | Create Sub-Project
       .col-sm-6.col-xs-12
         .page-details-main-buttons
           = f.submit 'Save', class: 'btn btn-primary'
