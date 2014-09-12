@@ -78,6 +78,9 @@ Erfrs::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  #Paperclip path
-  config.paperclip_defaults = { :storage_fog => :fog, :fog_credentials => { :provider => "Local", :local_root => "/home/azureuser/shared/public" }, :fog_directory => "", :fog_host => "http://dswd-erfrs.cloudapp.net" }
+  #Paperclip configs
+  Paperclip::Attachment.default_options.merge!({
+    :path=>"/home/azureuser/shared/public:url",
+    :url=>"/paperclip/:class/:attachment/:style/:basename.:extension"
+  })
 end

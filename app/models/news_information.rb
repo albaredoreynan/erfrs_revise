@@ -3,7 +3,8 @@ class NewsInformation < ActiveRecord::Base
   tracked owner: ->(controller, model) { controller.current_user }
   
   #### paperclip
-  has_attached_file :news_image, :styles => { :medium => "220x220>" }
+  has_attached_file :news_image, :styles => { :medium => "220x220>", :thumb => "75x75" }, 
+  :default_url => "/assets/images/missing.png"
   validates_attachment_content_type :news_image, :content_type => /\Aimage\/.*\Z/
   ####
 

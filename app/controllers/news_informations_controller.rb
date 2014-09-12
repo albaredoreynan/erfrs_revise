@@ -16,6 +16,10 @@ class NewsInformationsController < InheritedResources::Base
   def subheader
     @hide_nav = true
   end
+
+  def view_all
+    @news_informations = NewsInformation.order(created_at: :desc).paginate(:page => params[:page])
+  end
   
   protected
 
