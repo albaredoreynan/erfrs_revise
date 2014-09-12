@@ -145,27 +145,35 @@ table.table.table-responsive border=1 width=500
   tr
     td.text-center width='50%' colspan=2
       br
-      #{team_member_name(@rfrs.requested_by_first)}
+      = team_member_name(@rfrs.requested_by_first)
+      br
       '------------------------------------------------------- 
-      #{@rfrs.designation_first}  
+      br
+      = @rfrs.designation_first
     td.text-center width='50%' colspan=2
       br
-      #{team_member_name(@rfrs.requested_by_second)}
+      = team_member_name(@rfrs.requested_by_second)
+      br
       '------------------------------------------------------- 
-      #{@rfrs.designation_second}
+      br
+      = @rfrs.designation_second
   tr 
     td.bold colspan=4 Review as to completeness  of requirements by:
   tr
     td.text-center width='50%' colspan=2    
       br
-      #{team_member_name(@rfrs.reviewed_by_first)}
+      = team_member_name(@rfrs.reviewed_by_first)
+      br
       '------------------------------------------------------- 
-      #{@rfrs.rev_designation_first}  
+      br
+      = @rfrs.rev_designation_first
     td.text-center width='50%' colspan=2
       br
-      #{team_member_name(@rfrs.reviewed_by_second)}
+      = team_member_name(@rfrs.reviewed_by_second)
+      br
       '------------------------------------------------------- 
-      #{@rfrs.rev_designation_second}
+      br
+      = @rfrs.rev_designation_second
   tr
     td.text-left.bold width='10%' Date:
     td.text-center width='40%'
@@ -184,22 +192,28 @@ table.table.table-responsive border=1 width=500
     td width='50%' colspan=2
       p.bold Reviewed by:
       .col-md-7.text-center
-        #{team_member_name(@rfrs.srpmo_reviewed_by)}
+        = team_member_name(@rfrs.srpmo_reviewed_by)
+        br
         '------------------------------------------------------- 
-        #{@rfrs.srpmo_designation}  
+        br
+        = @rfrs.srpmo_designation
       p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')}
       p.bold Recommended by:
       .col-md-7.text-center
-        #{team_member_name(@rfrs.srpmo_recommend_by)}
+        = team_member_name(@rfrs.srpmo_recommend_by)
+        br
         '------------------------------------------------------- 
-        #{@rfrs.srpmo_rec_designation}
+        br
+        = @rfrs.srpmo_rec_designation
       p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_rec_date.strftime('%d-%b-%Y')}
     td width='50%' colspan=4
       p.bold Approved by:
       .col-md-7.text-center
-        #{team_member_name(@rfrs.rpmo_approved_by)}
+        = team_member_name(@rfrs.rpmo_approved_by)
+        br
         '------------------------------------------------------- 
-        #{@rfrs.rpmo_designation}  
+        br
+        = @rfrs.rpmo_designation
       p.bold Date: #{@rfrs.rpmo_date.nil? ? "" : @rfrs.rpmo_date.strftime('%d-%b-%Y')}
 
 css:    
