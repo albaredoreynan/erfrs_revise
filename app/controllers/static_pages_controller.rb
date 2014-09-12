@@ -16,5 +16,8 @@ class StaticPagesController < ApplicationController
     @check_dup = params[:model].camelize.constantize.where(params[:type].intern => "#{params[:content_var]}").present?
   end
 
+  def view_all
+    @news_informations = NewsInformation.where("publish_start <= ? and publish_end >= ?", Date.today, Date.today ).recent
+  end
 
 end
