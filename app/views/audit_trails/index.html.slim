@@ -13,6 +13,7 @@ br
           th User
           th Action
           th Date
+          th Location
       tbody
         - @activities.each do |activity|
           tr.text-center
@@ -20,3 +21,8 @@ br
             -act = activity.key.split(".")
             td #{act.shift.camelize} has been #{act.shift}d
             td= activity.created_at.strftime("%d-%b-%Y") 
+            td
+              -if activity.trackable
+                = link_to activity.trackable.title, activity.trackable
+              -else
+                ' Already Removed
