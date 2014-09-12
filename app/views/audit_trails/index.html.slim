@@ -19,7 +19,7 @@ br
           tr.text-center
             td #{activity.owner.first_name} #{activity.owner.last_name}
             -act = activity.key.split(".")
-            td #{act.shift.camelize} has been #{act.shift}d
+            td #{act.shift.camelize} - #{act.shift.camelize}
             td= activity.created_at.strftime("%d-%b-%Y") 
             td
               -if activity.trackable
