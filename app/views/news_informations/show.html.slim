@@ -26,9 +26,9 @@ br
       .panel-body
         h2
           = @news_information.title
+        p style="color: #888" = @news_information.publish_start.strftime("%B %d, %Y")
         - if @news_information.news_image?
           = image_tag @news_information.news_image.url, class: 'news-image'
-        p style="color: #888" = @news_information.publish_start.strftime("%B %d, %Y")
         hr
         blockquote  
           p
