@@ -1,5 +1,7 @@
 class Region < ActiveRecord::Base
-
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+  
   has_many :provinces
   has_many :regional_officers
 
