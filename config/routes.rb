@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   get '/landing_page' => 'static_pages#landing_page'
   get '/dashboard' => 'static_pages#dashboard'
+  #defined links
+  get '/view_all' => 'static_pages#view_all'
 
   resources :subproject_implementation_plans
   resources :subprojects
@@ -80,5 +82,5 @@ Rails.application.routes.draw do
   get '/display_designation', to: 'request_for_fund_releases#display_designation', as:'display_designation'
   
   get '/assigned_fund_source', to: 'municipalities#assigned_fund_source', as: 'assigned_fund_source' 
-
+  
 end
