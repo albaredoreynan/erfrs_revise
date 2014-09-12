@@ -79,5 +79,8 @@ Erfrs::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   #Paperclip configs
-  Paperclip::Attachment.default_options[:url] = "/home/azureuser/shared/public/system/:class/:attachment/:id/:style/:filename"
+  Paperclip::Attachment.default_options.merge!({
+    :path=>"/home/azureuser/shared/public:url",
+    :url => "/system/:class/:attachment/:id_partition/:style/:filename"
+  })
 end
