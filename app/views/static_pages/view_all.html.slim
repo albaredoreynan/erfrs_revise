@@ -1,0 +1,25 @@
+.row
+  .col-md-12
+    h4 News and Information
+    hr
+  .col-md-12  
+    - @news_informations.each do |news|
+        .panel.panel-default
+          .panel-heading
+            
+            h5
+              = link_to news.title, news_information_path(news)
+              / news.publish_start.strftime("%B %d, %Y")  
+          .panel-body
+            .col-md-1
+              - if news.news_image?
+                = image_tag news.news_image.url(:medium), class: 'img-thumbnail pull-left image-news'
+              - else
+                = image_tag 'missing.png', size: "75x100", class: 'img-thumbnail pull-left image-news'
+            .col-md-11  
+              p Published Date: #{news.publish_start.strftime("%B %d, %Y")}
+              = truncate(news.content, length: 250, class: 'pull-right')
+              br
+              = link_to "Read More...", news_information_path(news), class: "btn btn-primary btn-sm pull-right"
+              br
+              br
