@@ -78,6 +78,7 @@ Erfrs::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  #Paperclip path
+  #Paperclip configs
+  Paperclip.registered_attachments_styles_path = '/tmp/config/paperclip_attachments.yml'
   
 end
