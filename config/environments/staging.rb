@@ -80,7 +80,7 @@ Erfrs::Application.configure do
 
   #Paperclip configs
   Paperclip::Attachment.default_options.merge!({
-    :path=>"/home/azureuser/shared/public:url",
-    :url => "/system/:class/:attachment/:id_partition/:style/:filename"
+    :path=>"/home/azureuser/shared/public/system/:class/:attachment/:id_partition/:style/:filename",
+    :url=>"/home/azureuser/shared/public/system/:class/:attachment/:id_partition/:style/:filename"
   })
 end
