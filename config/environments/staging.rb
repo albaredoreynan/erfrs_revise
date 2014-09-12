@@ -79,6 +79,5 @@ Erfrs::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   #Paperclip configs
-  Paperclip.registered_attachments_styles_path = '/tmp/config/paperclip_attachments.yml'
-  
+  Paperclip::Attachment.default_options[:url] = "/home/azureuser/shared/public/system/:class/:attachment/:id/:style/:filename"
 end
