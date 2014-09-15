@@ -68,6 +68,9 @@ class RequestForFundReleasesController < ApplicationController
 
   def show
     @rfrs = RequestForFundRelease.find params[:id]
+    if params[:sp_id].nil?
+      params[:sp_id] = @rfrs.subproject_id
+    end
     @subproject = Subproject.includes(:region, :province, :municipality, :barangay).find(params[:sp_id].to_i)
   end
 
