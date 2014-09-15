@@ -130,14 +130,17 @@
         =f.hidden_field :tranch_for, value: @tranch
         =f.hidden_field :subproject_id, value: params[:sp_id].to_i
 javascript: 
-  $('.amount_approved').val( parseInt($('.amt_requested').text()) )
+  var amt_requested = $(".amt_requested").html()
+  var amt_requested = parseFloat(amt_requested.replace(/[$,]+/g,""),10) 
+
+  $('.amount_approved').val(amt_requested)
   
   $('input[type=radio]').click(function () { 
     if ($(this).val() == 0){
       $('#request_for_fund_release_amount_approve').val(0)
     }
     else{
-      $('#request_for_fund_release_amount_approve').val( parseInt($('.amt_requested').text()) )
+      $('#request_for_fund_release_amount_approve').val(amt_requested)
     }
 
   });
