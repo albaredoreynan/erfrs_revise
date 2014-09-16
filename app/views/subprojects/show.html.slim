@@ -14,6 +14,7 @@ br
 
 = form_for @subproject, html: { class: 'form-horizontal' } do |f|
   .col-md-12
+    = render 'cash_program_history'
     = render 'general_information'
     = render 'financial_information'
     = render 'projected_schedule'
