@@ -26,9 +26,16 @@ class RequestForFundRelease < ActiveRecord::Base
   scope :username, -> username {includes(subproject: :user).where("users.username" => username)}
   scope :with_status, -> status {where(status: status)}
 
+  scope :drafts, -> { where(status: 'Draft') }
+  scope :null_status, -> { where(status: '') }
+
+
   # scope :upcoming, lambda {
   # where("start_date between ? and ?", Date.today, Date.today.next_month.beginning_of_month) }
 
+  def location
+    subproject.barangay.name.to_s + ',' +  subproject.municipality.name  + ',' + subproject.province.name
+  end  
 
   def confirm_presence_of_obr_date?
   	obr_date.nil?

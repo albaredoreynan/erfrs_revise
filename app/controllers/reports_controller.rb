@@ -21,7 +21,7 @@ class ReportsController < ApplicationController
 	end
 
 	def mga_reports
-		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
+		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality, :request_for_fund_releases).where(status: "Final").reject { |sp| sp.with_draft_null_status_rfrs? }.group_by(&:municipality)
 		respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }
@@ -33,7 +33,7 @@ class ReportsController < ApplicationController
 	end
 
 	def cg_reports
-		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
+		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality, :request_for_fund_releases).where(status: "Final").reject { |sp| sp.with_draft_null_status_rfrs? }.group_by(&:municipality)
 		respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }
@@ -45,7 +45,7 @@ class ReportsController < ApplicationController
 	end
 
 	def cash_program_reports
-		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality).group_by(&:municipality)
+		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality, :request_for_fund_releases).reject { |sp| sp.with_draft_null_status_rfrs? }.group_by(&:municipality)
     respond_to do |format|
       format.html
       format.xls
@@ -113,7 +113,7 @@ class ReportsController < ApplicationController
         rfrs = Subproject.where(status: "Final", fund_source_id: fund_source)
         subproject_id = rfrs.pluck(:id)
       end
-      @rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id)
+      @rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id, status: "Final")
     end
 
     def subproject_control_data
@@ -127,7 +127,5 @@ class ReportsController < ApplicationController
         @subproject_data = Subproject.where(status: "Final").order("region_id ASC")
       end
     end
-
-
 
 end

@@ -15,4 +15,8 @@ class User < ActiveRecord::Base
       type == role.name
     end
   end
+
+  def is_regional_or_admin?
+    role.name == 'Regional' || role.name == 'Admin'
+  end  
 end

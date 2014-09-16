@@ -23,7 +23,7 @@
         .col-md-4.text-right
           'Status:
         .col-md-6.bold
-          = f.select :status, options_for_select(Cgdp::STATUS, selected: @cgdp.status.titleize), {}
+          = select_status_options("cgdp",f,@cgdp)
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
