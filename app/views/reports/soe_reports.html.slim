@@ -35,10 +35,8 @@ hr
           th 14
           th 15
           th 16
-          th 17
         tr
           th Item No.
-          th Location
           th style="min-width:298px" Name of Contractor / Supplier / Consultant
           th Contract Number
           th style="min-width:100px" Contract Date
@@ -58,7 +56,6 @@ hr
         - @soe.each_with_index do |soe, index|
           tr
   	       	td= index + 1
-            td #{soe.location}
   	        td #{soe.subproject.barangay.name}, #{soe.subproject.municipality.name.titleize}
   	        td= trail_id(6, soe.subproject_id)
   	        td= soe.subproject.date_of_mibf
