@@ -5,4 +5,5 @@ $(function() {
 		}	
 	});
 	$(".monetary_field").focus(function(){ if ( $(this).val() == 0 ) {  $(this).val(''); }  });
+	$(".tranch_input").focus(function(){ if ( $(this).val() == 'NaN' ) {  $(this).val(''); }  });
 });
