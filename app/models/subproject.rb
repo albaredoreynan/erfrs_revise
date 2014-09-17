@@ -1,6 +1,9 @@
 class Subproject < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller.current_user }
+
+  # cash program history
+  has_paper_trail :only => [:first_tranch_date_required, :second_tranch_date_required, :third_tranch_date_required]
   
   belongs_to :region
   belongs_to :province
@@ -80,14 +83,12 @@ class Subproject < ActiveRecord::Base
   # validates :team_members, associated: {:message => "Team Members Missing"}, :if => -> {self.status == "Final"}
   ####################### SCOPES ###########################
   scope :with_user, -> username {
-
     includes(:user).where('users.username' => username) 
   }
   scope :with_id,     -> id { where id: id }
   scope :with_status, -> status { where status: status }
   scope :fund_source_id, -> fs { where fund_source_id: fs}
-
-
+  scope :final, where(status: "Final")
 
   # if ENV['ERFRS_USES_POSTGRESQL']
   scope :year, -> year { where 'EXTRACT(YEAR FROM date_of_mibf) = ?', year }
@@ -120,6 +121,9 @@ class Subproject < ActiveRecord::Base
   ####################### END ###########################
 
   ################# CUSTOM VALIDATION #####################
+  def with_draft_null_status_rfrs?
+    request_for_fund_releases.drafts.count > 0 || request_for_fund_releases.null_status.count > 0
+  end  
 
   def total_tranch_must_equal_to_grant_amount
     margin = 10 # for floating point margin of error

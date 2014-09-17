@@ -183,6 +183,9 @@ hr
         button data-toggle='modal' data-target='#view_cash_program' class=" btn btn-primary "
           = icon_text(nil, 'View Cash Program')
         | &nbsp  
+        button data-toggle='modal' data-target='#history_cash_program' class=" btn btn-primary "
+          = icon_text(nil, 'History Cash Program')
+        | &nbsp  
         / button data-toggle='modal' id='assigned_fund_source' class="btn btn-primary"
           / = icon_text(nil, 'Assign Fund Sources')
     .col-md-12
@@ -243,6 +246,7 @@ hr
           -if @cgdp.present?
             = @cgdp.saa_date.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
 = render 'view_cash_program'
+= render 'cash_program_history'
 / = render 'assigned_fund_source'
 
 javascript:

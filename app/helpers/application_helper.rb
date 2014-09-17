@@ -54,6 +54,18 @@ module ApplicationHelper
   #   @fund_source = FundSource.where(code: code).last
   #   @fund_source.id
   # end  
+  
+  #Status Select Dropdown System Wide
+  def select_status_options(class_name,f,object)
+    current_user.is_regional_or_admin? ? disabled = false : disabled = true
+    if class_name == 'cgdp'
+      @classname = class_name.camelize.constantize::STATUS
+    else
+      @classname = class_name.camelize.constantize::STATUSES
+    end   
+    select = f.select :status, options_for_select(@classname,params[:id].present? ? object.status : ""),{}, { class: 'form-control', :disabled => disabled }
+    select
+  end
 
   def budget_allocation(code, year)
     @budget = FundAllocation.select('amount').where( fund_source_id: code, year: year).last

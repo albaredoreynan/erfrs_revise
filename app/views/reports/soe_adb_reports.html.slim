@@ -23,8 +23,10 @@ hr
           th.text-left colspan='3' Category/ Sub-Category:
           th.text-left colspan='4' Application No.:
           th.text-left Date:
+          th
         tr
           th Item No.
+          th Location
           th style="min-width:158px" Description of Goods and Services
           th style="min-width:158px"  
             | Contract/PO No. for EA's Record
@@ -42,6 +44,7 @@ hr
         - @soe.each_with_index do |soe, index|
           tr
             td= index + 1
+            td = soe.location
             td= soe.subproject.title
             td= trail_id(6, soe.subproject_id)
             td
