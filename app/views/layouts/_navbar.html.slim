@@ -20,6 +20,7 @@
         li = link_to "Municipal Grants Allocation ", mga_reports_reports_path
         li = link_to "Status of Community Grants", cg_reports_reports_path
         li = link_to "Community Grants Disbursement Plan", cash_program_reports_reports_path
+        li = link_to "Request For Fund Release Tracking", rfrs_tracking_reports_reports_path
     - if current_user.role.code == 0
       li class = active_class("admin")
         = link_to "Administration", admin_index_path
