@@ -65,13 +65,14 @@ class Subproject < ActiveRecord::Base
             :community_indirect_cost, :community_contingency_cost, :mlgu_direct_cost, :mlgu_indirect_cost, :mlgu_contingency_cost,
             :plgu_others_direct_cost, :plgu_others_indirect_cost, :plgu_others_contingency_cost, :total_lcc_cash_direct_cost, :total_lcc_cash_indirect_cost,
             :total_lcc_cash_contingency_cost, :total_lcc_in_kind_direct_cost, :total_lcc_in_kind_indirect_cost, :total_lcc_in_kind_contingency_cost,
-            :first_tranch_amount, :first_tranch_date_required, :second_tranch_amount, :second_tranch_date_required, :third_tranch_amount, :third_tranch_date_required, 
+            :first_tranch_amount, :first_tranch_date_required, :second_tranch_amount, :second_tranch_date_required,
+            #:third_tranch_amount, :third_tranch_date_required, 
             presence: {:message => 'should be filled'}, :if => ->{ self.status == 'Final' }  
   
   #validates :first_tranch_amount, :second_tranch_amount, :third_tranch_amount, numericality: {greater_than_or_equal_to: 0, message: "error: enter proper amount"}
   validates :first_tranch_date_required, presence: true, :if => -> {self.first_tranch_amount.present?}
   validates :second_tranch_date_required, presence: true, :if => -> {self.second_tranch_amount.present?}
-  validates :third_tranch_date_required, presence: true, :if => -> {self.third_tranch_amount.present?}
+  #validates :third_tranch_date_required, presence: true, :if => -> {self.third_tranch_amount.present?}
 
   validate :mbif_date
 

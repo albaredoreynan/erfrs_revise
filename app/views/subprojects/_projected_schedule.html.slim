@@ -24,7 +24,9 @@
             - first_amount = @subproject.first_tranch_revised_amount.to_f
 
           th.text-center 1
-          td.text-right = number_to_percentage 100*(first_amount.to_f/@total.to_f), precision: 1
+          td.text-right 
+            / = number_to_percentage 100*(first_amount.to_f/@total.to_f), precision: 1
+            = number_to_percentage @subproject.tranch_one_percentage, precision: 1
           td.text-center
             - @date = @subproject.first_tranch_date_required.to_s
             = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
@@ -42,7 +44,9 @@
               - second_amount = (@subproject.first_tranch_amount.to_f + @subproject.second_tranch_amount.to_f) - @subproject.first_tranch_revised_amount.to_f
 
           th.text-center 2 
-          td.text-right = number_to_percentage 100*(second_amount.to_f/@total.to_f), precision: 1
+          td.text-right 
+            / = number_to_percentage 100*(second_amount.to_f/@total.to_f), precision: 1
+            = number_to_percentage @subproject.tranch_two_percentage, precision: 1
           td.text-center
             - @date = @subproject.second_tranch_date_required.to_s
             = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
@@ -58,14 +62,24 @@
               - third_amount = (@total.to_f - first_amount.to_f) - second_amount.to_f
 
           th.text-center 3 
-          td.text-right = number_to_percentage 100*(third_amount.to_f/@total.to_f), precision: 1
-          td.text-center
-            - @date = @subproject.third_tranch_date_required.to_s
-            = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
-          td.text-right = number_to_currency @subproject.third_tranch_amount.to_f
-          td.text-right
-            = number_to_currency third_amount.to_f
-          td.text-right = number_to_currency @subproject.third_tranch_amount_release.to_f
+          td.text-right 
+            / = number_to_percentage 100*(third_amount.to_f/@total.to_f), precision: 1
+            = number_to_percentage @subproject.tranch_three_percentage, precision: 1
+          - if @subproject.tranch_three_percentage.nil? || @subproject.tranch_three_percentage == 0  
+            td.text-center
+            td.text-right
+            td.text-right
+            td.text-right
+          - else  
+            td.text-center
+              - @date = @subproject.third_tranch_date_required.to_s
+              = @date.blank? ? '' : Date.parse(@date).strftime('%d-%b-%Y')
+            td.text-right = number_to_currency @subproject.third_tranch_amount.to_f
+            td.text-right
+              = number_to_currency third_amount.to_f
+            td.text-right = number_to_currency @subproject.third_tranch_amount_release.to_f
+        
+
         tr
           th colspan=3 TOTAL
           td.text-right.bold = number_to_currency (@subproject.first_tranch_amount.to_f + @subproject.second_tranch_amount.to_f + @subproject.third_tranch_amount.to_f)

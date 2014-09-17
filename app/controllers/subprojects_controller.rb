@@ -198,6 +198,9 @@ class SubprojectsController < ApplicationController
       :first_tranch_revised_amount,
       :second_tranch_revised_amount,
       :third_tranch_revised_amount,
+      :tranch_one_percentage,
+      :tranch_two_percentage,
+      :tranch_three_percentage,
       # team member params
       team_members_attributes: [:id, :name, :designation_id, :email, :phone]
     ]

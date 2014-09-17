@@ -80,13 +80,13 @@ $.urlParam = function(name){
     subproject_third_tranch_amount = (parseFloat($('#subproject_third_tranch_amount').val()))
     
 
-    // (isNaN($('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100 ).toFixed(2));
-    // (isNaN($('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2));
-    // (isNaN($('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2));
+    // (isNaN($('#subproject_tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#subproject_tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100 ).toFixed(2));
+    // (isNaN($('#subproject_tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#subproject_tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2));
+    // (isNaN($('#subproject_tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2)))) ?  '' : $('#subproject_tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2));
     // original value
-    $('#tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100).toFixed(2))
-    $('#tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2))
-    $('#tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2))
+    $('#subproject_tranch_one_percentage').val((subproject_first_tranch_amount / total_grant * 100).toFixed(2))
+    $('#subproject_tranch_two_percentage').val((subproject_second_tranch_amount / total_grant * 100).toFixed(2))
+    $('#subproject_tranch_three_percentage').val((subproject_third_tranch_amount / total_grant * 100).toFixed(2))
   }
 
   function compute_tranch(){
@@ -98,9 +98,9 @@ $.urlParam = function(name){
 
     total_grant = parseFloat($('#subproject_grant_amount_direct_cost').val()) + parseFloat($('#subproject_grant_amount_indirect_cost').val()) + parseFloat($('#subproject_grant_amount_contingency_cost').val());
 
-    subproject_first_tranch_amount = (parseFloat($('#tranch_one_percentage').val()))/Math.pow(10, 2);
-    subproject_two_tranch_amount = (parseFloat($('#tranch_two_percentage').val()))/Math.pow(10, 2);
-    subproject_three_tranch_amount = (parseFloat($('#tranch_three_percentage').val()))/Math.pow(10, 2);
+    subproject_first_tranch_amount = (parseFloat($('#subproject_tranch_one_percentage').val()))/Math.pow(10, 2);
+    subproject_two_tranch_amount = (parseFloat($('#subproject_tranch_two_percentage').val()))/Math.pow(10, 2);
+    subproject_three_tranch_amount = (parseFloat($('#subproject_tranch_three_percentage').val()))/Math.pow(10, 2);
     
     $('#subproject_first_tranch_amount').val((parseTranch(total_grant * subproject_first_tranch_amount)).toFixed(2));
     $('#subproject_second_tranch_amount').val((parseTranch(total_grant * subproject_two_tranch_amount)).toFixed(2));

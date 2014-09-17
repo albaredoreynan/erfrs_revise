@@ -77,13 +77,15 @@ class RequestForFundReleasesController < ApplicationController
   def update
     @rfrs = RequestForFundRelease.find params[:id]
     @subproj = Subproject.find rfrs_params[:subproject_id]
+    params[:request_for_fund_release][:amount_approve] = rfrs_params[:amount_approve]
+    # params[:request_for_fund_release][:amount_requested] = rfrs_params[:amount_requested]
     if @rfrs.update_attributes rfrs_params
       if rfrs_params[:tranch_for] == '1'
-        @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve], first_tranch_revised_amount: rfrs_params[:amount_approve])
+        @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, first_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
       elsif rfrs_params[:tranch_for] == '2'
-        @subproj.update(second_tranch_amount_release: rfrs_params[:amount_approve], second_tranch_revised_amount: rfrs_params[:amount_approve])
+        @subproj.update(second_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, second_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
       else  
-        @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve], third_tranch_revised_amount: rfrs_params[:amount_approve])
+        @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, third_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
       end 
       flash[:success] = 'Request for release updated successfully.'
       redirect_to edit_request_for_fund_release_path(@rfrs, :sp_id => @subproj.id)
@@ -100,13 +102,15 @@ class RequestForFundReleasesController < ApplicationController
     flash[:error] = 'You cannot create Request For Fund Release' if @subproj.status != "Final"
     redirect_to subproject_path(params[:sp_id]) if @subproj.status != "Final"
     #For safety purpose
+    # @rfrs.amount_requested = rfrs_params[:amount_requested].gsub(/,/, '').to_f
+    @rfrs.amount_approve = rfrs_params[:amount_approve].gsub(/,/, '').to_f
     if @rfrs.save 
       if rfrs_params[:tranch_for] == '1'
-        @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve], first_tranch_revised_amount: rfrs_params[:amount_approve])
+        @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, first_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
       elsif rfrs_params[:tranch_for] == '2'
-        @subproj.update(second_tranch_amount_release: rfrs_params[:amount_approve], second_tranch_revised_amount: rfrs_params[:amount_approve])
+        @subproj.update(second_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, second_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
       else  
-        @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve], third_tranch_revised_amount: rfrs_params[:amount_approve])
+        @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, third_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
       end 
       flash[:success] = 'Request for release created successfully.'
       # redirect_to request_for_fund_releases_path
@@ -237,7 +241,7 @@ class RequestForFundReleasesController < ApplicationController
         :requested_by_second, :designation_second, :date_second, :date_received, :reviewed_by_first, :reviewed_by_second,
         :rev_date_first, :rev_date_second, :rev_designation_first, :rev_designation_second, :srpmo_designation, :srpmo_date,
         :srpmo_date_received, :srpmo_reviewed_by, :srpmo_recommend_by, :srpmo_rec_designation, :srpmo_rec_date, :rpmo_designation,
-        :rpmo_date, :rpmo_date_received, :rpmo_approved_by, :approved_as_requested, :tranch_for ]
+        :rpmo_date, :rpmo_date_received, :rpmo_approved_by, :approved_as_requested, :tranch_for, :amount_requested ]
       params.require(:request_for_fund_release).permit(attrs)
     end
 

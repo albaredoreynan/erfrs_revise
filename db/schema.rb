@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140910082933) do
+ActiveRecord::Schema.define(version: 20140916061414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 20140910082933) do
     t.integer  "tranch_for"
     t.integer  "exchange_rate"
     t.string   "excel_remark"
+    t.decimal  "amount_requested",       precision: 15, scale: 2, default: 0.0, null: false
   end
 
   create_table "rfr_signatories", force: true do |t|
@@ -289,6 +290,9 @@ ActiveRecord::Schema.define(version: 20140910082933) do
     t.decimal  "first_tranch_amount_release",        precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "second_tranch_amount_release",       precision: 15, scale: 2, default: 0.0, null: false
     t.decimal  "third_tranch_amount_release",        precision: 15, scale: 2, default: 0.0, null: false
+    t.integer  "tranch_one_percentage"
+    t.integer  "tranch_two_percentage"
+    t.integer  "tranch_three_percentage"
   end
 
   add_index "subprojects", ["barangay_id"], name: "index_subprojects_on_barangay_id", using: :btree
