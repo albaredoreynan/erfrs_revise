@@ -1,0 +1,80 @@
+h4 Statement of Expenditures Report
+hr
+.row.rfr-index
+  =render 'soe_filter'
+  .col-md-12.header
+    p.text-center 
+      b DEPARTMENT OF SOCIAL WELFARE AND DEVELOPMENT
+      br
+      b Request For Fund Release Tracking
+      br
+      |(No Records Required for Submission)
+  
+.panel.panel-primary
+  .table-responsive.scrollable
+    table.table.table-hover.sortable
+      thead
+        tr
+          th Region
+          th Province
+          th Municipality
+          th Barangay
+          th Cycle
+          th Tranche
+          th.td_center colspan='5' RFR Date 
+          th.td_center colspan='2' Elapse Time
+        tr
+          th.td_center colspan='6' 
+          th.td_center style="min-width:148px" Barangay Level
+          th.td_center style="min-width:148px" Municipal Level 
+          th colspan='3' Regional level
+          th colspan='2'    
+        tr
+          th colspan='6'
+          th colspan='2'
+          th style="min-width:148px" Reviewed by
+          th style="min-width:148px" Recommended by
+          th style="min-width:148px" Approved by
+          th style="min-width:168px" Barangay to Municipality
+          th style="min-width:168px" Municipal to Regional
+      tbody
+        - @rfrs.each do |rfr|
+          tr  
+            td class='td_center' 
+              = rfr.subproject.region.name
+            td class='td_center'  
+              = rfr.subproject.province.name
+            td class='td_center'  
+              = rfr.subproject.municipality.name
+            td class='td_center' 
+               = rfr.subproject.barangay.name
+            td class='td_center' 
+               = rfr.subproject.cycle
+            td class='td_center'  
+              = rfr.tranch_for
+            - @barangay = rfr.date_first.nil? ? "" : rfr.date_first.strftime('%d-%b-%Y')
+            td class='td_center'  
+              = @barangay
+            - @municipal = rfr.date_first.nil? ? "" : rfr.date_first.strftime('%d-%b-%Y')
+            td class='td_center' 
+              = @municipal
+            - @reviewed = rfr.srpmo_date.nil? ? "" : rfr.srpmo_date.strftime('%d-%b-%Y')
+            td class='td_center' 
+              = @reviewed
+            - @recommended = rfr.srpmo_rec_date.nil? ? "" : rfr.srpmo_rec_date.strftime('%d-%b-%Y')
+            td class='td_center' 
+              = @recommended
+            - @approved = rfr.rpmo_date.nil? ? "" : rfr.rpmo_date.strftime('%d-%b-%Y')
+            td class='td_center'  
+              = @approved
+            - @barangay_to_municipal = @municipal.empty? || @barangay.empty? ? "" : (@municipal.to_date - @barangay.to_date).to_i
+            td class='td_center'  
+              = @barangay_to_municipal 
+            - @municipal_to_regional = @approved.empty? || @municipal.empty? ? "" : (@approved.to_date - @municipal.to_date).to_i
+            td class='td_center'  
+              = @municipal_to_regional
+
+css:
+  .td_center{
+    text-align: center;  
+  }            

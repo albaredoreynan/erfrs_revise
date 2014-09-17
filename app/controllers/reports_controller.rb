@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_filter :rfrs_control_data, only: [:soe_reports, :soe_adb_reports]
+  before_filter :rfrs_tracking_data, only: [:rfrs_tracking_reports]
   before_filter :subproject_control_data, only: [:mga_reports, :cg_reports, :cash_program_reports]
 
 	%w[region province municipality barangay].each{ |e| has_scope "#{e}_id".intern }
@@ -66,6 +67,15 @@ class ReportsController < ApplicationController
     
   end
 
+  def rfrs_tracking_reports
+    @rfrs = apply_scopes(@rfrs_tracking_data).includes(subproject:[:region, :province, :municipality, :barangay, :fund_source])
+    respond_to do |format|
+      format.html
+      #format.xls # { send_data @products.to_csv(col_sep: "\t") }
+    end
+    
+  end
+
 
 	def download_file
 		send_file 'public/sample_file.pdf', type: 'image/pdf', disposition: 'inline'	
@@ -115,7 +125,24 @@ class ReportsController < ApplicationController
       end
       @rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id, status: "Final")
     end
-
+   
+    def rfrs_tracking_data
+      if current_user.role_id == 3 or current_user.role_id == 4
+        subprojects = Subproject.where(region_id: current_user.region_id, status: "Final")
+        subproject_ids = subprojects.pluck(:id)
+      elsif current_user.role_id == 5
+        subprojects = Subproject.where(municipality_id: current_user.municipality_id, status: "Final")    
+        subproject_ids = subprojects.pluck(:id)
+      elsif current_user.role_id == 6
+        subprojects = Subproject.where(barangay_id: current_user.barangay_id, status: "Final")
+        subproject_ids = subprojects.pluck(:id)
+      else
+        subprojects = Subproject.where(status: "Final")
+        subproject_ids = subprojects.pluck(:id)
+      end
+      @rfrs_tracking_data = RequestForFundRelease.where(subproject_id: subproject_ids, status: "Final")
+    end 
+  
     def subproject_control_data
       if current_user.role_id == 3 or current_user.role_id == 4
         @subproject_data = Subproject.where(region_id: current_user.region_id, status: "Final").order("region_id ASC")

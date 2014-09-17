@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     get :mga_reports, on: :collection
     get :cg_reports, on: :collection
     get :cash_program_reports, on: :collection
+    get :rfrs_tracking_reports, on: :collection
   end
   
   get '/download_file', to: 'reports#download_file', as: 'download_file'
