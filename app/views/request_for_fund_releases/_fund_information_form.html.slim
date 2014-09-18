@@ -25,6 +25,23 @@
     - @contingency = @subproject.grant_amount_contingency_cost
 
 - @balance_amount = @total_grant - @cumulative_amount
+
+
+.row.sp-table
+  .col-md-12
+    h4 Remarks
+    hr
+  br
+.row.sp-show  
+  .col-md-12
+    .form-group
+      / .col-md-2.bold.text-right
+      /   'Remarks:
+      .col-md-1
+      .col-md-10
+        =f.text_area :remarks, rows: 5
+      .col-md-1
+br  
 .row.sp-table
   .col-md-12
     h4 Fund Information
@@ -81,7 +98,7 @@
         'Contingency:
       .col-md-3
         = number_to_currency(@contingency)
-                
+        = f.hidden_field :amount_contingency, value: @contingency       
   .col-md-12
     .form-group
       .col-md-2.bold.text-right
@@ -89,12 +106,12 @@
       .col-md-3
         =f.text_field :amount_approve, class: 'amount_approved monetary_field'
   
-  .col-md-12
-    .form-group
-      .col-md-2.bold.text-right
-        'Remarks:
-      .col-md-9
-        =f.text_area :remarks, rows: 3
+  / .col-md-12
+  /   .form-group
+  /     .col-md-2.bold.text-right
+  /       'Remarks:
+  /     .col-md-9
+  /       =f.text_area :remarks, rows: 3
   
   .col-md-6
     .form-group

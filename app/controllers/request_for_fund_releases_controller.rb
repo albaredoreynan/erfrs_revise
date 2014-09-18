@@ -241,7 +241,7 @@ class RequestForFundReleasesController < ApplicationController
         :requested_by_second, :designation_second, :date_second, :date_received, :reviewed_by_first, :reviewed_by_second,
         :rev_date_first, :rev_date_second, :rev_designation_first, :rev_designation_second, :srpmo_designation, :srpmo_date,
         :srpmo_date_received, :srpmo_reviewed_by, :srpmo_recommend_by, :srpmo_rec_designation, :srpmo_rec_date, :rpmo_designation,
-        :rpmo_date, :rpmo_date_received, :rpmo_approved_by, :approved_as_requested, :tranch_for, :amount_requested ]
+        :rpmo_date, :rpmo_date_received, :rpmo_approved_by, :approved_as_requested, :tranch_for, :amount_requested, :amount_contingency ]
       params.require(:request_for_fund_release).permit(attrs)
     end
 

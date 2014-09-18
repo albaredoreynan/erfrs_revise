@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140918014322) do
+ActiveRecord::Schema.define(version: 20140918053818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 20140918014322) do
     t.integer  "exchange_rate"
     t.string   "excel_remark"
     t.decimal  "amount_requested",       precision: 15, scale: 2, default: 0.0, null: false
+    t.decimal  "amount_contingency",     precision: 15, scale: 2, default: 0.0, null: false
   end
 
   create_table "rfr_signatories", force: true do |t|
