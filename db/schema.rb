@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140916061414) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "designation_type"
   end
 
   create_table "fund_allocations", force: true do |t|
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(version: 20140916061414) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+    t.decimal  "total_grant_allocation", precision: 15, scale: 2
   end
 
   add_index "municipalities", ["group_id"], name: "index_municipalities_on_group_id", using: :btree
