@@ -22,9 +22,10 @@ namespace :grant_allocation do
 
   def update_municipality_group(row)
     code = cell(row, 'D').to_i.to_s
+    total_grant = cell(row, 'E')
     group = Group.find_by(code: code)
     muni = Municipality.find_by(name: cell(row, 'C'))
-    muni.update(group_id: group.id)
+    muni.update(group_id: group.id, total_grant_allocation: total_grant)
   end
 
   def display_error(arr)
