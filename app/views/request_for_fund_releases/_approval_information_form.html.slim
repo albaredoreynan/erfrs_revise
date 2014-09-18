@@ -13,7 +13,7 @@
       .col-md-4.bold
         'Requested By:
       .col-md-6.bold
-        = f.select :requested_by_first, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
+        = f.select :requested_by_first, @subproject.barangay_team_members.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
     .form-group
       .col-md-4.bold
         'Designation:
@@ -29,7 +29,7 @@
       .col-md-5.bold
         'Requested By:
       .col-md-6.bold
-        = f.select :requested_by_second, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
+        = f.select :requested_by_second, @subproject.barangay_team_members.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
     .form-group
       .col-md-5.bold
         'Designation:
@@ -55,7 +55,7 @@
       .col-md-4.bold
         'Reviewed By:
       .col-md-6
-        =f.select :reviewed_by_first, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
+        =f.select :reviewed_by_first, @subproject.municipal_team_members.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
     .form-group
       .col-md-4.bold
         'Designation:
@@ -72,7 +72,7 @@
       .col-md-5.bold
         'Reviewed By:
       .col-md-6
-        =f.select :reviewed_by_second, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
+        =f.select :reviewed_by_second, @subproject.municipal_team_members.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
     .form-group
       .col-md-5.bold
         'Designation:
@@ -144,7 +144,7 @@
       .col-md-2.bold.text-right
         'Approved By:
       .col-md-3
-        =f.select :rpmo_approved_by, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
+        =f.select :rpmo_approved_by, @subproject.regional_team_members.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
     .form-group
       .col-md-2.bold.text-right
         'Designation:
@@ -161,7 +161,7 @@
       .col-md-4.bold
         'Reviewed By:
       .col-md-6
-        =f.select :srpmo_reviewed_by, @team_member.all.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
+        =f.select :srpmo_reviewed_by, @subproject.regional_team_members.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation"
     .form-group
       .col-md-4.bold
         'Designation:
