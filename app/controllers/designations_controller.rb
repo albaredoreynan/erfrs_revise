@@ -9,7 +9,7 @@ class DesignationsController < InheritedResources::Base
   protected
 
     def permitted_params
-      params.permit(designation: %i[name])
+      params.permit(designation: %i[name designation_type])
     end
 
     def collection
