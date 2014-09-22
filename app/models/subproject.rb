@@ -1,6 +1,6 @@
 class Subproject < ActiveRecord::Base
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller.current_user }
+  # tracked owner: ->(controller, model) { controller.current_user }
   
   # cash program history
   has_paper_trail :only => [:first_tranch_date_required, :second_tranch_date_required, :third_tranch_date_required], on: [:create, :update]
@@ -209,6 +209,19 @@ class Subproject < ActiveRecord::Base
     third = self.third_tranch_amount_release.present? ? self.third_tranch_amount_release : self.third_tranch_revised_amount
     return first + second + third
   end
+
+  def barangay_team_members
+    team_members.barangay
+  end
+
+  def municipal_team_members
+    team_members.municipal
+  end
+
+  def regional_team_members
+    team_members.regional
+  end
+  
   private
 
   def self.fetch_all_created_by(username)
@@ -219,6 +232,7 @@ class Subproject < ActiveRecord::Base
   def reject_team_members(attributes)
     attributes['name'].blank?
   end
+
 
 
 end

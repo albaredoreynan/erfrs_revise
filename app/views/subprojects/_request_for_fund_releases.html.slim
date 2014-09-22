@@ -30,6 +30,7 @@
           th Tranche
           th Date Requested
           th Amount Requested
+          th Used Contigency
           th DV Date
           th DV Amount
           th
@@ -40,6 +41,7 @@
             td.text-center = rfrs.tranch_for
             td.text-center = !rfrs.request_date.nil? ? rfrs.request_date.strftime("%d-%b-%Y") : ''
             td.text-center = number_to_currency rfrs.amount_requested
+            td.text-center = number_to_currency rfrs.amount_contingency
             td.text-center = !rfrs.dv_date.nil? ? rfrs.dv_date.strftime("%d-%b-%Y") : ''
             td.text-center = rfrs.dv_date.nil? ? '' : number_to_currency(rfrs.amount_approve)
             td.text-center

@@ -13,16 +13,25 @@
   - @previous_released = @subproject.first_tranch_amount_release
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
   - @tranch = 2
-  - @contingency = @subproject.grant_amount_contingency_cost
+  - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount)
+  - @y = @x - @subproject.grant_amount_contingency_cost
+  - @contingency_accumulated = @y.abs
+  - @contingency = @subproject.grant_amount_contingency_cost - @y.abs
 - else
   - @amount_requested = @subproject.third_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
   - @tranch = 3
-  - if @total_release > @total_grant_less_con 
-    - @contingency = @subproject.grant_amount_contingency_cost - (@total_release - @total_grant_less_con)
-  - else
-    - @contingency = @subproject.grant_amount_contingency_cost
+  
+  = @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release)
+  - @y = @x - @subproject.grant_amount_contingency_cost
+  - @contingency_accumulated = @x
+  - @contingency = @subproject.grant_amount_contingency_cost - @y.abs
+
+  / - if @total_release > @total_grant_less_con 
+  /   - @contingency = @subproject.grant_amount_contingency_cost - (@total_release - @total_grant_less_con)
+  / - else
+  /   - @contingency = @subproject.grant_amount_contingency_cost
 
 - @balance_amount = @total_grant - @cumulative_amount
 
@@ -46,6 +55,7 @@ br
   .col-md-12
     h4 Fund Information
     hr
+    = @contingency_accumulated
   br
 .row.sp-show
   .col-md-6
@@ -98,7 +108,7 @@ br
         'Contingency:
       .col-md-3
         = number_to_currency(@contingency)
-        = f.hidden_field :amount_contingency, value: @contingency       
+        = f.hidden_field :amount_contingency, value: @contingency_accumulated       
   .col-md-12
     .form-group
       .col-md-2.bold.text-right

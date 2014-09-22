@@ -1,6 +1,6 @@
 class RequestForFundRelease < ActiveRecord::Base
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller.current_user }
+  # tracked owner: ->(controller, model) { controller.current_user }
   
   belongs_to :subproject
   delegate :fund_source, to: :subproject, :allow_nil => true
