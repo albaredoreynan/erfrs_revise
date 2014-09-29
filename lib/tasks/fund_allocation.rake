@@ -48,7 +48,11 @@ namespace :fund_allocation do
   end
 
   def set_municipality(row)
-    name = cell(row, MUNI_COLUMN[:name]).upcase
+    # old
+    # name = cell(row, MUNI_COLUMN[:name]).upcase
+    # new
+    name = cell(row, MUNI_COLUMN[:name])
+
     @municipality = Municipality.find_by(name: name)
   end
 

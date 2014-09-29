@@ -139,13 +139,12 @@
 .row.sp-table
   .col-md-12
     h5 Regional Project Management Office (RPMO):
-.row.sp-show
-  / .col-md-12
-  /   .form-group
-  /     .col-md-2.text-right
-  /       'Date Received
-  /     .col-md-3.bold
-  /       = @rfrs.srpmo_date_received.nil? ? "" : @rfrs.srpmo_date_received.strftime('%d-%b-%Y')
+  .col-md-12
+    .form-group
+      .col-md-2.text-right
+        'Date Received
+      .col-md-3.bold
+        = @rfrs.rpmo_date_received.nil? ? "" : @rfrs.rpmo_date_received.strftime('%d-%b-%Y')
   .col-md-6
     .form-group
       .col-md-4
@@ -182,14 +181,6 @@
         'Date
       .col-md-6.bold
         = @rfrs.srpmo_rec_date.nil? ? "" : @rfrs.srpmo_rec_date.strftime('%d-%b-%Y')
-br
-.row.sp-show
-  .col-md-12
-    .form-group
-      .col-md-2.text-right
-        'Date Received
-      .col-md-3.bold
-        = @rfrs.rpmo_date_received.nil? ? "" : @rfrs.rpmo_date_received.strftime('%d-%b-%Y')
   .col-md-12
     .form-group
       .col-md-2.text-right

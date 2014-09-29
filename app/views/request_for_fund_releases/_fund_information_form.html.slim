@@ -23,7 +23,7 @@
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
   - @tranch = 3
   
-  = @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release)
+  - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release)
   - @y = @x - @subproject.grant_amount_contingency_cost
   - @contingency_accumulated = @x
   - @contingency = @subproject.grant_amount_contingency_cost - @y.abs

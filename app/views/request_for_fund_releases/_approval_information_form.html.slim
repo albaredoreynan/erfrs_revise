@@ -139,22 +139,7 @@
       .col-md-3
         =f.text_field :rpmo_date_received, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.rpmo_date_received.present? ? @rfrs.rpmo_date_received.strftime("%d-%b-%Y") : ''
 
-  .col-md-12.parent
-    .form-group
-      .col-md-2.bold.text-right
-        'Approved By:
-      .col-md-3
-        =f.select :rpmo_approved_by, @subproject.regional_team_members.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
-    .form-group
-      .col-md-2.bold.text-right
-        'Designation:
-      .col-md-3
-        =f.text_field :rpmo_designation, readonly: true
-    .form-group
-      .col-md-2.bold.text-right
-        'Date:
-      .col-md-3
-        =f.text_field :rpmo_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.rpmo_date.present? ? @rfrs.rpmo_date.strftime("%d-%b-%Y") : ''
+  
         
   .col-md-6.parent
     .form-group
@@ -188,6 +173,24 @@
         'Date:
       .col-md-6
         =f.text_field :srpmo_rec_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.srpmo_rec_date.present? ? @rfrs.srpmo_rec_date.strftime("%d-%b-%Y") : ''   
+
+  .col-md-12.parent
+    .form-group
+      .col-md-2.bold.text-right
+        'Approved By:
+      .col-md-3
+        =f.select :rpmo_approved_by, @subproject.regional_team_members.map{ |e| [e.name, e.id] }, {include_blank: true}, class: "designation" 
+    .form-group
+      .col-md-2.bold.text-right
+        'Designation:
+      .col-md-3
+        =f.text_field :rpmo_designation, readonly: true
+    .form-group
+      .col-md-2.bold.text-right
+        'Date:
+      .col-md-3
+        =f.text_field :rpmo_date, placeholder: 'DD-MMM-YYYY', class: "validate[custom[dateFormat]]", value: @rfrs.rpmo_date.present? ? @rfrs.rpmo_date.strftime("%d-%b-%Y") : ''      
+
 css:
   .sp-show{
     padding-right: 0px;
