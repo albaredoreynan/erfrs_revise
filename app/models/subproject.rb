@@ -91,7 +91,7 @@ class Subproject < ActiveRecord::Base
   scope :with_status, -> status { where status: status }
   scope :fund_source_id, -> fs { where fund_source_id: fs}
 
-
+  
 
   # if ENV['ERFRS_USES_POSTGRESQL']
   scope :year, -> year { where 'EXTRACT(YEAR FROM date_of_mibf) = ?', year }
@@ -220,6 +220,10 @@ class Subproject < ActiveRecord::Base
 
   def regional_team_members
     team_members.regional
+  end
+  
+  def with_draft_null_status_rfrs?
+    request_for_fund_releases.drafts.count > 0 || request_for_fund_releases.null_status.count > 0 || request_for_fund_releases.count == 0
   end
   
   private
