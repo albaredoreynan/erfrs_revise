@@ -39,7 +39,8 @@ gem 'wkhtmltopdf-binary'
 gem 'roo'
 
 group :development, :test do
-  gem 'rspec-rails'   
+  gem 'rspec-rails'
+  gem 'railroady'   
 end
 
 group :test do
