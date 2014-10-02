@@ -1,5 +1,7 @@
 class Municipality < ActiveRecord::Base
-
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+  
   has_many :barangays
   has_many :subprojects
   has_many :muni_fund_allocations

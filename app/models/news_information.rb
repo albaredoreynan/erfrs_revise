@@ -1,6 +1,6 @@
 class NewsInformation < ActiveRecord::Base
   include PublicActivity::Model
-  # tracked owner: ->(controller, model) { controller.current_user }
+  tracked owner: ->(controller, model) { controller.current_user }
   
   #### paperclip
   has_attached_file :news_image, :styles => { :medium => "220x220>", :thumb => "75x75" }, 

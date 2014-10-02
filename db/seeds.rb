@@ -1,5 +1,5 @@
 require 'csv'
-
+PublicActivity.enabled = false
 # def normalize(region_name)
 #   if region_name.index '('
 #     code, name = region_name.split('(')
@@ -109,6 +109,12 @@ Group.find_or_create_by(code: '377', status: 'Active')
 puts "Done!!"
 
 
+Rake::Task["barangays:import"].execute
+Rake::Task["signatories:import"].execute
+Rake::Task["grant_allocation:import"].execute
+Rake::Task["fund_allocation:import"].execute
+
+PublicActivity.enabled = true
 
 
 

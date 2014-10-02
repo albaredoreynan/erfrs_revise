@@ -1,4 +1,7 @@
 class RegionalOfficer < ActiveRecord::Base
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller.current_user }
+  
   belongs_to :region
   has_many :rfr_signatories
 

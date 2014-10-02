@@ -1,6 +1,6 @@
 class Subproject < ActiveRecord::Base
   include PublicActivity::Model
-  # tracked owner: ->(controller, model) { controller.current_user }
+  tracked owner: ->(controller, model) { controller.current_user }
   
   # cash program history
   has_paper_trail :only => [:first_tranch_date_required, :second_tranch_date_required, :third_tranch_date_required], on: [:create, :update]

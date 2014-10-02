@@ -13,7 +13,7 @@ br
           th User
           th Action
           th Date
-          th Location
+          th Performed by
       tbody
         - @activities.each do |activity|
           tr.text-center
@@ -23,6 +23,6 @@ br
             td= activity.created_at.strftime("%d-%b-%Y") 
             td
               -if activity.trackable
-                = link_to activity.trackable.try(:title), activity.trackable
+                = activity.owner.full_name
               -else
                 ' Already Removed
