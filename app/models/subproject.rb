@@ -76,7 +76,7 @@ class Subproject < ActiveRecord::Base
   #validates :first_tranch_amount, :second_tranch_amount, :third_tranch_amount, numericality: {greater_than_or_equal_to: 0, message: "error: enter proper amount"}
   validates :first_tranch_date_required, presence: true, :if => -> {self.first_tranch_amount.present?}
   validates :second_tranch_date_required, presence: true, :if => -> {self.second_tranch_amount.present?}
-  validates :third_tranch_date_required, presence: true, :if => -> {self.third_tranch_amount.present?}
+  # validates :third_tranch_date_required, presence: true, :if => -> {self.third_tranch_amount.present?}
 
   validate :mbif_date
 
