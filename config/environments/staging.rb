@@ -80,7 +80,7 @@ Erfrs::Application.configure do
 
   #Paperclip configs
   Paperclip::Attachment.default_options.merge!({
-    :path=>"/home/azureuser/shared/public:url",
+    :path=>"/home/ubuntu/shared/public:url",
     :url=>"/paperclip/:class/:attachment/:style/:basename.:extension"
   })
 end
