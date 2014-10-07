@@ -1,7 +1,7 @@
 set :rails_env, :staging
 set :branch, :staging
 set :deploy_to, '/home/ubuntu'
-set :user, :azureuser
+set :user, :ubuntu
 set :nginx_server_name, '54.169.9.32'
 set :default_env, { 'ERFRS_USES_POSTGRESQL' => 1 } 
 set :linked_files, %w[config/database.yml tmp/pids/unicorn.pid log/unicorn.log]
