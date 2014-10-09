@@ -32,16 +32,16 @@
       = f.radio_button :status, false
       span.radio-btn-label &nbsp; Inactive
   .col-md-4.signin-form
-    .form-group
+    .form-group.show_off.regional
         = f.label :region_id
         = f.select :region_id, Region.values_for_select, { include_blank: true }, { id:"subproject_region_id", :class => 'form-control'}
-    .form-group
+    .form-group.show_off.provinces
         = f.label :province_id
         = f.select :province_id, [], { disabled: 'disabled' }, { id:"subproject_province_id", :class => 'form-control'}
-    .form-group
+    .form-group.show_off.municipalities
         = f.label :municipality_id
         = f.select :municipality_id, [], { disabled: 'disabled' }, {  id:"subproject_municipality_id", :class => 'form-control'}
-    .form-group
+    .form-group.show_off.barangays
         = f.label :barangay_id
         = f.select :barangay_id, [], { disabled: 'disabled' }, {id:"subproject_barangay_id", :class => 'form-control'}
         = hidden_field_tag :signup_field, value: false
@@ -51,6 +51,10 @@ css:
   .container{
     min-height: 100%;
   }
+  .show_off{
+    display:none;
+  }
+  
 
 
 / dropdown_values, {include_blank: true, selected: @item.source_of_funds_id},
