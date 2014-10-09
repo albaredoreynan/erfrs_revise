@@ -15,7 +15,8 @@
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
   - @tranch = 2
   - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount)
-  - if @subproject.grant_amount_contingency_cost == '0'
+  - if @subproject.grant_amount_contingency_cost == 0
+    - @contingency_accumulated = 0
     - @contingency = 0
   - else
     - @y = @x - @subproject.grant_amount_contingency_cost
@@ -26,7 +27,8 @@
   - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
   - @tranch = 3
-  - if @subproject.grant_amount_contingency_cost == '0'
+  - if @subproject.grant_amount_contingency_cost == 0
+    - @contingency_accumulated = 0
     - @contingency = 0
   - else
     - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release)

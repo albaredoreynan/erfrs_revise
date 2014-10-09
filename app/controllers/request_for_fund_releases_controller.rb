@@ -78,14 +78,15 @@ class RequestForFundReleasesController < ApplicationController
     @rfrs = RequestForFundRelease.find params[:id]
     @subproj = Subproject.find rfrs_params[:subproject_id]
     params[:request_for_fund_release][:amount_approve] = rfrs_params[:amount_approve].gsub(/,/, '').to_f
+    # raise
     # params[:request_for_fund_release][:amount_requested] = rfrs_params[:amount_requested]
     if @rfrs.update_attributes rfrs_params
       if rfrs_params[:tranch_for] == '1'
-        @subproj.update(first_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, first_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
+        @subproj.update(first_tranch_amount_release: params[:request_for_fund_release][:amount_approve], first_tranch_revised_amount: params[:request_for_fund_release][:amount_approve])
       elsif rfrs_params[:tranch_for] == '2'
-        @subproj.update(second_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, second_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
+        @subproj.update(second_tranch_amount_release: params[:request_for_fund_release][:amount_approve], second_tranch_revised_amount: params[:request_for_fund_release][:amount_approve])
       else  
-        @subproj.update(third_tranch_amount_release: rfrs_params[:amount_approve].gsub(/,/, '').to_f, third_tranch_revised_amount: rfrs_params[:amount_approve].gsub(/,/, '').to_f)
+        @subproj.update(third_tranch_amount_release: params[:request_for_fund_release][:amount_approve], third_tranch_revised_amount: params[:request_for_fund_release][:amount_approve])
       end 
       flash[:success] = 'Request for release updated successfully.'
       redirect_to edit_request_for_fund_release_path(@rfrs, :sp_id => @subproj.id)
