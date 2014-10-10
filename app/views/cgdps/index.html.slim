@@ -62,7 +62,7 @@ hr
           tr
           -spss.group_by{|u|u.created_at.year}.each do |ca, sps|
             tr
-              td colspan="6"
+              td colspan= "6"
             -sps.uniq_by{|a|a.created_at.year}.each do |sp|
               - cgdp = Cgdp.where('municipality_id =? ', sp.municipality_id).last
               tr
