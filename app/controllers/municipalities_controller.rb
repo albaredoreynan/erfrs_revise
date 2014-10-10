@@ -22,8 +22,8 @@ class MunicipalitiesController < InheritedResources::Base
 
   def show
     #@subprojects = apply_scopes(@municipality.subprojects)
-    @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).order("date_of_mibf")
-    @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
+    @subprojects = Subproject.where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', params[:with_year], params[:id]).order("date_of_mibf")
+    @subproject = Subproject.where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
     @cgdp = Cgdp.where('municipality_id =?', params[:id]).last
 
   end
@@ -77,14 +77,14 @@ class MunicipalitiesController < InheritedResources::Base
   end
 
   def edit_cgdp
-    @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
-    @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
+    @subprojects = Subproject.where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', params[:with_year], params[:id])
+    @subproject = Subproject.where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
     @cgdp = Cgdp.find(params[:cgdp_id]) 
   end
 
   def create_cgdp
-    @subprojects = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id])
-    @subproject = Subproject.where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
+    @subprojects = Subproject.where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', params[:with_year], params[:id])
+    @subproject = Subproject.where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
     @cgdp = Cgdp.new 
   end
 
