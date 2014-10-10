@@ -87,7 +87,7 @@ module ApplicationHelper
 
   def total_grant_amount_per_mncpl(municipality_id, year, fund_source)
     @total = Array.new
-    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source)
+    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source)
     @val.each do |amount|
       @total << amount.grant_amount_direct_cost.to_f
     end
@@ -96,7 +96,7 @@ module ApplicationHelper
 
   def total_grant_amount_per_year(year, fund_source)
     @total = Array.new
-    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source)
+    @val = Subproject.select('grant_amount_direct_cost').where('EXTRACT( YEAR from date_of_mibf) = ? AND fund_source_id = ?', year, fund_source)
     @val.each do |amount|
       @total << amount.grant_amount_direct_cost.to_f
     end
@@ -108,7 +108,7 @@ module ApplicationHelper
     @tranch1 = Array.new  
     @tranch2 = Array.new
     @tranch3 = Array.new
-    @val = Subproject.select('first_tranch_amount, second_tranch_amount, third_tranch_amount').where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ?', year, municipality_id)
+    @val = Subproject.select('first_tranch_amount, second_tranch_amount, third_tranch_amount').where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', year, municipality_id)
     @val.each do |amount|
       @tranch1 << amount.first_tranch_amount.to_f
       @tranch2 << amount.second_tranch_amount.to_f
@@ -152,7 +152,7 @@ module ApplicationHelper
 
   def total_amount_release(year, fund_source)
     @amount_approve = Array.new
-    Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND fund_source_id = ?', year, fund_source).each do |sp_id|
+    Subproject.select("id").where('EXTRACT( YEAR from date_of_mibf) = ? AND fund_source_id = ?', year, fund_source).each do |sp_id|
       RequestForFundRelease.select("amount_approve").where(subproject_id: sp_id.id).each do |rfrs|
         @amount_approve << rfrs.amount_approve.to_f
       end
@@ -162,7 +162,7 @@ module ApplicationHelper
 
   def total_amount_release_per_mncpl(municipality_id, year, fund_source)
     @amount_approve = Array.new
-    Subproject.select("id").where('EXTRACT( YEAR from created_at) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source).each do |sp_id|
+    Subproject.select("id").where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source).each do |sp_id|
       RequestForFundRelease.select("amount_approve").where(subproject_id: sp_id.id).each do |rfrs|
         @amount_approve << rfrs.amount_approve.to_f
       end
