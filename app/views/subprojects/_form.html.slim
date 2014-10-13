@@ -19,7 +19,7 @@
           | Edit Sub-Project
       .col-sm-6
         .page-details-main-buttons
-          - if @subproject.status != 'Final'
+          - if @subproject.status != 'Final' || current_user.is_regional_or_admin?
             = f.submit 'Save', class: 'btn btn-primary'
           
           '&nbsp;
@@ -47,7 +47,7 @@
 
   .row
     .page-details-main-buttons
-      - if @subproject.status != 'Final'
+      - if @subproject.status != 'Final' || current_user.is_regional_or_admin?
         = f.submit 'Save', class: 'btn btn-primary'
       '&nbsp;
       = link_to 'Cancel', subprojects_path, class: 'btn btn-primary'
