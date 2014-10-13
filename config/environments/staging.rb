@@ -65,6 +65,22 @@ Erfrs::Application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = false
 
+  #previous configuration of email receiver and forwarder
+  config.action_mailer.default_url_options = { :host => 'erfrs.dswd.gov.ph' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "erfrs.dswd.gov.ph",
+    authentication: "plain",
+    enable_starttls_auto: true,
+    user_name: "dswderfrs@gmail.com",
+    password: "appsource1401"
+  }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
   config.i18n.fallbacks = true
