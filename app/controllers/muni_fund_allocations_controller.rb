@@ -58,6 +58,6 @@ class MuniFundAllocationsController < ApplicationController
   
 	private
 		def muni_fund_allocation_params
-		  params.require(:muni_fund_allocation).permit(:year, :amount, :municipality_id)
+		  params.require(:muni_fund_allocation).permit(:year, :amount, :municipality_id, :cycle)
 		end
 end

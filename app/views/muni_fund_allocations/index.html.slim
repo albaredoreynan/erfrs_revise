@@ -39,6 +39,7 @@ br
           th Municipality
           th Year
           th Fund Allocated
+          th Cycle
           th Actions
       tbody
         - @muni_fund_allocations.each do |mfa|
@@ -46,6 +47,7 @@ br
             td= mfa.municipality.name
             td= mfa.year
             td= number_to_currency mfa.amount
+            td= mfa.cycle
             td
               = link_to "<i class='fa fa-edit'></i>".html_safe, edit_muni_fund_allocation_path(mfa, :municipality_id => params[:municipality_id]), class: 'btn btn-xs btn-warning', title: "Edit"
               '&nbsp

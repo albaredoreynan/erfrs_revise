@@ -5,26 +5,26 @@ hr
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
-          'Region
+          'Region:
         .col-md-6.bold
           = @muni_info.province.region.name
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
-          'Status
+          'Status:
         .col-md-6.bold
           = @cgdp.present? ? @cgdp.try(:status).try(:upcase) : ''
 
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
-          'Province
+          'Province:
         .col-md-6.bold
           = @muni_info.province.name
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
-          'Year
+          'Year / Cycle:
         .col-md-6.bold
           = @cgdp.present? ? @cgdp.try(:year) : ''
     .col-md-6.parent
@@ -152,7 +152,7 @@ hr
               - @excess_per_mncpl_other_per = (@excess_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f) * 100
               = @excess_per_mncpl_other_per.round(2)
           tr
-            td style="padding-right: 70px;" Surplus
+            td style="padding-right: 70px;" Leftover
             td.text-right 
               - @amount_surplus = @fund_allocation.to_f - @mibf.to_f
               = number_to_currency(@amount_surplus.to_f)

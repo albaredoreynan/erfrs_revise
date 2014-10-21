@@ -1,5 +1,5 @@
 = wicked_pdf_stylesheet_link_tag "application"
-- @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost
+- @total_grant = @subproject.grant_amount_direct_cost + @subproject.grant_amount_indirect_cost + @subproject.grant_amount_contingency_cost
 - @total_release = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount_release
 / - total_lcc = @subproject.lcc_blgu_direct_cost       + @subproject.lcc_blgu_indirect_cost        + @subproject.lcc_blgu_contingency_cost
 - total_lcc_cash = @subproject.total_lcc_cash_direct_cost + @subproject.total_lcc_cash_indirect_cost + @subproject.total_lcc_cash_contingency_cost
