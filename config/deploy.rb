@@ -34,6 +34,8 @@ set :log_level, :debug
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :unicorn_pid, '/home/ubuntu/shared/tmp/pids/unicorn.pid'
+
 namespace :deploy do
 
   desc 'Restart application'
