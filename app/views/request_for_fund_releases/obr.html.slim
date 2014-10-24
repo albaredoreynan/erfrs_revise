@@ -99,14 +99,15 @@ hr
               |&nbsp; Supporting documents valid, proper and legal
           td colspan=2 style='padding-left: 50px;'
             .form-group Allotment available and obligated for the purpose as indicated above
-    table.table.table-bordered
-      tr
-        td.text-left width='50%'
-          button data-toggle='modal' data-target='#obr_signatories' class=" btn btn-primary "
-            = icon_text(nil, 'Add Signatory')
-        td.text-left width='50%'
-          button data-toggle='modal' data-target='#obr_b_signatories' class=" btn btn-primary "
-            = icon_text(nil, 'Add Signatory')
+    - if !current_user.is_barangay_or_public?
+      table.table.table-bordered
+        tr
+          td.text-left width='50%'
+            button data-toggle='modal' data-target='#obr_signatories' class=" btn btn-primary "
+              = icon_text(nil, 'Add Signatory')
+          td.text-left width='50%'
+            button data-toggle='modal' data-target='#obr_b_signatories' class=" btn btn-primary "
+              = icon_text(nil, 'Add Signatory')
     table.table.table-bordered
       tr
         td.text-center width='10%'

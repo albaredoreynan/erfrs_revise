@@ -118,15 +118,16 @@ hr
               = check_box_tag :c, disabled: true
               |&nbsp; Supporting documents complete
           td colspan=2 style='padding-left: 50px;'
-            .form-group 
-    table.table.table-bordered
-      tr
-        td.text-left width='50%'
-          button data-toggle='modal' data-target='#dv_signatories' class=" btn btn-primary "
-            = icon_text(nil, 'Add Signatory')
-        td.text-left width='50%'
-          button data-toggle='modal' data-target='#dv_b_signatories' class=" btn btn-primary "
-            = icon_text(nil, 'Add Signatory')
+            .form-group
+    - if !current_user.is_barangay_or_public?         
+      table.table.table-bordered
+        tr
+          td.text-left width='50%'
+            button data-toggle='modal' data-target='#dv_signatories' class=" btn btn-primary "
+              = icon_text(nil, 'Add Signatory')
+          td.text-left width='50%'
+            button data-toggle='modal' data-target='#dv_b_signatories' class=" btn btn-primary "
+              = icon_text(nil, 'Add Signatory')
     table.table.table-bordered
       tr
         td.text-center width='10%'

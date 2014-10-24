@@ -74,9 +74,10 @@ hr
                 td
                   = link_to "<i class='fa fa-eye'></i>".html_safe, "#{municipality_path(sp.municipality_id)}?with_year=#{sp.try(:date_of_mibf).try(:year)}", class: 'btn btn-xs btn-primary'
                   '&nbsp
-                  - if cgdp.nil? 
-                    = link_to "<i class='fa fa-edit'></i>".html_safe, "#{create_cgdp_municipalities_path()}?id=#{sp.municipality_id}&with_year=#{sp.try(:date_of_mibf).try(:year)}", class: 'btn btn-xs btn-warning'
-                  -else
-                    = link_to "<i class='fa fa-edit'></i>".html_safe, "#{edit_cgdp_municipalities_path()}?id=#{sp.municipality_id}&with_year=#{sp.try(:date_of_mibf).try(:year)}&cgdp_id=#{cgdp.id}", class: 'btn btn-xs btn-warning'
-                  '&nbsp
-                  = link_to "<i class='fa fa-trash-o'></i>".html_safe, "#", method: :delete, confirm: 'Are you sure you want to delete this CGDP?', class: 'btn btn-xs btn-danger'
+                  - if !current_user.is_barangay_or_public?
+                    - if cgdp.nil? 
+                      = link_to "<i class='fa fa-edit'></i>".html_safe, "#{create_cgdp_municipalities_path()}?id=#{sp.municipality_id}&with_year=#{sp.try(:date_of_mibf).try(:year)}", class: 'btn btn-xs btn-warning'
+                    -else
+                      = link_to "<i class='fa fa-edit'></i>".html_safe, "#{edit_cgdp_municipalities_path()}?id=#{sp.municipality_id}&with_year=#{sp.try(:date_of_mibf).try(:year)}&cgdp_id=#{cgdp.id}", class: 'btn btn-xs btn-warning'
+                    '&nbsp
+                    = link_to "<i class='fa fa-trash-o'></i>".html_safe, "#", method: :delete, confirm: 'Are you sure you want to delete this CGDP?', class: 'btn btn-xs btn-danger'

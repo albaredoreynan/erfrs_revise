@@ -6,8 +6,9 @@
     = link_to 'Cancel', subprojects_path, class: 'btn btn-primary pull-right'
     span.pull-right
       '&nbsp;
-    - if @subproject.status != 'Final'
-      = link_to 'Edit', edit_subproject_path(@subproject), class: 'btn btn-primary pull-right'
+    - if !current_user.is_barangay_or_public?  
+      - if @subproject.status != 'Final'
+        = link_to 'Edit', edit_subproject_path(@subproject), class: 'btn btn-primary pull-right'
 hr
 br
 br

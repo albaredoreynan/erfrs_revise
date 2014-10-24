@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-  include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller.current_user }
+  # include PublicActivity::Model
+  # tracked owner: ->(controller, model) { controller.current_user }
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -20,11 +20,14 @@ class User < ActiveRecord::Base
   end
 
   def is_regional_or_admin?
-    role.name == 'Regional' || role.name == 'Admin'
+    role.name == 'Regional Admin' || role.name == 'Admin' || role.name == 'National'
   end  
 
   def full_name
     "#{first_name} #{last_name}"
   end
 
+  def is_barangay_or_public?
+    role.name == 'Barangay' || role.name == 'Public'
+  end  
 end

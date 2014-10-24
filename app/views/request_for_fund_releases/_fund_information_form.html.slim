@@ -17,10 +17,24 @@
     - @contingency = 0
   - else 
     - @tranch = 2
-    - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount)
-    - @y = @x - @subproject.grant_amount_contingency_cost
-    - @contingency_accumulated = @y.abs
-    - @contingency = @subproject.grant_amount_contingency_cost - @y.abs
+    - if @subproject.tranch_three_percentage.nil? || @subproject.tranch_three_percentage == 0
+      - @x = (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount) - @total_grant_less_con
+      - @contingency_accumulated = @x
+      - @contingency = @subproject.grant_amount_contingency_cost - @contingency_accumulated
+    - else
+      - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount)
+      - if @x > @total_grant_less_con
+        - @contingency_accumulated = @x - @total_grant_less_con
+        - @contingency = @subproject.grant_amount_contingency_cost - @contingency_accumulated
+      - else
+        = @x
+        = "false"
+        - @contingency_accumulated = 0
+        - @contingency = 0
+
+    / - @y = @x - @subproject.grant_amount_contingency_cost
+    / - @contingency_accumulated = @y.abs
+    / - @contingency = @subproject.grant_amount_contingency_cost - @y.abs
 - else
   - @amount_requested = @subproject.third_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
@@ -30,15 +44,19 @@
     - @contingency_accumulated = 0
     - @contingency = 0
   - else
-    - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release)
-    - @y = @x - @subproject.grant_amount_contingency_cost
-    - @contingency_accumulated = @x
-    - @contingency = @subproject.grant_amount_contingency_cost - @y.abs
-
-  / - if @total_release > @total_grant_less_con 
-  /   - @contingency = @subproject.grant_amount_contingency_cost - (@total_release - @total_grant_less_con)
-  / - else
-  /   - @contingency = @subproject.grant_amount_contingency_cost
+    - @x = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release + @subproject.third_tranch_amount
+    = @x
+    - if @x > @total_grant_less_con
+      = "true" 
+      - @contingency_accumulated = @x - @total_grant_less_con
+      - @contingency = @subproject.grant_amount_contingency_cost - @contingency_accumulated
+    - else
+      = "false"
+      - @contingency_accumulated = 0
+      - @contingency = 0
+    / - @y = @x - @subproject.grant_amount_contingency_cost
+    / - @contingency_accumulated = @x
+    / - @contingency = @subproject.grant_amount_contingency_cost - @y.abs
 
 - @balance_amount = @total_grant - @cumulative_amount
 
@@ -70,14 +88,18 @@ br
       .col-md-4.bold
         'Amount Requested:
       .col-md-6.amt_requested
-        - if @subproject.tranch_three_percentage.nil? || @subproject.tranch_three_percentage == 0
-          - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release)
-          = f.hidden_field :amount_requested, value: @x
-          = number_to_currency (@x)
-          '&nbsp;(excess of tranche 2)
-        - else
-          = number_to_currency (@amount_requested)
-          = f.hidden_field :amount_requested, value: @amount_requested
+        / - if params[:tranch] == 'second' || @rfrs.tranch_for == 2
+        /   - if @subproject.tranch_three_percentage.nil? || @subproject.tranch_three_percentage == 0
+        /     - @x = @total_grant - (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release)
+        /     = f.hidden_field :amount_requested, value: @x
+        /     = number_to_currency (@x)
+        /     '&nbsp;(excess of tranche 2)
+        /   - else
+        /     = number_to_currency (@amount_requested)
+        /     = f.hidden_field :amount_requested, value: @amount_requested
+        / - else
+        = number_to_currency (@amount_requested)
+        = f.hidden_field :amount_requested, value: @amount_requested
   .col-md-6
     .form-group
       .col-md-7.bold.text-right

@@ -7,9 +7,8 @@ $ ->
 	  else
 	    $(".show_off").hide()
 	    $(".regional").show()  if role_text is "National" or role_text is "Regional"
-	    if role_text is "Sub Regional"
+	    if role_text is "Regional Admin"
 	      $(".regional").show()
-	      $(".provinces").show()
 	    if role_text is "Municipal"
 	      $(".regional").show()
 	      $(".provinces").show()
