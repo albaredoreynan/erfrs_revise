@@ -5,7 +5,4 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 
-  # def user_for_paper_trail
-  #   user_signed_in? ? current_user.full_name : 'Public'  # or whatever
-  # end
 end

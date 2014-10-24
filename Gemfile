@@ -31,7 +31,6 @@ gem 'font-awesome-sass', '4.1.0'
 gem 'paperclip', '~> 4.2' # make sure to install imagemagick in the server
 
 # utilities
-gem 'paper_trail', '~> 3.0.5'
 gem 'public_activity'
 gem 'faker', require: false
 gem 'wicked_pdf'

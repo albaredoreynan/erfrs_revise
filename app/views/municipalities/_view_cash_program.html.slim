@@ -24,25 +24,24 @@
               th ADB
               th WB
               th Total
-            - @earliest_month = sp.first_tranch_date_required.to_date
+            - @tranches_date = [sp.first_tranch_date_required, sp.second_tranch_date_required, sp.third_tranch_date_required].map{ |date| date.to_date.strftime("%b-%Y") rescue ''}
             - @monthlist = []  
-            - 12.times do 
-              - @monthlist << @earliest_month.strftime("%b-%Y")
-              - @earliest_month = @earliest_month + 1.month
+            - (sp.cycle * 12).times do |n|
+              - @monthlist << (Date.today + n.month).strftime("%b-%Y")
 
-            - @monthlist.each_with_index do |breakdown, idx|  
-              - @num = Date.parse(breakdown).strftime("%-m").to_i
+            - @monthlist.each_with_index do |date, idx|  
+              - @num = Date.parse(date).strftime("%-m").to_i
               tr
                 td = id = idx + 1
-                td = breakdown
-                td = number_to_currency(@cfa_adb = cfa_amounts(@num, params[:with_year], params[:id], 1))
-                td = number_to_currency(@cfa_wb = cfa_amounts(@num, params[:with_year], params[:id], 2))
-                td = number_to_currency(total_cfa_amounts = @cfa_adb + @cfa_wb)
-            tr
-              td
-              td
-              td 
-              td
-              td     
+                td = date
+                - if @tranches_date.include? date
+                  td = number_to_currency(@cfa_adb = cfa_amounts(@num, params[:with_year], params[:id], 1))
+                  td = number_to_currency(@cfa_wb = cfa_amounts(@num, params[:with_year], params[:id], 2))
+                  td = number_to_currency(total_cfa_amounts = @cfa_adb + @cfa_wb)
+                - else
+                  td 0.00
+                  td 0.00
+                  td 0.00
+
     .modal-footer
       button.btn data-dismiss="modal" aria-hidden="true" Close

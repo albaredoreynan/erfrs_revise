@@ -2,55 +2,36 @@
   .modal-content
     .modal-header
       button.close-modal type="button" data-dismiss="modal" x 
-      h4.modal-title History Cash Program
+      h4.modal-title View Cash Program
     .modal-body
-      - @subprojects.each do |sp|
-        table.table.table-bordered
+      -@subprojects.each do |sp|
+        table.table
+          tr
+            td Year  
+            td.bold = sp.date_of_mibf.year
+            td Province
+            td.bold = @subproject.province.try(:name)
+          tr
+            td Municipality
+            td.bold = @subproject.municipality.try(:name)
+            td Region
+            td.bold = @subproject.region.try(:name)
+        table.table.table-hover.table-striped.table-bordered
           thead
             tr
-              th Tranche No.
-              th Modified Schedule
-              th Date Modified
-              th User
-          tbody
-          - if sp.versions.length == 0
-            tr
-              td colspan='6' No history to display.
-          - sp.versions.reverse.each do |v|
-            - if v.event == 'update'
-        
-              - prev = v.previous.reify.first_tranch_date_required rescue '-'
-              - if v.reify.first_tranch_date_required != prev
+              th Tranch
+              th Month
+              th ADB
+              th WB
+              th Total
+            - %w(first second third).each_with_index do |tranch, index|
+              - date = sp.send("#{tranch}_tranch_date_required".intern).to_date rescue false
+              - if date && date.beginning_of_month < Date.today.beginning_of_month
                 tr
-                  td 1
-                  - if v.reify.first_tranch_date_required == sp.versions.last.reify.first_tranch_date_required
-                    td style='background: #ccc;' = v.reify.first_tranch_date_required
-                  - else
-                    td = v.reify.first_tranch_date_required
-                  td = v.reify.updated_at.strftime("%B %d, %Y")
-                  td = v.whodunnit
-        
-              - prev = v.previous.reify.second_tranch_date_required rescue '-'
-              - if v.reify.second_tranch_date_required != prev
-                tr
-                  td 2
-                  - if v.reify.second_tranch_date_required == sp.versions.last.reify.second_tranch_date_required
-                    td style='background: #ccc;' = v.reify.second_tranch_date_required
-                  - else
-                    td = v.reify.second_tranch_date_required
-                  td = v.reify.updated_at.strftime("%B %d, %Y")
-                  td = v.whodunnit
-        
-              - prev = v.previous.reify.third_tranch_date_required rescue '-'
-              - if v.reify.third_tranch_date_required != prev
-                tr
-                  td 3
-                  - if v.reify.third_tranch_date_required == sp.versions.last.reify.third_tranch_date_required
-                    td style='background: #ccc;' = v.reify.third_tranch_date_required
-                  - else
-                    td = v.reify.third_tranch_date_required
-                  td = v.reify.updated_at.strftime("%B %d, %Y")
-                  td = v.whodunnit
-
+                  td = index + 1
+                  td = date.strftime("%b-%Y")
+                  td = number_to_currency(@cfa_adb = cfa_amounts(date.month, params[:with_year], params[:id], 1))
+                  td = number_to_currency(@cfa_wb = cfa_amounts(date.month, params[:with_year], params[:id], 2))
+                  td = number_to_currency(total_cfa_amounts = @cfa_adb + @cfa_wb)
     .modal-footer
       button.btn data-dismiss="modal" aria-hidden="true" Close
