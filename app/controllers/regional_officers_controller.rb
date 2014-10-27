@@ -1,12 +1,14 @@
 class RegionalOfficersController < ApplicationController
-	respond_to :html, :json
+	require 'will_paginate/array'
+  
+  respond_to :html, :json
   
   has_scope :region_id
   before_filter :subheader
   #has_scope :ro_type
 
   def index
-    @regional_officers = apply_scopes(RegionalOfficer).all
+    @regional_officers = apply_scopes(RegionalOfficer).all.paginate(page: params[:page], per_page: 30)
   end
 
   def new
