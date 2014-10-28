@@ -1,4 +1,4 @@
-# run "rake barangays:users"
+# run "rake users:import"
 
 namespace :users do
   
