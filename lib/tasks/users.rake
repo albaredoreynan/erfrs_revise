@@ -19,7 +19,7 @@ namespace :users do
     @spreadsheet.default_sheet = 'Sheet1'
 
     NOT_MIGRATED = []
-    (2..517).each do |row|
+    (2..518).each do |row|
       begin
         puts "CREATING row #{row} - #{cell(row, USER_COLUMN[:first_name])}..."
         create_user(row)
@@ -53,7 +53,7 @@ namespace :users do
     
     role = cell(row, USER_COLUMN[:role])
     unless role.nil?
-      @role = Role.find_or_create_by(code: role.titleize)  
+      @role = Role.find_or_create_by(name: role.titleize)  
       user.role_id = @role.id
     end
         
