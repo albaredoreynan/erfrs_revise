@@ -45,10 +45,10 @@ class MuniFundAllocationsController < ApplicationController
 	end
 
 
-	def delete
+	def destroy
 		@muni_fund_allocation = MuniFundAllocation.find(params[:id])
     @muni_fund_allocation.destroy!
-    flash[:success] = 'Regional Officer has been remove.'
+    flash[:success] = 'Municipality Fund Allocation has been removed.'
     redirect_to muni_fund_allocations_path
 	end
 
