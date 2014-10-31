@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
   def is_barangay_or_public?
     role.name == 'Barangay' || role.name == 'Public'
   end  
+
+  def is_regional_level?
+    role.name == 'Regional Admin' || role.name == 'Region'
+  end
 end

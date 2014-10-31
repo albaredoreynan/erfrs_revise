@@ -45,7 +45,10 @@ hr
         thead
           tr
             th.text-center width="10%" Fund Allocation
-            th.text-center colspan="4" Entire Fund
+            - if !current_user.is_regional_level?
+              th.text-center colspan="4" Entire Fund
+            - else
+              th.text-center colspan="4" Entire Regional Fund
             th.text-center colspan="4" This Municipal Only
           tr
             th
@@ -59,18 +62,30 @@ hr
             th.text-center %
           tr
             td.text-left style="padding-right: 60px;" Allocation
-            td.text-right 
-              - @fund_allocation = budget_allocation(1, params[:with_year])
-              = number_to_currency(@fund_allocation.to_f)
-            td.text-right 100.00
-            td.text-right
-              - @fund_allocation_other = budget_allocation(2, params[:with_year])
-              = number_to_currency(@fund_allocation_other.to_f)
-            td.text-right 100.00
+            - if !current_user.is_regional_level?
+              td.text-right 
+                - @fund_allocation = budget_allocation(1, params[:with_year])
+                = number_to_currency(@fund_allocation.to_f)
+              td.text-right 100.00
+              td.text-right
+                - @fund_allocation_other = budget_allocation(2, params[:with_year])
+                = number_to_currency(@fund_allocation_other.to_f)
+              td.text-right 100.00
+            - else  
+              td.text-right 
+                - @fund_allocation = compute_regional_fund_allocations(1, params[:with_year], current_user.region_id, current_user.province_id, current_user.municipality_id)
+                = number_to_currency(@fund_allocation.to_f)
+              td.text-right 100.00
+              td.text-right
+                - @fund_allocation_other = compute_regional_fund_allocations(2, params[:with_year], current_user.region_id, current_user.province_id, current_user.municipality_id)
+                = number_to_currency(@fund_allocation_other.to_f)
+              td.text-right 100.00
             td.text-center colspan="4"
               - @fund_allocation_per_mun = budget_allocation_per_mun(1, params[:with_year], params[:id])
               - @fund_allocation_per_mun_other = budget_allocation_per_mun(2, params[:with_year], params[:id])
               = number_to_currency(@fund_allocation_per_mun.to_f)
+            
+
           tr
             td style="padding-right: 90px;" MIBF
             td.text-right 
@@ -86,13 +101,13 @@ hr
               - @mibf_per_other = (@mibf_other.to_f / @fund_allocation.to_f ) * 100
               = @mibf_per_other.round(2)
             td.text-right
-              - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 1) 
+              - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 1, @subprojects.last.id) 
               = number_to_currency(@mibf_this_mncpl.to_f)
             td.text-right 
               - @mibf_this_mncpl_per = ( @mibf_this_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
               = @mibf_this_mncpl_per.round(2)
             td.text-right 
-              - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 2)
+              - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 2, @subprojects.last.id )
               = number_to_currency(@mibf_this_mncpl_other.to_f)
             td.text-right 
               - @mibf_this_mncpl_other_per = ( @mibf_this_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
@@ -209,7 +224,8 @@ hr
               td= sp.id
               td= sp.barangay.try(:name)
               td= sp.title
-              td.text-right= number_to_currency(sp.grant_amount_direct_cost.to_f)
+              - @total_grant = sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost
+              td.text-right= number_to_currency(@total_grant.to_f)
               td.text-right= number_to_currency(sp.first_tranch_amount.to_f)
               td.text-right= number_to_currency(sp.second_tranch_amount.to_f)
               td.text-right= number_to_currency(sp.third_tranch_amount.to_f)
