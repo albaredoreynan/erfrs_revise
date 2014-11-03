@@ -5,7 +5,7 @@ class CgdpsController < ApplicationController
 
   def index
     usercode = current_user.role.code
-    if usercode == 20
+    if usercode == 20 || usercode == 15
       subpro = Subproject.where(region_id: current_user.region_id)
     elsif usercode == 40
       subpro = Subproject.where(municipality_id: current_user.municipality_id)    

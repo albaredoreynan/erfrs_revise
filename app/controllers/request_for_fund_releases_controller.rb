@@ -10,7 +10,7 @@ class RequestForFundReleasesController < ApplicationController
 
   def index
     usercode = current_user.role.code
-    if usercode == 20
+    if usercode == 20 || usercode == 15
       rfrs = Subproject.where(region_id: current_user.region_id)
       subproject_id = rfrs.pluck(:id)
     elsif usercode == 40

@@ -1,5 +1,5 @@
 Erfrs::Application.configure do
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'erfrs.dswd.gov.ph' }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -36,7 +36,7 @@ Erfrs::Application.configure do
   config.action_mailer.smtp_settings = {
     address: "smtp.gmail.com",
     port: 587,
-    domain: "dswd-erfrs.cloudapp.net",
+    domain: "erfrs.dswd.gov.ph",
     authentication: "plain",
     enable_starttls_auto: true,
     user_name: "dswderfrs@gmail.com",
