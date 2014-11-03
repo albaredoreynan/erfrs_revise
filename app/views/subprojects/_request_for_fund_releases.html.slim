@@ -44,7 +44,7 @@
             td.text-center = number_to_currency rfrs.amount_requested
             td.text-center = number_to_currency rfrs.amount_contingency
             td.text-center = !rfrs.dv_date.nil? ? rfrs.dv_date.strftime("%d-%b-%Y") : ''
-            td.text-center = rfrs.dv_date.nil? ? '' : number_to_currency(rfrs.amount_approve)
+            td.text-center = rfrs.amount_approve.nil? ? '' : number_to_currency(rfrs.amount_approve)
             td.text-center
               = link_to "<i class='fa fa-eye'></i>".html_safe, request_for_fund_release_path(rfrs, :sp_id => params[:id], tranch: rfrs.tranch_for ), class: 'btn btn-xs btn-primary'
               '&nbsp
