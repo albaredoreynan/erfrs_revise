@@ -39,13 +39,11 @@ Erfrs::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
+    address: "smtp.mandrillapp.com",
     port: 587,
-    domain: "erfrs.dswd.gov.ph",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: "dswderfrs@gmail.com",
-    password: "appsource1401"
+    # domain: "erfrs.dswd.gov.ph",
+    user_name: "ralbaredo",
+    password: "pEnxyu3b1BK6XJgVIDlg-A"
   }
 
   

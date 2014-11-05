@@ -75,8 +75,8 @@ Erfrs::Application.configure do
     address: "smtp.mandrillapp.com",
     port: 587,
     # domain: "erfrs.dswd.gov.ph",
-    user_name: "reynan.albaredo@gmail.com",
-    password: "Y3Wj7IBsZALLN9FsR3TERQ"
+    user_name: "ralbaredo",
+    password: "pEnxyu3b1BK6XJgVIDlg-A"
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
