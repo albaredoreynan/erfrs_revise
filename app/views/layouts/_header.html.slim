@@ -1,14 +1,18 @@
 nav.navbar.navbar-default.navbar-fixed-top.bg-g-ln-gray role="navigation"
-  .navbar-headernavbar 
-    = link_to "eRFRS - Electronic Request for Fund Release System", root_url, class: "navbar-brand"
-
-  .collapse.navbar-collapse
-    ul.nav.navbar-nav.navbar-right
-      - if user_signed_in?
-        - if current_user.first_name.present? && current_user.last_name.present?
-          li= link_to "Logged in as #{current_user.first_name.humanize} #{current_user.last_name.humanize}", "#"
-        - else
-          li= link_to "Logged in as #{current_user.email}", "#"          
-        li= link_to "Logout", destroy_user_session_path, method: :delete
+  .div.pull-left style="padding:5px;"
+    = image_tag("erfrs_logo1.png", size: "65x53", alt: "DSWD")
+    '&nbsp;
+    = image_tag("erfrs_logo2.png", size: "65x53", alt: "KALAHI CIDSS-NCDDP")
+    '&nbsp;
+    = image_tag("erfrsmain_logo.png", size: "320x53", alt: "ERFRS")
+  .div.pull-right style="padding-top:5px;"      
+    .collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          - if current_user.first_name.present? && current_user.last_name.present?
+            li= link_to "Logged in as #{current_user.first_name.humanize} #{current_user.last_name.humanize}", "#"
+          - else
+            li= link_to "Logged in as #{current_user.email}", "#"          
+          li= link_to "Logout", destroy_user_session_path, method: :delete
 
 
