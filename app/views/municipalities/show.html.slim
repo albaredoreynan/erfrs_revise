@@ -217,14 +217,15 @@ hr
             th.text-center Status
             th.text-center Fund Source
         tbody
-          - @grant_total = Array.new
+          - @super_grant_total = Array.new
           - @subprojects.each do |sp|
-            - @grant_total << sp.grant_amount_direct_cost
+            
             tr
               td= sp.id
               td= sp.barangay.try(:name)
               td= sp.title
               - @total_grant = sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost
+              - @super_grant_total << @total_grant
               td.text-right= number_to_currency(@total_grant.to_f)
               td.text-right= number_to_currency(sp.first_tranch_amount.to_f)
               td.text-right= number_to_currency(sp.second_tranch_amount.to_f)
@@ -239,28 +240,43 @@ hr
                   td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
           tr
            td colspan="3" COUNT: #{@subprojects.count}
-           td.text-left colspan="6" TOTAL: #{number_to_currency(@grant_total.inject(:+).to_f)}
+           td.text-left colspan="6" TOTAL: #{number_to_currency(@super_grant_total.inject(:+).to_f)}
   .row.sp-table
-    .col-md-12
+    .col-md-8
       h4 Sub-Allotment Advice Information
-      hr
+      
+    / .col-md-4 style="padding-bottom:7px;"
+    /   button data-toggle='modal' data-target='#view_cash_program' class=" btn btn-primary pull-right"
+    /     = icon_text(nil, 'Create SAA')
     br
     br
   .row.sp-show
-    .col-md-8.parent
-      .form-group
-        .col-md-6.text-right
-          'SAA Number
-        .col-md-6.bold
-          -if @cgdp.present?
-            = @cgdp.present? ? @cgdp.saa_number : ''
-    .col-md-8.parent
-      .form-group
-        .col-md-6.text-right
-          'SAA Date
-        .col-md-6.bold
-          -if @cgdp.present?
-            = @cgdp.saa_date.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
+    .col-md-8
+      table.table.table-hover.table-striped.table-bordered
+        thead
+          tr
+            th.text-center SAA Date
+            th.text-center SAA Number
+            th.text-center SAA Amount
+    .col-md-4
+      table.table.table-hover.table-striped.table-bordered
+        thead
+          tr
+            th.text-center Remaining Amount
+    / .col-md-8.parent
+    /   .form-group
+    /     .col-md-6.text-right
+    /       'SAA Number
+    /     .col-md-6.bold
+    /       -if @cgdp.present?
+    /         = @cgdp.present? ? @cgdp.saa_number : ''
+    / .col-md-8.parent
+    /   .form-group
+    /     .col-md-6.text-right
+    /       'SAA Date
+    /     .col-md-6.bold
+    /       -if @cgdp.present?
+    /         = @cgdp.saa_date.present? ? @cgdp.saa_date.strftime('%d-%b-%Y') : ''
 = render 'view_cash_program'
 = render 'cash_program_history'
 / = render 'assigned_fund_source'
