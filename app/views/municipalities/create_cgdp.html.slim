@@ -82,7 +82,7 @@
               - @fund_allocation_per_mun_other = budget_allocation_per_mun(2, params[:with_year], params[:id]).to_f
               = number_to_currency(@fund_allocation_per_mun.to_f)
           tr
-            td.text-right MIBF
+            td style="padding-right: 90px;" MIBF
             td.text-right 
               - @mibf = total_grant_amount_per_year(params[:with_year], 1)
               = number_to_currency(@mibf.to_f)
@@ -96,19 +96,19 @@
               - @mibf_per_other = (@mibf_other.to_f / @fund_allocation.to_f ) * 100
               = @mibf_per_other.round(2)
             td.text-right
-              - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 1) 
+              - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 1, @subprojects.last.id) 
               = number_to_currency(@mibf_this_mncpl.to_f)
             td.text-right 
               - @mibf_this_mncpl_per = ( @mibf_this_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
               = @mibf_this_mncpl_per.round(2)
             td.text-right 
-              - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 2)
+              - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 2, @subprojects.last.id )
               = number_to_currency(@mibf_this_mncpl_other.to_f)
             td.text-right 
               - @mibf_this_mncpl_other_per = ( @mibf_this_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
               = @mibf_this_mncpl_other_per.round(2)
           tr
-            td Released
+            td style="padding-left: 30px;" Released
             td.text-right 
               - @release = total_amount_release(params[:with_year], 1).to_f
               = number_to_currency(@release.to_f)
@@ -135,7 +135,7 @@
               - @release_per_mncpl_other_percent = (@release_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
               = @release_per_mncpl_other_percent.round(2)
           tr
-            td Excess
+            td style="padding-left: 20px;" Excess
             td.text-right 
               - @excess = @mibf.to_f - @release.to_f
 
@@ -162,7 +162,7 @@
               - @excess_per_mncpl_other_per = (@excess_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f) * 100
               = @excess_per_mncpl_other_per.round(2)
           tr
-            td Surplus
+            td style="padding-right: 70px;" Leftover
             td.text-right 
               - @amount_surplus = @fund_allocation.to_f - @mibf.to_f
               = number_to_currency(@amount_surplus.to_f)
@@ -176,18 +176,18 @@
               - @amount_surplus_other_per = (@amount_surplus_other.to_f / @fund_allocation_other.to_f ) * 100
               = @amount_surplus_other_per.round(2)
 
-            td.text-right 
-              - @amount_surplus_per_mncpl = @fund_allocation_per_mun.to_f - @mibf_this_mncpl.to_f
+            td.text-center colspan="4"
+              - @amount_surplus_per_mncpl = @fund_allocation_per_mun.to_f - (@mibf_this_mncpl.to_f + @mibf_this_mncpl_other.to_f)
               = number_to_currency(@amount_surplus_per_mncpl.to_f)
-            td.text-right
-              - @amount_surplus_per_mncpl_per = (@amount_surplus_per_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
-              = @amount_surplus_per_mncpl_per.round(2)
-            td.text-right
-              - @amount_surplus_per_mncpl_other = @fund_allocation_per_mun_other.to_f - @mibf_this_mncpl_other.to_f
-              = number_to_currency(@amount_surplus_per_mncpl_other.to_f)
-            td.text-right
-              - @amount_surplus_per_mncpl_other_per = (@amount_surplus_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
-              = @amount_surplus_per_mncpl_other_per.round(2) 
+            / td.text-right
+            /   - @amount_surplus_per_mncpl_per = (@amount_surplus_per_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
+            /   = @amount_surplus_per_mncpl_per.round(2)
+            / td.text-right
+            /   - @amount_surplus_per_mncpl_other = @fund_allocation_per_mun_other.to_f - @mibf_this_mncpl_other.to_f
+            /   = number_to_currency(@amount_surplus_per_mncpl_other.to_f)
+            / td.text-right
+            /   - @amount_surplus_per_mncpl_other_per = (@amount_surplus_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
+            /   = @amount_surplus_per_mncpl_other_per.round(2)  
     
     .col-md-12 style="padding-bottom:7px;"
         button data-toggle='modal' data-target='#view_cash_program' class=" btn btn-primary "
@@ -257,6 +257,11 @@
           'SAA Number :
         .col-md-6
           = f.text_field :saa_number
+      .form-group
+        .col-md-5.text-right
+          'SAA Amount :
+        .col-md-6
+          = text_field_tag :saa_amount
       .form-group
         .col-md-5.text-right
           'SAA Date :

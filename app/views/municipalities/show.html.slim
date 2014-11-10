@@ -181,18 +181,18 @@ hr
               - @amount_surplus_other_per = (@amount_surplus_other.to_f / @fund_allocation_other.to_f ) * 100
               = @amount_surplus_other_per.round(2)
 
-            td.text-right 
-              - @amount_surplus_per_mncpl = @fund_allocation_per_mun.to_f - @mibf_this_mncpl.to_f
+            td.text-center colspan="4"
+              - @amount_surplus_per_mncpl = @fund_allocation_per_mun.to_f - (@mibf_this_mncpl.to_f + @mibf_this_mncpl_other.to_f)
               = number_to_currency(@amount_surplus_per_mncpl.to_f)
-            td.text-right
-              - @amount_surplus_per_mncpl_per = (@amount_surplus_per_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
-              = @amount_surplus_per_mncpl_per.round(2)
-            td.text-right
-              - @amount_surplus_per_mncpl_other = @fund_allocation_per_mun_other.to_f - @mibf_this_mncpl_other.to_f
-              = number_to_currency(@amount_surplus_per_mncpl_other.to_f)
-            td.text-right
-              - @amount_surplus_per_mncpl_other_per = (@amount_surplus_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
-              = @amount_surplus_per_mncpl_other_per.round(2) 
+            / td.text-right
+            /   - @amount_surplus_per_mncpl_per = (@amount_surplus_per_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
+            /   = @amount_surplus_per_mncpl_per.round(2)
+            / td.text-right
+            /   - @amount_surplus_per_mncpl_other = @fund_allocation_per_mun_other.to_f - @mibf_this_mncpl_other.to_f
+            /   = number_to_currency(@amount_surplus_per_mncpl_other.to_f)
+            / td.text-right
+            /   - @amount_surplus_per_mncpl_other_per = (@amount_surplus_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
+            /   = @amount_surplus_per_mncpl_other_per.round(2) 
     
     .col-md-12 style="padding-bottom:7px;"
         button data-toggle='modal' data-target='#view_cash_program' class=" btn btn-primary "
