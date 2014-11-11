@@ -247,44 +247,29 @@
             th Status
             th Fund Source
         tbody
-          - @grant_total = Array.new
+          - @super_grant_total = Array.new
           - @subprojects.each do |sp|
-            - @grant_total << sp.grant_amount_direct_cost
             tr
               td= sp.id
               td= sp.barangay.try(:name)
               td= sp.title
-              td.text-right= number_to_currency(sp.grant_amount_direct_cost)
-              td.text-right= number_to_currency(sp.first_tranch_amount)
-              td.text-right= number_to_currency(sp.second_tranch_amount)
-              td.text-right= number_to_currency(sp.third_tranch_amount)
+              - @total_grant = sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost
+              - @super_grant_total << @total_grant
+              td.text-right= number_to_currency(@total_grant.to_f)
+              td.text-right= number_to_currency(sp.first_tranch_amount.to_f)
+              td.text-right= number_to_currency(sp.second_tranch_amount.to_f)
+              td.text-right= number_to_currency(sp.third_tranch_amount.to_f)
               td= sp.status
-              -if @cgdp.status == 'Final'
-                -if sp.fund_source.present?
-                  td= sp.fund_source.code  
-                -else
-                  td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+              -if sp.fund_source.present? && sp.status == "Final"
+                td= sp.fund_source.code
               -else
-                -if sp.fund_source.present?
-                  td= sp.fund_source.code  
+                -if sp.fund_source_id.present? 
+                  td= sp.fund_source.code
                 -else
                   td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
-
-              / -if sp.fund_source.present? && sp.status == "Final"
-              /   td= sp.fund_source.code
-              / -elsif sp.fund_source.present? || sp.status == "Final"
-              /   td= sp.fund_source.code
-              / -else
-              /   -if sp.fund_source.present?
-              /     -if sp.fund_source_id != '' 
-              /       td= sp.fund_source.code
-              /     -else
-              /       td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
-              /   -else
-              /     td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
           tr
-           td colspan="3" Count: #{@subprojects.count}
-           td.text-left colspan="6" Total: #{number_to_currency(@grant_total.inject(:+).to_f)}
+           td colspan="3" COUNT: #{@subprojects.count}
+           td.text-left colspan="6" TOTAL: #{number_to_currency(@super_grant_total.inject(:+).to_f)}
   .row.sp-table
     .col-md-12
       h4 Sub Allotment Advice Information

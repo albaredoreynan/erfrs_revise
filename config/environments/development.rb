@@ -34,11 +34,13 @@ Erfrs::Application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    address: "smtp.mandrillapp.com",
-    port: 587,
-    # domain: "erfrs.dswd.gov.ph",
-    user_name: "ralbaredo",
-    password: "pEnxyu3b1BK6XJgVIDlg-A"
+    :enable_starttls_auto => true,
+    :address              => "smtp.gmail.com",
+    :port                 => '587',
+    :domain               => 'erfrs.dswd.gov.ph',
+    :authentication       => :login,
+    :user_name            => 'erfrs@dswd.gov.ph',
+    :password             => '3rfrs@dswdKALAHI'
   }
 
 

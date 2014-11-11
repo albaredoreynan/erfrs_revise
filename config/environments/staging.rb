@@ -72,11 +72,13 @@ Erfrs::Application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default :charset => "utf-8"
   config.action_mailer.smtp_settings = {
-    address: "smtp.mandrillapp.com",
-    port: 587,
-    # domain: "erfrs.dswd.gov.ph",
-    user_name: "ralbaredo",
-    password: "pEnxyu3b1BK6XJgVIDlg-A"
+    :enable_starttls_auto => true,
+    :address              => "smtp.gmail.com",
+    :port                 => '587',
+    :domain               => 'erfrs.dswd.gov.ph',
+    :authentication       => :login,
+    :user_name            => 'erfrs@dswd.gov.ph',
+    :password             => '3rfrs@dswdKALAHI'
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
