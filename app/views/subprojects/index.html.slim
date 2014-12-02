@@ -114,7 +114,8 @@ br
                     = link_to "<i class='fa fa-trash-o'></i>".html_safe, sp, method: :delete, confirm: 'Are you sure you want to delete this Sub-Project?', class: 'btn btn-xs btn-danger', data: { confirm: 'Are you sure?' } ," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Delete"
                   -else
                     = link_to "<i class='fa fa-trash-o'></i>".html_safe, {}, class: 'btn btn-xs btn-default disabled'     
-
+  .flickr_pagination
+    = will_paginate @municipalities
 
 
 javascript:

@@ -25,7 +25,7 @@ class SubprojectsController < ApplicationController
     end
 
     @subprojects = apply_scopes(subpro).includes(
-      :region, :province, :municipality, :barangay).order(created_at: :asc)
+      :region, :province, :municipality, :barangay).paginate(page: params[:page], per_page: 25).order(created_at: :asc)
                                                    .sort!{ |a,b| a.barangay.name.downcase <=>  b.barangay.name.downcase }
                                                    .sort!{ |a,b| a.municipality.name.downcase <=>  b.municipality.name.downcase }
                                                    .sort!{ |a,b| a.province.name.downcase <=>  b.province.name.downcase }
