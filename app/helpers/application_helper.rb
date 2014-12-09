@@ -76,6 +76,19 @@ module ApplicationHelper
     end
   end
 
+  def entire_region_budget_allocation(region_id, year)
+    @provinces = Province.where(:region_id => region_id)
+    prov_id = @provinces.pluck(:id)
+    @municipalities = Municipality.where(:province_id => prov_id)
+    municipality_id = @municipalities.pluck(:id)
+    @muni_fund_allocations = MuniFundAllocation.where(:municipality_id => municipality_id, :year => year)
+    @total_grand_allocation = Array.new
+    @muni_fund_allocations.each do |mfa| 
+      @total_grand_allocation << mfa.amount
+    end
+    return @total_grand_allocation.inject(:+).to_f
+  end
+
   def budget_allocation_per_mun(code, year, municipality_id)
     @budget = MuniFundAllocation.select('amount').where( municipality_id: municipality_id, year: year).last
     if @budget.nil?
@@ -85,11 +98,11 @@ module ApplicationHelper
     end  
   end
 
-  def total_grant_amount_per_mncpl(municipality_id, year, fund_source, subproject_id)
+  def total_grant_amount_per_mncpl(municipality_id, year, fund_source)
     @total1 = Array.new
     @total2 = Array.new
     @total3 = Array.new
-    @val = Subproject.select('grant_amount_direct_cost, grant_amount_indirect_cost, grant_amount_contingency_cost').where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ? AND fund_source_id = ? AND id = ?', year, municipality_id, fund_source, subproject_id)
+    @val = Subproject.select('grant_amount_direct_cost, grant_amount_indirect_cost, grant_amount_contingency_cost').where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ? AND fund_source_id = ?', year, municipality_id, fund_source)
     @val.each do |amount|
       @total1 << amount.grant_amount_direct_cost.to_f
       @total2 << amount.grant_amount_indirect_cost.to_f
@@ -110,6 +123,30 @@ module ApplicationHelper
     end
     @total1.inject(:+).to_f + @total2.inject(:+).to_f + @total3.inject(:+).to_f
 
+  end
+
+  def total_amount_release_per_region(year, region_id, fund_source_id)
+    @amount_approve = Array.new
+    Subproject.select("id").where('EXTRACT( YEAR from date_of_mibf) = ? AND region_id = ? AND status = ? AND fund_source_id =?', year, region_id, 'Final', fund_source_id).each do |sp_id|
+      RequestForFundRelease.select("amount_approve").where(subproject_id: sp_id.id).each do |rfrs|
+        @amount_approve << rfrs.amount_approve.to_f
+      end
+    end
+    @total = @amount_approve.inject(:+).to_f
+
+  end
+
+  def total_grant_amount_per_region(year, region_id, fund_source_id)
+    @total1 = Array.new
+    @total2 = Array.new
+    @total3 = Array.new
+    @val = Subproject.select('grant_amount_direct_cost, grant_amount_indirect_cost, grant_amount_contingency_cost').where('EXTRACT( YEAR from date_of_mibf) = ? AND region_id = ? AND fund_source_id =? ', year, region_id, fund_source_id)
+    @val.each do |amount|
+      @total1 << amount.grant_amount_direct_cost.to_f
+      @total2 << amount.grant_amount_indirect_cost.to_f
+      @total3 << amount.grant_amount_contingency_cost.to_f
+    end
+    @total1.inject(:+).to_f + @total2.inject(:+).to_f + @total3.inject(:+).to_f
   end 
 
   def total_amount_of_tranches(year, municipality_id)
@@ -144,7 +181,6 @@ module ApplicationHelper
     @val3.each do |amount|
       @tranch3 << amount.third_tranch_amount.to_f
     end
-
     @total = @tranch1.inject(:+).to_f + @tranch2.inject(:+).to_f + @tranch3.inject(:+).to_f
   end
   

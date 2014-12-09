@@ -54,7 +54,10 @@
         thead
           tr
             th.text-center width="10%" Fund Allocation
-            th.text-center colspan="4" Entire Fund
+            - if !current_user.is_regional_level?
+              th.text-center colspan="4" Entire Fund
+            - else
+              th.text-center colspan="4" Entire Regional Fund
             th.text-center colspan="4" This Municipal Only
           tr
             th
@@ -66,57 +69,77 @@
             th.text-center %
             th.text-center WB
             th.text-center %
-        tbody
           tr
-            td Allocation
-            td.text-right 
-              - @fund_allocation = budget_allocation(1, params[:with_year]).to_f
-              = number_to_currency(@fund_allocation.to_f)
-            td.text-right 100
-            td.text-right
-              - @fund_allocation_other = budget_allocation(2, params[:with_year]).to_f
-              = number_to_currency(@fund_allocation_other.to_f)
-            td.text-right 100
+            td.text-left style="padding-right: 60px;" Allocation
+            - if !current_user.is_regional_level?
+              td.text-center colspan="4"
+                - @fund_allocation = entire_region_budget_allocation(@muni_info.province.region_id, params[:with_year])
+                = number_to_currency(@fund_allocation.to_f)
+              / td.text-right 
+              /   - @fund_allocation = budget_allocation(1, params[:with_year])
+              /   = number_to_currency(@fund_allocation.to_f)
+              / td.text-right 100.00
+              / td.text-right
+              /   - @fund_allocation_other = budget_allocation(2, params[:with_year])
+              /   = number_to_currency(@fund_allocation_other.to_f)
+              / td.text-right 100.00
+            - else  
+              td.text-right 
+                - @fund_allocation = compute_regional_fund_allocations(1, params[:with_year], current_user.region_id, current_user.province_id, current_user.municipality_id)
+                = number_to_currency(@fund_allocation.to_f)
+              td.text-right 100.00
+              td.text-right
+                - @fund_allocation_other = compute_regional_fund_allocations(2, params[:with_year], current_user.region_id, current_user.province_id, current_user.municipality_id)
+                = number_to_currency(@fund_allocation_other.to_f)
+              td.text-right 100.00
             td.text-center colspan="4"
-              - @fund_allocation_per_mun = budget_allocation_per_mun(1, params[:with_year], params[:id]).to_f
-              - @fund_allocation_per_mun_other = budget_allocation_per_mun(2, params[:with_year], params[:id]).to_f
+              - @fund_allocation_per_mun = budget_allocation_per_mun(1, params[:with_year], params[:id])
+              - @fund_allocation_per_mun_other = budget_allocation_per_mun(2, params[:with_year], params[:id])
               = number_to_currency(@fund_allocation_per_mun.to_f)
+            
+
           tr
             td style="padding-right: 90px;" MIBF
             td.text-right 
-              - @mibf = total_grant_amount_per_year(params[:with_year], 1)
+              - @mibf = total_grant_amount_per_region(params[:with_year], @muni_info.province.region_id, 1)
               = number_to_currency(@mibf.to_f)
+              / - @mibf = total_grant_amount_per_year(params[:with_year], 1)
+              / = number_to_currency(@mibf.to_f)
             td.text-right
               - @mibf_per = (@mibf.to_f / @fund_allocation.to_f) * 100
               = @mibf_per.round(2)
             td.text-right  
-              - @mibf_other = total_grant_amount_per_year(params[:with_year], 2)
+              - @mibf_other = total_grant_amount_per_region(params[:with_year], @muni_info.province.region_id, 2)
               = number_to_currency(@mibf_other.to_f)
+              / - @mibf_other = total_grant_amount_per_year(params[:with_year], 2)
+              / = number_to_currency(@mibf_other.to_f)
             td.text-right 
               - @mibf_per_other = (@mibf_other.to_f / @fund_allocation.to_f ) * 100
               = @mibf_per_other.round(2)
             td.text-right
-              - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 1, @subprojects.last.id) 
+              - @mibf_this_mncpl = total_grant_amount_per_mncpl(params[:id], params[:with_year], 1) 
               = number_to_currency(@mibf_this_mncpl.to_f)
             td.text-right 
               - @mibf_this_mncpl_per = ( @mibf_this_mncpl.to_f / @fund_allocation_per_mun.to_f ) * 100
               = @mibf_this_mncpl_per.round(2)
             td.text-right 
-              - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 2, @subprojects.last.id )
+              - @mibf_this_mncpl_other = total_grant_amount_per_mncpl(params[:id], params[:with_year], 2)
               = number_to_currency(@mibf_this_mncpl_other.to_f)
             td.text-right 
               - @mibf_this_mncpl_other_per = ( @mibf_this_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
               = @mibf_this_mncpl_other_per.round(2)
           tr
             td style="padding-left: 30px;" Released
-            td.text-right 
-              - @release = total_amount_release(params[:with_year], 1).to_f
+            td.text-right
+              - @release = total_amount_release_per_region(params[:with_year], @muni_info.province.region_id, 1)
               = number_to_currency(@release.to_f)
+              / - @release = total_amount_release(params[:with_year], 1).to_f
+              / = number_to_currency(@release.to_f)
             td.text-right 
               - @release_per = ( @release.to_f / @fund_allocation.to_f) * 100
               = @release_per.round(2)
             td.text-right 
-              - @release_other = total_amount_release(params[:with_year], 2).to_f
+              - @release_other = total_amount_release_per_region(params[:with_year], @muni_info.province.region_id, 2)
               = number_to_currency(@release_other.to_f)
             td.text-right 
               - @release_other_per = ( @release_other.to_f / @fund_allocation.to_f ) * 100
@@ -138,7 +161,6 @@
             td style="padding-left: 20px;" Excess
             td.text-right 
               - @excess = @mibf.to_f - @release.to_f
-
               = number_to_currency(@excess.to_f)
             td.text-right
               - @excess_per = (@excess.to_f / @fund_allocation.to_f) * 100
@@ -147,7 +169,7 @@
               - @excess_other = @mibf_other.to_f - @release_other.to_f
               = number_to_currency(@excess_other.to_f)
             td.text-right
-              - @excess_other_per = (@excess_other.to_f / @fund_allocation_other.to_f) * 100
+              - @excess_other_per = (@excess_other.to_f / @fund_allocation.to_f) * 100
               = @excess_other_per.round(2)
             td.text-right 
               - @excess_per_mncpl = @mibf_this_mncpl.to_f - @release_per_mncpl.to_f
@@ -163,18 +185,18 @@
               = @excess_per_mncpl_other_per.round(2)
           tr
             td style="padding-right: 70px;" Leftover
-            td.text-right 
-              - @amount_surplus = @fund_allocation.to_f - @mibf.to_f
+            td.text-center colspan=3
+              - @amount_surplus = @fund_allocation.to_f - (@mibf.to_f + @mibf_other.to_f)
               = number_to_currency(@amount_surplus.to_f)
             td.text-right 
-              - @amount_surplus_per = (@amount_surplus.to_f / @fund_allocation.to_f ) * 100
+              - @amount_surplus_per = (@amount_surplus.to_f / (@fund_allocation.to_f + @fund_allocation_other.to_f) ) * 100
               = @amount_surplus_per.round(2)
-            td.text-right
-              - @amount_surplus_other = @fund_allocation_other.to_f - @mibf_other.to_f
-              = number_to_currency(@amount_surplus_other.to_f)
-            td.text-right
-              - @amount_surplus_other_per = (@amount_surplus_other.to_f / @fund_allocation_other.to_f ) * 100
-              = @amount_surplus_other_per.round(2)
+            / td.text-right
+            /   - @amount_surplus_other = @fund_allocation_other.to_f - @mibf_other.to_f
+            /   = number_to_currency(@amount_surplus_other.to_f)
+            / td.text-right
+            /   - @amount_surplus_other_per = (@amount_surplus_other.to_f / @fund_allocation_other.to_f ) * 100
+            /   = @amount_surplus_other_per.round(2)
 
             td.text-center colspan="4"
               - @amount_surplus_per_mncpl = @fund_allocation_per_mun.to_f - (@mibf_this_mncpl.to_f + @mibf_this_mncpl_other.to_f)
@@ -187,29 +209,35 @@
             /   = number_to_currency(@amount_surplus_per_mncpl_other.to_f)
             / td.text-right
             /   - @amount_surplus_per_mncpl_other_per = (@amount_surplus_per_mncpl_other.to_f / @fund_allocation_per_mun_other.to_f ) * 100
-            /   = @amount_surplus_per_mncpl_other_per.round(2)  
+            /   = @amount_surplus_per_mncpl_other_per.round(2) 
     
     .col-md-12 style="padding-bottom:7px;"
         button data-toggle='modal' data-target='#view_cash_program' class=" btn btn-primary "
           = icon_text(nil, 'View Cash Program')
         | &nbsp  
-        /button data-toggle='modal' id='assigned_fund_source' class="btn btn-primary"
-          = icon_text(nil, 'Assign Fund Sources')
+        button data-toggle='modal' data-target='#history_cash_program' class=" btn btn-primary "
+          = icon_text(nil, 'History Cash Program')
+        | &nbsp  
+        / button data-toggle='modal' id='assigned_fund_source' class="btn btn-primary"
+          / = icon_text(nil, 'Assign Fund Sources')
     .col-md-12
       table.table.table-hover.table-striped.table-bordered
         thead
           tr
-            th SP ID
-            th Barangay
-            th Title
-            th.text-right Grant Amount
-            th.text-right Tranche 1
-            th.text-right Tranche 2
-            th.text-right Tranche 3
-            th Status
-            th Fund Source
+            th.text-center SP ID
+            th.text-center Barangay
+            th.text-center Title
+            th.text-center Grant Amount
+            th.text-center Tranche 1
+            th.text-center Tranche 2
+            th.text-center Tranche 3
+            th.text-center Status
+            th.text-center Fund Source
         tbody
           - @super_grant_total = Array.new
+          - @first_tranche = Array.new
+          - @second_tranche = Array.new
+          - @third_tranche = Array.new
           - @subprojects.each do |sp|
             tr
               td= sp.id
@@ -218,9 +246,15 @@
               - @total_grant = sp.grant_amount_direct_cost + sp.grant_amount_indirect_cost + sp.grant_amount_contingency_cost
               - @super_grant_total << @total_grant
               td.text-right= number_to_currency(@total_grant.to_f)
-              td.text-right= number_to_currency(sp.first_tranch_amount.to_f)
-              td.text-right= number_to_currency(sp.second_tranch_amount.to_f)
-              td.text-right= number_to_currency(sp.third_tranch_amount.to_f)
+              td.text-right
+                - @first_tranche << sp.first_tranch_amount.to_f
+                = number_to_currency(sp.first_tranch_amount.to_f)
+              td.text-right
+                - @second_tranche << sp.second_tranch_amount.to_f
+                = number_to_currency(sp.second_tranch_amount.to_f)
+              td.text-right
+                - @third_tranche << sp.third_tranch_amount.to_f
+                = number_to_currency(sp.third_tranch_amount.to_f)
               td= sp.status
               -if sp.fund_source.present? && sp.status == "Final"
                 td= sp.fund_source.code
@@ -230,8 +264,13 @@
                 -else
                   td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
           tr
-           td colspan="3" COUNT: #{@subprojects.count}
-           td.text-left colspan="6" TOTAL: #{number_to_currency(@super_grant_total.inject(:+).to_f)}
+           td colspan="2" COUNT: #{@subprojects.count}
+           td TOTAL:
+           td.text-right #{number_to_currency(@super_grant_total.inject(:+).to_f)}
+           td.text-right #{number_to_currency(@first_tranche.inject(:+).to_f)}
+           td.text-right #{number_to_currency(@second_tranche.inject(:+).to_f)}
+           td.text-right #{number_to_currency(@third_tranche.inject(:+).to_f)}
+           td colspan="2"
   .row.sp-table
     .col-md-12
       h4 Sub Allotment Advice Information
