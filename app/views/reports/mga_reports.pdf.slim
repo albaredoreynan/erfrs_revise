@@ -37,7 +37,12 @@
               - allocation = 0
             -# allocation += sps.map{|c|c.grant_amount_direct_cost + c.grant_amount_indirect_cost + c.grant_amount_contingency_cost}.first
             - release += sps.map{|c|c.first_tranch_revised_amount + c.second_tranch_revised_amount + c.third_tranch_revised_amount}.first
-            - approve_amount = sps.map{|c| c.request_for_fund_releases.sum(&:amount_approve) }.pop
+            / - approve_amount = sps.map{|c| c.request_for_fund_releases.sum(&:amount_approve) }.pop
+            
+            - @pprove_amt_adb = total_grant_amount_per_mncpl(m.id, sps.first.date_of_mibf.year, 1)
+            - @pprove_amt_wb = total_grant_amount_per_mncpl(m.id, sps.first.date_of_mibf.year, 2)
+            - approve_amount = @pprove_amt_adb + @pprove_amt_wb
+
             - excess += approve_amount - release
             
             -# excess += sps.map{|c|c.first_tranch_amount + c.second_tranch_amount + c.third_tranch_amount}.first 
@@ -51,4 +56,4 @@
               td = number_to_currency release
               td = number_to_currency excess
               td = number_to_currency total_m
-              td = number_to_currency (allocation - release)
+              td = number_to_currency (allocation - approve_amount)

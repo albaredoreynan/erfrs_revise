@@ -73,7 +73,12 @@
           <% allocation = 0%>
         <% end %>
         <%#allocation += sps.map{|c|c.grant_amount_direct_cost + c.grant_amount_indirect_cost + c.grant_amount_contingency_cost}.first %>
-        <% approve_amount = sps.map{|c| c.request_for_fund_releases.sum(&:amount_approve) }.pop %>
+        <%# approve_amount = sps.map{|c| c.request_for_fund_releases.sum(&:amount_approve) }.pop %>
+        
+        <% @pprove_amt_adb = total_grant_amount_per_mncpl(m.id, sps.first.date_of_mibf.year, 1) %>
+        <% @pprove_amt_wb = total_grant_amount_per_mncpl(m.id, sps.first.date_of_mibf.year, 2) %>
+        <% approve_amount = @pprove_amt_adb + @pprove_amt_wb %>
+
         <%release += sps.map{|c|c.first_tranch_revised_amount + c.second_tranch_revised_amount + c.third_tranch_revised_amount}.first %>
         <% excess += approve_amount - release %>
         <%#excess += sps.map{|c|c.first_tranch_amount + c.second_tranch_amount + c.third_tranch_amount}.first %>
@@ -87,7 +92,7 @@
           <Cell><Data ss:Type="String"><%=number_to_currency release %></Data></Cell>
           <Cell><Data ss:Type="String"><%=number_to_currency excess %></Data></Cell>
           <Cell><Data ss:Type="String"><%=number_to_currency total_m %></Data></Cell>
-          <Cell><Data ss:Type="String"><%=number_to_currency allocation - total_m %></Data></Cell>
+          <Cell><Data ss:Type="String"><%=number_to_currency allocation - approve_amount %></Data></Cell>
         </Row>
       <% end %>
     </Table>
