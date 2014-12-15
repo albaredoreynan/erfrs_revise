@@ -190,14 +190,14 @@ table.table.table-responsive border=1 width=500
       
   tr
     td width='50%' colspan=2
-      p.bold Reviewed by:
-      .col-md-7.text-center
-        = team_member_name(@rfrs.srpmo_reviewed_by)
-        br
-        '------------------------------------------------------- 
-        br
-        = @rfrs.srpmo_designation
-      p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')}
+      / p.bold Reviewed by:
+      / .col-md-7.text-center
+      /   = team_member_name(@rfrs.srpmo_reviewed_by)
+      /   br
+      /   '------------------------------------------------------- 
+      /   br
+      /   = @rfrs.srpmo_designation
+      / p.bold Date: #{@rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')}
       p.bold Recommended by:
       .col-md-7.text-center
         = team_member_name(@rfrs.srpmo_recommend_by)

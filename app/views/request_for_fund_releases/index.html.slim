@@ -93,7 +93,7 @@ br
               td = trail_id(6, rf.id)
               td = trail_id(6, rf.subproject_id)
               td = rf.subproject.title
-              td = rf.request_date.strftime('%b %d, %Y')
+              td = rf.request_date.nil? ? '' : rf.request_date.strftime('%b %d, %Y')
               td = number_to_currency(rf.subproject.first_tranch_amount)
               td = number_to_currency(rf.amount_approve)
               td = rf.status
