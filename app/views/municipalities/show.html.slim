@@ -295,7 +295,8 @@ hr
             tr
               th.text-center Remaining Amount
             tr
-              - @remaining = @mibf_this_mncpl - @total_saa.inject(:+)
+              - @total_saa_value = @total_saa.nil? ? 0 : @total_saa.inject(:+).to_f
+              - @remaining = @mibf_this_mncpl - @total_saa_value
               td.text-center = number_to_currency(@remaining.to_f)
     / .col-md-8.parent
     /   .form-group
