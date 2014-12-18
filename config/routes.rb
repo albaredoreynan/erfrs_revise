@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :municipalities do
     get :edit_cgdp, on: :collection
     get :create_cgdp, on: :collection
+    post :create_saa, on: :collection
   end
   resources :barangays
   resources :groups

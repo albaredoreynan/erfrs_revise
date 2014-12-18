@@ -25,7 +25,12 @@ class MunicipalitiesController < InheritedResources::Base
     @subprojects = Subproject.where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', params[:with_year], params[:id]).order("date_of_mibf")
     @subproject = Subproject.where('EXTRACT( YEAR from date_of_mibf) = ? AND municipality_id = ?', params[:with_year], params[:id]).last
     @cgdp = Cgdp.where('municipality_id =?', params[:id]).last
-
+    @saa = TableCgdpsSaaEntry.new
+    if !@cgdp.nil?
+      @saa_list = TableCgdpsSaaEntry.where(:cgdp_id => @cgdp.id)
+    else
+      @saa_list = nil
+    end
   end
 
   def update
@@ -88,6 +93,17 @@ class MunicipalitiesController < InheritedResources::Base
     @cgdp = Cgdp.new 
   end
 
+  def create_saa
+    @saa = TableCgdpsSaaEntry.new saa_params
+    if @saa.save 
+      flash[:success] = 'Updated Successfully.'
+      redirect_to request.referrer
+    else
+      flash[:error] = 'Failed to Update: Please Contact Administrator'
+      redirect_to request.referrer
+    end
+  end
+
   protected
     def permitted_params
       params.permit(municipality: %i[province_id name group_id])
@@ -107,5 +123,9 @@ class MunicipalitiesController < InheritedResources::Base
   private
     def municipality_params
       @municipality = Municipality.find(params[:id])
+    end
+
+    def saa_params
+      params.require(:table_cgdps_saa_entry).permit(:cgdp_id, :saa_number, :saa_date, :saa_amount)
     end
 end

@@ -271,29 +271,29 @@
            td.text-right #{number_to_currency(@second_tranche.inject(:+).to_f)}
            td.text-right #{number_to_currency(@third_tranche.inject(:+).to_f)}
            td colspan="2"
-  .row.sp-table
-    .col-md-12
-      h4 Sub Allotment Advice Information
-      hr
-    br
-    br
-  .row.sp-show
-    .col-md-8.parent
-      .form-group
-        .col-md-5.text-right
-          'SAA Number :
-        .col-md-6
-          = f.text_field :saa_number
-      .form-group
-        .col-md-5.text-right
-          'SAA Amount :
-        .col-md-6
-          = text_field_tag :saa_amount
-      .form-group
-        .col-md-5.text-right
-          'SAA Date :
-        .col-md-6
-          =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY'
+  / .row.sp-table
+  /   .col-md-12
+  /     h4 Sub Allotment Advice Information
+  /     hr
+  /   br
+  /   br
+  / .row.sp-show
+  /   .col-md-8.parent
+  /     .form-group
+  /       .col-md-5.text-right
+  /         'SAA Number :
+  /       .col-md-6
+  /         = f.text_field :saa_number
+  /     .form-group
+  /       .col-md-5.text-right
+  /         'SAA Amount :
+  /       .col-md-6
+  /         = text_field_tag :saa_amount
+  /     .form-group
+  /       .col-md-5.text-right
+  /         'SAA Date :
+  /       .col-md-6
+  /         =f.text_field :saa_date, placeholder: 'DD-MMM-YYYY'
 
 = render 'view_cash_program'
 = render 'assigned_fund_source'

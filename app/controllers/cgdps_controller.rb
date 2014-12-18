@@ -15,7 +15,7 @@ class CgdpsController < ApplicationController
       subpro = Subproject.all
     end
     
-    @subprojects = apply_scopes(subpro).includes(:region, :province, :municipality).where(status: "Final").group_by(&:municipality)
+    @subprojects = apply_scopes(subpro).includes(:region, :province, :municipality).where(status: "Final").paginate(page: params[:page], per_page: 25).group_by(&:municipality)
     @cgdp = Cgdp.where('municipality_id =?', params[:id]).last
   end
 

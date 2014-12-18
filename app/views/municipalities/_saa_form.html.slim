@@ -1,0 +1,34 @@
+.modal.fade#saa_form data-backdrop='static' style="width: 520px; height: auto; left:15%;background: transparent;overflow-y: hidden"
+  .modal-content
+    = form_for @saa, :url => {:action => 'create_saa'}, html: { class: 'form-horizontal' } do |f|
+      .modal-header
+        button.close-modal data-dismiss='modal' aria-hidden=true &times;
+        h4.modal-title Sub-Allotment Advice Information
+      .modal-body
+        .form-group
+          .col-sm-10.text-left
+          = f.hidden_field :cgdp_id, value: @cgdp.id.to_i
+        .form-group
+          .col-sm-10.text-left
+            'SAA Number
+          .col-sm-10.text-left
+            = f.text_field :saa_number
+        .form-group
+          .col-sm-10.text-left
+            'SAA Date
+          .col-sm-10.text-left
+            = f.text_field :saa_date, placeholder: 'DD-MMM-YYYY'
+        .form-group
+          .col-sm-10.text-left
+            'SAA Amount
+          .col-sm-10.text-left
+            = f.text_field :saa_amount
+          / saa_date
+          / saa_amount
+      /   = f.check_box :regional_officer_id, blah.id, html: { name: 'regional_officer_id[]' }
+      /   / = f.hidden_field :request_for_fund_release_id, params[:id] 
+      / / = f.collection_check_boxes(:regional_officer_id, @positions, :id, :name, html: { name: 'regional_officer_id[]' })
+      .modal-footer
+        = f.submit 'Save', class: 'btn btn-primary'
+        '&nbsp;
+        button.btn data-dismiss="modal" aria-hidden="true" Close
