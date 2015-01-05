@@ -247,23 +247,26 @@ hr
                 - @third_tranche << sp.third_tranch_amount.to_f
                 = number_to_currency(sp.third_tranch_amount.to_f)
               td= sp.status
+              - @array = FundSource.all.map{|a|[a.code, a.id]}
+              - @array << ['Unnassigned', 0]
               -if sp.fund_source.present? && sp.status == "Final"
                 -if current_user.is_admin?
-                  td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+                  td= select_tag :fund_source,  options_for_select(@array, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
                 -else
                   td= sp.fund_source.code
                 / td= sp.fund_source.code
               -else
                 -if sp.fund_source_id.present? 
                   -if current_user.is_admin?
-                    td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+                    td= select_tag :fund_source,  options_for_select(@array, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
                   -else
                     td= sp.fund_source.code
                 -else
                   -if current_user.is_admin?
-                    td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+                    td= select_tag :fund_source,  options_for_select(@array, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
                   -else
-                    td
+                    td 
+                    
           tr
            td colspan="2" COUNT: #{@subprojects.count}
            td TOTAL:

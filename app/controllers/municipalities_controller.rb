@@ -46,10 +46,14 @@ class MunicipalitiesController < InheritedResources::Base
   
   def update_fund_source
     @sp = Subproject.find(params[:subproject_id])
-    @fs = FundSource.find(params[:fund_source_id])
-
-    if @sp.status == "Final"
-      @sp.update(fund_source_id: @fs.id)
+    if params[:fund_source_id] == '0'
+      # @fs = FundSource.find(params[:fund_source_id])
+      @sp.update(fund_source_id: nil)
+    else
+      @fs = FundSource.find(params[:fund_source_id])  
+      if @sp.status == "Final"
+        @sp.update(fund_source_id: @fs.id)
+      end
     end     
   end
 
@@ -66,7 +70,8 @@ class MunicipalitiesController < InheritedResources::Base
           @fs = FundSource.where(code: "ADB").first
           @sp.update(fund_source_id: @fs.id)
         else
-          
+          # @fs = FundSource.where(code: "nil").first
+          @sp.update(fund_source_id: nil)
         end
       else
         # Condition in Assign Fundsource without group
