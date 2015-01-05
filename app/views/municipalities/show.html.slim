@@ -260,7 +260,10 @@ hr
                   -else
                     td= sp.fund_source.code
                 -else
-                  td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+                  -if current_user.is_admin?
+                    td= select_tag :fund_source,  options_for_select(FundSource.all.map{|a|[a.code, a.id]}, selected: sp.fund_source_id), include_blank: true, id: "#{sp.id}", class: "fund_source"
+                  -else
+                    td
           tr
            td colspan="2" COUNT: #{@subprojects.count}
            td TOTAL:
