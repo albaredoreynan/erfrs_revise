@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
 
   def is_regional_or_admin?
     role.name == 'Regional Admin' || role.name == 'Admin' || role.name == 'National'
+  end
+
+  def is_admin?
+    role.name == 'Admin' || role.name == 'National'
   end  
 
   def full_name
