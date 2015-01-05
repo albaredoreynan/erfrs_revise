@@ -24,7 +24,7 @@ class RequestForFundReleasesController < ApplicationController
       subproject_id = rfrs.pluck(:id)
     end
     
-    rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id)
+    rfrs_data = RequestForFundRelease.where(subproject_id: subproject_id).paginate(page: params[:page], per_page: 30).order(created_at: :asc)
     @rfrs = apply_scopes(rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay])
     #@rfrs = RequestForFundRelease.all
   end

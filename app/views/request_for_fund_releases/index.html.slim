@@ -105,6 +105,8 @@ br
                 / = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, rf], class: 'btn btn-xs btn-warning'
                 / '&nbsp
                 / = link_to "<i class='fa fa-trash-o'></i>".html_safe, rf, method: :delete, confirm: 'Are you sure you want to delete this request?', class: 'btn btn-xs btn-danger'
+  .flickr_pagination
+    = will_paginate @rfrs
 css:
   .form-group > .col-md-3{
     text-align: right;
