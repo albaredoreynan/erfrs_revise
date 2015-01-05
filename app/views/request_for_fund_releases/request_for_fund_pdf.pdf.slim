@@ -104,8 +104,8 @@ table.table.table-responsive border=1 width=500
 br
 table.table.table-responsive border=0 width="100%"
   tr
-    td.bold width="40%" To the Regional Program Director - DSWD Regional Office
-    td.bold width="60%" ________________________________________________
+    td.bold width="50%" To the Regional Program Director - DSWD Regional Office #{@subproject.region.code}
+    td.bold width="50%" ________________________________________________
 p.sm_font May we request the transfer of funds for the implementation of the KC-NCDDP approved sub-project stated above
 br
 table.table.table-responsive border=1 width=500
@@ -174,11 +174,11 @@ table.table.table-responsive border=1 width=500
       br
       = @rfrs.rev_designation_second
   tr
-    td.text-left.bold width='10%' Date:
-    td.text-center width='40%'
+    td.text-left.bold width='25%' Date:
+    td.text-center width='25%'
       = @rfrs.rev_date_first.nil? ? "" : @rfrs.rev_date_first.strftime('%d-%b-%Y')
-    td.text-left.bold width='10%' Date:
-    td.text-center width='40%'
+    td.text-left.bold width='25%' Date:
+    td.text-center width='25%'
       = @rfrs.rev_date_first.nil? ? "" : @rfrs.rev_date_second.strftime('%d-%b-%Y')
   tr
     td.bold width='100%' colspan=4 
