@@ -147,10 +147,10 @@
         = @rfrs.rpmo_date_received.nil? ? "" : @rfrs.rpmo_date_received.strftime('%d-%b-%Y')
   .col-md-6
     .form-group
-      .col-md-4
-        'Reviewed By
+      .col-md-4.text-right
+        'Approved By
       .col-md-6.bold
-        = team_member_name(@rfrs.srpmo_reviewed_by)
+        = team_member_name(@rfrs.rpmo_approved_by)
   .col-md-6
     .form-group
       .col-md-5
@@ -159,10 +159,10 @@
         = team_member_name(@rfrs.srpmo_recommend_by)
   .col-md-6  
     .form-group
-      .col-md-4
+      .col-md-4.text-right
         'Designation
       .col-md-6.bold
-        = @rfrs.srpmo_designation
+        = @rfrs.rpmo_designation
   .col-md-6
     .form-group
       .col-md-5
@@ -171,32 +171,32 @@
         = @rfrs.srpmo_rec_designation
   .col-md-6
     .form-group
-      .col-md-4
+      .col-md-4.text-right
         'Date
       .col-md-6.bold
-        = @rfrs.srpmo_date.nil? ? "" : @rfrs.srpmo_date.strftime('%d-%b-%Y')
+        = @rfrs.rpmo_date.nil? ? "" : @rfrs.rpmo_date.strftime('%d-%b-%Y')
   .col-md-6  
     .form-group
       .col-md-5
         'Date
       .col-md-6.bold
         = @rfrs.srpmo_rec_date.nil? ? "" : @rfrs.srpmo_rec_date.strftime('%d-%b-%Y')
-  .col-md-12
-    .form-group
-      .col-md-2.text-right
-        'Approved By
-      .col-md-3.bold
-        = team_member_name(@rfrs.rpmo_approved_by)
-  .col-md-12
-    .form-group
-      .col-md-2.text-right
-        'Designation
-      .col-md-3.bold
-        = @rfrs.rpmo_designation
-  .col-md-12
-    .form-group
-      .col-md-2.text-right
-        'Date
-      .col-md-3.bold
-        = @rfrs.rpmo_date.nil? ? "" : @rfrs.rpmo_date.strftime('%d-%b-%Y')
+  / .col-md-12
+  /   .form-group
+  /     .col-md-2.text-right
+  /       'Approved By
+  /     .col-md-3.bold
+  /       = team_member_name(@rfrs.rpmo_approved_by)
+  / .col-md-12
+  /   .form-group
+  /     .col-md-2.text-right
+  /       'Designation
+  /     .col-md-3.bold
+  /       = @rfrs.rpmo_designation
+  / .col-md-12
+  /   .form-group
+  /     .col-md-2.text-right
+  /       'Date
+  /     .col-md-3.bold
+  /       = @rfrs.rpmo_date.nil? ? "" : @rfrs.rpmo_date.strftime('%d-%b-%Y')
 
