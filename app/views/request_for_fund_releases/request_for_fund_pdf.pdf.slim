@@ -69,7 +69,6 @@ table.table.table-responsive border=1 width=500
     td.text-left width='20%' Region
     td.text-left width='30%'
       = @subproject.region.code
-      = @subproject.province.name
     td.text-left width='20%' Date
     td.text-left width='30%'
       = @rfrs.request_date.present? ? @rfrs.request_date.strftime("%m/%d/%y") : ''
@@ -98,14 +97,14 @@ table.table.table-responsive border=1 width=500
     td.text-left width='20%' Sub-project Title
     td.text-left width='30%'
       = @subproject.title
-    td.text-left width='20%' Total Project Cost
+    td.text-left width='20%' Total Program Cost
     td.text-left width='30%'
       - @total_proj_cost = @total_grant + @subtotal_lccs
       = number_to_currency @total_proj_cost
 br
 table.table.table-responsive border=0 width="100%"
   tr
-    td.bold width="40%" To the Regional Project Director - DSWD Regional Office
+    td.bold width="40%" To the Regional Program Director - DSWD Regional Office
     td.bold width="60%" ________________________________________________
 p.sm_font May we request the transfer of funds for the implementation of the KC-NCDDP approved sub-project stated above
 br
@@ -183,10 +182,10 @@ table.table.table-responsive border=1 width=500
       = @rfrs.rev_date_first.nil? ? "" : @rfrs.rev_date_second.strftime('%d-%b-%Y')
   tr
     td.bold width='100%' colspan=4 
-      'Regional Project Management Office
+      'Regional Program Management Office
       
     / td.bold width='50%' colspan=2 
-    /   'National Project Management Office
+    /   'National Program Management Office
       
   tr
     td width='50%' colspan=2
