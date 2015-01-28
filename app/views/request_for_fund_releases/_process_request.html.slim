@@ -6,9 +6,12 @@ br
     .page-details-main-buttons
       / button.btn.btn-primary Print
       /'&nbsp
-      - if @rfrs.status != 'Final' || current_user.is_regional_or_admin? 
+      - if @rfrs.status != 'Final'
       / - if @rfrs.status != 'Final' 
         = f.submit 'Save', class: 'btn btn-primary'
+      - else
+        - if current_user.is_regional_or_admin? && @rfrs.status == 'Final'
+          = f.submit 'Save', class: 'btn btn-primary'
       '&nbsp
       = link_to 'Cancel', request_for_fund_releases_path, class: 'btn btn-default'
 
