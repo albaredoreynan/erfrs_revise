@@ -268,3 +268,6 @@ $.fn.check_dup = function(model_name, datatype, dup_message) {
   });
 };
 
+$('form').submit(function(){
+  $('input[type="submit"]').attr('disabled', 'disabled');
+});
