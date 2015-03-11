@@ -431,3 +431,7 @@ body.rtl .formError .formErrorArrow {
   position: absolute;
   z-index: 999;
 }
+
+.button-loading{
+  background-image: url('/images/ajax-loader.gif')
+}
