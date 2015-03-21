@@ -32,6 +32,10 @@ $( document ).ready(function() {
   });
 
   $(".monetary_field").number(true, 2);
+  $('form').submit(function(){
+    $('input[type="submit"]').attr('disabled', 'disabled');
+    $('input[type="submit"]').attr('value','Saving')
+  });
 });
 
 $.urlParam = function(name){
@@ -268,6 +272,3 @@ $.fn.check_dup = function(model_name, datatype, dup_message) {
   });
 };
 
-$('form').submit(function(){
-  $('input[type="submit"]').attr('disabled', 'disabled');
-});

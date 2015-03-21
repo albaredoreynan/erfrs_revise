@@ -223,7 +223,7 @@ class Subproject < ActiveRecord::Base
   end
   
   def with_draft_null_status_rfrs?
-    request_for_fund_releases.drafts.count > 0 || request_for_fund_releases.null_status.count > 0 || request_for_fund_releases.count == 0
+    request_for_fund_releases.drafts.present? || request_for_fund_releases.null_status.present?
   end
   
   private

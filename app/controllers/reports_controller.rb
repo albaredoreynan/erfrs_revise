@@ -22,8 +22,15 @@ class ReportsController < ApplicationController
 	end
 
 	def mga_reports
-		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality, :request_for_fund_releases).where(status: "Final").reject { |sp| sp.with_draft_null_status_rfrs? }.group_by(&:municipality)
-		respond_to do |format|
+    # year =  params[:year].present? ?  params[:year].to_i : DateTime.now.year 
+		# @subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality, :request_for_fund_releases).where(status: "Final").reject { |sp| sp.with_draft_null_status_rfrs? }.group_by(&:municipality)
+    sub_id= RequestForFundRelease.where(status: "Final").pluck(:subproject_id).uniq
+    @subprojects = apply_scopes(@subproject_data).includes(:request_for_fund_releases, :region, :municipality)
+                                                 .where('request_for_fund_releases.status' => "Final")
+                                                 .order("region_id ASC")
+                                                 .group_by(&:municipality)
+
+    respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }
       format.pdf do
@@ -34,7 +41,10 @@ class ReportsController < ApplicationController
 	end
 
 	def cg_reports
-		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality, :request_for_fund_releases).where(status: "Final").reject { |sp| sp.with_draft_null_status_rfrs? }.group_by(&:municipality)
+		@subprojects = apply_scopes(@subproject_data).includes(:request_for_fund_releases, :region, :municipality)
+                                                 .where('request_for_fund_releases.status' => "Final")
+                                                 .order("region_id ASC")
+                                                 .group_by(&:municipality)
 		respond_to do |format|
     	format.html
     	format.xls # { send_data @products.to_csv(col_sep: "\t") }
@@ -46,7 +56,10 @@ class ReportsController < ApplicationController
 	end
 
 	def cash_program_reports
-		@subprojects = apply_scopes(@subproject_data).includes(:region, :province, :municipality, :request_for_fund_releases).reject { |sp| sp.with_draft_null_status_rfrs? }.group_by(&:municipality)
+		@subprojects = apply_scopes(@subproject_data).includes(:request_for_fund_releases, :region, :municipality)
+                                                 .where('request_for_fund_releases.status' => "Final")
+                                                 .order("region_id ASC")
+                                                 .group_by(&:municipality)
     respond_to do |format|
       format.html
       format.xls
@@ -151,7 +164,7 @@ class ReportsController < ApplicationController
       elsif current_user.role_id == 6
         @subproject_data = Subproject.where(barangay_id: current_user.barangay_id, status: "Final").order("region_id ASC")
       else
-        @subproject_data = Subproject.where(status: "Final").order("region_id ASC")
+        @subproject_data = Subproject.where(status: "Final")
       end
     end
 
