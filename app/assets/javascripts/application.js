@@ -34,6 +34,7 @@ $( document ).ready(function() {
   $(".monetary_field").number(true, 2);
   $('form').submit(function(){
     $('input[type="submit"]').attr('disabled', 'disabled');
+    $('input[type="submit"]').attr('value','Saving')
   });
 });
 
