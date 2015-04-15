@@ -12,6 +12,7 @@ server 'erfrs.dswd.gov.ph', user: 'ubuntu', roles: %w[web app]
 
 set :ssh_options, {
   #keys: ["/Users/ken/.ssh/erfrsUser.key"],
+  keys: ["/Users/reynanalbaredo/Downloads/ncddpkey.pem"],
   #auth_methods: %w[password],
   forward_agent: true
 }
