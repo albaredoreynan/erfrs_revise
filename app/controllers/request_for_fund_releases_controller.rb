@@ -78,6 +78,7 @@ class RequestForFundReleasesController < ApplicationController
     @rfrs = RequestForFundRelease.find params[:id]
     @subproj = Subproject.find rfrs_params[:subproject_id]
     params[:request_for_fund_release][:amount_approve] = rfrs_params[:amount_approve].gsub(/,/, '').to_f
+    rfrs_params[:amount_approve] = rfrs_params[:amount_approve].gsub(/,/, '').to_f 
     # raise
     # params[:request_for_fund_release][:amount_requested] = rfrs_params[:amount_requested]
     if @rfrs.update_attributes rfrs_params
