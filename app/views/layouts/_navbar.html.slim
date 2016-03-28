@@ -7,7 +7,7 @@
     li class = active_class("subprojects")
       = link_to "Sub-Projects", subprojects_path
     li class= "#{active_class('cgdps')} #{active_class('municipalities')}"
-      = link_to "CGDP", cgdps_path
+      = link_to "CGDP", cgdps_path(with_year: Date.today.year)
     li class = active_class("request_for_fund_releases")
       = link_to "RFRs", request_for_fund_releases_path
     li class="dropdown #{active_class('reports')}"
@@ -21,6 +21,13 @@
         li = link_to "Status of Community Grants", cg_reports_reports_path
         li = link_to "Community Grants Disbursement Plan", cash_program_reports_reports_path
         li = link_to "Request For Fund Release Tracking", rfrs_tracking_reports_reports_path
+        /newly created reports
+        li = link_to "Sub-Allotment and Obligations Report", rfrs_tracking_reports_reports_path
+        li = link_to "Municipal and Regional Consolidated Status of Community Grants", rfrs_tracking_reports_reports_path
+        li = link_to "Municipal and Regional Consolidated Status of Subproject Fund Utilization Report", rfrs_tracking_reports_reports_path
+        li = link_to "Community Bank Accounts Monitoring Report", rfrs_tracking_reports_reports_path
+        li = link_to "Status of Sources and Uses of Funds", rfrs_tracking_reports_reports_path
+
     - if current_user.role.code == 0
       li class = active_class("admin")
         = link_to "Administration", admin_index_path

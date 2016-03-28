@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
 	has_scope :fund_source
 
   def soe_reports
-		@soe = apply_scopes(@rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay, :fund_source]).where('fund_sources.code' => "WB")
+		@soe = apply_scopes(@rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay, :fund_source]).where('fund_sources.code' => "WB").paginate(page: params[:page], per_page: 30)
 
     respond_to do |format|
     	format.html
@@ -27,6 +27,7 @@ class ReportsController < ApplicationController
     sub_id= RequestForFundRelease.where(status: "Final").pluck(:subproject_id).uniq
     @subprojects = apply_scopes(@subproject_data).includes(:request_for_fund_releases, :region, :municipality)
                                                  .where('request_for_fund_releases.status' => "Final")
+                                                 .paginate(page: params[:page], per_page: 30)
                                                  .order("region_id ASC")
                                                  .group_by(&:municipality)
 
@@ -43,6 +44,7 @@ class ReportsController < ApplicationController
 	def cg_reports
 		@subprojects = apply_scopes(@subproject_data).includes(:request_for_fund_releases, :region, :municipality)
                                                  .where('request_for_fund_releases.status' => "Final")
+                                                 .paginate(page: params[:page], per_page: 30)
                                                  .order("region_id ASC")
                                                  .group_by(&:municipality)
 		respond_to do |format|
@@ -58,6 +60,7 @@ class ReportsController < ApplicationController
 	def cash_program_reports
 		@subprojects = apply_scopes(@subproject_data).includes(:request_for_fund_releases, :region, :municipality)
                                                  .where('request_for_fund_releases.status' => "Final")
+                                                 .paginate(page: params[:page], per_page: 30)
                                                  .order("region_id ASC")
                                                  .group_by(&:municipality)
     respond_to do |format|
@@ -72,6 +75,7 @@ class ReportsController < ApplicationController
 	end
 
   def soe_adb_reports
+    
     @soe = apply_scopes(@rfrs_data).includes(subproject:[:region, :province, :municipality, :barangay, :fund_source]).where('fund_sources.code' => "ADB")
     respond_to do |format|
       format.html

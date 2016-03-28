@@ -103,8 +103,9 @@ br
                 = link_to "<i class='fa fa-eye'></i>".html_safe, request_for_fund_release_path(rf, :sp_id => rf.subproject_id, :tranch => rf.tranch_for), class: 'btn btn-xs btn-primary'
                 '&nbsp
                 / = link_to "<i class='fa fa-edit'></i>".html_safe, [:edit, rf], class: 'btn btn-xs btn-warning'
-                / '&nbsp
-                / = link_to "<i class='fa fa-trash-o'></i>".html_safe, rf, method: :delete, confirm: 'Are you sure you want to delete this request?', class: 'btn btn-xs btn-danger'
+                '&nbsp
+                - if current_user.is_regional_or_admin?
+                  = link_to "<i class='fa fa-trash-o'></i>".html_safe, rf, method: :delete, confirm: 'Are you sure you want to delete this request?', class: 'btn btn-xs btn-danger'
   .flickr_pagination
     = will_paginate @rfrs
 css:

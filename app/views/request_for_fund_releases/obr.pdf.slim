@@ -1,123 +1,192 @@
 = wicked_pdf_stylesheet_link_tag "application"
 
-.row
-  p.text-center Republic of the Philippines
-  p.text-center Department of Social Welfare and Development
-  p.text-center
+.row.myclass
+  .text-center Republic of the Philippines
+  .text-center Department of Social Welfare and Development
+  .text-center
     = @subproject.region.try(:address_region)
-br
-table.table.table-responsive border=1 width=500
+table.table.table-bordered.myclass
   tr 
-    td.text-center rowspan=2 colspan=4 width='80%'
-      br
-      b OBLIGATION REQUEST
-    td.text-left No: #{@rfrs.obr_number}
+    td.text-center rowspan=2 colspan=9
+      .title OBLIGATION REQUEST AND STATUS
+    td.text-left colspan=5 No: #{ @rfrs.obr_number.present? ? @rfrs.obr_number : '' }
   tr
-    td.text-left Date: #{ !@rfrs.obr_date.nil? ? @rfrs.obr_date.strftime("%d-%b-%Y") : '' }
+    td.text-left colspan=5 Date: #{ !@rfrs.obr_date.nil? ? @rfrs.obr_date.strftime("%d-%b-%Y") : '' }
+  tr 
+    td.text-center colspan=9 width='80%' DEPARTMENT OF SOCIAL WELFARE AND DEVELOPMENT
+    td.text-left colspan=5 Fund: KC-NCDDP
   tr
-    td.text-center width='10%' Payee
-    td colspan=4
-      = @rfrs.account_name.upcase
+    td.text-center colspan=4 width='10%' Payee
+    td colspan=10
+      = @rfrs.account_name.present? ? @rfrs.account_name.upcase : ''
       | &nbsp;/&nbsp;
-      = @rfrs.bank_account_number
+      = @rfrs.bank_account_number.present? ? @rfrs.bank_account_number : ''
+
   tr
-    td.text-center width='10%' Office
-    td colspan=4
+    td.text-center colspan=4 width='10%' Office
+    td colspan=10
   tr
-    td.text-center width='10%' Address
-    td colspan=4
+    td.text-center colspan=4 width='10%' Address
+    td colspan=10
       = @subproject.municipality.try(:name)
       |&nbsp; 
       = @subproject.province.try(:name)
       |,&nbsp;
       = @subproject.region.try(:name)
-table.table.table-responsive border=1 width=500
+  
   tr
-    td.text-center width='10%' Responsibility Center
-    td.text-center width='50%' Particulars
-    td.text-center width='12%' P.P.A
-    td.text-center width='8%' Account Code
-    td.text-center width='10%' Amount
-  tr height=250 
-    td.text-center width='10%' 
-    td.text-left width='50%'
+    td.text-center colspan=4 width='10%' Responsibility Center
+    td.text-center colspan=4 width='50%' Particulars
+    td.text-center colspan=2 width='12%' MFO/PPA
+    td.text-center colspan=2 width='8%' UACS Code/Expenditure
+    td.text-center colspan=2 width='10%' Amount
+  tr height=200 
+    td.text-center width='10%' rowspan=2 colspan=4
+    td.text-left width='50%' colspan=4
       .col-md-12
         p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
-        p Sub-Project Name: &nbsp; #{@subproject.title}
-        p Tranche: &nbsp; #{@rfrs.tranch_for}
-        p Fund Soure: &nbsp; #{@subproject.fund_source.try(:name)}
+        p Sub-Project Name: &nbsp; #{ @subproject.title.present? ? @subproject.title : '' }
+        p Tranche: &nbsp; #{@rfrs.tranch_for.present? ? @rfrs.tranch_for : '' }
+        p Fund Source: &nbsp; #{@subproject.fund_source.try(:name)}
         / p.bold Attachment
-        / p style="padding-left: 30px;" #{@rfrs.remarks}
-    td.text-center width='12%' 
-    td.text-center width='8%' 
-    td.text-center width='10%'
+        / p style="padding-left: 30px;" #{@rfrs.remarks}         
+    td.text-center width='12%' rowspan=2 colspan=2
+    td.text-center width='8%' rowspan=2 colspan=2
+    td.text-center width='10%' colspan=2
       .col-md-12
         - if @rfrs.tranch_for == 1 
           - @amount_requested = @subproject.first_tranch_revised_amount
         - elsif @rfrs.tranch_for == 2
           - @amount_requested = @subproject.second_tranch_revised_amount
         - else
-          - @amount_requested = @subproject.third_tranch_revised_amount        
+          - @amount_requested = @subproject.third_tranch_revised_amount
+        
         p #{number_to_currency @amount_requested }
   tr
     td.text-right colspan=4 Total
-    td.text-center
+    td.text-center colspan=2
       = number_to_currency @amount_requested
-table.table.table-responsive border=1 width=500
-  form.form-horizontal
+  
+  table.table.table-bordered.myclass width="100%"
     tr
-      td.text-left width='2%'
+      td.text-left width='30' rowspan=2
         b A.
-      td.text-left width='48%'
-        b Certified
-        
-      td.text-left width='2%'
+      td.text-left colspan=5
+        b Certified:
+        | &nbsp;&nbsp;Charges to appropriation/allotment necessary, lawful and under  
+      td.text-left width='30' rowspan=2
         b B.
-      td.text-left width='48%'
-        b Certified
+      td.text-left colspan=5
+        b Certified:
+        | &nbsp;&nbsp;Allotment available and obligated for the purpose/adjustment
     tr
-      td colspan=2 style='padding-left: 50px;'
-        .form-group
-          = check_box_tag :a, disabled: true
-          |&nbsp; Charges to appropriation/allotment necessary, lawful and under my direct supervision
-          br
-          = check_box_tag :a, disabled: true
-          |&nbsp; Supporting documents valid, proper and legal
-      td colspan=2 style='padding-left: 50px;'
-        .form-group Allotment available and obligated for the purpose as indicated above      
-table.table.table-responsive border=1 width=500
-  tr
-    td.text-center width='10%'
-      p Signature
-      p Printed Name
-      p Position
-    td.text-center width='40%'
-      br
-      - if @positions.count == 0
-        p No entry found!
-      - else
-        - @positions.each do |position|
-          table.table.table-condensed.borderless.vcenter
-            tr
-              td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
-            tr
-              td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
-    td.text-center width='10%'
-      p Signature
-      p Printed Name
-      p Position
-    td.text-center width='40%'
-      br
-      - if @positions2.count == 0
-        p No entry found!
-      - else
-        - @positions2.each do |position|
-          table.table.table-condensed.borderless.vcenter
-            tr
-              td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
-            tr
-              td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
+      td.text-left colspan=5 my direct supervision; supporting documents valid, proper and legal
+      td.text-left colspan=5 necessary as indicated above
+    - position = @positions.first
+    - position2 = @positions2.first
+    tr
+      td.text-center width='100' colspan=2 Signature
+      td.text-center width='100' colspan=4
+      td.text-center width='100' colspan=2 Signature
+      td.text-center width='100' colspan=4 
+    tr
+      td.text-center width='100' colspan=2 Printed Name
+      td.text-center width='100' colspan=4 
+        - !position.nil? ? position.regional_officer.name : ''
+      td.text-center width='100' colspan=2 Printed Name
+      td.text-center width='100' colspan=4 
+        - !position2.nil? ? position2.regional_officer.name : ''
+    tr
+      td.text-center width='100' colspan=2 Position
+      td.text-center width='100' colspan=4 
+        - !position.nil? ? position.regional_officer.designation : '' 
+      td.text-center width='100' colspan=2 Position
+      td.text-center width='100' colspan=4 
+        - !position2.nil? ? position2.regional_officer.designation : ''
+    tr
+      td.text-center width='100' colspan=2 Date
+      td.text-center width='100' colspan=4
+      td.text-center width='100' colspan=2 Date
+      td.text-center width='100' colspan=4
+          / td.text-center colspan=4
+      /   br
+      /   - if @positions.count == 0
+      /     p No entry found!
+      /   - else
+      /     - @positions.first.each do |position|
+      /       table.table.table-condensed.borderless.vcenter.myclass
+      /         tr
+      /           td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+      /         tr
+      /           td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
+      /       / p #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+      /       / p -------------------------------------------------------
+      /       / p #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
+      /       / br    
+      / td.text-center width='100' colspan=2
+      /   p Signature
+      /   p Printed Name
+      /   p Position
+      /   p Date
+        
+      / td.text-center colspan=4
+      /   br
+      /   - if @positions2.count == 0
+      /     p No entry found!
+      /   - else  
+      /     - @positions2.each do |position|
+      /       table.table.table-condensed.borderless.vcenter.myclass
+      /         tr
+      /           td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+      /         tr
+      /           td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
+    tr
+      td.text-left
+        b C.
+      td.text-center colspan=11
+        b STATUS OF OBLIGATION
+    tr
+      td.text-center colspan=6 Reference
+      td.text-center colspan=6 Amount
+    tr
+      td.text-center colspan=2 Date
+      td.text-center colspan=2 Particulars
+      td.text-center colspan=2 ORS/JEV/RCI/RADAI No.
+      td.text-center colspan=2 Obligation
+      td.text-center colspan=2 Payment
+      td.text-center Not Yet Due
+      td.text-center Due and Demandable
+    - @num = [1,2,3,4,5]
+    - @num.each do |five|
+      tr
+        td colspan=2
+        td colspan=2
+        td colspan=2
+        td colspan=2
+        td colspan=2
+        td
+        td
+    tr
+        td colspan=2
+        td colspan=2
+        td.text-center colspan=2 Totals
+        td colspan=2
+        td colspan=2
+        td
+        td
 css:      
+  .myclass { 
+    font-size: 10px;
+    color: #000;
+  }
+  .title{
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+  }
+  .blck {
+    color: #000;
+  }
   .form-group > .col-md-3{
     text-align: right;
   }	
@@ -127,8 +196,8 @@ css:
   .sm_font {
     font-size: 9px;
   }
-  .borderless tbody tr td, .borderless thead tr th {
-    border: none;
+  .table tbody tr td, .borderless thead tr th {
+    border-color: #000
   }
   .vcenter td {
     vertical-align: middle!important;

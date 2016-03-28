@@ -146,6 +146,18 @@ class SubprojectsController < ApplicationController
     @group = @municipality.group
   end
 
+  def refresh_subproject_tranch
+    @data = Subproject.find params[:subproject_id]
+    if params[:tranch] == 1
+      @data.update(first_tranch_amount_release: 0.0)
+    elsif 
+      @data.update(second_tranch_amount_release: 0.0)
+    else
+      @data.update(third_tranch_amount_release: 0.0)
+    end
+    redirect_to subproject_path(params[:subproject_id])  
+  end
+
   protected
 
   def subproject_params
@@ -201,6 +213,9 @@ class SubprojectsController < ApplicationController
       :tranch_one_percentage,
       :tranch_two_percentage,
       :tranch_three_percentage,
+      :first_tranch_amount_release,
+      :second_tranch_amount_release,
+      :third_tranch_amount_release,
       # team member params
       team_members_attributes: [:id, :name, :designation_id, :email, :phone]
     ]

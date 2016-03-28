@@ -78,7 +78,8 @@ class RequestForFundReleasesController < ApplicationController
     @rfrs = RequestForFundRelease.find params[:id]
     @subproj = Subproject.find rfrs_params[:subproject_id]
     params[:request_for_fund_release][:amount_approve] = rfrs_params[:amount_approve].gsub(/,/, '').to_f
-    rfrs_params[:amount_approve] = rfrs_params[:amount_approve].gsub(/,/, '').to_f 
+    # rfrs_params[:amount_approve] = rfrs_params[:amount_approve].gsub(/,/, '').to_f 
+    rfrs_params[:amount_approve] = rfrs_params[:amount_approve]
     # raise
     # params[:request_for_fund_release][:amount_requested] = rfrs_params[:amount_requested]
     if @rfrs.update_attributes rfrs_params
@@ -128,7 +129,12 @@ class RequestForFundReleasesController < ApplicationController
 
     @rfrs.destroy!
     flash[:success] = 'Request has been deleted.'
-    redirect_to subproject_path(params[:sp_id])
+    if !params[:sp_id].nil?
+      redirect_to subproject_path(params[:sp_id])
+    else
+      # redirect_to request_for_fund_releases_path
+      redirect_to request.referrer
+    end
   end
 
   def display_designation

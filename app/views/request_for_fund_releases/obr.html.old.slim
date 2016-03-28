@@ -20,13 +20,10 @@ hr
     table.table.table-bordered
       tr 
         td.text-center rowspan=2 colspan=4 width='80%'
-          h3 OBLIGATION REQUEST AND STATUS
+          h4 OBLIGATION REQUEST
         td.text-left No: #{ @rfrs.obr_number.present? ? @rfrs.obr_number : '' }
       tr
         td.text-left Date: #{ !@rfrs.obr_date.nil? ? @rfrs.obr_date.strftime("%d-%b-%Y") : '' }
-      tr 
-        td.text-center colspan=4 width='80%' DEPARTMENT OF SOCIAL WELFARE AND DEVELOPMENT
-        td.text-left Fund: KC-NCDDP
       tr
         td.text-center width='10%' Payee
         td colspan=4
@@ -51,11 +48,11 @@ hr
       tr
         td.text-center width='10%' Responsibility Center
         td.text-center width='50%' Particulars
-        td.text-center width='12%' MFO/PPA
-        td.text-center width='8%' UACS Code/Expenditure
+        td.text-center width='12%' P.P.A
+        td.text-center width='8%' Account Code
         td.text-center width='10%' Amount
       tr height=400 
-        td.text-center width='10%' rowspan=2
+        td.text-center width='10%' 
         td.text-left width='50%'
           .col-md-12
             p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
@@ -64,8 +61,8 @@ hr
             p Fund Source: &nbsp; #{@subproject.fund_source.try(:name)}
             / p.bold Attachment
             / p style="padding-left: 30px;" #{@rfrs.remarks}         
-        td.text-center width='12%' rowspan=2
-        td.text-center width='8%' rowspan=2
+        td.text-center width='12%' 
+        td.text-center width='8%' 
         td.text-center width='10%'
           .col-md-12
             - if @rfrs.tranch_for == 1 
@@ -77,25 +74,31 @@ hr
             
             p #{number_to_currency @amount_requested }
       tr
-        td.text-right Total
+        td.text-right colspan=4 Total
         td.text-center
           = number_to_currency @amount_requested
     table.table.table-bordered
       form.form-horizontal
         tr
-          td.text-left width='2%' rowspan=2
+          td.text-left width='2%'
             b A.
           td.text-left width='48%'
-            b Certified:
-            | &nbsp;&nbsp;Charges to appropriation/allotment necessary, lawful and under  
-          td.text-left width='2%' rowspan=2
+            b Certified
+            
+          td.text-left width='2%'
             b B.
           td.text-left width='48%'
-            b Certified:
-            | &nbsp;&nbsp;Allotment available and obligated for the purpose/adjustment
+            b Certified
         tr
-          td.text-left width='48%' my direct supervision; supporting documents valid, proper and legal
-          td.text-left width='48%' necessary as indicated above
+          td colspan=2 style='padding-left: 50px;'
+            .form-group
+              = check_box_tag :a, disabled: true
+              |&nbsp; Charges to appropriation/allotment necessary, lawful and under my direct supervision
+              br
+              = check_box_tag :a, disabled: true
+              |&nbsp; Supporting documents valid, proper and legal
+          td colspan=2 style='padding-left: 50px;'
+            .form-group Allotment available and obligated for the purpose as indicated above
     - if !current_user.is_barangay_or_public?
       table.table.table-bordered
         tr
@@ -111,7 +114,6 @@ hr
           p Signature
           p Printed Name
           p Position
-          p Date
         td.text-center width='40%'
           br
           - if @positions.count == 0
@@ -133,7 +135,7 @@ hr
           p Signature
           p Printed Name
           p Position
-          p Date
+          
           
         td.text-center width='40%'
           br
@@ -168,45 +170,9 @@ hr
       /   td.text-left width='40%'
       /   td.text-center width='10%' Date
       /   td.text-left width='40%'
-    table.table.table-bordered
-      tr
-        td.text-left width='2%'
-          b C.
-        td.text-center colspan=6
-          b STATUS OF OBLIGATION
-    table.table.table-bordered
-      tr
-        td.text-center colspan=3 Reference
-        td.text-center colspan=4 Amount
-      tr
-        td.text-center Date
-        td.text-center Particulars
-        td.text-center ORS/JEV/RCI/RADAI No.
-        td.text-center Obligation
-        td.text-center Payment
-        td.text-center Not Yet Due
-        td.text-center Due and Demandable
-      - @num = [1,2,3,4,5]
-      - @num.each do |five|
-        tr
-          td
-          td
-          td
-          td
-          td
-          td
-          td
-      tr
-          td
-          td
-          td.text-center Totals
-          td
-          td
-          td
-          td
 .row.rfr-index
   .col-md-12
-    = link_to "Print to PDF".html_safe, obr_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right', target: "_blank"
+    = link_to "Print to PDF".html_safe, obr_request_for_fund_releases_path(:sp_id => params[:sp_id], :rfrs_id => params[:rfrs_id], :format => 'pdf'), class: 'btn btn-small btn-primary pull-right'
 = render 'obr_signatories'
 = render 'obr_b_signatories'
 css:      

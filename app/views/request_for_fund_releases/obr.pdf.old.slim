@@ -1,0 +1,136 @@
+= wicked_pdf_stylesheet_link_tag "application"
+
+.row
+  p.text-center Republic of the Philippines
+  p.text-center Department of Social Welfare and Development
+  p.text-center
+    = @subproject.region.try(:address_region)
+br
+table.table.table-responsive border=1 width=500
+  tr 
+    td.text-center rowspan=2 colspan=4 width='80%'
+      br
+      b OBLIGATION REQUEST
+    td.text-left No: #{@rfrs.obr_number}
+  tr
+    td.text-left Date: #{ !@rfrs.obr_date.nil? ? @rfrs.obr_date.strftime("%d-%b-%Y") : '' }
+  tr
+    td.text-center width='10%' Payee
+    td colspan=4
+      = @rfrs.account_name.upcase
+      | &nbsp;/&nbsp;
+      = @rfrs.bank_account_number
+  tr
+    td.text-center width='10%' Office
+    td colspan=4
+  tr
+    td.text-center width='10%' Address
+    td colspan=4
+      = @subproject.municipality.try(:name)
+      |&nbsp; 
+      = @subproject.province.try(:name)
+      |,&nbsp;
+      = @subproject.region.try(:name)
+table.table.table-responsive border=1 width=500
+  tr
+    td.text-center width='10%' Responsibility Center
+    td.text-center width='50%' Particulars
+    td.text-center width='12%' P.P.A
+    td.text-center width='8%' Account Code
+    td.text-center width='10%' Amount
+  tr height=250 
+    td.text-center width='10%' 
+    td.text-left width='50%'
+      .col-md-12
+        p Sub-Project ID: &nbsp; #{trail_id(6, @subproject.id)} 
+        p Sub-Project Name: &nbsp; #{@subproject.title}
+        p Tranche: &nbsp; #{@rfrs.tranch_for}
+        p Fund Source: &nbsp; #{@subproject.fund_source.try(:name)}
+        / p.bold Attachment
+        / p style="padding-left: 30px;" #{@rfrs.remarks}
+    td.text-center width='12%' 
+    td.text-center width='8%' 
+    td.text-center width='10%'
+      .col-md-12
+        - if @rfrs.tranch_for == 1 
+          - @amount_requested = @subproject.first_tranch_revised_amount
+        - elsif @rfrs.tranch_for == 2
+          - @amount_requested = @subproject.second_tranch_revised_amount
+        - else
+          - @amount_requested = @subproject.third_tranch_revised_amount        
+        p #{number_to_currency @amount_requested }
+  tr
+    td.text-right colspan=4 Total
+    td.text-center
+      = number_to_currency @amount_requested
+table.table.table-responsive border=1 width=500
+  form.form-horizontal
+    tr
+      td.text-left width='2%'
+        b A.
+      td.text-left width='48%'
+        b Certified
+        
+      td.text-left width='2%'
+        b B.
+      td.text-left width='48%'
+        b Certified
+    tr
+      td colspan=2 style='padding-left: 50px;'
+        .form-group
+          = check_box_tag :a, disabled: true
+          |&nbsp; Charges to appropriation/allotment necessary, lawful and under my direct supervision
+          br
+          = check_box_tag :a, disabled: true
+          |&nbsp; Supporting documents valid, proper and legal
+      td colspan=2 style='padding-left: 50px;'
+        .form-group Allotment available and obligated for the purpose as indicated above      
+table.table.table-responsive border=1 width=500
+  tr
+    td.text-center width='10%'
+      p Signature
+      p Printed Name
+      p Position
+    td.text-center width='40%'
+      br
+      - if @positions.count == 0
+        p No entry found!
+      - else
+        - @positions.each do |position|
+          table.table.table-condensed.borderless.vcenter
+            tr
+              td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+            tr
+              td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
+    td.text-center width='10%'
+      p Signature
+      p Printed Name
+      p Position
+    td.text-center width='40%'
+      br
+      - if @positions2.count == 0
+        p No entry found!
+      - else
+        - @positions2.each do |position|
+          table.table.table-condensed.borderless.vcenter
+            tr
+              td #{ position.regional_officer.name.present? ? position.regional_officer.name : ''}
+            tr
+              td #{ position.regional_officer.designation.present? ? position.regional_officer.designation : '' }
+css:      
+  .form-group > .col-md-3{
+    text-align: right;
+  }	
+  td{
+    font-size: 10px;
+  }
+  .sm_font {
+    font-size: 9px;
+  }
+  .borderless tbody tr td, .borderless thead tr th {
+    border: none;
+  }
+  .vcenter td {
+    vertical-align: middle!important;
+  }
+      

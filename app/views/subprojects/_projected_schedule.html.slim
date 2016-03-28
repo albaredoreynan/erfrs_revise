@@ -15,7 +15,7 @@
           th Planned Amount
           th Actual Amount
           th Released Amount
-          / th
+          th
       tbody
         tr
           - if @subproject.first_tranch_revised_amount == 0 
@@ -34,6 +34,9 @@
           td.text-right
             = number_to_currency first_amount.to_f
           td.text-right = number_to_currency @subproject.first_tranch_amount_release.to_f
+          - if current_user.is_admin?
+            td
+              = link_to "<i class='fa fa-list'></i>".html_safe, subproject_refresh_subproject_tranch_path(params[:id], tranch: 1), class: 'btn btn-xs btn-primary'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Clear Fund Release"
         tr
           - if @subproject.second_tranch_revised_amount == 0 && @subproject.first_tranch_amount_release == 0
             - second_amount = @subproject.second_tranch_amount.to_f
@@ -54,6 +57,9 @@
           td.text-right
             = number_to_currency second_amount.to_f
           td.text-right = number_to_currency @subproject.second_tranch_amount_release.to_f
+          - if current_user.is_admin?
+            td
+              = link_to "<i class='fa fa-list'></i>".html_safe, subproject_refresh_subproject_tranch_path(params[:id], tranch: 2), class: 'btn btn-xs btn-primary'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Clear Fund Release"
         tr
           - if @subproject.third_tranch_revised_amount == 0 && @subproject.first_tranch_amount_release == 0
             - third_amount = @subproject.third_tranch_amount
@@ -78,6 +84,9 @@
             td.text-right
               = number_to_currency third_amount.to_f
             td.text-right = number_to_currency @subproject.third_tranch_amount_release.to_f
+          - if current_user.is_admin?
+            td
+              = link_to "<i class='fa fa-list'></i>".html_safe, subproject_refresh_subproject_tranch_path(params[:id], tranch: 3), class: 'btn btn-xs btn-primary'," data-toggle"=> "tooltip", "data-placement" => "top", "title" => "Clear Fund Release"
         
 
         tr

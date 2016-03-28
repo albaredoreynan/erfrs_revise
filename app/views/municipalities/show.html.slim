@@ -26,7 +26,8 @@ hr
         .col-md-4.text-right
           'Year / Cycle:
         .col-md-6.bold
-          = @cgdp.present? ? @cgdp.try(:year) : ''
+          / = @cgdp.present? ? @cgdp.try(:year) : ''
+          = params[:with_year]
     .col-md-6.parent
       .form-group
         .col-md-4.text-right
@@ -297,11 +298,13 @@ hr
               - if !@saa_list.nil?
                 - @total_saa = Array.new
                 - @saa_list.each do |saa_list|
-                  - @total_saa << saa_list.saa_amount.to_f
-                  tr
-                    td.text-center = saa_list.saa_date.nil? ? '' : saa_list.saa_date.strftime('%d-%b-%Y')
-                    td.text-center = saa_list.saa_number
-                    td.text-right = number_to_currency(saa_list.saa_amount.to_f)
+                  - @saa_year = saa_list.saa_date.nil? ? '' : saa_list.saa_date.strftime('%Y')
+                  - if @saa_year == params[:with_year]
+                    - @total_saa << saa_list.saa_amount.to_f
+                    tr
+                      td.text-center = saa_list.saa_date.nil? ? '' : saa_list.saa_date.strftime('%d-%b-%Y')
+                      td.text-center = saa_list.saa_number
+                      td.text-right = number_to_currency(saa_list.saa_amount.to_f)
       .col-md-4
         table.table.table-hover.table-striped.table-bordered
           thead

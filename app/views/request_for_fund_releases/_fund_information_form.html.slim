@@ -12,11 +12,11 @@
   - @amount_requested = @subproject.second_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release
   - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
+  - @tranch = 2
   - if @subproject.grant_amount_contingency_cost == 0
     - @contingency_accumulated = 0
     - @contingency = 0
   - else 
-    - @tranch = 2
     - if @subproject.tranch_three_percentage.nil? || @subproject.tranch_three_percentage == 0
       - @x = (@subproject.first_tranch_amount_release + @subproject.second_tranch_amount) - @total_grant_less_con
       - @contingency_accumulated = @x

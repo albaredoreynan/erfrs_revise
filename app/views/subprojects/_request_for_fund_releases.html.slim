@@ -50,7 +50,8 @@
               '&nbsp
               - if !current_user.is_barangay_or_public?
                 = link_to "<i class='fa fa-edit'></i>".html_safe, edit_request_for_fund_release_path(rfrs, :sp_id => params[:id]), class: 'btn btn-xs btn-warning'
-                / '&nbsp
-                / = link_to "<i class='fa fa-trash-o'></i>".html_safe, request_for_fund_release_path(rfrs, :sp_id => params[:id]), method: :delete, confirm: 'Are you sure you want to delete this request ?', class: 'btn btn-xs btn-danger'
+                '&nbsp
+              - if current_user.is_regional_or_admin?
+                = link_to "<i class='fa fa-trash-o'></i>".html_safe, request_for_fund_release_path(rfrs, :sp_id => params[:id]), method: :delete, confirm: 'Are you sure you want to delete this request ?', class: 'btn btn-xs btn-danger'
                 '&nbsp
               = link_to "<i class='fa fa-file'></i>".html_safe, request_for_fund_pdf_request_for_fund_releases_path(:sp_id => params[:id], :rfrs_id => rfrs.id, :format => 'pdf', :tranch => rfrs.tranch_for), class: 'btn btn-xs btn-success'

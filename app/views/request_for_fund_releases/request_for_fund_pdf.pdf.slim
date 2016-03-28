@@ -12,24 +12,25 @@
 -total_lcc = @subproject.lcc_blgu_direct_cost       + @subproject.lcc_blgu_indirect_cost        + @subproject.lcc_blgu_contingency_cost
 
 
+
 - if params[:tranch] == '1'
   - @amount_requested = @subproject.first_tranch_amount
   - @previous_released = 0
-  - @cumulative_amount = @subproject.first_tranch_amount
+  - @cumulative_amount = @subproject.first_tranch_revised_amount
   - @tranch = 1
   - @contingency = @subproject.grant_amount_contingency_cost
   - @current_amount = @subproject.first_tranch_revised_amount
 - elsif params[:tranch] == '2'
   - @amount_requested = @subproject.second_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release
-  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount
+  - @cumulative_amount = @subproject.first_tranch_revised_amount + @subproject.second_tranch_revised_amount
   - @tranch = 2
   - @contingency = @subproject.grant_amount_contingency_cost
   - @current_amount = @subproject.second_tranch_revised_amount
 - else
   - @amount_requested = @subproject.third_tranch_amount
   - @previous_released = @subproject.first_tranch_amount_release + @subproject.second_tranch_amount_release
-  - @cumulative_amount = @subproject.first_tranch_amount + @subproject.second_tranch_amount + @subproject.third_tranch_amount
+  - @cumulative_amount = @subproject.first_tranch_revised_amount + @subproject.second_tranch_revised_amount + @subproject.third_tranch_revised_amount
   - @tranch = 3
   - @current_amount = @subproject.third_tranch_revised_amount
   - if @total_release > @total_grant_less_con 

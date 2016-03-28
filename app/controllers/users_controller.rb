@@ -1,10 +1,17 @@
 class UsersController < ApplicationController
-  respond_to :html  
+  respond_to :html
+
+  has_scope :municipality_id
+  has_scope :province_id, :with_id
+  has_scope :region_id
+  has_scope :username
+  has_scope :email
 
   def index
     @hide_nav = true
     
     @users = User.all.paginate(page: params[:page],per_page: 30)
+    @users = apply_scopes(@users)
   end
 
   def new

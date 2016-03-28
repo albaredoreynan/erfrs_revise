@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get '/view_all' => 'static_pages#view_all'
 
   resources :subproject_implementation_plans
-  resources :subprojects
+  resources :subprojects do
+    get :refresh_subproject_tranch
+  end
   resources :request_for_fund_releases do
     get :select_subproject, on: :collection
     get :obr, on: :collection
