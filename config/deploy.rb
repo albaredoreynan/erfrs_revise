@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'erfrs'
-set :repo_url, 'git@bitbucket.org:erfrs/erfrs.git'
+set :repo_url, 'https://github.com/albaredoreynan/erfrs_revise.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
